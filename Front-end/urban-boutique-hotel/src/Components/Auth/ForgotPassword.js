@@ -1,14 +1,15 @@
 import "./auth-styles.css";
 
-import { useNavigate } from "react-router-dom";
-
 // MUI
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
 	palette: {
@@ -20,11 +21,11 @@ const theme = createTheme({
 	},
 });
 
-const Login = () => {
+const ForgotPassword = () => {
 	const navigation = useNavigate();
 
 	function handleSubmit() {
-		console.log("Submitted");
+		navigation("/login");
 	}
 
 	return (
@@ -38,8 +39,11 @@ const Login = () => {
 						flexDirection: "column",
 						alignItems: "center",
 					}}>
-					{/* Add hotel logo here */}
-					<h1>Log in</h1>
+					<h1 className='auth-header'>Forgot Password</h1>
+					<h4 className='auth-description'>
+						If you have forgotten your password, enter your email address below
+						and we'll send you a link to reset it.
+					</h4>
 					<form onSubmit={handleSubmit}>
 						<TextField
 							margin='normal'
@@ -49,22 +53,14 @@ const Login = () => {
 							autoComplete='email'
 							autoFocus
 						/>
-						<TextField
-							margin='normal'
-							fullWidth
-							label='Password'
-							type='password'
-							id='password'
-							autoComplete='current-password'
-						/>
 						<button type='submit' className='primary-button'>
-							Log in
+							Submit
 						</button>
 					</form>
 					<Grid container>
 						<Grid item xs>
-							<div className='link' onClick={() => navigation("/reset")}>
-								Forgot password?
+							<div className='link' onClick={() => navigation("/login")}>
+								Back to log in
 							</div>
 						</Grid>
 					</Grid>
@@ -74,4 +70,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default ForgotPassword;

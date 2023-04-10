@@ -5,7 +5,7 @@ import ReactModal from "react-modal";
 
 // Components
 import Login from "./Components/Auth/Login";
-import Signup from "./Components/Auth/Signup";
+import ForgotPassword from "./Components/Auth/ForgotPassword";
 
 ReactModal.setAppElement("#root");
 function App() {
@@ -14,7 +14,7 @@ function App() {
 			<div className='App'>
 				<Routes>
 					<Route path='/login' element={<Login />} />
-					<Route path='/signup' element={<Signup />} />
+					<Route path='/reset' element={<ForgotPassword />} />
 				</Routes>
 			</div>
 		</BrowserRouter>

@@ -1,14 +1,10 @@
-.primary-button{
-    width: 100%;
-    background-color: #2a3249;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 15px 0;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.auth-header{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2a3249;
+    font-size: 35px;
+}
 
+.auth-description{
+    color: #2a3249;
 }

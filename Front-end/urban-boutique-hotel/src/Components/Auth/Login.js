@@ -55,7 +55,7 @@ const Login = () => {
 							id='password'
 							autoComplete='current-password'
 						/>
-						<button type='submit' className='primary-button'>
+						<button type='submit' className='btn-primary'>
 							Log in
 						</button>
 					</form>

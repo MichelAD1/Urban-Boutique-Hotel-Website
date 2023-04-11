@@ -4,7 +4,8 @@
   box-sizing: border-box; }
 
 :root {
-  --primaryColor: #af9a7d;
+  --primaryColor: #2a3249;
+  --secondaryColor: #aca0a0;
   --mainWhite: #fff;
   --offWhite: #f7f7f7;
   --mainBlack: #222;
@@ -53,20 +54,26 @@ h6 {
   margin-bottom: 1.5em; }
 
 .btn-primary {
-  display: inline-block;
-  text-decoration: none;
-  letter-spacing: var(--mainSpacing);
-  color: var(--mainBlack);
-  background: var(--primaryColor);
-  padding: 0.4rem 0.9rem;
-  border: 3px solid var(--primaryColor);
-  transition: var(--mainTransition);
-  text-transform: uppercase;
-  cursor: pointer; }
+  width: 100%;
+  background-color: #2a3249;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-.btn-primary:hover {
-  background: transparent;
-  color: var(--primaryColor); }
+.link{
+  color: #2a3249;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: underline;
+}
 
 .loading {
   text-transform: capitalize;

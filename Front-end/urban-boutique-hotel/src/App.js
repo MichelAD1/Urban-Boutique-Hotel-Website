@@ -1,5 +1,3 @@
-import "./Global/styles/styles.css";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ReactModal from "react-modal";
 

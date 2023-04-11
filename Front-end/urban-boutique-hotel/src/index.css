@@ -186,7 +186,7 @@ h6 {
 .banner div {
   width: 10rem;
   height: 5px;
-  background: var(--primaryColor);
+  background: var(--secondaryColor);
   margin: 1.7rem auto; }
 
 .banner p {
@@ -221,7 +221,7 @@ h6 {
   width: 5rem;
   height: 5px;
   margin: 0 auto;
-  background: var(--primaryColor); }
+  background: var(--secondaryColor); }
 
 /* end of Title */
 /* services */

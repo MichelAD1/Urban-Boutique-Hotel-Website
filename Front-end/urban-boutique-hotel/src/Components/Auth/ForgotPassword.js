@@ -1,5 +1,3 @@
-import "./auth-styles.css";
-
 // MUI
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";

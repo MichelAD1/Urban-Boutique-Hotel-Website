@@ -1,5 +1,3 @@
-import "./auth-styles.css";
-
 import { useNavigate } from "react-router-dom";
 
 // MUI
@@ -24,7 +22,7 @@ const Login = () => {
 	const navigation = useNavigate();
 
 	function handleSubmit() {
-		console.log("Submitted");
+		navigation("/");
 	}
 
 	return (

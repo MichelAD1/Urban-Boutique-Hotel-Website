@@ -10,6 +10,7 @@ import Rooms from "./Components/Rooms/Rooms";
 import Services from "./Components/Services/Services";
 import FindUs from "./Components/FindUs/FindUs";
 import About from "./Components/About/About";
+import Contact from "./Components/Contact/Contact";
 import Navbar from "./Components/Navbar/Navbar";
 import PrivateRoute from "./Routes/PrivateRoutes";
 
@@ -64,6 +65,15 @@ function App() {
               <>
                 <Navbar />
                 <About />
+              </>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <>
+                <Navbar />
+                <Contact />
               </>
             }
           />

@@ -9,7 +9,7 @@ import Home from "./Components/Home/Home";
 import Rooms from "./Components/Rooms/Rooms";
 import Services from "./Components/Services/Services";
 import FindUs from "./Components/FindUs/FindUs";
-
+import About from "./Components/About/About";
 import Navbar from "./Components/Navbar/Navbar";
 import PrivateRoute from "./Routes/PrivateRoutes";
 
@@ -55,6 +55,15 @@ function App() {
               <>
                 <Navbar />
                 <FindUs />
+              </>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <>
+                <Navbar />
+                <About />
               </>
             }
           />

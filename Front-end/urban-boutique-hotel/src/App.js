@@ -7,6 +7,8 @@ import Login from "./Components/Auth/Login";
 import ForgotPassword from "./Components/Auth/ForgotPassword";
 import Home from "./Components/Home/Home";
 import Rooms from "./Components/Rooms/Rooms";
+import Services from "./Components/Services/Services";
+
 import Navbar from "./Components/Navbar/Navbar";
 import PrivateRoute from "./Routes/PrivateRoutes";
 
@@ -34,6 +36,15 @@ function App() {
               <>
                 <Navbar />
                 <Rooms />
+              </>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <>
+                <Navbar />
+                <Services />
               </>
             }
           />

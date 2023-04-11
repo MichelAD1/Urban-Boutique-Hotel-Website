@@ -16,8 +16,8 @@ const Navbar = () => {
             Rooms
           </div>
         </Link>
-        <Link to="/offers" className="nav-link">
-          <div className={`routes ${path === "/offers" ? "active" : ""}`}>
+        <Link to="/services" className="nav-link">
+          <div className={`routes ${path === "/services" ? "active" : ""}`}>
             Services
           </div>
         </Link>

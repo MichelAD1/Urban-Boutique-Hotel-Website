@@ -1,54 +1,57 @@
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
+import { useState } from "react";
 
 const Navbar = () => {
-  const path = useLocation().pathname;
-  const navigate = useNavigate();
-  return (
-    <nav className="navbar">
-      <div className="links-section">
-        {" "}
-        <Link to="/" className="nav-link">
-          <div className={`routes ${path === "/" ? "active" : ""}`}>Home</div>
-        </Link>
-        <Link to="/rooms" className="nav-link">
-          <div className={`routes ${path === "/rooms" ? "active" : ""}`}>
-            Rooms
-          </div>
-        </Link>
-        <Link to="/services" className="nav-link">
-          <div className={`routes ${path === "/services" ? "active" : ""}`}>
-            Services
-          </div>
-        </Link>
-        <Link to="/findus" className="nav-link">
-          <div className={`routes ${path === "/findus" ? "active" : ""}`}>
-            Find Us
-          </div>
-        </Link>
-        <Link to="/about" className="nav-link">
-          <div className={`routes ${path === "/about" ? "active" : ""}`}>
-            About
-          </div>
-        </Link>
-        <Link to="/contact" className="nav-link">
-          <div className={`routes ${path === "/contact" ? "active" : ""}`}>
-            Contact
-          </div>
-        </Link>
-      </div>
-      <div className="login-section">
-        <div className="login-btn">
-          <Link to="/login" className="nav-link">
-            <div className="login-img">
-              <HiUserCircle className="nav-image" />
-            </div>
-            <div className="routes nav-btn">Sign In</div>
-          </Link>
-        </div>
-      </div>
-    </nav>
-  );
+	const path = useLocation().pathname;
+
+	const [isOpen, setIsOpen] = useState(false);
+
+	return (
+		<nav className='navbar'>
+			<div className='links-section'>
+				{" "}
+				<Link to='/' className='nav-link'>
+					<div className={`routes ${path === "/" ? "active" : ""}`}>Home</div>
+				</Link>
+				<Link to='/rooms' className='nav-link'>
+					<div className={`routes ${path === "/rooms" ? "active" : ""}`}>
+						Rooms
+					</div>
+				</Link>
+				<Link to='/services' className='nav-link'>
+					<div className={`routes ${path === "/services" ? "active" : ""}`}>
+						Services
+					</div>
+				</Link>
+				<Link to='/findus' className='nav-link'>
+					<div className={`routes ${path === "/findus" ? "active" : ""}`}>
+						Find Us
+					</div>
+				</Link>
+				<Link to='/about' className='nav-link'>
+					<div className={`routes ${path === "/about" ? "active" : ""}`}>
+						About
+					</div>
+				</Link>
+				<Link to='/contact' className='nav-link'>
+					<div className={`routes ${path === "/contact" ? "active" : ""}`}>
+						Contact
+					</div>
+				</Link>
+			</div>
+			<div className='login-section'>
+				<div className='login-btn'>
+					<Link to='/login' className='nav-link'>
+						<div className='login-img'>
+							<HiUserCircle className='nav-image' />
+						</div>
+						<div className='routes nav-btn'>Sign In</div>
+					</Link>
+				</div>
+			</div>
+		</nav>
+	);
 };
 
 export default Navbar;

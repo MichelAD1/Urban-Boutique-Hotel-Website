@@ -154,12 +154,14 @@ h6 {
   outline: none;
 }
 .links-section {
-  width: 75%;
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  background: var(--offWhite);
 }
+
 .nav-link {
   list-style-type: none;
   display: block;
@@ -223,11 +225,32 @@ h6 {
   background-color: none;
   font-size: 17px;
   opacity: 1; 
+  background-color: var(--offWhite);
 }
+
+.close-btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  color: var(--primaryColor);
+  cursor: pointer;
+  background-color: var(--offWhite);
+  border: none;
+  outline: none;
+  margin-top: 0.5em;
+  margin-right: 0.5em;
+}
+
 .login-btn {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 .login-btn:hover .nav-image,
 .login-btn:hover .nav-btn {
@@ -242,9 +265,21 @@ h6 {
 
 .show-nav {
   height: 100px;
+  opacity: 0;
 }
 
 @media screen and (min-width: 1000px) {
+  .links-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .show-nav{
+    height: auto;
+    opacity: 1;
+  }
   .nav-center {
     max-width: 1170px;
     margin: 0 auto;
@@ -262,6 +297,11 @@ h6 {
 
   .nav-btn{
     opacity: 0;
+    cursor: default;
+  }
+
+  .login-btn{
+    opacity: 1;
     cursor: default;
   }
 }

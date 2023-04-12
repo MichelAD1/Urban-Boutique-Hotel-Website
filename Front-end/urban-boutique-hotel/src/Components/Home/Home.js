@@ -30,15 +30,17 @@ const Home = () => {
 	];
 	return (
 		<>
-			{/* <header className={coverClass}>{children}</header> */}
-			<div className='banner'>
-				<h1>Urban Boutique Hotel</h1>
-				<div></div>
-				<p>Delux Rooms Starting at $299</p>
-				<Link to='' className='btn-primary'>
-					our rooms
-				</Link>
+			<div className='defaultHero'>
+				<div className='banner'>
+					<h1>Urban Boutique Hotel</h1>
+					<div></div>
+					<p>Delux Rooms Starting at $299</p>
+					<Link to='/rooms' className='btn-primary'>
+						our rooms
+					</Link>
+				</div>
 			</div>
+
 			<div className='services'>
 				<div className='section-title'>
 					<h4>Services</h4>

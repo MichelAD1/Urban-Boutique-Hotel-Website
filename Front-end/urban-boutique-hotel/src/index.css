@@ -303,6 +303,11 @@ h6 {
 
   .login-btn{
     opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-btn{
+    pointer-events: none;
   }
 }
 /* end of navbar */

@@ -50,7 +50,7 @@ const ForgotPassword = () => {
 							autoComplete='email'
 							autoFocus
 						/>
-						<button type='submit' className='primary-button'>
+						<button type='submit' className='btn-primary'>
 							Submit
 						</button>
 					</form>

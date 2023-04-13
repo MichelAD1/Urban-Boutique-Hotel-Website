@@ -17,7 +17,8 @@ const Navbar = () => {
 		const login_btn = document.getElementById("login-btn");
 
 		navbar.style.height = "auto";
-		login_btn.style.display = "flex";
+		login_btn.style.opacity = "1";
+		login_btn.style.pointerEvents = "all";
 	};
 
 	const handleClose = () => {
@@ -26,7 +27,8 @@ const Navbar = () => {
 		const login_btn = document.getElementById("login-btn");
 
 		navbar.style.height = "4em";
-		login_btn.style.display = "none";
+		login_btn.style.opacity = "0";
+		login_btn.style.pointerEvents = "none";
 	};
 
 	return (
@@ -86,7 +88,6 @@ const Navbar = () => {
 					<AiOutlineClose className='nav-icon' />
 				</button>
 			)}
-
 		</nav>
 	);
 };

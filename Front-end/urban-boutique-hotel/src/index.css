@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto";
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -20,7 +21,6 @@
 }
 
 :root {
-  --fontFamily: "Roboto";
   --primaryColor: #2a3249;
   --secondaryColor: #aca0a0;
   --mainWhite: #fff;
@@ -90,6 +90,7 @@ h6 {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .link {
@@ -170,7 +171,6 @@ h6 {
   align-items: center;
   padding: 1em;
   margin: 0.5em;
-  font-family: var(--fontFamily);
   font-size: 17px;
   font-weight: 500;
   color: var(--primaryColor);
@@ -732,3 +732,76 @@ h6 {
 }
 
 /* End of Auth */
+/* Footer */
+.footer {
+  background: var(--mainBlack);
+  padding: 2rem 0;
+}
+
+.footer-content {
+  width: 80vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 2rem;
+}
+
+.footer-col {
+  color: var(--mainWhite);
+}
+
+.footer-col h4 {
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+  margin-bottom: 1rem;
+}
+
+.footer-col ul li {
+  list-style-type: none;
+  margin-bottom: 0.5rem;
+}
+
+.footer-col ul li a {
+  color: var(--mainGrey);
+}
+
+.footer-col ul li a:hover {
+  color: var(--mainWhite);
+}
+
+.footer-bottom {
+  width: 80vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.footer-bottom p {
+  color: var(--mainGrey);
+}
+
+.social-icons {
+  display: flex;
+}
+
+.social-icons li {
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 776px) {
+  .footer-content {
+    width: 90vw;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .footer-content {
+    width: 95vw;
+    max-width: 1170px;
+  }
+}
+
+/* End of Footer */

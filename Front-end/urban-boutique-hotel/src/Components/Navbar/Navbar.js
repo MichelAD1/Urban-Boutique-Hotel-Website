@@ -1,7 +1,9 @@
 import { useLocation, Link } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
+
 import { FaAlignRight } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+
 import { useState } from "react";
 
 const Navbar = () => {
@@ -84,6 +86,7 @@ const Navbar = () => {
 					<AiOutlineClose className='nav-icon' />
 				</button>
 			)}
+
 		</nav>
 	);
 };

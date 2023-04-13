@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
 
+// Componenets
+import Footer from "../../Global/Components/Footer";
+
 import dummy1 from "../../assets/images/room-1.jpeg";
 import dummy2 from "../../assets/images/room-2.jpeg";
 import dummy3 from "../../assets/images/room-3.jpeg";
@@ -30,15 +33,17 @@ const Home = () => {
 	];
 	return (
 		<>
-			{/* <header className={coverClass}>{children}</header> */}
-			<div className='banner'>
-				<h1>Urban Boutique Hotel</h1>
-				<div></div>
-				<p>Delux Rooms Starting at $299</p>
-				<Link to='' className='btn-primary'>
-					our rooms
-				</Link>
+			<div className='defaultHero'>
+				<div className='banner'>
+					<h1>Urban Boutique Hotel</h1>
+					<div></div>
+					<p>Delux Rooms Starting at $299</p>
+					<Link to='/rooms' className='btn-primary'>
+						our rooms
+					</Link>
+				</div>
 			</div>
+
 			<div className='services'>
 				<div className='section-title'>
 					<h4>Services</h4>
@@ -91,6 +96,7 @@ const Home = () => {
 					</article>
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 };

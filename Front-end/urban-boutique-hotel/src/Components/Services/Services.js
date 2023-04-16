@@ -50,6 +50,41 @@ const Services = () => {
             />
           </div>
         </div>
+        <div className="service-item">
+          <div className="service-image-container">
+            <img
+              src={require("../../assets/images/parking.jpg")}
+              alt="image"
+              className="service-image"
+            />
+          </div>
+          <div className="service-content">
+            <h3 className="service-title">PARKING</h3>
+            <p className="service-description">
+              To find a parking space in Vienna is very tedious and expensive.
+              Thanks to our location there is a garage opposite the pension.
+              Parking tickets can be purchased at the reception from just €18
+              per day.
+            </p>
+          </div>
+        </div>
+        <div className="service-item">
+          <div className="service-content">
+            <h3 className="service-title">PROMOTIONS</h3>
+            <p className="service-description">
+              At our establishment, we provide a variety of vouchers and
+              promotions that cater to your needs. You have the opportunity to
+              save money and enjoy our services depending on the season.
+            </p>
+          </div>
+          <div className="service-image-container-inversed">
+            <img
+              src={require("../../assets/images/promotions.jpg")}
+              alt="image"
+              className="service-image"
+            />
+          </div>
+        </div>
       </div>
     </>
   );

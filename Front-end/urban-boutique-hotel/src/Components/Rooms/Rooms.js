@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import RoomsList from "./RoomsList";
+
 const Rooms = () => {
 	const [rooms, setRooms] = useState([]);
 	const [types, setTypes] = useState([]);
@@ -44,7 +46,7 @@ const Rooms = () => {
 			</div>
 			<section className='filter-container'>
 				<div className='section-title'>
-					<h4>Featured Rooms</h4>
+					<h4>Search rooms</h4>
 					<div />
 				</div>
 				<form className='filter-form'>
@@ -150,6 +152,7 @@ const Rooms = () => {
 					{/* end of extras */}
 				</form>
 			</section>
+			<RoomsList rooms={rooms} />
 		</>
 	);
 };

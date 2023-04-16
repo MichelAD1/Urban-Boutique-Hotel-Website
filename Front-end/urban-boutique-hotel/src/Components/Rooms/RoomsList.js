@@ -1,6 +1,7 @@
-import { defaultImg } from "../../images";
+import { Link } from "react-router-dom";
 
-const RoomsList = (rooms) => {
+const RoomsList = ({ rooms }) => {
+	console.log(rooms);
 	if (rooms.length === 0) {
 		return (
 			<div className='empty-search'>
@@ -9,13 +10,15 @@ const RoomsList = (rooms) => {
 		);
 	}
 
+	const { name, slug, images, price } = rooms;
+
 	return (
 		<section className='roomslist'>
 			<div className='roomslist-center'>
 				{rooms.map((item) => {
 					<article className='room'>
 						<div className='img-container'>
-							<img src={images[0] || defaultImg} alt='single room' />
+							<img src={images[0]} alt='single room' />
 							<div className='price-top'>
 								<h6>${price}</h6>
 								<p>per night</p>

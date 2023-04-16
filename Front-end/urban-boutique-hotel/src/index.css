@@ -336,7 +336,8 @@ h6 {
   justify-content: center;
   min-height: 60vh;
 }
-
+/* End of Hero */
+/* Services */
 .service-item {
   display: flex;
   flex-direction: row;
@@ -387,7 +388,72 @@ h6 {
   margin-bottom: 1rem;
 }
 
-/* End of Hero */
+@media screen and (max-width: 768px) {
+  .servicesHero {
+    min-height: calc(100vh - 66px);
+    background-size: cover;
+    background-position: center bottom;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh;
+  }
+
+  .service-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto 1%;
+    margin-bottom: 2%;
+    padding: 2rem;
+  }
+
+  .service-image-container {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .service-image-container-inversed {
+    width: 100%;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .service-content {
+    width: 100%;
+    text-align: center;
+  }
+
+  .service-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .service-description {
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .service-title {
+    font-size: 1.2rem;
+  }
+
+  .service-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* End of services */
+
 /* Banner */
 .banner {
   display: inline-block;

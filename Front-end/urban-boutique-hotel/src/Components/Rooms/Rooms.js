@@ -3,6 +3,13 @@ import { useState, useEffect } from "react";
 
 import RoomsList from "./RoomsList";
 
+import room1 from "../../assets/images/room-1.jpeg";
+import room2 from "../../assets/images/room-2.jpeg";
+import room3 from "../../assets/images/room-3.jpeg";
+import room4 from "../../assets/images/room-4.jpeg";
+import room5 from "../../assets/images/room-5.jpeg";
+import room6 from "../../assets/images/room-6.jpeg";
+
 const Rooms = () => {
 	const [rooms, setRooms] = useState([]);
 	const [types, setTypes] = useState([]);
@@ -32,7 +39,76 @@ const Rooms = () => {
 		}
 	};
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		setRooms([
+			{
+				id: 1,
+				room_name: "Standard Room",
+				price: 100.0,
+				guests: 2,
+				room_type: "Queen Bed",
+				room_size: "250 sqft",
+				breakfast: false,
+				pets: true,
+				images: [room1],
+			},
+			{
+				id: 2,
+				room_name: "Executive Suite",
+				price: 350.0,
+				guests: 4,
+				room_type: "Two Queen Beds",
+				room_size: "600 sqft",
+				breakfast: true,
+				pets: false,
+				images: [room2],
+			},
+			{
+				id: 3,
+				room_name: "Executive Suite",
+				price: 350.0,
+				guests: 4,
+				room_type: "Two Queen Beds",
+				room_size: "600 sqft",
+				breakfast: true,
+				pets: false,
+				images: [room3],
+			},
+			{
+				id: 4,
+				room_name: "Family Room",
+				price: 200.0,
+				guests: 6,
+				room_type: "Two Queen Beds and a Sofa Bed",
+				room_size: "500 sqft",
+				breakfast: true,
+				pets: true,
+				images: [room4],
+			},
+			{
+				id: 5,
+				room_name: "Luxury Suite",
+				price: 500.0,
+				guests: 2,
+				room_type: "King Bed",
+				room_size: "800 sqft",
+				breakfast: true,
+				pets: false,
+				images: [room5],
+			},
+			{
+				id: 6,
+				room_name: "Penthouse",
+				price: 1000.0,
+				guests: 8,
+				room_type: "Three Queen Beds and a King Bed",
+				room_size: "1200 sqft",
+				breakfast: true,
+				pets: false,
+				images: [room6],
+			},
+		]);
+	}, []);
 	return (
 		<>
 			<div className='roomsHero'>

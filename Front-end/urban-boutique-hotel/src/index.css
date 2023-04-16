@@ -224,11 +224,11 @@ h6 {
   outline: none;
   background-color: none;
   font-size: 17px;
-  opacity: 1; 
+  opacity: 1;
   background-color: var(--offWhite);
 }
 
-.close-btn{
+.close-btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -277,7 +277,7 @@ h6 {
     justify-content: space-evenly;
   }
 
-  .show-nav{
+  .show-nav {
     height: auto;
     opacity: 1;
   }
@@ -296,17 +296,17 @@ h6 {
     padding: 0.5rem 0;
   }
 
-  .nav-btn{
+  .nav-btn {
     opacity: 0;
     cursor: default;
   }
 
-  .login-btn{
+  .login-btn {
     opacity: 1 !important;
     pointer-events: all;
   }
 
-  .nav-btn{
+  .nav-btn {
     pointer-events: none;
   }
 }
@@ -323,6 +323,17 @@ h6 {
 
 .roomsHero {
   background-image: url("./assets/images/room-2.jpeg");
+  min-height: 60vh;
+}
+.defaultHero,
+.servicesHero {
+  min-height: calc(100vh - 66px);
+  background-image: url("./assets/images/services-image.jpg");
+  background-size: cover;
+  background-position: center bottom;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 60vh;
 }
 

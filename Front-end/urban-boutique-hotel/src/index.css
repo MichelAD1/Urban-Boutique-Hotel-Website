@@ -37,9 +37,9 @@
 /* globals */
 body {
   padding-top: 66px;
-  color: var(--mainBlack);
+  color: var(--primaryColor);
   background: var(--mainWhite);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 1.4;
 }
 
@@ -302,7 +302,7 @@ h6 {
   }
 
   .login-btn{
-    opacity: 1;
+    opacity: 1 !important;
     pointer-events: all;
   }
 

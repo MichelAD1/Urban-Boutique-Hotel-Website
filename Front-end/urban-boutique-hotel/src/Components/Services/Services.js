@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Footer from "../../Global/Components/Footer";
 
 const Services = () => {
   return (
@@ -86,6 +87,7 @@ const Services = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

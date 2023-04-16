@@ -5,8 +5,6 @@ import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
 import Footer from "../../Global/Components/Footer";
 
 import dummy1 from "../../assets/images/room-1.jpeg";
-import dummy2 from "../../assets/images/room-2.jpeg";
-import dummy3 from "../../assets/images/room-3.jpeg";
 
 const Home = () => {
 	const services = [

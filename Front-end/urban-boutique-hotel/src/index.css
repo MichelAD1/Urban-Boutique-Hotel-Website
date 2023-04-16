@@ -302,7 +302,7 @@ h6 {
   }
 
   .login-btn{
-    opacity: 1;
+    opacity: 1 !important;
     pointer-events: all;
   }
 

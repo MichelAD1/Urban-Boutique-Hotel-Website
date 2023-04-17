@@ -16,9 +16,9 @@ const Navbar = () => {
     const handleResize = () => {
       const login_btn = document.getElementById("login-btn");
       if (window.innerWidth === window.screen.width) {
-        handleClose();
         login_btn.style.opacity = "1";
         login_btn.style.pointerEvents = "all";
+        handleClose();
       } else {
         login_btn.style.opacity = "0";
         login_btn.style.pointerEvents = "none";
@@ -35,10 +35,13 @@ const Navbar = () => {
     setActive(!active);
   };
 
-  const handleClose = () => {
+  const handleCloseButton = () => {
     const login_btn = document.getElementById("login-btn");
     login_btn.style.opacity = "0";
     login_btn.style.pointerEvents = "none";
+    setActive(false);
+  };
+  const handleClose = () => {
     setActive(false);
   };
 
@@ -95,7 +98,7 @@ const Navbar = () => {
         <button
           type="button"
           className="nav-btn close-btn"
-          onClick={handleClose}
+          onClick={handleCloseButton}
         >
           <AiOutlineClose className="nav-icon" />
         </button>

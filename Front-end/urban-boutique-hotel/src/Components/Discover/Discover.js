@@ -5,12 +5,12 @@ import Footer from "../../Global/Components/Footer";
 import aboutImage1 from "../../assets/images/about-image1.jpg";
 import aboutImage2 from "../../assets/images/about-image2.jpeg";
 
-const About = () => {
+const Discover = () => {
   return (
     <>
       <div className="aboutHero">
         <div className="banner">
-          <h1>About</h1>
+          <h1>Discover</h1>
           <div></div>
           <ScrollLink
             to="about-section"
@@ -19,7 +19,7 @@ const About = () => {
             offset={-100}
             className="btn-primary"
           >
-            Discover the Hotel
+            Welcome to Our Hotel
           </ScrollLink>
         </div>
       </div>
@@ -59,4 +59,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Discover;

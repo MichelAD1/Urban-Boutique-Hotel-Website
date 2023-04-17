@@ -8,7 +8,7 @@ import aboutImage2 from "../../assets/images/about-image2.jpeg";
 const About = () => {
   return (
     <>
-      <div className="servicesHero">
+      <div className="aboutHero">
         <div className="banner">
           <h1>About</h1>
           <div></div>

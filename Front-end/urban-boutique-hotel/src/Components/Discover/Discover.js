@@ -2,6 +2,8 @@ import { Link as ScrollLink } from "react-scroll";
 import { useState, useEffect } from "react";
 import Footer from "../../Global/Components/Footer";
 
+import { FaTimes } from "react-icons/fa";
+
 import aboutImage1 from "../../assets/images/about-image1.jpg";
 import aboutImage2 from "../../assets/images/about-image2.jpeg";
 import galleryImage1 from "../../assets/images/gallery-image1.jpg";
@@ -14,12 +16,21 @@ const Discover = () => {
   const openModal = (image) => {
     setSelectedImage(image);
     setModalOpen(true);
+    document.body.style.overflow = "hidden"; // disable scrolling
   };
 
   const closeModal = () => {
     setSelectedImage(null);
     setModalOpen(false);
+    document.body.style.overflow = "auto"; // enable scrolling
   };
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "auto"; // enable scrolling on unmount
+    };
+  }, []);
+
   return (
     <>
       <div className="aboutHero">
@@ -68,7 +79,10 @@ const Discover = () => {
         </section>
       </div>
       {modalOpen && (
-        <div className="modal" onClick={closeModal}>
+        <div className="modal">
+          <button className="modal-close" onClick={closeModal}>
+            <FaTimes />
+          </button>
           <img src={selectedImage} alt="" />
         </div>
       )}
@@ -76,19 +90,17 @@ const Discover = () => {
       <div className="gallery">
         <h2>Photo Gallery</h2>
         <div className="gallery-images">
-          <div className="gallery-image">
-            <img
-              src={galleryImage1}
-              alt=""
-              onClick={() => openModal(galleryImage1)}
-            />
+          <div
+            className="gallery-image"
+            onClick={() => openModal(galleryImage1)}
+          >
+            <img src={galleryImage1} alt="" />
           </div>
-          <div className="gallery-image">
-            <img
-              src={galleryImage2}
-              alt=""
-              onClick={() => openModal(galleryImage2)}
-            />
+          <div
+            className="gallery-image"
+            onClick={() => openModal(galleryImage2)}
+          >
+            <img src={galleryImage2} alt="" />
           </div>
         </div>
       </div>

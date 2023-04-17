@@ -9,7 +9,7 @@ import Home from "./Components/Home/Home";
 import Rooms from "./Components/Rooms/Rooms";
 import Services from "./Components/Services/Services";
 import FindUs from "./Components/FindUs/FindUs";
-import About from "./Components/About/About";
+import About from "./Components/Discover/Discover";
 import Contact from "./Components/Contact/Contact";
 import Navbar from "./Components/Navbar/Navbar";
 import PrivateRoute from "./Routes/PrivateRoutes";

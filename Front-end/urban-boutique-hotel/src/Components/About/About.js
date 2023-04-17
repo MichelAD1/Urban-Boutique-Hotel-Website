@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 import { useState, useEffect } from "react";
 import Footer from "../../Global/Components/Footer";
 
@@ -12,13 +12,19 @@ const About = () => {
         <div className="banner">
           <h1>About</h1>
           <div></div>
-          <Link to="/about" className="btn-primary">
+          <ScrollLink
+            to="about-section"
+            smooth={true}
+            duration={1000}
+            offset={-100}
+            className="btn-primary"
+          >
             Discover the Hotel
-          </Link>
+          </ScrollLink>
         </div>
       </div>
       <div className="about">
-        <section class="about-section">
+        <section class="about-section" id="about-section">
           <div class="about-img">
             <div className="about-img1">
               <img src={aboutImage2} alt="" class="about-image1" />

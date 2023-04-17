@@ -7,7 +7,7 @@ const Navbar = () => {
   const path = useLocation().pathname;
   const [active, setActive] = useState(false);
 
-  useEffect(() => {
+ useEffect(() => {
     const navbar = document.getElementById("navbar");
     navbar.style.height = active ? "auto" : "4em";
   }, [active]);
@@ -27,84 +27,92 @@ const Navbar = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+	const handleToggle = () => {
+		setActive(!active);
+		const navbar = document.getElementById("navbar");
+		const links = document.getElementById("links-section");
+		const login_btn = document.getElementById("login-btn");
 
-  const handleToggle = () => {
-    const login_btn = document.getElementById("login-btn");
-    login_btn.style.opacity = "1";
-    login_btn.style.pointerEvents = "all";
-    setActive(!active);
-  };
+		navbar.style.height = "auto";
+		links.style.pointerEvents = "all";
+		login_btn.style.opacity = "1";
+		login_btn.style.pointerEvents = "all";
+	};
 
-  const handleCloseButton = () => {
-    const login_btn = document.getElementById("login-btn");
-    login_btn.style.opacity = "0";
-    login_btn.style.pointerEvents = "none";
-    setActive(false);
-  };
-  const handleClose = () => {
-    setActive(false);
-  };
+	const handleClose = () => {
+		setActive(!active);
+		const navbar = document.getElementById("navbar");
+		const links = document.getElementById("links-section");
+		const login_btn = document.getElementById("login-btn");
 
-  return (
-    <nav className="navbar" id="navbar">
-      <div className="nav-image">Logo</div>
-      <ul className={active ? "links-section" : "links-section show-nav"}>
-        {" "}
-        <Link to="/" className="nav-link" onClick={handleClose}>
-          <li className={`routes ${path === "/" ? "active" : ""}`}>Home</li>
-        </Link>
-        <Link to="/rooms" className="nav-link" onClick={handleClose}>
-          <li className={`routes ${path === "/rooms" ? "active" : ""}`}>
-            Rooms
-          </li>
-        </Link>
-        <Link to="/services" className="nav-link" onClick={handleClose}>
-          <li className={`routes ${path === "/services" ? "active" : ""}`}>
-            Services
-          </li>
-        </Link>
-        <Link to="/findus" className="nav-link" onClick={handleClose}>
-          <li className={`routes ${path === "/findus" ? "active" : ""}`}>
-            Find Us
-          </li>
-        </Link>
-        <Link to="/discover" className="nav-link" onClick={handleClose}>
-          <li className={`routes ${path === "/about" ? "active" : ""}`}>
-            Discover
-          </li>
-        </Link>
-        <Link to="/contact" className="nav-link" onClick={handleClose}>
-          <li className={`routes ${path === "/contact" ? "active" : ""}`}>
-            Contact
-          </li>
-        </Link>
-      </ul>
-      <div className="login-section">
-        <div className="login-btn" id="login-btn">
-          <Link to="/login" className="nav-link" onClick={handleClose}>
-            <div className="login-img">
-              <HiUserCircle className="nav-image" />
-            </div>
-            <div className="routes">Log in</div>
-          </Link>
-        </div>
-      </div>
-      {!active && (
-        <button type="button" className="nav-btn" onClick={handleToggle}>
-          <FaAlignRight className="nav-icon" />
-        </button>
-      )}
-      {active && (
-        <button
-          type="button"
-          className="nav-btn close-btn"
-          onClick={handleCloseButton}
-        >
-          <AiOutlineClose className="nav-icon" />
-        </button>
-      )}
-    </nav>
-  );
+		navbar.style.height = "4em";
+		links.style.pointerEvents = "none";
+		login_btn.style.opacity = "0";
+		login_btn.style.pointerEvents = "none";
+	};
+
+	return (
+		<nav className='navbar' id='navbar'>
+			<div className='nav-image'>Logo</div>
+			<ul
+				className={active ? "links-section" : "links-section show-nav"}
+				id='links-section'>
+				{" "}
+				<Link to='/' className='nav-link' onClick={handleClose}>
+					<li className={`routes ${path === "/" ? "active" : ""}`}>Home</li>
+				</Link>
+				<Link to='/rooms' className='nav-link' onClick={handleClose}>
+					<li className={`routes ${path === "/rooms" ? "active" : ""}`}>
+						Rooms
+					</li>
+				</Link>
+				<Link to='/services' className='nav-link' onClick={handleClose}>
+					<li className={`routes ${path === "/services" ? "active" : ""}`}>
+						Services
+					</li>
+				</Link>
+				<Link to='/findus' className='nav-link' onClick={handleClose}>
+					<li className={`routes ${path === "/findus" ? "active" : ""}`}>
+						Find Us
+					</li>
+				</Link>
+				<Link to='/about' className='nav-link' onClick={handleClose}>
+					<li className={`routes ${path === "/about" ? "active" : ""}`}>
+						About
+					</li>
+				</Link>
+				<Link to='/contact' className='nav-link' onClick={handleClose}>
+					<li className={`routes ${path === "/contact" ? "active" : ""}`}>
+						Contact
+					</li>
+				</Link>
+        
+			</ul>
+			<div className='login-section'>
+				<div className='login-btn' id='login-btn'>
+					<Link to='/login' className='nav-link' onClick={handleClose}>
+						<div className='login-img'>
+							<HiUserCircle className='nav-image' />
+						</div>
+						<div className='routes'>Log in</div>
+					</Link>
+				</div>
+			</div>
+			{!active && (
+				<button type='button' className='nav-btn' onClick={handleToggle}>
+					<FaAlignRight className='nav-icon' />
+				</button>
+			)}
+			{active && (
+				<button
+					type='button'
+					className='nav-btn close-btn'
+					onClick={handleClose}>
+					<AiOutlineClose className='nav-icon' />
+				</button>
+			)}
+		</nav>
+	);
 };
 
 export default Navbar;

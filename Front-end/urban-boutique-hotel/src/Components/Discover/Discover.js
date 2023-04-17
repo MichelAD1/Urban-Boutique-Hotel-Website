@@ -8,6 +8,18 @@ import galleryImage1 from "../../assets/images/gallery-image1.jpg";
 import galleryImage2 from "../../assets/images/gallery-image2.jpeg";
 
 const Discover = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    setModalOpen(false);
+  };
   return (
     <>
       <div className="aboutHero">
@@ -55,14 +67,28 @@ const Discover = () => {
           </div>
         </section>
       </div>
+      {modalOpen && (
+        <div className="modal" onClick={closeModal}>
+          <img src={selectedImage} alt="" />
+        </div>
+      )}
+
       <div className="gallery">
         <h2>Photo Gallery</h2>
         <div className="gallery-images">
           <div className="gallery-image">
-            <img src={galleryImage1} alt="" />
+            <img
+              src={galleryImage1}
+              alt=""
+              onClick={() => openModal(galleryImage1)}
+            />
           </div>
           <div className="gallery-image">
-            <img src={galleryImage2} alt="" />
+            <img
+              src={galleryImage2}
+              alt=""
+              onClick={() => openModal(galleryImage2)}
+            />
           </div>
         </div>
       </div>

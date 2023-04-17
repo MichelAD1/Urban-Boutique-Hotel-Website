@@ -4,6 +4,8 @@ import Footer from "../../Global/Components/Footer";
 
 import aboutImage1 from "../../assets/images/about-image1.jpg";
 import aboutImage2 from "../../assets/images/about-image2.jpeg";
+import galleryImage1 from "../../assets/images/gallery-image1.jpg";
+import galleryImage2 from "../../assets/images/gallery-image2.jpeg";
 
 const Discover = () => {
   return (
@@ -53,7 +55,17 @@ const Discover = () => {
           </div>
         </section>
       </div>
-
+      <div className="gallery">
+        <h2>Photo Gallery</h2>
+        <div className="gallery-images">
+          <div className="gallery-image">
+            <img src={galleryImage1} alt="" />
+          </div>
+          <div className="gallery-image">
+            <img src={galleryImage2} alt="" />
+          </div>
+        </div>
+      </div>
       <Footer />
     </>
   );

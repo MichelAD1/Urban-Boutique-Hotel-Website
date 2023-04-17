@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
 import { FaAlignRight } from "react-icons/fa";
@@ -7,9 +7,41 @@ import { AiOutlineClose } from "react-icons/ai";
 const Navbar = () => {
 	const path = useLocation().pathname;
 	const [active, setActive] = useState(false);
+	const [windowSize, setWindowSize] = useState([
+		window.innerWidth,
+		window.innerHeight,
+	]);
+
+	useEffect(() => {
+		const handleWindowResize = () => {
+			setWindowSize([window.innerWidth, window.innerHeight]);
+		};
+
+		window.addEventListener("resize", handleWindowResize);
+
+		return () => {
+			window.removeEventListener("resize", handleWindowResize);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (windowSize[0] > 1000) {
+			const navbar = document.getElementById("navbar");
+			const links = document.getElementById("links-section");
+			const login_btn = document.getElementById("login-btn");
+
+			navbar.style.height = "4em";
+			links.style.pointerEvents = "all";
+			login_btn.style.opacity = "1";
+			login_btn.style.pointerEvents = "all";
+
+			console.log(windowSize[0]);
+		}
+	}, [windowSize]);
 
 	const handleToggle = () => {
-		if (width < 1000) {
+		console.log(windowSize[0]);
+		if (windowSize[0] < 1000) {
 			setActive(!active);
 			const navbar = document.getElementById("navbar");
 			const links = document.getElementById("links-section");
@@ -22,10 +54,8 @@ const Navbar = () => {
 		}
 	};
 
-	const width = useRef(window.innerWidth);
-
 	const handleClose = () => {
-		if (width < 1000) {
+		if (windowSize[0] < 1000) {
 			setActive(!active);
 			const navbar = document.getElementById("navbar");
 			const links = document.getElementById("links-section");

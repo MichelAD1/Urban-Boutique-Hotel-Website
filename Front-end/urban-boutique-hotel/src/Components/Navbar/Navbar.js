@@ -14,9 +14,11 @@ const Navbar = () => {
 	const handleToggle = () => {
 		setActive(!active);
 		const navbar = document.getElementById("navbar");
+		const links = document.getElementById("links-section");
 		const login_btn = document.getElementById("login-btn");
 
 		navbar.style.height = "auto";
+		links.style.pointerEvents = "all";
 		login_btn.style.opacity = "1";
 		login_btn.style.pointerEvents = "all";
 	};
@@ -24,9 +26,11 @@ const Navbar = () => {
 	const handleClose = () => {
 		setActive(!active);
 		const navbar = document.getElementById("navbar");
+		const links = document.getElementById("links-section");
 		const login_btn = document.getElementById("login-btn");
 
 		navbar.style.height = "4em";
+		links.style.pointerEvents = "none";
 		login_btn.style.opacity = "0";
 		login_btn.style.pointerEvents = "none";
 	};
@@ -34,7 +38,9 @@ const Navbar = () => {
 	return (
 		<nav className='navbar' id='navbar'>
 			<div className='nav-image'>Logo</div>
-			<ul className={active ? "links-section" : "links-section show-nav"}>
+			<ul
+				className={active ? "links-section" : "links-section show-nav"}
+				id='links-section'>
 				{" "}
 				<Link to='/' className='nav-link' onClick={handleClose}>
 					<li className={`routes ${path === "/" ? "active" : ""}`}>Home</li>

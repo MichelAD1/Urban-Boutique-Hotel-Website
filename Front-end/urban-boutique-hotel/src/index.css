@@ -23,12 +23,13 @@
 :root {
   --primaryColor: #2a3249;
   --secondaryColor: #aca0a0;
+  
   --mainWhite: #fff;
   --offWhite: #f7f7f7;
   --mainBlack: #222;
   --mainGrey: #ececec;
   --darkGrey: #cfcfcf;
-  --mainTransition: all 0.3s linear;
+  --mainTransition: all 0.2s ease-in-out;
   --mainSpacing: 3px;
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
@@ -477,6 +478,8 @@ h6 {
 .room {
   box-shadow: var(--lightShadow);
   transition: var(--mainTransition);
+  text-decoration: none;
+  color: var(--primaryColor)
 }
 
 .room:hover {
@@ -497,7 +500,7 @@ h6 {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background-color: var(--primaryColor);
   color: var(--mainWhite);
   padding: 0.3rem 0.6rem 0.5rem;
   border-bottom-right-radius: 1rem;
@@ -530,12 +533,12 @@ h6 {
 }
 
 .img-container:hover .price-top {
-  opacity: 0;
+  opacity: 0.3;
 }
 
-.img-container:hover .room-link {
+/* .img-container:hover .room-link {
   transform: translate(-50%, -50%) scale(1);
-}
+} */
 
 .room-info {
   background: var(--darkGrey);
@@ -636,6 +639,7 @@ h6 {
 /* roomlist */
 .roomslist {
   padding: 5rem 0;
+  
 }
 
 .roomslist-center {
@@ -644,7 +648,7 @@ h6 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   grid-row-gap: 2rem;
-  grid-column-gap: 30px;
+  grid-column-gap: 50px;
 }
 
 @media screen and (min-width: 776px) {

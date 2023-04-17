@@ -66,32 +66,26 @@ const Home = () => {
 				</div>
 				<div className='featured-rooms-center'>
 					{/* {loading ? <Loading /> : rooms} */}
-					<article className='room'>
+					<Link to={"/rooms"} className='room'>
 						<div className='img-container'>
 							<img src={dummy1} alt='single room' />
 							<div className='price-top'>
 								<h6>$100</h6>
 								<p>per night</p>
 							</div>
-							<Link to={{}} className='btn-primary room-link'>
-								features
-							</Link>
 						</div>
 						<p className='room-info'>Room Name</p>
-					</article>
-					<article className='room'>
+					</Link>
+					<Link to={"/rooms"} className='room'>
 						<div className='img-container'>
 							<img src={dummy1} alt='single room' />
 							<div className='price-top'>
 								<h6>$100</h6>
 								<p>per night</p>
 							</div>
-							<Link to={{}} className='btn-primary room-link'>
-								features
-							</Link>
 						</div>
 						<p className='room-info'>Room Name</p>
-					</article>
+					</Link>
 				</div>
 			</div>
 			<Footer />

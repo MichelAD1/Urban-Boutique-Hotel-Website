@@ -39,6 +39,11 @@ const Rooms = () => {
 		}
 	};
 
+	// Get all unique items
+	const getUnique = (items, value) => {
+		return [...new Set(items.map((item) => item[value]))];
+	};
+
 	useEffect(() => {
 		setRooms([
 			{
@@ -108,7 +113,10 @@ const Rooms = () => {
 				images: [room6],
 			},
 		]);
+		setTypes(["All", ...getUnique(rooms, "room_type")]);
+		setPeople(getUnique(rooms, "guests"));
 	}, []);
+
 	return (
 		<>
 			<div className='roomsHero'>

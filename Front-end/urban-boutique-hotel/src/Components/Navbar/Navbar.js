@@ -68,9 +68,9 @@ const Navbar = () => {
             Find Us
           </li>
         </Link>
-        <Link to="/about" className="nav-link" onClick={handleClose}>
+        <Link to="/discover" className="nav-link" onClick={handleClose}>
           <li className={`routes ${path === "/about" ? "active" : ""}`}>
-            About
+            Discover
           </li>
         </Link>
         <Link to="/contact" className="nav-link" onClick={handleClose}>

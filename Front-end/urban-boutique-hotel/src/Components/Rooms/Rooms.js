@@ -298,7 +298,7 @@ const Rooms = () => {
 							onChange={(e) => {
 								setPrice(e.target.value);
 							}}
-							className='form-control'
+							className='form-control price-range'
 						/>
 					</div>
 					{/* end of rooms price */}
@@ -310,6 +310,7 @@ const Rooms = () => {
 								name='breakfast'
 								id='breakfast'
 								checked={breakfast}
+								className='checkbox-input'
 								onChange={(e) => {
 									setBreakfast(e.target.checked);
 								}}
@@ -322,6 +323,7 @@ const Rooms = () => {
 								name='pets'
 								id='pets'
 								checked={pets}
+								className='checkbox-input'
 								onChange={(e) => {
 									setPets(e.target.checked);
 								}}

@@ -969,7 +969,8 @@ h6 {
 /* end of single room*/
 /* roomlist */
 .roomslist {
-  padding: 5rem 0;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
   
 }
 
@@ -1024,8 +1025,19 @@ h6 {
   width: 100%;
   background: transparent;
   font-size: 1rem;
+  border: 1px solid var(--primaryColor);
+  border-radius: 1em;
+  padding: 5px;
 }
 
+.form-control:focus{
+  outline: none;
+}
+
+.price-range{
+  padding: 5px 0;
+  accent-color: var(--primaryColor)
+}
 .size-inputs {
   display: flex;
 }
@@ -1043,6 +1055,13 @@ h6 {
   font-size: 0.8rem;
   margin-left: 0.5rem;
 }
+
+.checkbox-input{
+  accent-color: var(--primaryColor);
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
 
 @media screen and (min-width: 776px) {
   .filter-form {

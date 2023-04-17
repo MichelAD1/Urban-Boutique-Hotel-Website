@@ -10,7 +10,7 @@ const RoomsList = ({ rooms }) => {
 	}
 
 	return (
-		<section className='roomslist'>
+		<section className='roomslist' id='roomlist'>
 			<div className='roomslist-center'>
 				{rooms.map((item) => (
 					<Link to={"/rooms"} className='room' key={item.id}>

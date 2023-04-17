@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
-import { FaAlignRight } from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 
 const Navbar = () => {
 	const path = useLocation().pathname;
@@ -25,17 +24,21 @@ const Navbar = () => {
 	}, []);
 
 	useEffect(() => {
-		if (windowSize[0] > 1000) {
-			const navbar = document.getElementById("navbar");
-			const links = document.getElementById("links-section");
-			const login_btn = document.getElementById("login-btn");
+		const navbar = document.getElementById("navbar");
+		const links = document.getElementById("links-section");
+		const login_btn = document.getElementById("login-btn");
 
+		if (windowSize[0] > 1000) {
 			navbar.style.height = "4em";
 			links.style.pointerEvents = "all";
 			login_btn.style.opacity = "1";
 			login_btn.style.pointerEvents = "all";
 
 			console.log(windowSize[0]);
+		}
+		if (windowSize[0] < 1000) {
+			login_btn.style.opacity = "0";
+			login_btn.style.pointerEvents = "none";
 		}
 	}, [windowSize]);
 
@@ -116,7 +119,7 @@ const Navbar = () => {
 			</div>
 			{!active && (
 				<button type='button' className='nav-btn' onClick={handleToggle}>
-					<FaAlignRight className='nav-icon' />
+					<AiOutlineMenu className='nav-icon' />
 				</button>
 			)}
 			{active && (

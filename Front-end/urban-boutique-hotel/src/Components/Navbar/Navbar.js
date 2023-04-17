@@ -96,11 +96,11 @@ const Navbar = () => {
 						Find Us
 					</li>
 				</Link>
-				<Link to='/about' className='nav-link' onClick={handleClose}>
-					<li className={`routes ${path === "/about" ? "active" : ""}`}>
-						About
-					</li>
-				</Link>
+				 <Link to="/discover" className="nav-link" onClick={handleClose}>
+          <li className={`routes ${path === "/discover" ? "active" : ""}`}>
+            Discover
+          </li>
+        </Link>
 				<Link to='/contact' className='nav-link' onClick={handleClose}>
 					<li className={`routes ${path === "/contact" ? "active" : ""}`}>
 						Contact

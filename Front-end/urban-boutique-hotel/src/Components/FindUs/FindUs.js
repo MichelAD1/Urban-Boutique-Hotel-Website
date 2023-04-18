@@ -50,30 +50,9 @@ function FindUs() {
 	return (
 		<>
 			<Slideshow data={data} />
-			<div className='find-content'>
-				<div className='section-info'>
-					<img src={map} alt='' className='location-map' />
-					<div className='section-description'>
-						<div className='section-title'>
-							<h4>Location</h4>
-							<div />
-						</div>
-						<div className='location-description'>
-							<p>
-								Our house is an ideal starting point to discover the beauty of
-								Vienna. Thanks to our central location, all sights are within
-								easy reach: We are only 10 minutes walk from the train station
-								"Westbahnhof" and 20 minutes walk from the city center. Our
-								address is Andreasgasse 1, 1070 Vienna, near the famous shopping
-								street "Mariahilfer Straße". With the subway station "U3
-								Zieglergasse" directly in front of our house is a drive to
-								cultural attractions or shopping just a few minutes away.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div className='section-title'>
-					<h4>Arrival Information</h4>
+			<div className='find-info'>
+				<div className='find-title'>
+					<h2>Arrival </h2>
 					<div />
 				</div>
 				{/* S-Bahn (S7) */}
@@ -161,6 +140,25 @@ function FindUs() {
 					</div>
 				</div>
 				{/* End of TAXI */}
+			</div>
+			<div className='find-info'>
+				<div className='find-title'>
+					<h2>Location</h2>
+					<div />
+				</div>
+				<div className='location-description'>
+					<p>
+						Our house is an ideal starting point to discover the beauty of
+						Vienna. Thanks to our central location, all sights are within easy
+						reach: We are only 10 minutes walk from the train station
+						"Westbahnhof" and 20 minutes walk from the city center. Our address
+						is Andreasgasse 1, 1070 Vienna, near the famous shopping street
+						"Mariahilfer Straße". With the subway station "U3 Zieglergasse"
+						directly in front of our house is a drive to cultural attractions or
+						shopping just a few minutes away.
+					</p>
+				</div>
+				<img src={map} alt='' className='location-map' />
 			</div>
 			<Footer />
 		</>

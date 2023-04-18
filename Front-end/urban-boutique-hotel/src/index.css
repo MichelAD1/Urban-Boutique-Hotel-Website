@@ -1360,6 +1360,8 @@ button:hover {
   margin: 0 auto;
   overflow: hidden;
   min-height: 60vh;
+  background-color: rgba(172,160,160,0.4);
+  padding-bottom: 2em;
 }
 
 .slideshowSlider {
@@ -1408,7 +1410,7 @@ button:hover {
   cursor: pointer;
   margin: 15px 7px 0px;
 
-  background-color: #c4c4c4;
+  background-color: #fff;
 }
 
 .slideshowDot.active {
@@ -1424,7 +1426,6 @@ button:hover {
   .slide {
     display: inline-block;
     padding: 0;
-
   }
   
   .slide-content {
@@ -1450,23 +1451,31 @@ button:hover {
 
 /* End of slide show */
 /* Find us page */
-.find-content{
-  margin-top: 4em;
-}
 
-.section-info{
+.find-info{
   margin: 2em auto;
   width: 80vw;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-bottom: 2em;
+  
 }
 
-.section-description{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 2em;
+.find-title{
+  margin-top: 2em;
+}
+
+.find-title h2{
+  color: var(--primaryColor);
+  font-size: 2rem;
+  margin-bottom: 0.3em;
+}
+
+.find-title div {
+  width: 10rem;
+  height: 5px;
+  background: rgba(172,160,160,0.7);
+  text-align: left;
 }
 
 .location-map{
@@ -1475,6 +1484,7 @@ button:hover {
 
 .location-description{
   color: var(--primaryColor);
+  margin: 2em 0;
 }
 
 .arrival-info{
@@ -1505,3 +1515,4 @@ button:hover {
     margin-bottom: 2em;
   }
 }
+/* End of find us page */

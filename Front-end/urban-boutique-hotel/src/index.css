@@ -1381,6 +1381,100 @@ button:hover {
 }
 
 /* End of Footer */
+/* Slide show */
+
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  min-height: 60vh;
+  background-color: rgba(172,160,160,0.4);
+  padding-bottom: 2em;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+}
+
+.slide {
+  display: inline-block;
+  width: 100%;
+  padding: 2em;
+}
+
+.slide-content{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.slide-image img{
+  max-width: 100%;
+  height: auto;
+}
+
+.slide-info{
+  margin-left: 2em;
+}
+
+.slide-description {
+  white-space: pre-wrap;
+  color: var(--primaryColor);
+}
+
+/* Buttons */
+
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 0px;
+
+  background-color: #fff;
+}
+
+.slideshowDot.active {
+  background-color: var(--primaryColor);
+  border: 0;
+}
+
+.slideshowDot.active::after{
+  height: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .slide {
+    display: inline-block;
+    padding: 0;
+  }
+
+  .slide-content {
+    flex-direction: column;
+  }
+
+  .slide-image {
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .slide-info {
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 2em;
+  }
+
+  .slide-title {
+    font-size: 2rem;
+  }
+}
 /* Deal */
 .deals-rooms {
   display: flex;
@@ -1391,7 +1485,6 @@ button:hover {
   width: 50%;
   height: auto;
 }
-
 .deal-info{
   display: flex;
   flex-direction: column;
@@ -1403,7 +1496,6 @@ button:hover {
   font-weight: 400;
   margin: 0;
 }
-
 .deal-info h5{
   font-weight: 400;
   color: var(--secondaryColor);
@@ -1425,11 +1517,12 @@ button:hover {
 
 .stat-item{
   color: var(--primaryColor);
+  margin: 2em 0;
   font-size: 1em;
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: 1em;
+
 }
 
 .stat-item p{
@@ -1454,3 +1547,35 @@ button:hover {
   text-decoration: line-through;
   color: var(--secondaryColor);
 }
+
+/* Find us page */
+
+.find-info{
+  margin: 2em auto;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+  
+}
+
+.find-title{
+  margin-top: 2em;
+}
+
+.find-title h2{
+  color: var(--primaryColor);
+  font-size: 2rem;
+  margin-bottom: 0.3em;
+}
+
+.find-title div {
+  width: 10rem;
+  height: 5px;
+  background: rgba(172,160,160,0.7);
+  text-align: left;
+}
+
+.location-map{
+  max-height: 500px;
+/* End of find us page */

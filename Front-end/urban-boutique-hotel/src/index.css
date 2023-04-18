@@ -1073,6 +1073,69 @@ button:hover {
 }
 
 /* end of room  */
+/* Room item */
+.room-item-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: -2%;
+}
+
+.room-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.room-name {
+  display: flex;
+  padding-left: 3%;
+  padding-top: 1%;
+  flex-direction: row;
+  align-items: center;
+  width: 60%;
+}
+.room-price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 40%;
+}
+
+.room-price p:first-child {
+  color: #bcbcbc;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+}
+.price-tag {
+  font-size: 30px;
+  font-weight: 600;
+}
+.room-price h2 {
+  background-color: red;
+  padding: 4%;
+}
+.room-price button {
+  width: 25%;
+  letter-spacing: 0.4em;
+  height: 5.5em;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 500;
+  font-size: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.room-price button:hover {
+  background-color: #2a32499a;
+}
+/* End of Room Item */
 /* single room*/
 .single-room {
   padding: 5rem 0 0 0;

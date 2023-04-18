@@ -102,6 +102,33 @@ h6 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+.btn-secondary{
+  width: 8em;
+  background-color: #2a3249;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  margin: 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.arrow{
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  rotate:90deg;
+  margin-left: 0.1em;
+}
+
 .link {
   color: #2a3249;
   font-size: 16px;
@@ -1354,154 +1381,76 @@ button:hover {
 }
 
 /* End of Footer */
-/* Slide show */
-
-.slideshow {
-  margin: 0 auto;
-  overflow: hidden;
-  min-height: 60vh;
-}
-
-.slideshowSlider {
-  white-space: nowrap;
-  transition: ease 1000ms;
-}
-
-.slide {
-  display: inline-block;
-  width: 100%;
-  padding: 2em;
-}
-
-.slide-content{
+/* Deal */
+.deals-rooms {
   display: flex;
   flex-direction: row;
-  align-items: center;
 }
 
-.slide-image img{
-  max-width: 100%;
+.deal-image{
+  width: 50%;
   height: auto;
 }
 
-.slide-info{
-  margin-left: 2em;
-}
-
-.slide-description {
-  white-space: pre-wrap;
-  color: var(--primaryColor);
-}
-
-/* Buttons */
-
-.slideshowDots {
-  text-align: center;
-}
-
-.slideshowDot {
-  display: inline-block;
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-
-  cursor: pointer;
-  margin: 15px 7px 0px;
-
-  background-color: #c4c4c4;
-}
-
-.slideshowDot.active {
-  background-color: var(--primaryColor);
-  border: 0;
-}
-
-.slideshowDot.active::after{
-  height: 0;
-}
-
-@media screen and (max-width: 1000px) {
-  .slide {
-    display: inline-block;
-    padding: 0;
-
-  }
-  
-  .slide-content {
-    flex-direction: column;
-  }
-
-  .slide-image {
-    max-width: 100%;
-    height: auto;
-    overflow: hidden;
-  }
-  
-  .slide-info {
-    margin-left: 2em;
-    margin-right: 2em;
-    margin-top: 2em;
-  }
-  
-  .slide-title {
-    font-size: 2rem;
-  }
-}
-
-/* End of slide show */
-/* Find us page */
-.find-content{
-  margin-top: 4em;
-}
-
-.section-info{
-  margin: 2em auto;
-  width: 80vw;
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 2em;
-}
-
-.section-description{
+.deal-info{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-left: 2em;
+  padding: 3em;
+  padding-right: 10em;
 }
 
-.location-map{
-  max-height: 500px;
-}
-
-.location-description{
-  color: var(--primaryColor);
-}
-
-.arrival-info{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin: 1em 25%;
-}
-
-.arrival-description{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.no-mg{
+.deal-info h2{
+  font-weight: 400;
   margin: 0;
 }
 
-@media screen and (max-width: 1000px) {
-  .section-info{
-    display: flex;
-    flex-direction: column;
-  }
+.deal-info h5{
+  font-weight: 400;
+  color: var(--secondaryColor);
+  margin: 0;
+}
 
-  .location-map{
-    margin-bottom: 2em;
-  }
+.deal-info p{
+  font-weight: 400;
+  margin-top: 1em;
+  font-size: 0.8em;
+}
+
+.deal-stats{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 1em;
+}
+
+.stat-item{
+  color: var(--primaryColor);
+  font-size: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.stat-item p{
+  margin-left: 0.4em;
+  margin-bottom: 0.7em;
+}
+
+.prices{
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+}
+
+.prices h4{
+  font-weight: 400;
+  margin: 0;
+  margin-right: 1em;
+  letter-spacing: 4px;
+}
+
+.old-price{
+  text-decoration: line-through;
+  color: var(--secondaryColor);
 }

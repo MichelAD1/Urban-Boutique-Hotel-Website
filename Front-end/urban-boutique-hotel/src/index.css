@@ -102,8 +102,8 @@ h6 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.btn-secondary {
-  width: 8em;
+.btn-secondary{
+  width: 9em;
   background-color: #2a3249;
   color: #fff;
   border: none;
@@ -123,9 +123,8 @@ h6 {
 
 .arrow {
   color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  rotate: 90deg;
+  font-size: 20px;
+  rotate:90deg;
   margin-left: 0.1em;
 }
 
@@ -155,6 +154,12 @@ h6 {
   margin: 2rem 0;
   padding: 1rem;
   letter-spacing: var(--mainSpacing);
+}
+
+.mg-bot{
+  margin: 1em;
+  background-color: rgba(172,160,160,0.2);
+  border-radius: 1em;
 }
 
 /* end of globals */

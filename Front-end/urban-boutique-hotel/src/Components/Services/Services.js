@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 import { useState, useEffect } from "react";
 import Footer from "../../Global/Components/Footer";
 
@@ -45,9 +45,15 @@ const Services = () => {
         <div className="banner">
           <h1>Services</h1>
           <div></div>
-          <Link to="/services" className="btn-primary">
-            Discover our exclusive packages
-          </Link>
+          <ScrollLink
+            to="services-container"
+            smooth={true}
+            duration={1000}
+            offset={-100}
+            className="btn-primary"
+          >
+            Discover our exclusive services
+          </ScrollLink>
         </div>
       </div>
       <div className="services-container">

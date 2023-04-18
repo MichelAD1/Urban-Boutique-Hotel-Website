@@ -5,7 +5,8 @@ import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
 import Footer from "../../Global/Components/Footer";
 import SingleRoom from "../Rooms/SingleRoom";
 
-import dummy1 from "../../assets/images/room-1.jpeg";
+import room1 from "../../assets/images/room-1.jpeg";
+import room2 from "../../assets/images/room-2.jpeg";
 
 const Home = () => {
 	const services = [
@@ -30,6 +31,32 @@ const Home = () => {
 			info: "Lorem There are many variations of passages of Lorem Ipsum available, but the majority form.",
 		},
 	];
+
+	const rooms = [
+		{
+			id: 1,
+			room_name: "Standard Room",
+			price: 100.0,
+			guests: 2,
+			room_type: "Queen Bed",
+			room_size: 250,
+			breakfast: false,
+			pets: true,
+			images: [room1],
+		},
+		{
+			id: 2,
+			room_name: "Executive Suite",
+			price: 350.0,
+			guests: 4,
+			room_type: "Two Queen Beds",
+			room_size: 600,
+			breakfast: true,
+			pets: false,
+			images: [room2],
+		},
+	];
+
 	return (
 		<>
 			<div className='defaultHero'>
@@ -42,8 +69,9 @@ const Home = () => {
 					</Link>
 				</div>
 			</div>
-			<SingleRoom reverse={false} />
-			<SingleRoom reverse={true} />
+			<SingleRoom reverse={true} room={rooms[0]} />
+			<SingleRoom reverse={false} room={rooms[0]} />
+
 			<div className='services'>
 				<div className='section-title'>
 					<h4>Services</h4>
@@ -59,35 +87,6 @@ const Home = () => {
 							</article>
 						);
 					})}
-				</div>
-			</div>
-			<div className='featured-rooms'>
-				<div className='section-title'>
-					<h4>Featured Rooms</h4>
-					<div />
-				</div>
-				<div className='featured-rooms-center'>
-					{/* {loading ? <Loading /> : rooms} */}
-					<Link to={"/rooms"} className='room'>
-						<div className='img-container'>
-							<img src={dummy1} alt='single room' />
-							<div className='price-top'>
-								<h6>$100</h6>
-								<p>per night</p>
-							</div>
-						</div>
-						<p className='room-info'>Room Name</p>
-					</Link>
-					<Link to={"/rooms"} className='room'>
-						<div className='img-container'>
-							<img src={dummy1} alt='single room' />
-							<div className='price-top'>
-								<h6>$100</h6>
-								<p>per night</p>
-							</div>
-						</div>
-						<p className='room-info'>Room Name</p>
-					</Link>
 				</div>
 			</div>
 			<Footer />

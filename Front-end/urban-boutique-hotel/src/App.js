@@ -26,72 +26,79 @@ function App() {
 					<Route path='/login' element={<Login />} />
 					<Route path='/reset' element={<ForgotPassword />} />
 
-					 <Route
-            path="/"
-            element={
-              <>
-                <Navbar />
-                <Home />
-              </>
-            }
-          />
-          <Route
-            path="/rooms"
-            element={
-              <>
-                <Navbar />
-                <Rooms />
-              </>
-            }
-          />
-          <Route
-            path="/rooms/:id"
-            element={
-              <>
-                <RoomsItem />
-              </>
-            }
-          />
-          <Route
-            path="/services"
-            element={
-              <>
-                <Navbar />
-                <Services />
-              </>
-            }
-          />
-          <Route
-            path="/findus"
-            element={
-              <>
-                <Navbar />
-                <FindUs />
-              </>
-            }
-          />
-          <Route
-            path="/discover"
-            element={
-              <>
-                <Navbar />
-                <Discover />
-              </>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <>
-                <Navbar />
-                <Contact />
-              </>
-            }
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  );
+					<Route
+						path='/'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Home />
+							</>
+						}
+					/>
+					<Route
+						path='/rooms'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Rooms />
+							</>
+						}
+					/>
+					<Route
+						path='/rooms/:id'
+						element={
+							<>
+								<ScrollToTop />
+								<RoomsItem />
+							</>
+						}
+					/>
+					<Route
+						path='/services'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Services />
+							</>
+						}
+					/>
+					<Route
+						path='/findus'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<FindUs />
+							</>
+						}
+					/>
+					<Route
+						path='/discover'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Discover />
+							</>
+						}
+					/>
+					<Route
+						path='/contact'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Contact />
+							</>
+						}
+					/>
+				</Routes>
+			</div>
+		</BrowserRouter>
+	);
 }
 
 export default App;

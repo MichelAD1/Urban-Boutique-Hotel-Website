@@ -52,6 +52,7 @@ const Home = () => {
 						enim, doloribus similique praesentium sunt harum accusantium dolore.
 						Nemo, eos et!
 					</p>
+					<div className='deal-stats'></div>
 				</div>
 			</div>
 			<div className='services'>

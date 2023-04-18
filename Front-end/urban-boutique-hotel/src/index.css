@@ -1198,3 +1198,24 @@ h6 {
   margin-top: 1em;
   font-size: 0.8em;
 }
+
+.deal-stats{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 2em;
+}
+
+.stat-item{
+  color: var(--primaryColor);
+  font-size: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.stat-item p{
+  margin-left: 0.4em;
+  margin-bottom: 0.7em;
+}

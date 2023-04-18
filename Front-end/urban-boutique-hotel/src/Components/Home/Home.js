@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
+import { RxPerson } from "react-icons/rx";
+import { TbResize } from "react-icons/tb";
+import { AiOutlineWifi } from "react-icons/ai";
+import { CgScreen } from "react-icons/cg";
+import { MdOutlineShower, MdOutlineLocalBar } from "react-icons/md";
+import { GiTowel, GiDesk } from "react-icons/gi";
 
 // Componenets
 import Footer from "../../Global/Components/Footer";
@@ -52,7 +58,40 @@ const Home = () => {
 						enim, doloribus similique praesentium sunt harum accusantium dolore.
 						Nemo, eos et!
 					</p>
-					<div className='deal-stats'></div>
+					<div className='deal-stats'>
+						<div className='stat-item'>
+							<RxPerson />
+							<p>Occupancy: 2</p>
+						</div>
+						<div className='stat-item'>
+							<TbResize />
+							<p>Size: 100-150sqm</p>
+						</div>
+						<div className='stat-item'>
+							<AiOutlineWifi />
+							<p>WI-Fi</p>
+						</div>
+						<div className='stat-item'>
+							<CgScreen />
+							<p>TV</p>
+						</div>
+						<div className='stat-item'>
+							<MdOutlineShower />
+							<p>Shower</p>
+						</div>
+						<div className='stat-item'>
+							<GiTowel />
+							<p>Towels</p>
+						</div>
+						<div className='stat-item'>
+							<MdOutlineLocalBar />
+							<p>Minibar</p>
+						</div>
+						<div className='stat-item'>
+							<GiDesk />
+							<p>Work Space</p>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div className='services'>

@@ -1,6 +1,11 @@
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-
+import Slideshow from "../../Global/Components/Slideshow";
+import att_1 from "../../assets/images/att-1.jpg";
+import att_2 from "../../assets/images/att-2.jpg";
+import att_3 from "../../assets/images/att-3.jpg";
+import att_4 from "../../assets/images/att-4.jpg";
+import att_5 from "../../assets/images/att-5.jpg";
 const RoomsItem = () => {
   const location = useLocation();
   const room = location.state.data;
@@ -12,7 +17,29 @@ const RoomsItem = () => {
   const [breakfast, setBreakfast] = useState(room.breakfast);
   const [pets, setPets] = useState(room.pets);
   const [images, setImages] = useState(room.images);
-
+  console.log(images);
+  const slideshowd_data = [
+    {
+      id: 1,
+      image: att_1,
+    },
+    {
+      id: 2,
+      image: att_2,
+    },
+    {
+      id: 3,
+      image: att_3,
+    },
+    {
+      id: 4,
+      image: att_4,
+    },
+    {
+      id: 5,
+      image: att_5,
+    },
+  ];
   return (
     <div className="room-item-container">
       <div className="room-header">
@@ -25,7 +52,9 @@ const RoomsItem = () => {
           <button type="submit">BOOK NOW</button>
         </div>
       </div>
-      <div className="room-images"></div>
+      <div className="room-images">
+        <Slideshow data={slideshowd_data} type={"Room"} />
+      </div>
       <div className="room-infos">
         <div className="room-display">
           <p>SQUARE M2</p>

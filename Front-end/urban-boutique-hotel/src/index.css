@@ -23,7 +23,7 @@
 :root {
   --primaryColor: #2a3249;
   --secondaryColor: #aca0a0;
-  
+
   --mainWhite: #fff;
   --offWhite: #f7f7f7;
   --mainBlack: #222;
@@ -342,6 +342,16 @@ h6 {
   background-image: url("./assets/images/about-image.jpg");
   background-size: cover;
   background-position: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+.contactHero {
+  min-height: calc(100vh - 66px);
+  background-image: url("./assets/images/contact-image.jpg");
+  background-size: cover;
+  background-position: center bottom;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -810,7 +820,7 @@ h6 {
   box-shadow: var(--lightShadow);
   transition: var(--mainTransition);
   text-decoration: none;
-  color: var(--primaryColor)
+  color: var(--primaryColor);
 }
 
 .room:hover {
@@ -971,7 +981,6 @@ h6 {
 .roomslist {
   padding-top: 1rem;
   padding-bottom: 5rem;
-  
 }
 
 .roomslist-center {
@@ -1030,13 +1039,13 @@ h6 {
   padding: 5px;
 }
 
-.form-control:focus{
+.form-control:focus {
   outline: none;
 }
 
-.price-range{
+.price-range {
   padding: 5px 0;
-  accent-color: var(--primaryColor)
+  accent-color: var(--primaryColor);
 }
 .size-inputs {
   display: flex;
@@ -1056,12 +1065,11 @@ h6 {
   margin-left: 0.5rem;
 }
 
-.checkbox-input{
+.checkbox-input {
   accent-color: var(--primaryColor);
   width: 0.8rem;
   height: 0.8rem;
 }
-
 
 @media screen and (min-width: 776px) {
   .filter-form {

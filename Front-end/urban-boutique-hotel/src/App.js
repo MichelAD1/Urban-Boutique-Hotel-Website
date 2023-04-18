@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ReactModal from "react-modal";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Components
 import Login from "./Components/Auth/Login";
@@ -15,16 +15,18 @@ import Contact from "./Components/Contact/Contact";
 import Navbar from "./Components/Navbar/Navbar";
 import PrivateRoute from "./Routes/PrivateRoutes";
 
+import ScrollToTop from "./Global/Function/ScrollToTop";
+
 ReactModal.setAppElement("#root");
 function App() {
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/reset" element={<ForgotPassword />} />
+	return (
+		<BrowserRouter>
+			<div className='App'>
+				<Routes>
+					<Route path='/login' element={<Login />} />
+					<Route path='/reset' element={<ForgotPassword />} />
 
-          <Route
+					 <Route
             path="/"
             element={
               <>

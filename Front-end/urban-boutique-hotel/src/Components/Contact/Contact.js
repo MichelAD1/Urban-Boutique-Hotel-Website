@@ -6,6 +6,31 @@ import { MdEmail, MdLocationPin } from "react-icons/md";
 import { FaFax } from "react-icons/fa";
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleSubjectChange = (event) => {
+    setSubject(event.target.value);
+  };
+
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Code to handle form submission
+  };
   return (
     <>
       <div className="contactHero">
@@ -23,7 +48,7 @@ const Contact = () => {
           </ScrollLink>
         </div>
       </div>
-      <div className="contact-section">
+      <div className="contact-section" id="contact-section">
         <div className="side-information">
           <div className="side-info-box">
             <div className="contact-icons">
@@ -74,10 +99,17 @@ const Contact = () => {
               learn more about our accommodations and book your stay.
             </p>
           </div>
-          <form className="message-inputs">
+          <form className="message-inputs" onSubmit={handleSubmit}>
             <div className="message-name-email">
               <div className="message-input">
-                <input type="text" id="name" name="name" placeholder="Name" />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Name"
+                  value={name}
+                  onChange={handleNameChange}
+                />
               </div>
               <div className="message-input">
                 <input
@@ -85,6 +117,8 @@ const Contact = () => {
                   id="email"
                   name="email"
                   placeholder="Email"
+                  value={email}
+                  onChange={handleEmailChange}
                 />
               </div>
             </div>
@@ -94,6 +128,8 @@ const Contact = () => {
                 id="subject"
                 name="subject"
                 placeholder="Subject"
+                value={subject}
+                onChange={handleSubjectChange}
               />
             </div>
             <div className="message-textarea">
@@ -101,6 +137,8 @@ const Contact = () => {
                 id="message"
                 name="message"
                 placeholder="Message"
+                value={message}
+                onChange={handleMessageChange}
               ></textarea>
             </div>
             <button type="submit">Send Message</button>

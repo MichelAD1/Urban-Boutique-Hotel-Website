@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { RxPerson } from "react-icons/rx";
 import { TbResize } from "react-icons/tb";
@@ -11,67 +11,85 @@ import { IoIosArrowUp } from "react-icons/io";
 import dummy1 from "../../assets/images/room-1.jpeg";
 import { useEffect } from "react";
 
-const SingleRoom = ({ reverse }) => {
+const SingleRoom = ({ reverse, room, type }) => {
 	useEffect(() => {
 		if (reverse) {
 			document.getElementById("deals-rooms").style.flexDirection =
 				"row-reverse";
 		}
 	}, [reverse]);
+
+	const navigate = useNavigate();
+
+	const handleRedirect = (item) => {
+		navigate(`/rooms/${item.room_name}`, { state: { data: item } });
+	};
+
 	return (
-		<div className='deals-rooms' id='deals-rooms'>
+		<div
+			className='deals-rooms'
+			id='deals-rooms'
+			onClick={() => handleRedirect(room)}>
 			<img src={dummy1} alt='' className='deal-image' />
 			<div className='deal-info'>
-				<h2>Deal of the month</h2>
-				<h5>Room Name</h5>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-					praesentium iste at iure fuga. Nesciunt fugiat, eos aliquid, sint
-					enim, doloribus similique praesentium sunt harum accusantium dolore.
-					Nemo, eos et!
-				</p>
+				{type && <h2>{type}</h2>}
+				{type && <h5>{room.room_name}</h5>}
+				{!type && <h2>{room.room_name}</h2>}
+				<p>{room.description}</p>
 				<div className='deal-stats'>
 					<div className='stat-item'>
 						<RxPerson />
-						<p>Occupancy: 2</p>
+						<p>Occupancy: {room.guests}</p>
 					</div>
 					<div className='stat-item'>
 						<TbResize />
-						<p>Size: 100-150sqm</p>
+						<p>Size: {room.room_size}sqm</p>
 					</div>
-					<div className='stat-item'>
-						<AiOutlineWifi />
-						<p>WI-Fi</p>
-					</div>
-					<div className='stat-item'>
-						<CgScreen />
-						<p>TV</p>
-					</div>
-					<div className='stat-item'>
-						<MdOutlineShower />
-						<p>Shower</p>
-					</div>
-					<div className='stat-item'>
-						<GiTowel />
-						<p>Towels</p>
-					</div>
-					<div className='stat-item'>
-						<MdOutlineLocalBar />
-						<p>Minibar</p>
-					</div>
-					<div className='stat-item'>
-						<GiDesk />
-						<p>Work Space</p>
-					</div>
+					{room.wifi && (
+						<div className='stat-item'>
+							<AiOutlineWifi />
+							<p>WI-Fi</p>
+						</div>
+					)}
+					{room.tv && (
+						<div className='stat-item'>
+							<CgScreen />
+							<p>TV</p>
+						</div>
+					)}
+					{room.shower && (
+						<div className='stat-item'>
+							<MdOutlineShower />
+							<p>Shower</p>
+						</div>
+					)}
+					{room.towels && (
+						<div className='stat-item'>
+							<GiTowel />
+							<p>Towels</p>
+						</div>
+					)}
+					{room.minibar && (
+						<div className='stat-item'>
+							<MdOutlineLocalBar />
+							<p>Minibar</p>
+						</div>
+					)}
+					{room.work_space && (
+						<div className='stat-item'>
+							<GiDesk />
+							<p>Work Space</p>
+						</div>
+					)}
 				</div>
 				<div className='prices'>
-					<h4>$500</h4>
-					<h4 className='old-price'>$400</h4>
+					<h4>${room.price}</h4>
+					{room.old_price && <h4 className='old-price'>${room.old_price}</h4>}
 				</div>
-				<Link to='/rooms' className='btn-secondary'>
-					Book now
+				<button className='btn-secondary'>
+					Learn more
 					<IoIosArrowUp className='arrow' />
-				</Link>
+				</button>
 			</div>
 		</div>
 	);

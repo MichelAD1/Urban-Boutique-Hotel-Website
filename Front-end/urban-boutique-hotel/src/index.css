@@ -103,7 +103,7 @@ h6 {
 }
 
 .btn-secondary{
-  width: 8em;
+  width: 9em;
   background-color: #2a3249;
   color: #fff;
   border: none;
@@ -123,8 +123,7 @@ h6 {
 
 .arrow{
   color: #fff;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
   rotate:90deg;
   margin-left: 0.1em;
 }
@@ -1696,7 +1695,6 @@ button:hover {
 .deals-rooms {
   display: flex;
   flex-direction: row;
-  margin-bottom: 2em;
 }
 
 .deal-image{

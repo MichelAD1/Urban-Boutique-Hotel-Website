@@ -37,23 +37,37 @@ const Home = () => {
 			id: 1,
 			room_name: "Standard Room",
 			price: 100.0,
+			old_price: 150.0,
 			guests: 2,
 			room_type: "Queen Bed",
 			room_size: 250,
-			breakfast: false,
-			pets: true,
+			wifi: true,
+			tv: true,
+			shower: true,
+			towels: false,
+			minibar: true,
+			desk: false,
 			images: [room1],
+			description:
+				"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
 		},
 		{
 			id: 2,
 			room_name: "Executive Suite",
 			price: 350.0,
+			old_price: 400.0,
 			guests: 4,
 			room_type: "Two Queen Beds",
 			room_size: 600,
-			breakfast: true,
-			pets: false,
+			wifi: true,
+			tv: false,
+			shower: true,
+			towels: true,
+			minibar: false,
+			desk: false,
 			images: [room2],
+			description:
+				"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
 		},
 	];
 
@@ -69,8 +83,8 @@ const Home = () => {
 					</Link>
 				</div>
 			</div>
-			<SingleRoom reverse={true} room={rooms[0]} />
-			<SingleRoom reverse={false} room={rooms[0]} />
+			<SingleRoom reverse={false} room={rooms[0]} type={"Deal of the month"} />
+			<SingleRoom reverse={true} room={rooms[1]} type={"Featured room"} />
 
 			<div className='services'>
 				<div className='section-title'>

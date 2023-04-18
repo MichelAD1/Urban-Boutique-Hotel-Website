@@ -1284,13 +1284,14 @@ h6 {
 }
 
 .location-description{
-  color: var(--primaryColor)
+  color: var(--primaryColor);
 }
 
 .arrival-info{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
   margin: 1em 25%;
 }
 
@@ -1302,4 +1303,15 @@ h6 {
 
 .no-mg{
   margin: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .section-info{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .location-map{
+    margin-bottom: 2em;
+  }
 }

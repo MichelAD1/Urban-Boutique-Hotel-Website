@@ -41,7 +41,12 @@ const Home = () => {
 					</Link>
 				</div>
 			</div>
-
+			<div className='discount-rooms'>
+				<div className='section-title'>
+					<h4>Deals</h4>
+					<div />
+				</div>
+			</div>
 			<div className='services'>
 				<div className='section-title'>
 					<h4>Services</h4>
@@ -59,6 +64,7 @@ const Home = () => {
 					})}
 				</div>
 			</div>
+
 			<div className='featured-rooms'>
 				<div className='section-title'>
 					<h4>Featured Rooms</h4>

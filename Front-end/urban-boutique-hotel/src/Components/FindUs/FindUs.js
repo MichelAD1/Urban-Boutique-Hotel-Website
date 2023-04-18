@@ -1,3 +1,4 @@
+import Footer from "../../Global/Components/Footer";
 import Slideshow from "../../Global/Components/Slideshow";
 
 // Images
@@ -6,6 +7,7 @@ import att_2 from "../../assets/images/att-2.jpg";
 import att_3 from "../../assets/images/att-3.jpg";
 import att_4 from "../../assets/images/att-4.jpg";
 import att_5 from "../../assets/images/att-5.jpg";
+import map from "../../assets/images/map.jpg";
 
 function FindUs() {
 	const data = [
@@ -49,11 +51,118 @@ function FindUs() {
 		<>
 			<Slideshow data={data} />
 			<div className='find-content'>
+				<div className='section-info'>
+					<img src={map} alt='' className='location-map' />
+					<div className='section-description'>
+						<div className='section-title'>
+							<h4>Location</h4>
+							<div />
+						</div>
+						<div className='location-description'>
+							<p>
+								Our house is an ideal starting point to discover the beauty of
+								Vienna. Thanks to our central location, all sights are within
+								easy reach: We are only 10 minutes walk from the train station
+								"Westbahnhof" and 20 minutes walk from the city center. Our
+								address is Andreasgasse 1, 1070 Vienna, near the famous shopping
+								street "Mariahilfer Straße". With the subway station "U3
+								Zieglergasse" directly in front of our house is a drive to
+								cultural attractions or shopping just a few minutes away.
+							</p>
+						</div>
+					</div>
+				</div>
 				<div className='section-title'>
-					<h4>Location</h4>
+					<h4>Arrival Information</h4>
 					<div />
 				</div>
+				{/* S-Bahn (S7) */}
+				<div className='arrival-info'>
+					<div className='section-title no-mg'>
+						<h3>S-Bahn (S7)</h3>
+					</div>
+					<div className='arrival-description'>
+						<p>
+							The S-Bahn offers the cheapest fare to the airport. Several
+							stopovers allow easy entry and exit across the city, most of them
+							with suburban and subway connections. Trains leave between about
+							04.00 and 00.00. A ride takes about 23 minutes from Wien Mitte and
+							costs 4.10 €
+						</p>
+					</div>
+				</div>
+				{/* End of S-Bahn (S7) */}
+				{/* CAT - City Airport Train */}
+				<div className='arrival-info'>
+					<div className='section-title no-mg'>
+						<h3>CAT - City Airport Train</h3>
+					</div>
+					<div className='arrival-description'>
+						<p>
+							The City Airport Train is perhaps the most comfortable travel
+							option, but also one of the most expensive. Every 30 minutes there
+							is a fast train between Wien-Mitte and the airport. <br />
+							<br />
+							From / to: Wien-Mitte (U3, U4 + S) - Flughafen Wien, Bahnhof{" "}
+							<br />
+							<br />
+							Cost: when buying online 11 € (single), 19 € (return); when buying
+							at machines 12 € (single), 21 € (return) <br />
+							<br />
+							Interval: 30 minutes
+						</p>
+					</div>
+				</div>
+				{/* End of CAT - City Airport Train */}
+				{/* Vienna Airport Lines (Postbus ÖBB) */}
+				<div className='arrival-info'>
+					<div className='section-title no-mg'>
+						<h3>Vienna Airport Lines (Postbus ÖBB)</h3>
+					</div>
+					<div className='arrival-description'>
+						<p>
+							The Vienna Airport Lines connect important transport hubs with the
+							airport. And most bus stops are directly connected to subway
+							stations. Buses from Morzinplatz / Schwedenplatz and Westbahnhof
+							leave every 30 minutes. <br />
+							<br />
+							Cost: 8 € (single), 13 € (return) <br />
+							<br />
+							Interval: 30 minutes or 1 hour (line VAL3) <br />
+							<br />
+							Duration: 20-40 minutes
+						</p>
+					</div>
+				</div>
+				{/* End of Vienna Airport Lines (Postbus ÖBB) */}
+				{/* TAXI */}
+				<div className='arrival-info'>
+					<div className='section-title no-mg'>
+						<h3>TAXI</h3>
+					</div>
+					<div className='arrival-description'>
+						<p>
+							The Vienna taxi centers offer trips with an airport package. For a
+							fixed price of 36 € (if ordered in advance) you get so directly
+							from home to the airport. Accessible for example under 31300,
+							40100 or 60160. Please say on the phone that you need an airport
+							taxi! <br />
+							<br />
+							From / to: anywhere in Vienna - Airport, departure / arrival{" "}
+							<br />
+							<br />
+							Cost: 36 € fixed price (+ tip) <br />
+							<br />
+							Duration: varies depending on place of departure and traffic
+							<br />
+							<br />
+							Duration: 20-40 minutes
+						</p>
+					</div>
+				</div>
+				{/* End of TAXI */}
 			</div>
+			<Footer />
 		</>
 	);
 }

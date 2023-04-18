@@ -1077,9 +1077,9 @@ button:hover {
 .room-item-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 90%;
-  align-items: center;
+  align-items: flex-start;
   margin: 0 auto;
   margin-top: -2%;
 }
@@ -1089,36 +1089,92 @@ button:hover {
   flex-direction: row;
   width: 100%;
 }
+.room-images {
+  width: 100%;
+  height: 40em;
+}
+.room-infos {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 4%;
+  padding-bottom: 4%;
+}
+.room-options {
+  display: flex;
+  flex-direction: row;
+  padding-left: 3.1%;
+  margin-top: 5%;
+  width: 100%;
+  height: 20em;
+}
+.room-right {
+  width: 50%;
+  padding-right: 4%;
+}
+.room-left {
+  width: 50%;
+}
+.room-description {
+  padding-left: 3.1%;
+  padding-top: 3.5%;
+  padding-bottom: 5%;
+  line-height: 2em;
+}
 .room-name {
   display: flex;
   padding-left: 3%;
-  padding-top: 1%;
+  padding-top: 6%;
   flex-direction: row;
   align-items: center;
   width: 60%;
 }
-.room-price {
+.room-name.description h1 {
+  font-size: 30px;
+}
+.room-display {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   width: 40%;
 }
+.room-display.pricing {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1%;
+}
+.room-display.pricing::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 0.5px;
+  background-color: #bcbcbc;
+}
 
-.room-price p:first-child {
+.room-display p:first-child {
   color: #bcbcbc;
   letter-spacing: 0.2em;
   font-size: 12px;
 }
-.price-tag {
+.room-tag {
   font-size: 30px;
   font-weight: 600;
 }
-.room-price h2 {
-  background-color: red;
+.room-tag.pricing {
+  font-size: 20px;
+}
+.room-display h2 {
   padding: 4%;
 }
-.room-price button {
+.room-display button {
   width: 25%;
   letter-spacing: 0.4em;
   height: 5.5em;
@@ -1132,7 +1188,7 @@ button:hover {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-.room-price button:hover {
+.room-display button:hover {
   background-color: #2a32499a;
 }
 /* End of Room Item */

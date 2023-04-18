@@ -1114,6 +1114,7 @@ button:hover {
   padding-right: 4%;
 }
 .room-left {
+  padding-left: 4%;
   width: 50%;
 }
 .room-description {
@@ -1146,6 +1147,17 @@ button:hover {
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+  width: 100%;
+  margin-top: 1%;
+}
+.room-display.amenities {
+  display: flex;
+  position: relative;
+  padding-top: 3%;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-left: 3%;
   width: 100%;
   margin-top: 1%;
 }

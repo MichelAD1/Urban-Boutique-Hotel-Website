@@ -75,7 +75,23 @@ const RoomsItem = () => {
             </div>
           </div>
         </div>
-        <div className="room-left"></div>
+        <div className="room-left">
+          <div className="room-name description">
+            <h1>Amenities</h1>
+          </div>
+          <div className="room-display amenities">
+            <p>FREE WIFI</p>
+          </div>
+          <div className="room-display amenities">
+            <p>INTERNATIONAL TV CHANNELS</p>
+          </div>
+          <div className="room-display amenities">
+            <p>AIR CONDITIONER</p>
+          </div>
+          <div className="room-display amenities">
+            <p>NO SMOKING</p>
+          </div>
+        </div>
       </div>
     </div>
   );

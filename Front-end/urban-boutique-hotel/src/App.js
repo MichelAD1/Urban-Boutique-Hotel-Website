@@ -7,6 +7,7 @@ import Login from "./Components/Auth/Login";
 import ForgotPassword from "./Components/Auth/ForgotPassword";
 import Home from "./Components/Home/Home";
 import Rooms from "./Components/Rooms/Rooms";
+import RoomsItem from "./Components/Rooms/RoomsItem";
 import Services from "./Components/Services/Services";
 import FindUs from "./Components/FindUs/FindUs";
 import Discover from "./Components/Discover/Discover";
@@ -25,70 +26,72 @@ function App() {
 					<Route path='/login' element={<Login />} />
 					<Route path='/reset' element={<ForgotPassword />} />
 
-					<Route
-						path='/'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Home />
-							</>
-						}
-					/>
-					<Route
-						path='/rooms'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Rooms />
-							</>
-						}
-					/>
-					<Route
-						path='/services'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Services />
-							</>
-						}
-					/>
-					<Route
-						path='/findus'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<FindUs />
-							</>
-						}
-					/>
-					<Route
-						path='/discover'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Discover />
-							</>
-						}
-					/>
-					<Route
-						path='/contact'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Contact />
-							</>
-						}
-					/>
-				</Routes>
-			</div>
-		</BrowserRouter>
-	);
+					 <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Home />
+              </>
+            }
+          />
+          <Route
+            path="/rooms"
+            element={
+              <>
+                <Navbar />
+                <Rooms />
+              </>
+            }
+          />
+          <Route
+            path="/rooms/:id"
+            element={
+              <>
+                <RoomsItem />
+              </>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <>
+                <Navbar />
+                <Services />
+              </>
+            }
+          />
+          <Route
+            path="/findus"
+            element={
+              <>
+                <Navbar />
+                <FindUs />
+              </>
+            }
+          />
+          <Route
+            path="/discover"
+            element={
+              <>
+                <Navbar />
+                <Discover />
+              </>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <>
+                <Navbar />
+                <Contact />
+              </>
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;

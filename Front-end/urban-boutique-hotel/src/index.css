@@ -1517,11 +1517,11 @@ button:hover {
 
 .stat-item{
   color: var(--primaryColor);
-  margin: 2em 0;
   font-size: 1em;
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-right: 1em;
 
 }
 
@@ -1578,4 +1578,5 @@ button:hover {
 
 .location-map{
   max-height: 500px;
+}
 /* End of find us page */

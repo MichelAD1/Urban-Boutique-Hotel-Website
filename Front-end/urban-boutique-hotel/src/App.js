@@ -7,6 +7,7 @@ import Login from "./Components/Auth/Login";
 import ForgotPassword from "./Components/Auth/ForgotPassword";
 import Home from "./Components/Home/Home";
 import Rooms from "./Components/Rooms/Rooms";
+import RoomsItem from "./Components/Rooms/RoomsItem";
 import Services from "./Components/Services/Services";
 import FindUs from "./Components/FindUs/FindUs";
 import Discover from "./Components/Discover/Discover";
@@ -38,6 +39,14 @@ function App() {
               <>
                 <Navbar />
                 <Rooms />
+              </>
+            }
+          />
+          <Route
+            path="/rooms/:id"
+            element={
+              <>
+                <RoomsItem />
               </>
             }
           />

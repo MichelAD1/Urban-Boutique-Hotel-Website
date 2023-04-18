@@ -18,7 +18,7 @@ const RoomsList = ({ rooms }) => {
 	return (
 		<section className='roomslist' id='roomlist'>
 			{rooms.map((item) => (
-				<SingleRoom reverse={false} room={item} type={null} />
+				<SingleRoom reverse={false} room={item} type={null} key={item.id} />
 			))}
 		</section>
 	);

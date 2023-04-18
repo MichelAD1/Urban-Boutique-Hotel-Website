@@ -24,10 +24,9 @@ const SingleRoom = ({ reverse, room, type }) => {
 	const handleRedirect = (item) => {
 		navigate(`/rooms/${item.room_name}`, { state: { data: item } });
 	};
-
 	return (
 		<div
-			className='deals-rooms'
+			className={`deals-rooms ${type ? "" : "mg-bot"}`}
 			id='deals-rooms'
 			onClick={() => handleRedirect(room)}>
 			<img src={dummy1} alt='' className='deal-image' />

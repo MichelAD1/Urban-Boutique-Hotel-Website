@@ -156,6 +156,12 @@ h6 {
   letter-spacing: var(--mainSpacing);
 }
 
+.mg-bot{
+  margin: 1em;
+  background-color: rgba(172,160,160,0.2);
+  border-radius: 1em;
+}
+
 /* end of globals */
 /* Navbar */
 .navbar {

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -54,18 +56,26 @@ class AuthController extends Controller
 
     public function register(Request $request){
         $request->validate([
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
 
-        $user = Customer::create([
-            'name' => $request->name,
+        $user = User::create([
+            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'phone_number' => $request->phone_number
+            'type'=>$request->type
         ]);
+        if($request->type==0){ //user a customer
+            $customer = Customer::create([
 
+            ]);
+        }else if($request->type==1){ //user an admin
+            $admin = Admin::create([
+
+            ]);
+        }
         $token = Auth::login($user);
         return response()->json([
             'status' => 'success',

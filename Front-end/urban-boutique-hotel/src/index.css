@@ -1087,6 +1087,8 @@ button:hover {
 .room-header {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 }
 .room-images {
@@ -1126,7 +1128,7 @@ button:hover {
 .room-name {
   display: flex;
   padding-left: 3%;
-  padding-top: 6%;
+  padding-top: 1%;
   flex-direction: row;
   align-items: center;
   width: 60%;

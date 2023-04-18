@@ -41,7 +41,19 @@ const Home = () => {
 					</Link>
 				</div>
 			</div>
-
+			<div className='deals-rooms'>
+				<img src={dummy1} alt='' className='deal-image' />
+				<div className='deal-info'>
+					<h2>Deal of the month</h2>
+					<h5>Room Name</h5>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+						praesentium iste at iure fuga. Nesciunt fugiat, eos aliquid, sint
+						enim, doloribus similique praesentium sunt harum accusantium dolore.
+						Nemo, eos et!
+					</p>
+				</div>
+			</div>
 			<div className='services'>
 				<div className='section-title'>
 					<h4>Services</h4>

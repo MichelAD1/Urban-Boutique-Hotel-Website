@@ -1164,3 +1164,37 @@ h6 {
 }
 
 /* End of Footer */
+/* Deal */
+.deals-rooms {
+  display: flex;
+  flex-direction: row;
+}
+
+.deal-image{
+  width: 50%;
+  height: auto;
+}
+
+.deal-info{
+  display: flex;
+  flex-direction: column;
+  padding: 3em;
+  padding-right: 10em;
+}
+
+.deal-info h2{
+  font-weight: 400;
+  margin: 0;
+}
+
+.deal-info h5{
+  font-weight: 400;
+  color: var(--secondaryColor);
+  margin: 0;
+}
+
+.deal-info p{
+  font-weight: 400;
+  margin-top: 1em;
+  font-size: 0.8em;
+}

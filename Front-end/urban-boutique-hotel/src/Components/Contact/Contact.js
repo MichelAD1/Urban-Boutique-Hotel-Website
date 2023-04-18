@@ -1,6 +1,9 @@
 import { Link as ScrollLink } from "react-scroll";
 import { useState, useEffect } from "react";
 import Footer from "../../Global/Components/Footer";
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { MdEmail, MdLocationPin } from "react-icons/md";
+import { FaFax } from "react-icons/fa";
 
 const Contact = () => {
   return (
@@ -22,10 +25,15 @@ const Contact = () => {
       </div>
       <div className="contact-section">
         <div className="side-information">
-          <div className="side-info-box"></div>
-          <div className="side-info-box"></div>
-          <div className="side-info-box"></div>
-          <div className="side-info-box"></div>
+          <div className="side-info-box">
+            <div className="contact-icons">
+              <BsFillTelephoneFill />
+            </div>
+            <div className="contact-stats">
+              <div className="contact-stat">Phone Number</div>
+              <div className="contact-paragraph">+43 1 526 19 28</div>
+            </div>
+          </div>
         </div>
         <div className="message-form">
           <div className="message-header">

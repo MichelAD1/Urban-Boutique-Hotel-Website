@@ -20,6 +20,15 @@ const Contact = () => {
           </ScrollLink>
         </div>
       </div>
+      <div className="contact-section">
+        <div className="side-information">
+          <div className="side-info-box"></div>
+          <div className="side-info-box"></div>
+          <div className="side-info-box"></div>
+          <div className="side-info-box"></div>
+        </div>
+        <div className="message-form"></div>
+      </div>
 
       <Footer />
     </>

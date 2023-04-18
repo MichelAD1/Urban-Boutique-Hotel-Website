@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 
 const Slideshow = ({ data }) => {
-	const delay = 100000;
+	const delay = 10000;
 
 	const [index, setIndex] = useState(0);
 	const timeoutRef = useRef(null);

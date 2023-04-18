@@ -4,6 +4,13 @@
   box-sizing: border-box;
   font-family: "Roboto";
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #333;
+  transition: background-color 5000s ease-in-out 0s;
+}
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -788,6 +795,7 @@ h6 {
   outline: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .message-textarea textarea:focus,
 .message-input input:focus {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);

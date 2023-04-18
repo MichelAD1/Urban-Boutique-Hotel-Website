@@ -6,6 +6,7 @@ import { AiOutlineWifi } from "react-icons/ai";
 import { CgScreen } from "react-icons/cg";
 import { MdOutlineShower, MdOutlineLocalBar } from "react-icons/md";
 import { GiTowel, GiDesk } from "react-icons/gi";
+import { IoIosArrowUp } from "react-icons/io";
 
 // Componenets
 import Footer from "../../Global/Components/Footer";
@@ -92,6 +93,14 @@ const Home = () => {
 							<p>Work Space</p>
 						</div>
 					</div>
+					<div className='prices'>
+						<h4>$500</h4>
+						<h4 className='old-price'>$400</h4>
+					</div>
+					<Link to='/rooms' className='btn-secondary'>
+						Book now
+						<IoIosArrowUp className='arrow' />
+					</Link>
 				</div>
 			</div>
 			<div className='services'>

@@ -21,7 +21,11 @@ function FindUs() {
 			image: att_2,
 		},
 	];
-	return <Slideshow data={data} />;
+	return (
+		<>
+			<Slideshow data={data} />
+		</>
+	);
 }
 
 export default FindUs;

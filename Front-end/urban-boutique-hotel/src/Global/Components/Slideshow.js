@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 
 const Slideshow = ({ data }) => {
-	const delay = 2500;
+	const delay = 100000;
 
 	const [index, setIndex] = useState(0);
 	const timeoutRef = useRef(null);
@@ -32,8 +32,16 @@ const Slideshow = ({ data }) => {
 			<div
 				className='slideshowSlider'
 				style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
-				{data.map((backgroundColor, index) => (
-					<div className='slide' key={index} style={{ backgroundColor }}></div>
+				{data.map((item, index) => (
+					<div className='slide' key={index}>
+						<div className='slide-content'>
+							<img src={item.image} alt='' className='slide-image' />
+							<div className='slide-info'>
+								<h2 className='slide-title'>{item.title}</h2>
+								<p className='slide-description'>{item.description}</p>
+							</div>
+						</div>
+					</div>
 				))}
 			</div>
 

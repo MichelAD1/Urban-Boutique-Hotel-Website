@@ -34,6 +34,35 @@ const Contact = () => {
               <div className="contact-paragraph">+43 1 526 19 28</div>
             </div>
           </div>
+          <div className="side-info-box">
+            <div className="contact-icons">
+              <MdEmail />
+            </div>
+            <div className="contact-stats">
+              <div className="contact-stat">Email Address</div>
+              <div className="contact-paragraph">pension@hargita.at</div>
+            </div>
+          </div>
+          <div className="side-info-box">
+            <div className="contact-icons">
+              <FaFax />
+            </div>
+            <div className="contact-stats">
+              <div className="contact-stat">Fax Address</div>
+              <div className="contact-paragraph">1070 Wien </div>
+            </div>
+          </div>
+          <div className="side-info-box">
+            <div className="contact-icons location">
+              <MdLocationPin />
+            </div>
+            <div className="contact-stats">
+              <div className="contact-stat">Location</div>
+              <div className="contact-paragraph">
+                Andreasgasse 1, 1070 Vienna
+              </div>
+            </div>
+          </div>
         </div>
         <div className="message-form">
           <div className="message-header">

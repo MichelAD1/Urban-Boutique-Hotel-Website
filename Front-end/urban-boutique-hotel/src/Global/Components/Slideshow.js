@@ -44,7 +44,6 @@ const Slideshow = ({ data }) => {
 					</div>
 				))}
 			</div>
-
 			<div className='slideshowDots'>
 				{data.map((_, idx) => (
 					<div

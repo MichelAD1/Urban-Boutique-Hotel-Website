@@ -48,6 +48,12 @@ function FindUs() {
 	return (
 		<>
 			<Slideshow data={data} />
+			<div className='find-content'>
+				<div className='section-title'>
+					<h4>Location</h4>
+					<div />
+				</div>
+			</div>
 		</>
 	);
 }

@@ -1226,6 +1226,10 @@ h6 {
   border: 0;
 }
 
+.slideshowDot.active::after{
+  height: 0;
+}
+
 @media screen and (max-width: 1000px) {
   .slide {
     display: inline-block;
@@ -1255,3 +1259,7 @@ h6 {
 }
 
 /* End of slide show */
+/* Find us page */
+.find-content{
+  margin-top: 4em;
+}

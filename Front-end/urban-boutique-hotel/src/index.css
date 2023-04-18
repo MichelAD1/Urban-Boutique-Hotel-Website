@@ -317,19 +317,19 @@ h6 {
 .defaultHero,
 .roomsHero {
   min-height: calc(100vh - 66px);
-  background: url("./assets/images/defaultBcg.jpeg") center/cover no-repeat;
+  background: url("./assets/images/hotel-outdoor.jpg") center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .roomsHero {
-  background-image: url("./assets/images/room-2.jpeg");
+  background-image: url("./assets/images/rooms-hero.jpg");
   min-height: 60vh;
 }
 .servicesHero {
   min-height: calc(100vh - 66px);
-  background-image: url("./assets/images/services-image.jpg");
+  background-image: url("./assets/images/services-hero.jpg");
   background-size: cover;
   background-position: center bottom;
   display: flex;
@@ -339,7 +339,7 @@ h6 {
 }
 .aboutHero {
   min-height: calc(100vh - 66px);
-  background-image: url("./assets/images/about-image.jpg");
+  background-image: url("./assets/images/about-hero.jpg");
   background-size: cover;
   background-position: center center;
   display: flex;
@@ -1164,3 +1164,46 @@ h6 {
 }
 
 /* End of Footer */
+/* Slide show */
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 500px;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+}
+
+.slide {
+  display: inline-block;
+
+  height: 400px;
+  width: 100%;
+  border-radius: 40px;
+}
+
+/* Buttons */
+
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 0px;
+
+  background-color: #c4c4c4;
+}
+
+.slideshowDot.active {
+  background-color: #6a0dad;
+}
+
+/* End of slide show */

@@ -1,15 +1,9 @@
 import { Link } from "react-router-dom";
 import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
-import { RxPerson } from "react-icons/rx";
-import { TbResize } from "react-icons/tb";
-import { AiOutlineWifi } from "react-icons/ai";
-import { CgScreen } from "react-icons/cg";
-import { MdOutlineShower, MdOutlineLocalBar } from "react-icons/md";
-import { GiTowel, GiDesk } from "react-icons/gi";
-import { IoIosArrowUp } from "react-icons/io";
 
 // Componenets
 import Footer from "../../Global/Components/Footer";
+import SingleRoom from "../Rooms/SingleRoom";
 
 import dummy1 from "../../assets/images/room-1.jpeg";
 
@@ -48,61 +42,8 @@ const Home = () => {
 					</Link>
 				</div>
 			</div>
-			<div className='deals-rooms'>
-				<img src={dummy1} alt='' className='deal-image' />
-				<div className='deal-info'>
-					<h2>Deal of the month</h2>
-					<h5>Room Name</h5>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-						praesentium iste at iure fuga. Nesciunt fugiat, eos aliquid, sint
-						enim, doloribus similique praesentium sunt harum accusantium dolore.
-						Nemo, eos et!
-					</p>
-					<div className='deal-stats'>
-						<div className='stat-item'>
-							<RxPerson />
-							<p>Occupancy: 2</p>
-						</div>
-						<div className='stat-item'>
-							<TbResize />
-							<p>Size: 100-150sqm</p>
-						</div>
-						<div className='stat-item'>
-							<AiOutlineWifi />
-							<p>WI-Fi</p>
-						</div>
-						<div className='stat-item'>
-							<CgScreen />
-							<p>TV</p>
-						</div>
-						<div className='stat-item'>
-							<MdOutlineShower />
-							<p>Shower</p>
-						</div>
-						<div className='stat-item'>
-							<GiTowel />
-							<p>Towels</p>
-						</div>
-						<div className='stat-item'>
-							<MdOutlineLocalBar />
-							<p>Minibar</p>
-						</div>
-						<div className='stat-item'>
-							<GiDesk />
-							<p>Work Space</p>
-						</div>
-					</div>
-					<div className='prices'>
-						<h4>$500</h4>
-						<h4 className='old-price'>$400</h4>
-					</div>
-					<Link to='/rooms' className='btn-secondary'>
-						Book now
-						<IoIosArrowUp className='arrow' />
-					</Link>
-				</div>
-			</div>
+			<SingleRoom reverse={false} />
+			<SingleRoom reverse={true} />
 			<div className='services'>
 				<div className='section-title'>
 					<h4>Services</h4>
@@ -120,7 +61,6 @@ const Home = () => {
 					})}
 				</div>
 			</div>
-
 			<div className='featured-rooms'>
 				<div className='section-title'>
 					<h4>Featured Rooms</h4>

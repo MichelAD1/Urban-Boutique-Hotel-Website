@@ -14,6 +14,11 @@ class DiscountController extends Controller
             $room->discount = $request->discount;
             $room->save();
         }
+
+        return response()->json([
+            'message'=>'discount added successfuly'
+        ]);
+
     }
     public function addRoomDiscount(Request $request){//room_id,discount
         $room = Room::find($request->room_id);
@@ -21,7 +26,29 @@ class DiscountController extends Controller
 
         if($room->save()){
             return response()->json([
-                'message'=>'discount added successfuly'
+                'message'=>`discount added to all rooms of size $request->size`
+            ]);
+        }
+    }
+    public function removeWholeDiscount($size){
+        $rooms = Room::where('size',$size);
+        for($i=0;$i<sizeof($rooms);$i++){
+            $room = $rooms[$i];
+            $room->discount = 0;
+            $room->save();
+        }
+
+        return response()->json([
+            'message'=>`Discount removed from all rooms of size $size`
+        ]);
+
+    }
+    public function removeRoomDiscount($room_id){
+        $room = Room::find($room_id);
+        $room->discount=0;
+        if($room->save()){
+            return response()->json([
+                'message'=>'discount removed successfuly'
             ]);
         }
     }

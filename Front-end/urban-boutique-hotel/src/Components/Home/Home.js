@@ -4,7 +4,9 @@ import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
 // Componenets
 import Footer from "../../Global/Components/Footer";
 import SingleRoom from "../Rooms/SingleRoom";
+import Reviews from "../../Global/Components/Reviews";
 
+// Images
 import room1 from "../../assets/images/room-1.jpeg";
 import room2 from "../../assets/images/room-2.jpeg";
 
@@ -103,6 +105,7 @@ const Home = () => {
 					})}
 				</div>
 			</div>
+			<Reviews />
 			<Footer />
 		</>
 	);

@@ -1938,7 +1938,8 @@ h6 {
 /* profile */
 .profile-container{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 3em 0em;
 }
 
@@ -1946,7 +1947,7 @@ h6 {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 50%;
+  width: 75%;
 }
 
 .profile-section h2{
@@ -1964,8 +1965,7 @@ h6 {
   justify-content: flex-start;
   flex-wrap: wrap;
 }
-/* end of profile */
-/* setting */
+
 .settings-box{
   width: 45%;
   padding: 1em 3em;
@@ -2006,4 +2006,19 @@ h6 {
   text-decoration: none;
   color: var(--secondaryColor);
 }
-/* end of setting */
+.reservations-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 75%;
+  margin-top: 1em;
+}
+.reservations-section h2{
+  margin-bottom: 0.1em;
+}
+
+.reservations-section h5{
+  font-size: 17px;
+  font-weight: 400;
+}
+/* end of profile */

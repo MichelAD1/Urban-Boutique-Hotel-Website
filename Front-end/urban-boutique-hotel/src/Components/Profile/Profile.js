@@ -42,14 +42,15 @@ const Profile = () => {
 						<MdMarkEmailUnread className='settings-icon' />
 						<div className='settings-content'>
 							<h3>Email notifications</h3>
-							<p>
-								Decide what you want to be notified about, and unsubscribe from
-								what you don't
-							</p>
+							<p>Decide what you want to subscribe and unsubscribe from</p>
 							<div className='settings-link'>Manage Notifications</div>
 						</div>
 					</Link>
 				</div>
+			</div>
+			<div className='reservations-section'>
+				<h2>Reservations</h2>
+				<h5>Manage your reservations</h5>
 			</div>
 		</div>
 	);

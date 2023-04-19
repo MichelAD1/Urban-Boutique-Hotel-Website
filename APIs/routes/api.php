@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,16 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::get('logout',[AuthController::class, 'logout']);
         Route::post('refresh',[AuthController::class, 'refresh']);
     });
-    Route::middleware(['auth', 'check.admin'])->group(function(){
 
-    });
-    Route::middleware(['auth', 'check.customer'])->group(function(){
+        Route::group(['prefix'=>'room'],function(){
+            Route::middleware(['auth', 'check.admin'])->group(function(){
+            Route::post('addroom',[RoomController::class,'addRoom']);
+            });
+            Route::middleware(['auth', 'check.customer'])->group(function(){
 
-    });
+            });
+            Route::get('getrooms',[RoomController::class,'getRooms']);
+        });
+
+
 });

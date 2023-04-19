@@ -61,7 +61,28 @@ class RoomController extends Controller
     }
     public function removeRoom($roomid){
         //admin function
+
         if(Room::find($roomid)->delete()){
+            $storage = new StorageClient([
+                'projectId' => 'meno-a6fd9',
+                'keyFilePath' => 'C:\Users\marc issa\Desktop\Meno\MENO\APIs\meno-a6fd9-firebase-adminsdk-dv2i6-bbf9790bcf.json'
+            ]);
+            $bucket = $storage->bucket('your-bucket-name');
+            $images = Image::where('room_id',$roomid)->get();
+            $folder_name = "RoomImages/";
+            if(!empty($images)){
+                for($i=0;$i<sizeof($images);$i++){
+                    $image = $images[$i];
+                    $url = $image->image_url;
+                    if (preg_match('/([\w]+\.(png|jpg|jpeg|gif))/', $url, $matches)) {
+                        $filename = $matches[1];
+                        $overallpath = $folder_name.$filename;
+                        $object = $bucket->object($overallpath);
+                        $object->delete();
+                    }
+
+                }
+            }
             return response()->json([
                 'message'=>'room deleted successfully'
             ]);
@@ -121,46 +142,55 @@ class RoomController extends Controller
         //customer and admin function
         //returns all rooms with their schedule
         // Get all the rooms
-    $rooms = Room::all();
+        // Get all the rooms
+        $rooms = Room::all();
 
-    // Get reservations for all rooms for the next week
-    $reservations = DB::table("customer_reserves_room")->whereBetween('reservation_date', [Carbon::today(), Carbon::today()->addDays(7)])
-        ->orWhereBetween('reservation_end', [Carbon::today(), Carbon::today()->addDays(300)])
-        ->get();
+        // Get reservations for all rooms for the next week
+        $reservations = DB::table("customer_reserves_room")->whereBetween('reservation_date', [Carbon::today(), Carbon::today()->addDays(7)])
+            ->orWhereBetween('reservation_end', [Carbon::today(), Carbon::today()->addDays(7)])
+            ->get();
 
-    // Initialize an array to store the occupied room dates
-    $occupiedRoomDates = [];
+        // Initialize an array to store the occupied and free dates for each room
+        $roomDates = [];
 
-    // Loop through all the reservations and populate the occupiedRoomDates array
-    foreach ($reservations as $reservation) {
-        $roomDates = CarbonPeriod::create($reservation->reservation_date, $reservation->reservation_end)->toArray();
-        if (isset($occupiedRoomDates[$reservation->room_id])) {
-            $occupiedRoomDates[$reservation->room_id] = array_merge($occupiedRoomDates[$reservation->room_id], $roomDates);
-        } else {
-            $occupiedRoomDates[$reservation->room_id] = $roomDates;
-        }
-    }
+        // Loop through all the rooms and find the free and occupied dates for each room
+        foreach ($rooms as $room) {
+            // Get the reservations for this room for the next week
+            $roomReservations = $reservations->where('room_id', $room->id);
 
-    // Loop through all the rooms and find the free dates for each room
-    $freeRoomDates = [];
-    foreach ($rooms as $room) {
-        $occupiedDates = isset($occupiedRoomDates[$room->id]) ? $occupiedRoomDates[$room->id] : [];
-        $freeDates = [];
-        $currentDate = Carbon::today();
-        $endDate = Carbon::today()->addDays(300);
-        while ($currentDate <= $endDate) {
-            if (!in_array($currentDate->format('Y-m-d'), $occupiedDates)) {
-                $freeDates[] = $currentDate->format('Y-m-d');
+            // Initialize arrays to store the occupied and free dates for this room
+            $occupiedDates = [];
+            $freeDates = [];
+
+            // Loop through each day of the next week and check if it's occupied
+            $currentDate = Carbon::today();
+            $endDate = Carbon::today()->addDays(7);
+            while ($currentDate <= $endDate) {
+                $isOccupied = false;
+                foreach ($roomReservations as $reservation) {
+                    $reservationDates = CarbonPeriod::create($reservation->reservation_date, $reservation->reservation_end)->toArray();
+                    if (in_array($currentDate->format('Y-m-d'), $reservationDates)) {
+                        $occupiedDates[] = $currentDate->format('Y-m-d');
+                        $isOccupied = true;
+                        break;
+                    }
+                }
+                if (!$isOccupied) {
+                    $freeDates[] = $currentDate->format('Y-m-d');
+                }
+                $currentDate->addDay();
             }
-            $currentDate->addDay();
+
+            // Add the occupied and free dates for this room to the roomDates array
+            $roomDates[] = [
+                'room' => $room,
+                'occupied_dates' => $occupiedDates,
+                'free_dates' => $freeDates
+            ];
         }
-        $freeRoomDates[] = [
-            'room' => $room,
-            'free_dates' => $freeDates
-        ];
-    }
 
-
+        // Return the roomDates array as JSON
+        return response()->json($roomDates);
 
     }
 

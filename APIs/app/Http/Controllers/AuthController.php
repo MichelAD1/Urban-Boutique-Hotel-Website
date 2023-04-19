@@ -81,7 +81,9 @@ class AuthController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'type'=>$request->type
+            'type'=>$request->type,
+            'dob'=>$request->dob,
+            'gender'=>$request->gender
         ]);
         if($request->type==0){ //user a customer
             $customer = Customer::create([

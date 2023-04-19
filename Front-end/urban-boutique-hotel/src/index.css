@@ -380,6 +380,11 @@ h6 {
 .account-image{
   font-size: 35px;
 }
+@media screen and (max-width: 1000px) {
+  .account-image{
+    margin-left: 90%;
+  }
+}
 /* end of account navbar */
 /* Hero */
 .defaultHero,
@@ -2006,6 +2011,18 @@ h6 {
   text-decoration: none;
   color: var(--secondaryColor);
 }
+
+@media screen and (max-width: 1000px) {
+  .settings-box{
+    width: 100%;
+    margin-right: 0;
+  }
+  .settings-link{
+    display: none;
+  }
+}
+
+
 .reservations-section{
   display: flex;
   flex-direction: column;

@@ -150,7 +150,13 @@ const Book = () => {
             </div>
           </form>
         </div>
-        <div className="message-form order"></div>
+        <div className="message-form order">
+          <div className="message-header">
+            <div className="room-display order">
+              <h1>Order Summary</h1>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Footer />

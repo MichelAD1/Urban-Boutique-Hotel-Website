@@ -1595,6 +1595,33 @@ h6 {
   margin-right: 10px;
 }
 
+.footer-col p{
+  font-size: 0.7em;
+  margin-bottom: 0.8em;
+  margin-top: -1em;
+}
+
+.newsletter-form {
+  display: flex;
+  align-items: center;
+}
+.news-input{
+  padding: 0.6em 1em;
+  border: none;
+}
+
+.news-input:focus{
+  outline: none;
+}
+
+.news-btn{
+  padding: 0.6em 1em;
+  background-color: var(--secondaryColor);
+  color: var(--mainWhite);
+  border: none;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 776px) {
   .footer-content {
     width: 90vw;

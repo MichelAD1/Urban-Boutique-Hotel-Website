@@ -2065,10 +2065,29 @@ h6 {
 .profile-item{
   border-bottom: 1px solid rgba(0,0,0,0.1);
   padding: 1em 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile-btn{
+  background: none;
+  border: none;
+  color: var(--secondaryColor);
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  height:min-content;
+}
+.profile-btn:hover{
+  background-color: rgba(172, 160, 160, 0.2);
+  border-radius: 0.2em;
 }
 .account-item{
   border-bottom: 1px solid rgba(0,0,0,0.1);
-  padding: 1em 1.5em;
+  padding: 1.5em 1.5em;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -2079,15 +2098,10 @@ h6 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 25%;
   justify-content: space-between;
+  width: 50%;
 }
-.account-item button{
-  background: none;
-  border: none;
-  color: var(--secondaryColor);
-  font-size: 15px;
-  cursor: pointer;
-  font-weight: 600;
+.info-item{
+  width: 100%;
 }
 /* end of profile */

@@ -250,11 +250,12 @@ h6 {
   width: 2em;
 }
 .nav-image {
-  color: var(--primaryColor);
   margin-right: 1em;
+  max-width: 200px;
+  max-height: 50px;
+  position: fixed;
 }
 .nav-image:hover {
-  color: var(--secondaryColor);
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
@@ -317,7 +318,6 @@ h6 {
     align-items: center;
     justify-content: space-evenly;
   }
-
   .show-nav {
     height: auto;
     opacity: 1;
@@ -349,6 +349,12 @@ h6 {
 
   .nav-btn {
     pointer-events: none;
+  }
+
+  .nav-image{
+    width: 250px;
+    height: 75px;
+    position: relative;
   }
 }
 /* end of navbar */

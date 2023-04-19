@@ -19,6 +19,14 @@ class RoomController extends Controller
         $room->guests = $request->guests;
         $room->floor = $request->floor;
         $room->beds = $request->beds;
+        $room->wifi = $request->wifi;
+        $room->tv = $request->tv;
+        $room->shower = $request->shower;
+        $room->towels = $request->towels;
+        $room->mini_bar = $request->mini_bar;
+        $room->desk = $request->desk;
+        $room->featured = false;
+        $room->discount = 0;
         if($room->save()){
             return response()->json([
                 'message'=>'room added successfully'
@@ -55,6 +63,25 @@ class RoomController extends Controller
         if($request->has("beds")){
             $room->beds=$request->beds;
         }
+        if($request->has("tv")){
+            $room->tv=$request->tv;
+        }
+        if($request->has("shower")){
+            $room->shower=$request->shower;
+        }
+        if($request->has("wifi")){
+            $room->wifi=$request->wifi;
+        }
+        if($request->has("towels")){
+            $room->towels=$request->towels;
+        }
+        if($request->has("mini_bar")){
+            $room->mini_bar=$request->mini_bar;
+        }
+        if($request->has("desk")){
+            $room->desk=$request->desk;
+        }
+
         if($room->save()){
             return response()->json([
                 'message'=>'room added successfully'

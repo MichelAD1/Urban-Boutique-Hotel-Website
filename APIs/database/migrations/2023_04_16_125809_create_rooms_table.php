@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean("mini_bar");
             $table->boolean("desk");
             $table->boolean("featured");
+            $table->integer("discount");
 
 
             $table->timestamps();

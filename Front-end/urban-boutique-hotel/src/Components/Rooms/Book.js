@@ -196,6 +196,32 @@ const Book = () => {
                 <img src={galleryImage1} alt="" />
               </div>
             </div>
+            <div className="order-infos">
+              <div className="order-info">
+                <p className="order-label">Room Type</p>
+                <p className="order-desc">
+                  Double Bedroom shared external Bathroom
+                </p>
+              </div>{" "}
+              <div className="order-info">
+                <p className="order-label">Guests</p>
+                <p className="order-desc">1 Adult</p>
+              </div>
+              <div className="underline"></div>
+              <div className="order-info price">
+                <p className="order-label price">Subtotal</p>
+                <p className="order-desc price">€89</p>
+              </div>
+              <div className="order-info">
+                <p className="order-label price">Tax (10%) </p>
+                <p className="order-desc price">€8.90</p>
+              </div>
+              <div className="underline"></div>
+              <div className="order-info">
+                <p className="order-label total">Total </p>
+                <p className="order-desc total">€97.90</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -779,6 +779,59 @@ h6 {
   justify-content: center;
   margin-top: 3%;
 }
+.order-infos {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 5%;
+  justify-content: flex-start;
+  width: 80%;
+  height: 20em;
+}
+.order-info {
+  display: flex;
+  margin-top: 3%;
+  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.order-label {
+  font-size: 15px;
+  width: 35%;
+  color: var(--secondaryColor);
+}
+.order-desc {
+  font-size: 13px;
+  font-weight: bold;
+  width: 65%;
+  color: var(--primaryColor);
+}
+.order-label.price {
+  font-size: 15px;
+  width: 90%;
+  color: var(--secondaryColor);
+}
+.order-desc.price {
+  font-size: 13px;
+  font-weight: bold;
+  width: 10%;
+  color: var(--primaryColor);
+}
+.order-label.total {
+  font-size: 18px;
+  width: 90%;
+  font-weight: bold;
+  color: var(--primaryColor);
+}
+.order-desc.total {
+  font-size: 18px;
+  font-weight: bold;
+  width: 20%;
+  color: var(--primaryColor);
+}
 .gallery-image.order {
   width: 300px;
   height: 180px;
@@ -834,7 +887,21 @@ h6 {
   height: 0.5px;
   background-color: #dedede;
 }
-
+.underline {
+  position: relative;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  width: 100%;
+}
+.underline::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 0.5px;
+  background-color: #dedede;
+}
 .message-input select {
   width: 100%;
   height: 3.4em;

@@ -73,6 +73,30 @@ const Home = () => {
 		},
 	];
 
+	const reviews = [
+		{
+			id: 1,
+			name: "Sara Smith",
+			content:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
+			rating: 4,
+		},
+		{
+			id: 2,
+			name: "John Doe",
+			content:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
+			rating: 3.5,
+		},
+		{
+			id: 3,
+			name: "Peter Jones",
+			content:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
+			rating: 2,
+		},
+	];
+
 	return (
 		<>
 			<div className='defaultHero'>
@@ -105,7 +129,7 @@ const Home = () => {
 					})}
 				</div>
 			</div>
-			<Reviews />
+			<Reviews data={reviews} />
 			<Footer />
 		</>
 	);

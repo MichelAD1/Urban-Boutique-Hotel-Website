@@ -1832,4 +1832,33 @@ h6 {
 .location-map {
   max-height: 500px;
 }
+
+.location-description{
+  margin: 1.5em 0;
+}
 /* End of find us page */
+/* Reviews */
+.review-section{
+  overflow: hidden;
+  padding: 2em 1em;
+  text-align: center;
+}
+.review-slider{
+  text-align: start;
+  width: 50%;
+  position: relative;
+  left: 25%;
+}
+
+.bg-change{
+  background-color: rgba(172, 160, 160, 0.4);
+  padding: 2em 2em;
+  border-radius: 1em;
+}
+
+@media screen and (max-width: 1000px) {
+  .review-slider{
+    width: 100%;
+    left: 0;
+  }
+}

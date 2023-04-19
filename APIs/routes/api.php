@@ -24,15 +24,15 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::post('refresh',[AuthController::class, 'refresh']);
     });
 
-        Route::group(['prefix'=>'room'],function(){
-            Route::middleware(['auth', 'check.admin'])->group(function(){
+    Route::group(['prefix'=>'room'],function(){
+        Route::middleware(['auth', 'check.admin'])->group(function(){
             Route::post('addroom',[RoomController::class,'addRoom']);
-            });
-            Route::middleware(['auth', 'check.customer'])->group(function(){
-
-            });
-            Route::get('getrooms',[RoomController::class,'getRooms']);
         });
+        Route::middleware(['auth', 'check.customer'])->group(function(){
+
+        });
+        Route::get('getrooms',[RoomController::class,'getRooms']);
+    });
 
 
 });

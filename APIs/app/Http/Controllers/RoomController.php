@@ -31,29 +31,29 @@ class RoomController extends Controller
         $room->featured = false;
         $room->discount = 0;
         if($room->save()){
-            $roomid = $room->id;
-            $images = $request->images;
-            $storage = new StorageClient([
-                'projectId' => 'meno-a6fd9',
-                'keyFilePath' => 'C:\Users\marc issa\Desktop\Meno\MENO\APIs\meno-a6fd9-firebase-adminsdk-dv2i6-bbf9790bcf.json'
-            ]);
-            $bucket = $storage->bucket('your-bucket-name');
-            if(!empty($images)){
-                for($i=0;$i<sizeof($images);$i++){
-                    $base64image = $images[$i];
-                    $image = new Image();
-                    $image->room_id = $roomid;
-                    $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64image));
-                    $filename = uniqid() . '.png';
-                    $foldername = "RoomImages/";
-                    $object = $bucket->upload($imageData, [
-                        'name' => $foldername.$filename
-                    ]);
-                    $url = $object->signedUrl(new \DateTime('+100 years'));
-                    $image->image_url = $url;
-                    $image->save();
-                }
-            }
+            // $roomid = $room->id;
+            // $images = $request->images;
+            // $storage = new StorageClient([
+            //     'projectId' => 'meno-a6fd9',
+            //     'keyFilePath' => 'C:\Users\marc issa\Desktop\Meno\MENO\APIs\meno-a6fd9-firebase-adminsdk-dv2i6-bbf9790bcf.json'
+            // ]);
+            // $bucket = $storage->bucket('your-bucket-name');
+            // if(!empty($images)){
+            //     for($i=0;$i<sizeof($images);$i++){
+            //         $base64image = $images[$i];
+            //         $image = new Image();
+            //         $image->room_id = $roomid;
+            //         $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64image));
+            //         $filename = uniqid() . '.png';
+            //         $foldername = "RoomImages/";
+            //         $object = $bucket->upload($imageData, [
+            //             'name' => $foldername.$filename
+            //         ]);
+            //         $url = $object->signedUrl(new \DateTime('+100 years'));
+            //         $image->image_url = $url;
+            //         $image->save();
+            //     }
+            // }
             return response()->json([
                 'message'=>'room added successfully'
             ]);

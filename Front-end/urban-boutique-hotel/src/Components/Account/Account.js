@@ -30,7 +30,7 @@ const Profile = () => {
 							<div className='settings-link'>Manage preferences</div>
 						</div>
 					</Link>
-					<Link to='' className='settings-box'>
+					<Link to='/account/security' className='settings-box'>
 						<BsPersonLock className='settings-icon' />
 						<div className='settings-content'>
 							<h3>Security</h3>

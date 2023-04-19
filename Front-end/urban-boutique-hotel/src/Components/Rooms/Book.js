@@ -36,6 +36,25 @@ const Book = () => {
   const handleSelectChange = (event) => {
     setCountry(event.target.value);
   };
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
+  };
+
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
+  };
+
+  const handleSpecialRequestChange = (event) => {
+    setSpecialRequest(event.target.value);
+  };
   console.log(country);
 
   return (
@@ -51,18 +70,42 @@ const Book = () => {
           <form className="message-inputs book">
             <div className="message-name-email">
               <div className="message-input">
-                <input type="text" id="first_name" placeholder="First Name" />
+                <input
+                  type="text"
+                  id="first_name"
+                  placeholder="First Name"
+                  value={first_name}
+                  onChange={handleFirstNameChange}
+                />
               </div>
               <div className="message-input">
-                <input type="text" id="last_name" placeholder="Last Name" />
+                <input
+                  type="text"
+                  id="last_name"
+                  placeholder="Last Name"
+                  value={last_name}
+                  onChange={handleLastNameChange}
+                />
               </div>
             </div>
             <div className="message-name-email">
               <div className="message-input">
-                <input type="email" id="email" placeholder="Email" />
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
               </div>
               <div className="message-input">
-                <input type="number" id="phone" placeholder="Phone Number" />
+                <input
+                  type="number"
+                  id="phone"
+                  placeholder="Phone Number"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                />
               </div>
             </div>
             <div className="message-input">
@@ -85,6 +128,8 @@ const Book = () => {
               <textarea
                 id="special_request"
                 placeholder="Special Request"
+                value={special_request}
+                onChange={handleSpecialRequestChange}
               ></textarea>
             </div>
             <div className="booking-policies">

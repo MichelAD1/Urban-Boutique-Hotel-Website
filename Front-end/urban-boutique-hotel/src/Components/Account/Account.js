@@ -7,8 +7,8 @@ import { BsPersonLock } from "react-icons/bs";
 
 const Profile = () => {
 	return (
-		<div className='profile-container'>
-			<div className='profile-section'>
+		<div className='account-container'>
+			<div className='account-section'>
 				<h2>Account settings</h2>
 				<h5>Manage your booking experience</h5>
 				<div className='settings-container'>

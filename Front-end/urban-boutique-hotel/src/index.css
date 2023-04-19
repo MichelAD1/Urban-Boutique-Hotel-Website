@@ -1877,8 +1877,9 @@ h6 {
   padding: 2em 2em;
 }
 
-.reviews .section-title{
+.reviews .slide-title{
   margin: 0;
+  margin-bottom: 0.1em;
 }
 
 .review-section{
@@ -1897,6 +1898,11 @@ h6 {
   background-color: rgba(172, 160, 160, 0.25);
   padding: 2em 2em;
   border-radius: 1em;
+}
+
+.review-rating{
+  color: var(--secondaryColor);
+  margin-bottom: 0.5em;
 }
 
 @media screen and (max-width: 1000px) {

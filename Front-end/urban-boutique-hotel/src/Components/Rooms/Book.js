@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import galleryImage1 from "../../assets/images/gallery-image1.jpg";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import Footer from "../../Global/Components/Footer";
 
 const Book = () => {
@@ -78,6 +80,12 @@ const Book = () => {
                   onChange={(date) => setCheckInDate(date)}
                   minDate={new Date()}
                   placeholderText="Check In"
+                  className="react-datepicker"
+                  dateFormat="yyyy/MM/dd"
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
                 />
               </div>
               <div className="message-input">
@@ -86,6 +94,12 @@ const Book = () => {
                   onChange={(date) => setCheckOutDate(date)}
                   minDate={checkInDate}
                   placeholderText="Check Out"
+                  className="react-datepicker"
+                  dateFormat="yyyy/MM/dd"
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
                 />
               </div>
             </div>

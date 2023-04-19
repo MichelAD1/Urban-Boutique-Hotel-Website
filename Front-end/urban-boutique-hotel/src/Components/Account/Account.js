@@ -22,7 +22,7 @@ const Profile = () => {
 							</div>
 						</div>
 					</Link>
-					<Link to='' className='settings-box'>
+					<Link to='/account/preferences' className='settings-box'>
 						<IoMdOptions className='settings-icon' />
 						<div className='settings-content'>
 							<h3>Preferences</h3>

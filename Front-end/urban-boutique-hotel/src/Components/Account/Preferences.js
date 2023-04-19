@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+
 const Preferences = () => {
 	const [edit, setEdit] = useState(false);
 	const [currency, setCurrency] = useState("USD");
@@ -5,7 +7,7 @@ const Preferences = () => {
 
 	useEffect(() => {
 		handleCancel();
-	}, [user]);
+	}, []);
 
 	const handleEdit = () => {
 		setEdit(true);

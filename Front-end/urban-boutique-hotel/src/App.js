@@ -17,6 +17,7 @@ import Account from "./Components/Account/Account";
 import AccountNav from "./Components/Navbar/AccountNav";
 
 import Profile from "./Components/Account/Profile";
+import Preferences from "./Components/Account/Preferences";
 
 import ScrollToTop from "./Global/Function/ScrollToTop";
 
@@ -115,6 +116,16 @@ function App() {
 								<ScrollToTop />
 								<AccountNav />
 								<Profile />
+							</>
+						}
+					/>
+					<Route
+						path='/account/preferences'
+						element={
+							<>
+								<ScrollToTop />
+								<AccountNav />
+								<Preferences />
 							</>
 						}
 					/>

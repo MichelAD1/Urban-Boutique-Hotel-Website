@@ -12,7 +12,7 @@ const Profile = () => {
 				<h2>Account settings</h2>
 				<h5>Manage your booking experience</h5>
 				<div className='settings-container'>
-					<Link to='' className='settings-box'>
+					<Link to='/account/profile' className='settings-box'>
 						<MdManageAccounts className='settings-icon' />
 						<div className='settings-content'>
 							<h3>Personal information</h3>

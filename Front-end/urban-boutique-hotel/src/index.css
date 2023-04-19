@@ -1940,26 +1940,26 @@ h6 {
   }
 }
 /* End of reviews */
-/* profile */
-.profile-container{
+/* account */
+.account-container{
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 3em 0em;
 }
 
-.profile-section{
+.account-section{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 75%;
 }
 
-.profile-section h2{
+.account-section h2{
   margin-bottom: 0.1em;
 }
 
-.profile-section h5{
+.account-section h5{
   font-size: 17px;
   font-weight: 400;
 }
@@ -2038,4 +2038,4 @@ h6 {
   font-size: 17px;
   font-weight: 400;
 }
-/* end of profile */
+/* end of account */

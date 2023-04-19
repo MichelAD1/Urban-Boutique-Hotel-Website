@@ -800,9 +800,21 @@ h6 {
   justify-content: flex-start;
   width: 70%;
   height: 35em;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1px !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
+.message-form.order {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 30%;
+  height: 35em;
+  border-radius: 1px !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .contact-section.book {
   margin: 0 auto;
   margin-bottom: 8%;
@@ -992,6 +1004,10 @@ h6 {
 }
 @media (max-width: 1110px) {
   .contact-section {
+    flex-direction: column;
+    height: auto;
+  }
+  .contact-section.book {
     flex-direction: column;
     height: auto;
   }

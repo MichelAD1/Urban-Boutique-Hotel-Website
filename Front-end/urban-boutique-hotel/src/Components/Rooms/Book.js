@@ -150,6 +150,7 @@ const Book = () => {
             </div>
           </form>
         </div>
+        <div className="message-form order"></div>
       </div>
 
       <Footer />

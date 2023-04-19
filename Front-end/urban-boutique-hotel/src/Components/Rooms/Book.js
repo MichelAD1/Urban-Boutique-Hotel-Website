@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
+import galleryImage1 from "../../assets/images/gallery-image1.jpg";
 
 import Footer from "../../Global/Components/Footer";
 
@@ -154,6 +155,11 @@ const Book = () => {
           <div className="message-header">
             <div className="room-display order">
               <h1>Order Summary</h1>
+            </div>
+            <div className="order-image">
+              <div className="gallery-image order">
+                <img src={galleryImage1} alt="" />
+              </div>
             </div>
           </div>
         </div>

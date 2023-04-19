@@ -2076,14 +2076,21 @@ h6 {
   color: var(--secondaryColor);
   font-size: 15px;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1em;
+  font-size: 0.9em;
   padding: 0.5em 1em;
   height:min-content;
+  border-radius: 0.2em;
+  margin-left: 0.5em;
 }
 .profile-btn:hover{
   background-color: rgba(172, 160, 160, 0.2);
-  border-radius: 0.2em;
+}
+.save{
+  background-color: var(--primaryColor);
+  color: #fff;
+}
+.save:hover{
+  background-color: rgb(31, 37, 54);
 }
 .account-item{
   border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -2099,7 +2106,19 @@ h6 {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 50%;
+  width: 75%;
+}
+.account-input{
+  width: 100%;
+  border: 1px solid rgba(0,0,0,0.25);
+  padding: 0.5em 1em;
+  font-size: 0.9em;
+  margin-left: 0.5em;
+  border-radius: 0.5em;
+}
+.account-input:focus{
+  outline: none;
+  border: 1px solid var(--secondaryColor);
 }
 .info-item{
   width: 100%;

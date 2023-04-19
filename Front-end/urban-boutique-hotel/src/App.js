@@ -13,7 +13,8 @@ import FindUs from "./Components/FindUs/FindUs";
 import Discover from "./Components/Discover/Discover";
 import Contact from "./Components/Contact/Contact";
 import Navbar from "./Components/Navbar/Navbar";
-import PrivateRoute from "./Routes/PrivateRoutes";
+import Profile from "./Components/Profile/Profile";
+import AccountNav from "./Components/Navbar/AccountNav";
 
 import ScrollToTop from "./Global/Function/ScrollToTop";
 
@@ -92,6 +93,16 @@ function App() {
 								<ScrollToTop />
 								<Navbar />
 								<Contact />
+							</>
+						}
+					/>
+					<Route
+						path='/profile'
+						element={
+							<>
+								<ScrollToTop />
+								<AccountNav />
+								<Profile />
 							</>
 						}
 					/>

@@ -364,6 +364,23 @@ h6 {
   }
 }
 /* end of navbar */
+/* Account navbar */
+.account-navbar {
+  background-color: var(--offWhite);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+.account-image{
+  font-size: 35px;
+}
+/* end of account navbar */
 /* Hero */
 .defaultHero,
 .roomsHero {

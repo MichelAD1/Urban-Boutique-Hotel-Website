@@ -56,6 +56,13 @@ const Book = () => {
                 placeholder="Special Request"
               ></textarea>
             </div>
+            <div className="booking-policies">
+              <p>
+                {" "}
+                By completing this booking I acknowledge I have read and
+                accepted the <a href="">Property Policies</a>.
+              </p>
+            </div>
             <div className="booking-nav">
               <div className="goback">
                 <button className="goback-button" onClick={handleGoBack}>

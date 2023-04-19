@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Room;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use Google\Cloud\Storage\StorageClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
     public function addRoom(Request $request){
+        //admin function
         $room = new Room();
         $room->title = $request->title;
         $room->description = $request->description;
@@ -28,12 +31,36 @@ class RoomController extends Controller
         $room->featured = false;
         $room->discount = 0;
         if($room->save()){
+            $roomid = $room->id;
+            $images = $request->images;
+            $storage = new StorageClient([
+                'projectId' => 'meno-a6fd9',
+                'keyFilePath' => 'C:\Users\marc issa\Desktop\Meno\MENO\APIs\meno-a6fd9-firebase-adminsdk-dv2i6-bbf9790bcf.json'
+            ]);
+            $bucket = $storage->bucket('your-bucket-name');
+            if(!empty($images)){
+                for($i=0;$i<sizeof($images);$i++){
+                    $base64image = $images[$i];
+                    $image = new Image();
+                    $image->room_id = $roomid;
+                    $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64image));
+                    $filename = uniqid() . '.png';
+                    $foldername = "RoomImages/";
+                    $object = $bucket->upload($imageData, [
+                        'name' => $foldername.$filename
+                    ]);
+                    $url = $object->signedUrl(new \DateTime('+100 years'));
+                    $image->image_url = $url;
+                    $image->save();
+                }
+            }
             return response()->json([
                 'message'=>'room added successfully'
             ]);
         }
     }
     public function removeRoom($roomid){
+        //admin function
         if(Room::find($roomid)->delete()){
             return response()->json([
                 'message'=>'room deleted successfully'
@@ -41,6 +68,7 @@ class RoomController extends Controller
         }
     }
     public function editRoom(Request $request){
+        //admin function
         $room = Room::find($request->room_id);
         if($request->has("title")){
             $room->title=$request->title;
@@ -90,6 +118,7 @@ class RoomController extends Controller
     }
 
     public function getRooms(){
+        //customer and admin function
         //returns all rooms with their schedule
         // Get all the rooms
     $rooms = Room::all();

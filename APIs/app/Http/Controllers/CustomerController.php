@@ -9,5 +9,16 @@ class CustomerController extends Controller
     public function editInformation(Request $request){
 
     }
+    public function reserveRoom(Request $request){
+
+    }
+    public function cancelReservation(Request $request){
+
+    }
+    public function editReservation($reservationid){
+
+    }
+
+
 
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class SupplyController extends Controller
 {
     public function addNewSupplyItem(Request $request){
+        //admin function
         $supply = new Supply();
         $supply->item_name = $request->item_name;
         $supply->item_amount = $request->item_amount;
@@ -18,6 +19,7 @@ class SupplyController extends Controller
         }
     }
     public function IncreaseAmount(Request $request){
+        //admin function
         $supply = Supply::find($request->supply_id);
         $supply->item_amount = $supply->item_amount + $request->amount;
         if($supply->save()){
@@ -27,6 +29,7 @@ class SupplyController extends Controller
         }
     }
     public function editName(Request $request){
+        //admin function
         $supply = Supply::find($request->supply_id);
         $supply->item_name = $request->item_name;
         if($supply->save()){
@@ -36,6 +39,7 @@ class SupplyController extends Controller
         }
     }
     public function deleteItem($supply_id){
+        //admin function
         Supply::find($supply_id)->delete();
     }
 }

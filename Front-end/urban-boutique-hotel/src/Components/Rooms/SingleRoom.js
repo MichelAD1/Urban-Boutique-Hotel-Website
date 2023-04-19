@@ -12,13 +12,6 @@ import dummy1 from "../../assets/images/room-1.jpeg";
 import { useEffect } from "react";
 
 const SingleRoom = ({ reverse, room, type }) => {
-	useEffect(() => {
-		if (reverse) {
-			document.getElementById("deals-rooms").style.flexDirection =
-				"row-reverse";
-		}
-	}, [reverse]);
-
 	const navigate = useNavigate();
 
 	const handleRedirect = (item) => {
@@ -26,7 +19,9 @@ const SingleRoom = ({ reverse, room, type }) => {
 	};
 	return (
 		<div
-			className={`deals-rooms ${type ? "" : "mg-bot"}`}
+			className={`deals-rooms ${type ? "" : "mg-bot"} ${
+				reverse ? "reverse" : ""
+			}`}
 			id='deals-rooms'
 			onClick={() => handleRedirect(room)}>
 			<img src={dummy1} alt='' className='deal-image' />

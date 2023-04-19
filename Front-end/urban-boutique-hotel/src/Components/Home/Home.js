@@ -4,7 +4,9 @@ import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
 // Componenets
 import Footer from "../../Global/Components/Footer";
 import SingleRoom from "../Rooms/SingleRoom";
+import Reviews from "../../Global/Components/Reviews";
 
+// Images
 import room1 from "../../assets/images/room-1.jpeg";
 import room2 from "../../assets/images/room-2.jpeg";
 
@@ -71,6 +73,30 @@ const Home = () => {
 		},
 	];
 
+	const reviews = [
+		{
+			id: 1,
+			name: "Sara Smith",
+			content:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
+			rating: 4,
+		},
+		{
+			id: 2,
+			name: "John Doe",
+			content:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
+			rating: 3.5,
+		},
+		{
+			id: 3,
+			name: "Peter Jones",
+			content:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
+			rating: 2,
+		},
+	];
+
 	return (
 		<>
 			<div className='defaultHero'>
@@ -103,6 +129,7 @@ const Home = () => {
 					})}
 				</div>
 			</div>
+			<Reviews data={reviews} />
 			<Footer />
 		</>
 	);

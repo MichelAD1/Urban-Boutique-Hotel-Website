@@ -242,6 +242,7 @@ h6 {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+ 
 }
 .login-img {
   display: flex;
@@ -250,11 +251,12 @@ h6 {
   width: 2em;
 }
 .nav-image {
-  color: var(--primaryColor);
   margin-right: 1em;
+  max-width: 200px;
+  max-height: 50px;
+  position: fixed;
 }
 .nav-image:hover {
-  color: var(--secondaryColor);
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
@@ -288,7 +290,6 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
   bottom: 0;
   right: 0;
   opacity: 0;
@@ -310,6 +311,12 @@ h6 {
   opacity: 0;
 }
 
+@media screen and (max-width: 1000px) {
+  .login-btn{
+    position:  absolute;
+  }
+}
+
 @media screen and (min-width: 1000px) {
   .links-section {
     display: flex;
@@ -317,7 +324,6 @@ h6 {
     align-items: center;
     justify-content: space-evenly;
   }
-
   .show-nav {
     height: auto;
     opacity: 1;
@@ -349,6 +355,12 @@ h6 {
 
   .nav-btn {
     pointer-events: none;
+  }
+
+  .nav-image{
+    width: 250px;
+    height: 75px;
+    position: relative;
   }
 }
 /* end of navbar */
@@ -1537,16 +1549,18 @@ h6 {
 }
 
 .footer-content {
-  width: 80vw;
+  width: 90%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  grid-row-gap: 2rem;
-  grid-column-gap: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .footer-col {
   color: var(--mainWhite);
+  margin-top: 1em;
+  margin-right: 1em;
 }
 
 .footer-col h4 {
@@ -1587,6 +1601,33 @@ h6 {
 
 .social-icons li {
   margin-right: 10px;
+}
+
+.footer-col p{
+  font-size: 0.7em;
+  margin-bottom: 0.8em;
+  margin-top: -1em;
+}
+
+.newsletter-form {
+  display: flex;
+  align-items: center;
+}
+.news-input{
+  padding: 0.6em 1em;
+  border: none;
+}
+
+.news-input:focus{
+  outline: none;
+}
+
+.news-btn{
+  padding: 0.6em 1em;
+  background-color: var(--secondaryColor);
+  color: var(--mainWhite);
+  border: none;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 776px) {
@@ -1781,6 +1822,27 @@ h6 {
   color: var(--secondaryColor);
 }
 
+.reverse{
+  flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 1000px) {
+  .deals-rooms {
+    flex-direction: column;
+    margin-top: 1em;
+  }
+
+  .deal-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .deal-info {
+    padding: 2em;
+    padding-right: 2em;
+  }
+}
+
 /* Find us page */
 
 .find-info {
@@ -1811,4 +1873,48 @@ h6 {
 .location-map {
   max-height: 500px;
 }
+
+.location-description{
+  margin: 1.5em 0;
+}
 /* End of find us page */
+/* Reviews */
+.reviews{
+  padding: 2em 2em;
+}
+
+.reviews .slide-title{
+  margin: 0;
+  margin-bottom: 0.1em;
+}
+
+.review-section{
+  overflow: hidden;
+  padding: 0;
+  text-align: center;
+}
+.review-slider{
+  text-align: start;
+  width: 50%;
+  position: relative;
+  left: 25%;
+}
+
+.bg-change{
+  background-color: rgba(172, 160, 160, 0.25);
+  padding: 2em 2em;
+  border-radius: 1em;
+}
+
+.review-rating{
+  color: var(--secondaryColor);
+  margin-bottom: 0.5em;
+}
+
+@media screen and (max-width: 1000px) {
+  .review-slider{
+    width: 100%;
+    left: 0;
+  }
+}
+/* End of reviews */

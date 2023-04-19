@@ -1,5 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 
+// Componenet
+import Rating from "./Rating";
+
 const Reviews = ({ data }) => {
 	const delay = 10000;
 
@@ -45,6 +48,7 @@ const Reviews = ({ data }) => {
 								<div className='slide-content review-slider'>
 									<div className='slide-info bg-change'>
 										<h2 className='slide-title'>{item.name}</h2>
+										<Rating rate={item.rating} />
 										<p className='slide-description'>{item.content}</p>
 									</div>
 								</div>

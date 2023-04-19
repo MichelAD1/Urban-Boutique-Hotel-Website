@@ -73,6 +73,8 @@ const Footer = () => {
 							</a>
 						</li>
 					</ul>
+				</div>
+				<div className='footer-col'>
 					<h4>Newsletter</h4>
 					<p>
 						Subscribe to our newsletter for news, updates, exclusive discounts

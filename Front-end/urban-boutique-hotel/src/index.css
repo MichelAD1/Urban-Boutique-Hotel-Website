@@ -1838,9 +1838,17 @@ h6 {
 }
 /* End of find us page */
 /* Reviews */
+.reviews{
+  padding: 2em 2em;
+}
+
+.reviews .section-title{
+  margin: 0;
+}
+
 .review-section{
   overflow: hidden;
-  padding: 2em 1em;
+  padding: 0;
   text-align: center;
 }
 .review-slider{
@@ -1851,7 +1859,7 @@ h6 {
 }
 
 .bg-change{
-  background-color: rgba(172, 160, 160, 0.4);
+  background-color: rgba(172, 160, 160, 0.25);
   padding: 2em 2em;
   border-radius: 1em;
 }

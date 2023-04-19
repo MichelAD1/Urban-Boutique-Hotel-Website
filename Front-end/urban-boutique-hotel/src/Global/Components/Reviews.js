@@ -31,30 +31,38 @@ const Reviews = ({ data }) => {
 
 	if (data) {
 		return (
-			<div className='review-section'>
-				<div
-					className='slideshowSlider slider-center'
-					style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
-					{data.map((item, index) => (
-						<div className='slide' key={index}>
-							<div className='slide-content review-slider'>
-								<div className='slide-info bg-change'>
-									<h2 className='slide-title'>{item.name}</h2>
-									<p className='slide-description'>{item.content}</p>
+			<div className='reviews'>
+				<div className='section-title'>
+					<h4>Reviews</h4>
+					<div />
+				</div>
+				<div className='review-section'>
+					<div
+						className='slideshowSlider slider-center'
+						style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+						{data.map((item, index) => (
+							<div className='slide' key={index}>
+								<div className='slide-content review-slider'>
+									<div className='slide-info bg-change'>
+										<h2 className='slide-title'>{item.name}</h2>
+										<p className='slide-description'>{item.content}</p>
+									</div>
 								</div>
 							</div>
-						</div>
-					))}
-				</div>
-				<div className='slideshowDots'>
-					{data.map((_, idx) => (
-						<div
-							key={idx}
-							className={`slideshowDot rooms${index === idx ? " active" : ""}`}
-							onClick={() => {
-								setIndex(idx);
-							}}></div>
-					))}
+						))}
+					</div>
+					<div className='slideshowDots'>
+						{data.map((_, idx) => (
+							<div
+								key={idx}
+								className={`slideshowDot rooms${
+									index === idx ? " active" : ""
+								}`}
+								onClick={() => {
+									setIndex(idx);
+								}}></div>
+						))}
+					</div>
 				</div>
 			</div>
 		);

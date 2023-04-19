@@ -15,10 +15,28 @@ const Book = () => {
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
   const [special_request, setSpecialRequest] = useState("");
-
+  const countries = [
+    "USA",
+    "Canada",
+    "Mexico",
+    "Brazil",
+    "Argentina",
+    "Chile",
+    "Peru",
+    "Colombia",
+    "Ecuador",
+    "Bolivia",
+    "Paraguay",
+    "Uruguay",
+    "Lebanon",
+  ];
   const handleGoBack = () => {
     navigate(`/rooms`);
   };
+  const handleSelectChange = (event) => {
+    setCountry(event.target.value);
+  };
+  console.log(country);
 
   return (
     <>
@@ -48,7 +66,20 @@ const Book = () => {
               </div>
             </div>
             <div className="message-input">
-              <input type="text" id="country" placeholder="Country" />
+              <select
+                id="country"
+                value={country}
+                onChange={handleSelectChange}
+              >
+                <option className="option-booking" value="">
+                  Country
+                </option>
+                {countries.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="message-textarea">
               <textarea

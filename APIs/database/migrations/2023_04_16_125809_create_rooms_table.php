@@ -20,6 +20,15 @@ return new class extends Migration
             $table->integer("guests");
             $table->integer("floor");
             $table->string("beds");
+            $table->boolean("wifi");
+            $table->boolean("tv");
+            $table->boolean("shower");
+            $table->boolean("towels");
+            $table->boolean("mini_bar");
+            $table->boolean("desk");
+            $table->boolean("featured");
+
+
             $table->timestamps();
         });
     }

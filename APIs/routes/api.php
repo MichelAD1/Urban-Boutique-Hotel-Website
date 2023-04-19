@@ -22,5 +22,10 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::get('logout',[AuthController::class, 'logout']);
         Route::post('refresh',[AuthController::class, 'refresh']);
     });
+    Route::middleware(['auth', 'check.admin'])->group(function(){
 
+    });
+    Route::middleware(['auth', 'check.customer'])->group(function(){
+
+    });
 });

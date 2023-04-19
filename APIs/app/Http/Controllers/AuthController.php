@@ -23,7 +23,7 @@ class AuthController extends Controller
         $validation = Validator::make($request->all(), [
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'type' => 'required|int',
+
         ]);
 
         if ($validation->fails()) {
@@ -43,14 +43,30 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        return response()->json([
+        if($user->type==0){
+            $customer = Customer::where('user_id',$user->id)->first();
+            return response()->json([
                 'status' => 'success',
                 'user' => $user,
+                'customer'=>$customer,
                 'authorisation' => [
                     'token' => $token,
                     'type' => 'bearer',
                 ]
             ]);
+        }else if($user->type==1){
+            $admin = Admin::where('user_id',$user->id)->first();
+            return response()->json([
+                'status' => 'success',
+                'user' => $user,
+                'customer'=>$admin,
+                'authorisation' => [
+                    'token' => $token,
+                    'type' => 'bearer',
+                ]
+            ]);
+        }
+
 
     }
 
@@ -69,14 +85,27 @@ class AuthController extends Controller
         ]);
         if($request->type==0){ //user a customer
             $customer = Customer::create([
+                'user_id'=>$user->id,
+                'phone_number'=>$request->phone_number
 
             ]);
+            $token = Auth::login($user);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User created successfully',
+            'user' => $user,
+            'customer'=>$customer,
+            'authorisation' => [
+                'token' => $token,
+                'type' => 'bearer',
+            ]
+        ]);
         }else if($request->type==1){ //user an admin
             $admin = Admin::create([
-
+                'user_id'=>$user->id,
+                'position'=>$request->position
             ]);
-        }
-        $token = Auth::login($user);
+            $token = Auth::login($user);
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
@@ -86,6 +115,8 @@ class AuthController extends Controller
                 'type' => 'bearer',
             ]
         ]);
+        }
+
     }
 
     public function logout()

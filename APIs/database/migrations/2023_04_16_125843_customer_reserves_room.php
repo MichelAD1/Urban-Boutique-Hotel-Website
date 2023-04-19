@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer("customer_id");
             $table->integer("room_id");
             $table->date("reservation_date");
+            $table->date("reservation_end");
             $table->timestamps();
         });
     }

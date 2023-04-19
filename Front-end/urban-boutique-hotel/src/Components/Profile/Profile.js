@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 
 // Icons
-import { MdManageAccounts } from "react-icons/md";
+import { MdManageAccounts, MdMarkEmailUnread } from "react-icons/md";
+import { IoMdOptions } from "react-icons/io";
+import { BsPersonLock } from "react-icons/bs";
 
 const Profile = () => {
 	return (
@@ -10,36 +12,43 @@ const Profile = () => {
 				<h2>Account settings</h2>
 				<h5>Manage your booking experience</h5>
 				<div className='settings-container'>
-					<div className='settings-box'>
+					<Link to='' className='settings-box'>
 						<MdManageAccounts className='settings-icon' />
 						<div className='settings-content'>
 							<h3>Personal information</h3>
 							<p>Update your personal information</p>
-							<Link to='' className='settings-link'>
-								Manage your personal details
-							</Link>
+							<div className='settings-link'>
+								Manage your personal information
+							</div>
 						</div>
-					</div>
-					<div className='settings-box'>
-						<MdManageAccounts className='settings-icon' />
+					</Link>
+					<Link to='' className='settings-box'>
+						<IoMdOptions className='settings-icon' />
 						<div className='settings-content'>
-							<h3>Personal information</h3>
-							<p>Update your personal information</p>
-							<Link to='' className='settings-link'>
-								Manage your personal details
-							</Link>
+							<h3>Preferences</h3>
+							<p>Change your language and currency</p>
+							<div className='settings-link'>Manage preferences</div>
 						</div>
-					</div>
-					<div className='settings-box'>
-						<MdManageAccounts className='settings-icon' />
+					</Link>
+					<Link to='' className='settings-box'>
+						<BsPersonLock className='settings-icon' />
 						<div className='settings-content'>
-							<h3>Personal information</h3>
-							<p>Update your personal information</p>
-							<Link to='' className='settings-link'>
-								Manage your personal details
-							</Link>
+							<h3>Security</h3>
+							<p>Adjust your security settings</p>
+							<div className='settings-link'>Manage security</div>
 						</div>
-					</div>
+					</Link>
+					<Link to='' className='settings-box'>
+						<MdMarkEmailUnread className='settings-icon' />
+						<div className='settings-content'>
+							<h3>Email notifications</h3>
+							<p>
+								Decide what you want to be notified about, and unsubscribe from
+								what you don't
+							</p>
+							<div className='settings-link'>Manage Notifications</div>
+						</div>
+					</Link>
 				</div>
 			</div>
 		</div>

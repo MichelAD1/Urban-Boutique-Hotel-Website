@@ -1935,3 +1935,32 @@ h6 {
   }
 }
 /* End of reviews */
+/* profile */
+.profile-container{
+  display: flex;
+  justify-content: center;
+  padding: 3em 0em;
+}
+
+.profile-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.profile-section h2{
+  margin-bottom: 0.1em;
+}
+
+.profile-section h5{
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.settings-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: red;
+}

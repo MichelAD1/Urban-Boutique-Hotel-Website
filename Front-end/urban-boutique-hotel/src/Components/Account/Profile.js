@@ -50,7 +50,6 @@ const Profile = () => {
 		setGender(user.gender);
 	};
 	const handleSubmit = () => {
-		console.log(dob);
 		setEdit(console.log("Submitted"));
 	};
 	function formatDate(dateString) {

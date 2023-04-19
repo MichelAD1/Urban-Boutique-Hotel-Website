@@ -73,7 +73,9 @@ const Navbar = () => {
 
 	return (
 		<nav className='navbar' id='navbar'>
-			<img className='nav-image' src={logo} />
+			<Link to='/'>
+				<img className='nav-image' src={logo} />
+			</Link>
 			<ul
 				className={active ? "links-section" : "links-section show-nav"}
 				id='links-section'>

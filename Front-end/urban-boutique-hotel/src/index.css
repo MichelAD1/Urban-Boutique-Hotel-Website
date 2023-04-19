@@ -1781,6 +1781,27 @@ h6 {
   color: var(--secondaryColor);
 }
 
+.reverse{
+  flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 1000px) {
+  .deals-rooms {
+    flex-direction: column;
+    margin-top: 1em;
+  }
+
+  .deal-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .deal-info {
+    padding: 2em;
+    padding-right: 2em;
+  }
+}
+
 /* Find us page */
 
 .find-info {

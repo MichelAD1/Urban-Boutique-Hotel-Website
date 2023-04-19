@@ -719,6 +719,96 @@ h6 {
   }
 }
 /* End of About */
+/* Booking */
+.goback {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.goback-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3em;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.goback button {
+  width: 7.5em !important;
+  height: 2.5em !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 3px !important;
+  border: none !important;
+  background-color: white !important;
+  color: var(--primaryColor) !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+}
+.booking-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.message-inputs.book button {
+  width: 35%;
+  height: 3em;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.message-form.book {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 60%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.contact-section.book {
+  margin: 0 auto;
+  margin-bottom: 8%;
+  display: flex;
+  width: 85%;
+  height: 500px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+}
+@media only screen and (max-width: 1008px) {
+  .message-inputs.book button {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .message-inputs.book button {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 668px) {
+  .message-inputs.book button {
+    width: 100%;
+    font-size: 10px;
+  }
+  .goback button {
+    width: 8.5em !important;
+  }
+}
+/* End of Booking */
 /* Contact */
 .contact-section {
   margin: 0 auto;
@@ -731,6 +821,7 @@ h6 {
   justify-content: center;
   align-content: center;
 }
+
 .side-information {
   display: flex;
   flex-direction: column;
@@ -788,6 +879,7 @@ h6 {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .message-header {
   padding-top: 4%;
   padding-left: 4%;
@@ -1192,7 +1284,8 @@ h6 {
   justify-content: space-evenly;
   width: 40%;
 }
-.room-display.pricing {
+.room-display.pricing,
+.room-display.book {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -1220,6 +1313,15 @@ h6 {
   width: 100%;
   height: 0.5px;
   background-color: #bcbcbc;
+}
+.room-display.book::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 90%;
+  height: 0.5px;
+  background-color: #dedede;
 }
 
 .room-display p:first-child {
@@ -1293,6 +1395,7 @@ h6 {
     width: 100%;
   }
   .room-display.pricing,
+  .room-display.book,
   .room-display.amenities {
     flex-direction: column;
     justify-content: center;
@@ -1302,6 +1405,9 @@ h6 {
     margin-bottom: 4%;
   }
   .room-display.pricing::after {
+    display: none;
+  }
+  .room-display.book::after {
     display: none;
   }
   .room-tag {

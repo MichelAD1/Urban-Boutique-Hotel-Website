@@ -146,10 +146,7 @@ class RoomController extends Controller
         $rooms = Room::all();
 
         // Get reservations for all rooms for the next week
-        $reservations = DB::table("customer_reserves_room")->whereBetween('reservation_date', [Carbon::today(), Carbon::today()->addDays(7)])
-            ->orWhereBetween('reservation_end', [Carbon::today(), Carbon::today()->addDays(7)])
-            ->get();
-
+        $reservations = DB::table("customer_reserves_room")->get();
         // Initialize an array to store the occupied and free dates for each room
         $roomDates = [];
 
@@ -164,12 +161,15 @@ class RoomController extends Controller
 
             // Loop through each day of the next week and check if it's occupied
             $currentDate = Carbon::today();
-            $endDate = Carbon::today()->addDays(7);
+
+            $endDate = Carbon::today()->addDays(50);
             while ($currentDate <= $endDate) {
                 $isOccupied = false;
                 foreach ($roomReservations as $reservation) {
                     $reservationDates = CarbonPeriod::create($reservation->reservation_date, $reservation->reservation_end)->toArray();
-                    if (in_array($currentDate->format('Y-m-d'), $reservationDates)) {
+
+                    if (in_array($currentDate, $reservationDates)) {
+
                         $occupiedDates[] = $currentDate->format('Y-m-d');
                         $isOccupied = true;
                         break;

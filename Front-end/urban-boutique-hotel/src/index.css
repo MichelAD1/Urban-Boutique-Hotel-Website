@@ -1006,7 +1006,10 @@ h6 {
     width: 40%;
   }
   .message-form.book {
-    height: 34em;
+    height: auto;
+  }
+  .message-form.order {
+    height: auto;
   }
 }
 @media only screen and (max-width: 768px) {
@@ -1014,7 +1017,7 @@ h6 {
     width: 40%;
   }
   .message-form.book {
-    height: 37em;
+    height: auto;
   }
 }
 @media only screen and (max-width: 668px) {
@@ -1023,7 +1026,7 @@ h6 {
     font-size: 11px;
   }
   .message-form.book {
-    height: 34em;
+    height: auto;
   }
   .goback button {
     width: 8.5em !important;
@@ -1196,6 +1199,9 @@ h6 {
   }
   .message-form.book {
     width: 100%;
+  }
+  .message-form.order {
+    height: auto;
   }
 
   @media (max-width: 768px) {

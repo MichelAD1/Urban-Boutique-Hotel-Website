@@ -844,7 +844,7 @@ h6 {
   align-items: center;
   justify-content: space-between;
 }
-.message-inputs.book button {
+.booking-nav button {
   width: 35%;
   height: 3em;
   padding: 0.5rem 1rem;
@@ -858,14 +858,14 @@ h6 {
 }
 .message-form.book {
   width: 70%;
-  height: 35em;
+  height: 40em;
   border-radius: 1px !important;
   box-shadow: none !important;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .message-form.order {
   width: 30%;
-  height: 35em;
+  height: 40em;
   border-radius: 1px !important;
   box-shadow: none !important;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -873,7 +873,7 @@ h6 {
 
 .contact-section.book {
   margin: 0 auto;
-  margin-bottom: 8%;
+  margin-bottom: 15%;
   display: flex;
   width: 85%;
   height: 500px;
@@ -1040,7 +1040,7 @@ h6 {
 .message-input input:focus {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-.message-inputs button {
+.message-inputs.contact button {
   width: 20%;
   height: 3em;
   padding: 0.5rem 1rem;
@@ -1053,7 +1053,7 @@ h6 {
   transition: background-color 0.2s ease;
 }
 
-.message-inputs button:hover {
+.message-inputs.contact button:hover {
   background-color: #2a32499a;
 }
 @media (max-width: 1500px) {

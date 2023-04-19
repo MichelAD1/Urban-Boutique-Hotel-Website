@@ -99,7 +99,7 @@ const Contact = () => {
               learn more about our accommodations and book your stay.
             </p>
           </div>
-          <form className="message-inputs" onSubmit={handleSubmit}>
+          <form className="message-inputs contact" onSubmit={handleSubmit}>
             <div className="message-name-email">
               <div className="message-input">
                 <input

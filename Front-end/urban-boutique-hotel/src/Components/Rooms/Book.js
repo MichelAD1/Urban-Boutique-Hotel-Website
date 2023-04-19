@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import galleryImage1 from "../../assets/images/gallery-image1.jpg";
-
+import DatePicker from "react-datepicker";
 import Footer from "../../Global/Components/Footer";
 
 const Book = () => {
@@ -16,6 +16,8 @@ const Book = () => {
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
   const [special_request, setSpecialRequest] = useState("");
+  const [checkInDate, setCheckInDate] = useState(null);
+  const [checkOutDate, setCheckOutDate] = useState(null);
   const countries = [
     "USA",
     "Canada",
@@ -71,6 +73,24 @@ const Book = () => {
           <form className="message-inputs book">
             <div className="message-name-email">
               <div className="message-input">
+                <DatePicker
+                  selected={checkInDate}
+                  onChange={(date) => setCheckInDate(date)}
+                  minDate={new Date()}
+                  placeholderText="Check In"
+                />
+              </div>
+              <div className="message-input">
+                <DatePicker
+                  selected={checkOutDate}
+                  onChange={(date) => setCheckOutDate(date)}
+                  minDate={checkInDate}
+                  placeholderText="Check Out"
+                />
+              </div>
+            </div>
+            <div className="message-name-email">
+              <div className="message-input">
                 <input
                   type="text"
                   id="first_name"
@@ -89,6 +109,7 @@ const Book = () => {
                 />
               </div>
             </div>
+
             <div className="message-name-email">
               <div className="message-input">
                 <input

@@ -1958,9 +1958,37 @@ h6 {
   font-weight: 400;
 }
 
-.settings-section{
+.settings-container{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  background-color: red;
+  flex-wrap: wrap;
 }
+/* end of profile */
+/* setting */
+.settings-box{
+  padding: 1em 3em;
+  border: 1px solid var(--mainGrey);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: row;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+.settings-icon{
+  font-size: 50px;
+  margin-right: 0.5em;
+}
+.settings-box h3{
+  margin-bottom: 0.3em;
+  font-size: 1.4em;
+}
+.settings-box p{
+  font-size: 15px;
+  margin-bottom: 0.3em;
+}
+.settings-link{
+  text-decoration: none;
+  font-size: 15px;
+}
+/* end of setting */

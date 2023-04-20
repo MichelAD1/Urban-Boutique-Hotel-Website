@@ -11,7 +11,6 @@ const ReviewItem = () => {
   const [data, setData] = useState(loc.state.data);
   const [err, setErr] = useState("");
 
-  const [ban, setBan] = useState("");
   const [username, setUsername] = useState(data.username);
   const [room_id, setRoomID] = useState(data.room_id);
   const [review, setReview] = useState(data.review);

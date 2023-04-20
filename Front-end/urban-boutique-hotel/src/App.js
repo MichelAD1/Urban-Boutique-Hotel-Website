@@ -148,6 +148,10 @@ function App() {
 								<ScrollToTop />
 								<AccountNav />
 								<Security />
+							</>
+						}
+					/>
+					<Route
 						path='*'
 						element={
 							<>

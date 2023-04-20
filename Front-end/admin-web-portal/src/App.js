@@ -8,6 +8,9 @@ import Home from "./Componenents/Home/Home";
 import Employees from "./Componenents/Employees/Employees";
 import EmployeeItem from "./Componenents/Employees/EmployeeItem";
 import Users from "./Componenents/Users/Users";
+import Support from "./Componenents/Support/Support";
+import ReviewItem from "./Componenents/Support/ReviewItem";
+import FeedbackItem from "./Componenents/Support/FeedbackItem";
 import UserItem from "./Componenents/Users/UserItem";
 import Options from "./Componenents/Options/Options";
 import Finance from "./Componenents/Finance/Finance";
@@ -52,6 +55,39 @@ function App() {
                 <>
                   <Navbar />
                   <Rooms />
+                </>
+              }
+            />
+          </Route>
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              path="/support"
+              element={
+                <>
+                  <Navbar />
+                  <Support />
+                </>
+              }
+            />
+          </Route>
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              path="/support/review"
+              element={
+                <>
+                  <Navbar />
+                  <ReviewItem />
+                </>
+              }
+            />
+          </Route>
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              path="/support/feedback"
+              element={
+                <>
+                  <Navbar />
+                  <FeedbackItem />
                 </>
               }
             />

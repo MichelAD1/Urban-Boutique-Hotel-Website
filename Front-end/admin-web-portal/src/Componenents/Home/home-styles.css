@@ -1,0 +1,69 @@
+/* Default styles */
+.headerStats{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    padding: 2em 0em;
+}
+.smallStats{
+    background-color:  rgba(80,81,79,0.1);
+    border-radius: 10px;
+    padding: 1em 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 12%;
+}
+.statsTitle{
+    color: #50514f;
+    font-weight: 700; 
+    font-size: 16px;
+    margin: 0.25em 0em;
+}
+.statsAmount{
+    color: #50514f;
+    font-weight: 500; 
+    font-size: 28px;
+    margin: 0.25em 0em;
+}
+.statsLink{
+    color: #50514f;
+    font-size: 14px;
+    margin: 0.25em 0em;
+}
+.bottomStats{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* Styles for screens smaller than 768px */
+@media (max-width: 767px) {
+  .headerStats {
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  .smallStats {
+    width: 100%;
+    margin-bottom: 1em;
+    width: 85%;
+  }
+}
+
+/* Styles for screens smaller than 576px */
+@media (max-width: 575px) {
+  .statsTitle {
+    font-size: 14px;
+  }
+  .statsAmount {
+    font-size: 20px;
+  }
+  .statsLink {
+    font-size: 12px;
+  }
+}

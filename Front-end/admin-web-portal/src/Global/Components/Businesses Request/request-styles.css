@@ -1,0 +1,26 @@
+.request-box{
+    width: 100%;
+    background-color:  rgba(80,81,79,0.1);
+    border-radius: 10px;
+
+    margin-bottom: 2em;
+}
+.request-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7em 1em;
+    
+}
+.item-redirect{
+    color: rgb(80,81,79);
+    font-weight: 500;
+    font-size: 13px;
+    text-decoration: underline;
+}
+.title{
+    color: rgb(80,81,79);
+    font-weight: 700;
+    font-size: 16px;   
+}

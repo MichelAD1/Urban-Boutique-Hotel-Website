@@ -10,7 +10,6 @@ const Table = ({ reqData, columns, redirect, err }) => {
   const [prev, setPrev] = useState("");
   const [current, setCurrent] = useState(1);
   const [lastNum, setLastNum] = useState(0);
-  console.log(reqData);
 
   useEffect(() => {
     if (reqData) {
@@ -51,9 +50,9 @@ const Table = ({ reqData, columns, redirect, err }) => {
     } else if (redirect === "request") {
       navigate("/businesses/requests/info", { state: { data: row.original } });
     } else if (redirect === "review") {
-      navigate("/businesses/support/review", { state: { data: row.original } });
+      navigate("/support/review", { state: { data: row.original } });
     } else if (redirect === "feedback") {
-      navigate("/businesses/support/feedback", {
+      navigate("/support/feedback", {
         state: { data: row.original },
       });
     }

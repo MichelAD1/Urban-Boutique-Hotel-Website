@@ -17,98 +17,108 @@ import Navbar from "./Components/Navbar/Navbar";
 import PrivateRoute from "./Routes/PrivateRoutes";
 
 import ScrollToTop from "./Global/Function/ScrollToTop";
+import PageNotFound from "./Global/Components/PageNotFound";
 
 ReactModal.setAppElement("#root");
 function App() {
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/reset" element={<ForgotPassword />} />
+	return (
+		<BrowserRouter>
+			<div className='App'>
+				<Routes>
+					<Route path='/login' element={<Login />} />
+					<Route path='/reset' element={<ForgotPassword />} />
 
-          <Route
-            path="/"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Home />
-              </>
-            }
-          />
-          <Route
-            path="/rooms"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Rooms />
-              </>
-            }
-          />
-          <Route
-            path="/rooms/:roomname"
-            element={
-              <>
-                <ScrollToTop />
-                <RoomsItem />
-              </>
-            }
-          />
-          <Route
-            path="/rooms/booking"
-            element={
-              <>
-                <ScrollToTop />
-                <Book />
-              </>
-            }
-          />
-          <Route
-            path="/services"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Services />
-              </>
-            }
-          />
-          <Route
-            path="/findus"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <FindUs />
-              </>
-            }
-          />
-          <Route
-            path="/discover"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Discover />
-              </>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Contact />
-              </>
-            }
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  );
+					<Route
+						path='/'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Home />
+							</>
+						}
+					/>
+					<Route
+						path='/rooms'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Rooms />
+							</>
+						}
+					/>
+					<Route
+						path='/rooms/:roomname'
+						element={
+							<>
+								<ScrollToTop />
+								<RoomsItem />
+							</>
+						}
+					/>
+					<Route
+						path='/rooms/booking'
+						element={
+							<>
+								<ScrollToTop />
+								<Book />
+							</>
+						}
+					/>
+					<Route
+						path='/services'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Services />
+							</>
+						}
+					/>
+					<Route
+						path='/findus'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<FindUs />
+							</>
+						}
+					/>
+					<Route
+						path='/discover'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Discover />
+							</>
+						}
+					/>
+					<Route
+						path='/contact'
+						element={
+							<>
+								<ScrollToTop />
+								<Navbar />
+								<Contact />
+							</>
+						}
+					/>
+					<Route
+						path='*'
+						element={
+							<>
+								<ScrollToTop />
+								<PageNotFound />
+							</>
+						}
+					/>
+				</Routes>
+			</div>
+		</BrowserRouter>
+	);
 }
 
 export default App;

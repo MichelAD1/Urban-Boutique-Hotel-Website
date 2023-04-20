@@ -3,6 +3,8 @@ import add_cp from "../../assets/icons/add-cp.svg";
 import close_cp from "../../assets/icons/close-option.svg";
 import "../Finance/finance-styles.css";
 import BasicTable from "../../Global/Components/Tables/BasicTable";
+import BasicTablePagination from "../../Global/Components/Tables/BasicTablePagination";
+
 import ReactModal from "react-modal";
 
 const Finance = () => {
@@ -49,6 +51,27 @@ const Finance = () => {
       },
       {
         Header: "action",
+      },
+    ],
+    []
+  );
+  const columns = useMemo(
+    () => [
+      {
+        Header: "Revenue",
+        accessor: "revenue",
+      },
+      {
+        Header: "Number of Transactions",
+        accessor: "number_of_transactions",
+      },
+      {
+        Header: "Average Transaction Value",
+        accessor: "average_transaction_value",
+      },
+      {
+        Header: "Date",
+        accessor: "date",
       },
     ],
     []
@@ -123,11 +146,15 @@ const Finance = () => {
           />
         </div>
       </div>
-      {/* <div className="revenue-container">
-        <h2>Revenue Information</h2>
-        <p>Revenue: $20,000</p>
-        <p>Number of Transactions: 50</p>
-      </div> */}
+
+      <div className="list-box">
+        <BasicTablePagination
+          reqData={""}
+          columns={columns}
+          redirect={"user"}
+          err={err}
+        />
+      </div>
     </div>
   );
 };

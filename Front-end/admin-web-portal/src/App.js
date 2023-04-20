@@ -10,6 +10,7 @@ import EmployeeItem from "./Componenents/Employees/EmployeeItem";
 import Users from "./Componenents/Users/Users";
 import UserItem from "./Componenents/Users/UserItem";
 import Options from "./Componenents/Options/Options";
+import Finance from "./Componenents/Finance/Finance";
 import Rooms from "./Componenents/Rooms/Rooms";
 import RoomItem from "./Componenents/Rooms/RoomItem";
 import BusinessesRequests from "./Global/Components/Businesses Request/Requests";
@@ -128,6 +129,17 @@ function App() {
                 <>
                   <Navbar />
                   <EmployeeItem />
+                </>
+              }
+            />
+          </Route>
+          <Route exact path="/finance" element={<PrivateRoute />}>
+            <Route
+              path="/finance"
+              element={
+                <>
+                  <Navbar />
+                  <Finance />
                 </>
               }
             />

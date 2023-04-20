@@ -10,12 +10,14 @@ import options_nf from "../../assets/icons/apps-nf.svg";
 import room_nf from "../../assets/icons/room-nf.svg";
 import employee_nf from "../../assets/icons/employees-nf.svg";
 import user_nf from "../../assets/icons/person-nf.svg";
+import finance_nf from "../../assets/icons/finance-nf.svg";
 import logout_nf from "../../assets/icons/logout-nf.svg";
 
 // Icons fill
 import home_fill from "../../assets/icons/home-fill.svg";
 import room_fill from "../../assets/icons/room-fill.svg";
 import employee_fill from "../../assets/icons/employee-fill.svg";
+import finance_fill from "../../assets/icons/finance-fill.svg";
 import user_fill from "../../assets/icons/person-fill.svg";
 // import logout_fill from "../../assets/icons/logout-nf.svg";
 
@@ -44,6 +46,7 @@ export default function Navbar() {
             <div className="routes active">Home</div>
           </div>
         )}
+
         {/* Options Page navigation */}
         {path === "/options" && (
           <div className="nav-link">
@@ -70,6 +73,20 @@ export default function Navbar() {
             <img className="icons" src={room_fill} alt="" />
             <div className="routes active">Rooms</div>
           </div>
+        )}
+        {/* Finance Page navigation */}
+        {path === "/finance" && (
+          <div className="nav-link">
+            <img className="icons" src={finance_fill} alt="" />
+            <div className="routes active">Finance</div>
+          </div>
+        )}
+
+        {path !== "/finance" && (
+          <Link to="/finance" className="nav-link">
+            <img className="icons" src={finance_nf} alt="" />
+            <div className="routes">Finance</div>
+          </Link>
         )}
         {/* Employees Page navigation */}
         {path !== "/employees" && (

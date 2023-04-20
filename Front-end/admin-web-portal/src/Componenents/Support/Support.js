@@ -62,6 +62,7 @@ export default function Support() {
           redirect={"review"}
           err={err}
         />
+        <div className="seperator"></div>
         <BasicTable
           reqData={data}
           columns={feedback_columns}

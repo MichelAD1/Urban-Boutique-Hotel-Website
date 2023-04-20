@@ -418,7 +418,9 @@ h6 {
 .custom-modal button:hover {
   background-color: #f69e9e;
 }
-
+.seperator {
+  padding: 5%;
+}
 .budget-button {
   display: flex !important;
   border: none !important;

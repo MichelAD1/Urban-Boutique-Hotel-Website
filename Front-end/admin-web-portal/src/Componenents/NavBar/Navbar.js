@@ -1,4 +1,3 @@
-import "./nav-styles.css";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 
 // ***************** Logo and Icons *****************

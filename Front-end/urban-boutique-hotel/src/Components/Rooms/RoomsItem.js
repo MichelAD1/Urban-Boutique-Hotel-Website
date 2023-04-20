@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Slideshow from "../../Global/Components/Slideshow";
 import att_1 from "../../assets/images/att-1.jpg";
@@ -8,6 +8,8 @@ import att_4 from "../../assets/images/att-4.jpg";
 import att_5 from "../../assets/images/att-5.jpg";
 const RoomsItem = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const room = location.state.data;
   const [room_name, setName] = useState(room.room_name);
   const [price, setPrice] = useState(room.price);
@@ -17,7 +19,6 @@ const RoomsItem = () => {
   const [breakfast, setBreakfast] = useState(room.breakfast);
   const [pets, setPets] = useState(room.pets);
   const [images, setImages] = useState(room.images);
-  console.log(images);
   const slideshowd_data = [
     {
       id: 1,
@@ -40,6 +41,10 @@ const RoomsItem = () => {
       image: att_5,
     },
   ];
+
+  const handleBooking = () => {
+    navigate(`/rooms/booking`, { state: { data: room } });
+  };
   return (
     <div className="room-item-container">
       <div className="room-header">
@@ -49,7 +54,7 @@ const RoomsItem = () => {
         <div className="room-display">
           <p>PRICE</p>
           <p className="room-tag">${price}.00</p>
-          <button type="submit">BOOK NOW</button>
+          <button onClick={handleBooking}>BOOK NOW</button>
         </div>
       </div>
       <div className="room-images">

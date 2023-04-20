@@ -8,6 +8,7 @@ import ForgotPassword from "./Components/Auth/ForgotPassword";
 import Home from "./Components/Home/Home";
 import Rooms from "./Components/Rooms/Rooms";
 import RoomsItem from "./Components/Rooms/RoomsItem";
+import Book from "./Components/Rooms/Book";
 import Services from "./Components/Services/Services";
 import FindUs from "./Components/FindUs/FindUs";
 import Discover from "./Components/Discover/Discover";
@@ -21,6 +22,7 @@ import Preferences from "./Components/Account/Preferences";
 import Security from "./Components/Account/Security";
 
 import ScrollToTop from "./Global/Function/ScrollToTop";
+import PageNotFound from "./Global/Components/PageNotFound";
 
 ReactModal.setAppElement("#root");
 function App() {
@@ -52,11 +54,20 @@ function App() {
 						}
 					/>
 					<Route
-						path='/rooms/:id'
+						path='/rooms/:roomname'
 						element={
 							<>
 								<ScrollToTop />
 								<RoomsItem />
+							</>
+						}
+					/>
+					<Route
+						path='/rooms/booking'
+						element={
+							<>
+								<ScrollToTop />
+								<Book />
 							</>
 						}
 					/>
@@ -137,6 +148,11 @@ function App() {
 								<ScrollToTop />
 								<AccountNav />
 								<Security />
+						path='*'
+						element={
+							<>
+								<ScrollToTop />
+								<PageNotFound />
 							</>
 						}
 					/>

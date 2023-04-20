@@ -8,6 +8,7 @@ import Home from "./Componenents/Home/Home";
 import Employees from "./Componenents/Employees/Employees";
 import EmployeeItem from "./Componenents/Employees/EmployeeItem";
 import Users from "./Componenents/Users/Users";
+import Support from "./Componenents/Support/Support";
 import UserItem from "./Componenents/Users/UserItem";
 import Options from "./Componenents/Options/Options";
 import Finance from "./Componenents/Finance/Finance";
@@ -52,6 +53,17 @@ function App() {
                 <>
                   <Navbar />
                   <Rooms />
+                </>
+              }
+            />
+          </Route>
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              path="/support"
+              element={
+                <>
+                  <Navbar />
+                  <Support />
                 </>
               }
             />

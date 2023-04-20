@@ -11,6 +11,7 @@ import room_nf from "../../assets/icons/room-nf.svg";
 import employee_nf from "../../assets/icons/employees-nf.svg";
 import user_nf from "../../assets/icons/person-nf.svg";
 import finance_nf from "../../assets/icons/finance-nf.svg";
+import support_nf from "../../assets/icons/support-nf.svg";
 import logout_nf from "../../assets/icons/logout-nf.svg";
 
 // Icons fill
@@ -18,6 +19,7 @@ import home_fill from "../../assets/icons/home-fill.svg";
 import room_fill from "../../assets/icons/room-fill.svg";
 import employee_fill from "../../assets/icons/employee-fill.svg";
 import finance_fill from "../../assets/icons/finance-fill.svg";
+import support_fill from "../../assets/icons/support-fill.svg";
 import user_fill from "../../assets/icons/person-fill.svg";
 // import logout_fill from "../../assets/icons/logout-nf.svg";
 
@@ -112,6 +114,19 @@ export default function Navbar() {
           <Link to="/users" className="nav-link">
             <img className="icons" src={user_nf} alt="" />
             <div className="routes">Users</div>
+          </Link>
+        )}
+        {/* Support Page navigation */}
+        {path === "/support" && (
+          <div className="nav-link">
+            <img className="icons" src={support_fill} alt="" />
+            <div className="routes active">Support</div>
+          </div>
+        )}
+        {path !== "/support" && (
+          <Link to="/support" className="nav-link">
+            <img className="icons" src={support_nf} alt="" />
+            <div className="routes">Support</div>
           </Link>
         )}
       </div>

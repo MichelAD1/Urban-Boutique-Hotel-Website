@@ -1,0 +1,44 @@
+.option-container{
+    width: 90%;
+}
+
+.option-box{
+    width: 100%;
+    background-color:  rgba(80,81,79,0.1);
+    border-radius: 10px;
+
+    margin: 1.5em 0em;
+}
+.option-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+    
+}
+.item-redirect{
+    color: rgb(80,81,79);
+    font-weight: 500;
+    font-size: 13px;
+    text-decoration: underline;
+}
+.option-title{
+    color: rgb(80,81,79);
+    font-weight: 700;
+    font-size: 16px;   
+}
+
+.add-cp{
+    width: 32px;
+    height: 32px;
+
+    padding: 0.25em;
+
+    border-radius: 10em;
+}
+
+.add-cp:hover{
+    background-color: rgba(80,81,79, 0.2);
+    cursor: pointer;
+}

@@ -10,7 +10,7 @@ import Room from "./RoomCard";
 import add_cp from "../../assets/icons/add-cp.svg";
 import search_icon from "../../assets/icons/search.svg";
 
-import GetBusiness from "../../api-client/Business/getBusiness";
+import GetRoom from "../../api-client/Rooms/GetRoom";
 
 // Authorisation
 
@@ -24,7 +24,7 @@ function Rooms() {
   let counter_key = 1;
 
   useEffect(() => {
-    const resp = GetBusiness();
+    const resp = GetRoom();
     resp.then((res) => {
       if (res.data.data.length > 0) {
         setData(res.data.data);

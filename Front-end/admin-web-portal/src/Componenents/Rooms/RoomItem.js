@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 
 import ConvertImage from "../../Global/Functions/ConvertImage";
-import AddBusiness from "../../api-client/Business/AddBusiness";
-import EditBusiness from "../../api-client/Business/EditBusiness";
+import AddRoom from "../../api-client/Rooms/AddRoom";
+import EditRoom from "../../api-client/Rooms/EditRoom";
 import GetOptions from "../../api-client/Options/GetOptions";
 //Icons
 import add from "../../assets/icons/add-cp.svg";
@@ -15,7 +15,7 @@ import add from "../../assets/icons/add-cp.svg";
 // Images
 import default_profile from "../../assets/default-profile.png";
 import delete_icon from "../../assets/icons/cancel-icon.svg";
-import DeleteBusiness from "../../api-client/Business/DeleteBusiness";
+import DeleteRoom from "../../api-client/Rooms/DeleteRoom";
 
 const RoomItem = () => {
   const loc = useLocation();
@@ -186,7 +186,7 @@ const RoomItem = () => {
     } else if (images.length === 0) {
       setErr("Please upload at least one image");
     } else {
-      const resp = AddBusiness(
+      const resp = AddRoom(
         username,
         email,
         password,
@@ -215,7 +215,7 @@ const RoomItem = () => {
           }
         } else {
           const new_data = mergeJson(res.user, res.business, res.images);
-          navigate("/business/profile", { state: { data: new_data } });
+          navigate("/room/profile", { state: { data: new_data } });
           window.location.reload();
         }
       });
@@ -224,7 +224,7 @@ const RoomItem = () => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    const resp = EditBusiness(
+    const resp = EditRoom(
       isValid.data,
       dataToSend(),
       addedImages,
@@ -233,7 +233,7 @@ const RoomItem = () => {
       checkChange()
     );
     resp.then((res) => {
-      navigate("/business/profile", { state: { data: res } });
+      navigate("/room/profile", { state: { data: res } });
       window.location.reload();
     });
   };
@@ -251,10 +251,10 @@ const RoomItem = () => {
 
   const handleConfirmDelete = () => {
     const user_id = isValid.data.id;
-    const response = DeleteBusiness(user_id);
+    const response = DeleteRoom(user_id);
     response.then((res) => {
       if (res.status === 200) {
-        navigate("/businesses");
+        navigate("/rooms");
       } else {
         setErr("Something went wrong");
       }

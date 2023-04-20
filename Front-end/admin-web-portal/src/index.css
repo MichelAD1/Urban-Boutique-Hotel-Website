@@ -249,7 +249,7 @@ h6 {
 .label-text {
   font-size: 1em;
   font-weight: 700;
-  color: rgb(80, 81, 79);
+  color: var(--primaryColor);
   margin-bottom: 1em;
 }
 
@@ -263,7 +263,7 @@ h6 {
   font-size: 0.9em;
   padding: 0.2em 0.3em;
   border-radius: 3px;
-  border: 1px solid rgb(80, 81, 79);
+  border: 1px solid var(--primaryColor);
   margin-bottom: 0.95em;
 }
 
@@ -273,7 +273,7 @@ h6 {
   padding: 0.2em 0.3em;
   margin-bottom: 0.95em;
   border-radius: 3px;
-  border: 1px solid rgb(80, 81, 79);
+  border: 1px solid var(--primaryColor);
 }
 
 .input-box:focus {
@@ -290,12 +290,13 @@ h6 {
   display: flex;
   flex-direction: row;
   align-items: center;
+  color: var(--primaryColor)
 }
 
 .search-bar {
   width: 70em;
 
-  border: 1px solid #50514f;
+  border: 1px solid var(--primaryColor);
   border-radius: 0.5em;
 
   padding: 0.5em;
@@ -313,7 +314,7 @@ h6 {
 .search-input {
   width: 100%;
 
-  color: #50514f;
+  color: var(--primaryColor);
   font-size: 1em;
 
   border: 0;
@@ -323,7 +324,6 @@ h6 {
 .filterDropDown {
   border-radius: 0.5em;
 
-  color: #50514f;
   font-size: 1em;
 
   margin: 0em 1em;
@@ -343,7 +343,7 @@ h6 {
 .info-text {
   margin-bottom: 1em;
   font-size: 1em;
-  color: #50514f;
+  color: var(--primaryColor);
 }
 .custom-modal {
   display: flex;
@@ -542,7 +542,7 @@ h6 {
   align-items: center;
   justify-content: space-between;
 
-  border-right: 1px solid rgba(80, 81, 79, 0.5);
+  border-right: 1px solid rgba(80, 81, 79, 0.2);
 
   padding: 0em 0.75em;
 
@@ -576,7 +576,7 @@ h6 {
   font-family: "Roboto";
   font-size: 17px;
   font-weight: 500;
-  color: #50514f;
+  color: var(--primaryColor);
   text-decoration: none;
 }
 
@@ -587,7 +587,7 @@ h6 {
 
 .active {
   font-weight: 900;
-  color: #50514f;
+  color: var(--primaryColor);
   cursor: pointer;
 }
 
@@ -604,37 +604,45 @@ h6 {
 
 @media screen and (max-width: 768px) {
   .navbar {
-    width: 5em;
-    height: 100%;
+    width: 7em;
 
     position: fixed;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 
-    border-right: 1px solid rgba(80, 81, 79, 0.5);
+    border-right: 1px solid rgba(80, 81, 79, 0.2);
 
     padding: 0em 0.75em;
+
+    top: 0;
+    left: 0;
+
+    z-index: 2;
   }
 
   .nav-link {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 8em;
-    padding: 0.5em 0.75em;
     margin-top: 0.5em;
-    font-family: "Roboto";
     font-size: 17px;
     font-weight: 500;
-    color: #50514f;
-    
+    padding: 0.5em;
+    width: 5em;
   }
 
-  .nav-link:hover {
-    background-color: rgba(80, 81, 79, 0.1);
-    border-radius: 50%;
+  .icons {
+    width: 28px;
+    height: 24px;
+    margin-right: 0.5em;
+  }
+
+  .logo img {
+    width: 6em;
+    height: 2em;
   }
 
   .logout {

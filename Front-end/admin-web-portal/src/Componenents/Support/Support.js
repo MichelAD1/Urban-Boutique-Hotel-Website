@@ -3,6 +3,11 @@ import { useMemo, useState, useEffect } from "react";
 import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
 export default function Support() {
   const [err, setErr] = useState("");
+  const [data, setData] = useState([
+    { review: "Marketing", room_id: 1, username: "Hello", date: "10-09-2023" },
+    { review: "Business", room_id: 2, username: "Hello", date: "10-09-2023" },
+    { review: "Economics", room_id: 3, username: "Hello", date: "10-09-2023" },
+  ]);
   const reviews_columns = useMemo(
     () => [
       {
@@ -52,15 +57,15 @@ export default function Support() {
     <div className="container">
       <div className="list-box">
         <BasicTable
-          reqData={""}
+          reqData={data}
           columns={reviews_columns}
-          redirect={"reviews"}
+          redirect={"review"}
           err={err}
         />
         <BasicTable
-          reqData={""}
+          reqData={data}
           columns={feedback_columns}
-          redirect={"reviews"}
+          redirect={"feedback"}
           err={err}
         />
       </div>

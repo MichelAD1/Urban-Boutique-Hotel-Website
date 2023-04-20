@@ -14,7 +14,12 @@ import FindUs from "./Components/FindUs/FindUs";
 import Discover from "./Components/Discover/Discover";
 import Contact from "./Components/Contact/Contact";
 import Navbar from "./Components/Navbar/Navbar";
-import PrivateRoute from "./Routes/PrivateRoutes";
+import Account from "./Components/Account/Account";
+import AccountNav from "./Components/Navbar/AccountNav";
+
+import Profile from "./Components/Account/Profile";
+import Preferences from "./Components/Account/Preferences";
+import Security from "./Components/Account/Security";
 
 import ScrollToTop from "./Global/Function/ScrollToTop";
 import PageNotFound from "./Global/Components/PageNotFound";
@@ -107,6 +112,42 @@ function App() {
 						}
 					/>
 					<Route
+						path='/account'
+						element={
+							<>
+								<ScrollToTop />
+								<AccountNav />
+								<Account />
+							</>
+						}
+					/>
+					<Route
+						path='/account/profile'
+						element={
+							<>
+								<ScrollToTop />
+								<AccountNav />
+								<Profile />
+							</>
+						}
+					/>
+					<Route
+						path='/account/preferences'
+						element={
+							<>
+								<ScrollToTop />
+								<AccountNav />
+								<Preferences />
+							</>
+						}
+					/>
+					<Route
+						path='/account/security'
+						element={
+							<>
+								<ScrollToTop />
+								<AccountNav />
+								<Security />
 						path='*'
 						element={
 							<>

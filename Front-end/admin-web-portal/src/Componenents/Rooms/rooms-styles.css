@@ -15,9 +15,9 @@
 }
 
 /* ************************************** */
-/*              Business list             */
+/*              Rooms list             */
 /* ************************************** */
-.business-list {
+.rooms-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -49,7 +49,7 @@
 .link:hover {
   transform: scale(1.1);
 }
-.business-logo {
+.room-logo {
   object-fit: cover;
   overflow: hidden;
 }
@@ -65,7 +65,7 @@
   padding: 0.5em 0.5em 0em 0.5em;
 }
 
-.business-details {
+.room-details {
   display: flex;
   padding: 1em 0.5em;
   flex-direction: column;
@@ -217,7 +217,7 @@
   margin-bottom: 11em;
 }
 
-.delete-icon{
+.delete-icon {
   position: absolute;
   z-index: 10;
   margin-left: -1.4em;

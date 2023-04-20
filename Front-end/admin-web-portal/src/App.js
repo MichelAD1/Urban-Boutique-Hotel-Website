@@ -10,8 +10,8 @@ import EmployeeItem from "./Componenents/Employees/EmployeeItem";
 import Users from "./Componenents/Users/Users";
 import UserItem from "./Componenents/Users/UserItem";
 import Options from "./Componenents/Options/Options";
-import Businesses from "./Componenents/Businesses/Businesses";
-import BusinessItem from "./Componenents/Businesses/BusinessItem";
+import Rooms from "./Componenents/Rooms/Rooms";
+import RoomItem from "./Componenents/Rooms/RoomItem";
 import BusinessesRequests from "./Global/Components/Businesses Request/Requests";
 import RequestItem from "./Global/Components/Businesses Request/RequestItem";
 import PrivateRoute from "./Routes/PrivateRoutes";
@@ -46,22 +46,22 @@ function App() {
           </Route>
           <Route exact path="/" element={<PrivateRoute />}>
             <Route
-              path="/businesses"
+              path="/rooms"
               element={
                 <>
                   <Navbar />
-                  <Businesses />
+                  <Rooms />
                 </>
               }
             />
           </Route>
           <Route exact path="/" element={<PrivateRoute />}>
             <Route
-              path="/business/profile"
+              path="/room/profile"
               element={
                 <>
                   <Navbar />
-                  <BusinessItem />
+                  <RoomItem />
                 </>
               }
             />

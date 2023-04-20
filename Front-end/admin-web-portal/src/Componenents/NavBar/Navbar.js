@@ -2,7 +2,7 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 
 // ***************** Logo and Icons *****************
 // Logo
-import logo from "../../assets/splash.png";
+import logo from "../../assets/logo.png";
 
 // Icons no fill
 import home_nf from "../../assets/icons/home-nf.svg";
@@ -27,75 +27,77 @@ export default function Navbar() {
 
 	return (
 		<nav className='navbar'>
-			<div className='logo'>
-				<img src={logo} alt='' />
-			</div>
-			{/* Home Page navigation */}
-			{path !== "/" && (
-				<Link to='/' className='nav-link'>
-					<img className='icons' src={home_nf} alt='' />
-					<div className='routes'>Home</div>
-				</Link>
-			)}
-			{path === "/" && (
-				<div className='nav-link'>
-					<img className='icons' src={home_fill} alt='' />
-					<div className='routes active'>Home</div>
+			<div>
+				<div className='logo'>
+					<img src={logo} alt='' />
 				</div>
-			)}
-			{/* Options Page navigation */}
-			{path === "/options" && (
-				<div className='nav-link'>
-					<img className='icons' src={options_nf} alt='' />
-					<div className='routes active'>Options</div>
-				</div>
-			)}
+				{/* Home Page navigation */}
+				{path !== "/" && (
+					<Link to='/' className='nav-link'>
+						<img className='icons' src={home_nf} alt='' />
+						<div className='routes'>Home</div>
+					</Link>
+				)}
+				{path === "/" && (
+					<div className='nav-link'>
+						<img className='icons' src={home_fill} alt='' />
+						<div className='routes active'>Home</div>
+					</div>
+				)}
+				{/* Options Page navigation */}
+				{path === "/options" && (
+					<div className='nav-link'>
+						<img className='icons' src={options_nf} alt='' />
+						<div className='routes active'>Options</div>
+					</div>
+				)}
 
-			{path !== "/options" && (
-				<Link to='/options' className='nav-link'>
-					<img className='icons' src={options_nf} alt='' />
-					<div className='routes'>Options</div>
-				</Link>
-			)}
-			{/* Businesses Page navigation */}
-			{path !== "/businesses" && (
-				<Link to='/businesses' className='nav-link'>
-					<img className='icons' src={business_nf} alt='' />
-					<div className='routes'>Partners</div>
-				</Link>
-			)}
-			{path === "/businesses" && (
-				<div className='nav-link'>
-					<img className='icons' src={business_fill} alt='' />
-					<div className='routes active'>Partners</div>
-				</div>
-			)}
-			{/* Employees Page navigation */}
-			{path !== "/employees" && (
-				<Link to='/employees' className='nav-link'>
-					<img className='icons' src={employee_nf} alt='' />
-					<div className='routes'>Staff</div>
-				</Link>
-			)}
-			{path === "/employees" && (
-				<div className='nav-link'>
-					<img className='icons' src={employee_fill} alt='' />
-					<div className='routes active'>Staff</div>
-				</div>
-			)}
-			{/* Users Page navigation */}
-			{path === "/users" && (
-				<div className='nav-link'>
-					<img className='icons' src={user_fill} alt='' />
-					<div className='routes active'>Users</div>
-				</div>
-			)}
-			{path !== "/users" && (
-				<Link to='/users' className='nav-link'>
-					<img className='icons' src={user_nf} alt='' />
-					<div className='routes'>Users</div>
-				</Link>
-			)}
+				{path !== "/options" && (
+					<Link to='/options' className='nav-link'>
+						<img className='icons' src={options_nf} alt='' />
+						<div className='routes'>Options</div>
+					</Link>
+				)}
+				{/* Businesses Page navigation */}
+				{path !== "/businesses" && (
+					<Link to='/businesses' className='nav-link'>
+						<img className='icons' src={business_nf} alt='' />
+						<div className='routes'>Partners</div>
+					</Link>
+				)}
+				{path === "/businesses" && (
+					<div className='nav-link'>
+						<img className='icons' src={business_fill} alt='' />
+						<div className='routes active'>Partners</div>
+					</div>
+				)}
+				{/* Employees Page navigation */}
+				{path !== "/employees" && (
+					<Link to='/employees' className='nav-link'>
+						<img className='icons' src={employee_nf} alt='' />
+						<div className='routes'>Staff</div>
+					</Link>
+				)}
+				{path === "/employees" && (
+					<div className='nav-link'>
+						<img className='icons' src={employee_fill} alt='' />
+						<div className='routes active'>Staff</div>
+					</div>
+				)}
+				{/* Users Page navigation */}
+				{path === "/users" && (
+					<div className='nav-link'>
+						<img className='icons' src={user_fill} alt='' />
+						<div className='routes active'>Users</div>
+					</div>
+				)}
+				{path !== "/users" && (
+					<Link to='/users' className='nav-link'>
+						<img className='icons' src={user_nf} alt='' />
+						<div className='routes'>Users</div>
+					</Link>
+				)}
+			</div>
 
 			<div
 				className='nav-link logout'

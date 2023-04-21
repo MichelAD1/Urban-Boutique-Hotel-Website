@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ReactModal from "react-modal";
 
 // Componenents
@@ -15,14 +15,9 @@ import RoomItem from "./Componenents/Rooms/RoomItem";
 import BusinessesRequests from "./Global/Components/Businesses Request/Requests";
 import RequestItem from "./Global/Components/Businesses Request/RequestItem";
 import PrivateRoute from "./Routes/PrivateRoutes";
+
 ReactModal.setAppElement("#root");
 function App() {
-	const path = useLocation().pathname;
-	if (path === "/login") {
-		document.body.style.padding = "0";
-	} else {
-		document.body.style.paddingLeft = "15em";
-	}
 	return (
 		<BrowserRouter>
 			<div className='App'>

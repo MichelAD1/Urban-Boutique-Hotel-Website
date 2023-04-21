@@ -1,5 +1,3 @@
-import "./rooms-styles.css";
-
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -14,11 +12,8 @@ import GetRoom from "../../api-client/Rooms/GetRoom";
 
 import room1 from "../../assets/dummy.png";
 
-// Authorisation
-
 function Rooms() {
 	const [data, setData] = useState([]);
-	const [paginate, setPaginate] = useState(9);
 	const [query, setQuery] = useState("");
 	const [filter, setFilter] = useState("");
 	const [err, setErr] = useState("");
@@ -42,6 +37,60 @@ function Rooms() {
 				name: "Standard Room",
 				price: 100.0,
 				old_price: 150.0,
+				guests: 2,
+				type: "Queen Bed",
+				size: 250,
+				wifi: true,
+				tv: true,
+				shower: true,
+				towels: false,
+				minibar: true,
+				desk: false,
+				images: [room1],
+				description:
+					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
+			},
+			{
+				id: 1,
+				name: "Standard Room",
+				price: 100.0,
+				old_price: null,
+				guests: 2,
+				type: "Queen Bed",
+				size: 250,
+				wifi: true,
+				tv: true,
+				shower: true,
+				towels: false,
+				minibar: true,
+				desk: false,
+				images: [room1],
+				description:
+					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
+			},
+			{
+				id: 1,
+				name: "Standard Room",
+				price: 100.0,
+				old_price: null,
+				guests: 2,
+				type: "Queen Bed",
+				size: 250,
+				wifi: true,
+				tv: true,
+				shower: true,
+				towels: false,
+				minibar: true,
+				desk: false,
+				images: [room1],
+				description:
+					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
+			},
+			{
+				id: 1,
+				name: "Standard Room",
+				price: 100.0,
+				old_price: null,
 				guests: 2,
 				type: "Queen Bed",
 				size: 250,
@@ -121,7 +170,7 @@ function Rooms() {
 					<img src={add_cp} width='28px' height='28px' alt='' />
 				</Link>
 			</div>
-			<div className='room-list'>
+			<div className='rooms-container'>
 				{data.map((item) => (
 					<Room data={item} key={item.id} />
 				))}

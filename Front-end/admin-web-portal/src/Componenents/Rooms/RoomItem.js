@@ -235,6 +235,97 @@ const RoomItem = () => {
 						</div>
 					</div>
 				</div>
+				<div className='edit-item'>
+					<div className='edit-info info-large'>
+						<div>
+							<label>Type</label>
+						</div>
+						<div>
+							<p>{type}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info info-large'>
+						<div>
+							<label>Guests</label>
+						</div>
+						<div>
+							<p>{guests}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info info-large'>
+						<div>
+							<label>Size</label>
+						</div>
+						<div>
+							<p>{size}sqft</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info info-large'>
+						<div>
+							<label>Price</label>
+						</div>
+						<div>
+							<p>${price}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info info-large'>
+						<div>
+							<label>Old price</label>
+						</div>
+						<div>
+							<p>${oldPrice}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info info-large'>
+						<div style={{ alignSelf: "flex-start" }}>
+							<label>Ammeneties</label>
+						</div>
+						<div className='amm-checkbox'>
+							<div className='checkbox-item'>
+								<input type='checkbox' checked={minibar} />
+								<label>Minibar</label>
+							</div>
+							<div className='checkbox-item'>
+								<input type='checkbox' checked={shower} />
+								<label>Shower</label>
+							</div>
+							<div className='checkbox-item'>
+								<input type='checkbox' checked={towels} />
+								<label>Towels</label>
+							</div>
+							<div className='checkbox-item'>
+								<input type='checkbox' checked={tv} />
+								<label>Tv</label>
+							</div>
+							<div className='checkbox-item'>
+								<input type='checkbox' checked={wifi} />
+								<label>WI-FI</label>
+							</div>
+							<div className='checkbox-item'>
+								<input type='checkbox' checked={desk} />
+								<label>Desk</label>
+							</div>
+							<div className='checkbox-item'>
+								<input type='checkbox' checked={breakfast} />
+								<label>Breakfast</label>
+							</div>
+							<div className='checkbox-item'>
+								<input type='checkbox' checked={pets} />
+								<label>Pets</label>
+							</div>
+						</div>
+					</div>
+				</div>
 			</form>
 		</div>
 	);

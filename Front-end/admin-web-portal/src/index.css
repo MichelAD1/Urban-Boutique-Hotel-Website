@@ -263,7 +263,7 @@ h6 {
 }
 
 .info-large{
-  width: 60%;
+  width: 90%;
 }
 
 .edit-info div{
@@ -271,7 +271,25 @@ h6 {
 }
 
 .info-large div{
-  width: 30em;
+  width: 40em;
+}
+
+.amm-checkbox{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.amm-checkbox div{
+  margin-bottom: 0.2em;
+  width: 10em;
+}
+.amm-checkbox label{
+  margin-left: 1em;
+}
+.amm-checkbox input{
+  accent-color: var(--primaryColor);
+  transform: scale(1.5);
 }
 
 .input-dropdown {

@@ -22,7 +22,7 @@ class CheckCustomer
         }else{
             return response()->json([
                 'status' => 'error',
-                'message' => 'Unauthorized',
+                'message' => 'Not a customer',
             ], 401);
         }
     }

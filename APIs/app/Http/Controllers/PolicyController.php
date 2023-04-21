@@ -36,4 +36,7 @@ class PolicyController extends Controller
             ],200);
         }
     }
+    public function getPolicies(){
+        return Policy::all();
+    }
 }

@@ -28,7 +28,7 @@ class SupplyController extends Controller
             ]);
         }
     }
-    public function editName(Request $request){
+    public function edit(Request $request){
         //admin function
         $supply = Supply::find($request->supply_id);
         $supply->item_name = $request->item_name;
@@ -41,5 +41,8 @@ class SupplyController extends Controller
     public function deleteItem($supply_id){
         //admin function
         Supply::find($supply_id)->delete();
+    }
+    public function getSupplies(){
+        return Supply::all();
     }
 }

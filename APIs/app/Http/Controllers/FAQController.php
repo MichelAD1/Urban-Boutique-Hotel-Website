@@ -39,4 +39,7 @@ class FAQController extends Controller
             ],200);
         }
     }
+    public function getFAQs(){
+        return FAQ::all();
+    }
 }

@@ -1,5 +1,4 @@
 import { useTable } from "react-table";
-import "./basic-styles.css";
 import ReactModal from "react-modal";
 import { useEffect, useState } from "react";
 import DeleteOptions from "../../../api-client/Options/DeleteOptions";

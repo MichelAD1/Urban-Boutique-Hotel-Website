@@ -44,7 +44,7 @@ input:-webkit-autofill:active {
 
 /* globals */
 body {
-  padding-left: 66px;
+  padding-left: 15em;
   color: var(--primaryColor);
   background: var(--mainWhite);
   font-family: "Roboto", sans-serif;
@@ -164,10 +164,10 @@ h6 {
 
 .container {
   height: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
 }
 .list-box {
   display: flex;
@@ -264,7 +264,7 @@ h6 {
 .label-text {
   font-size: 0.5em;
   font-weight: 700;
-  color: rgb(80, 81, 79);
+  color: var(--primaryColor);
   margin-bottom: 1em;
 }
 
@@ -278,7 +278,7 @@ h6 {
   font-size: 0.9em;
   padding: 0.2em 0.3em;
   border-radius: 3px;
-  border: 1px solid rgb(80, 81, 79);
+  border: 1px solid var(--primaryColor);
   margin-bottom: 0.95em;
 }
 
@@ -288,7 +288,7 @@ h6 {
   padding: 0.2em 0.3em;
   margin-bottom: 0.95em;
   border-radius: 3px;
-  border: 1px solid rgb(80, 81, 79);
+  border: 1px solid var(--primaryColor);
 }
 
 .input-box:focus {
@@ -305,12 +305,13 @@ h6 {
   display: flex;
   flex-direction: row;
   align-items: center;
+  color: var(--primaryColor)
 }
 
 .search-bar {
   width: 70em;
 
-  border: 1px solid #50514f;
+  border: 1px solid var(--primaryColor);
   border-radius: 0.5em;
 
   padding: 0.5em;
@@ -328,7 +329,7 @@ h6 {
 .search-input {
   width: 100%;
 
-  color: #50514f;
+  color: var(--primaryColor);
   font-size: 1em;
 
   border: 0;
@@ -338,7 +339,6 @@ h6 {
 .filterDropDown {
   border-radius: 0.5em;
 
-  color: #50514f;
   font-size: 1em;
 
   margin: 0em 1em;
@@ -358,7 +358,7 @@ h6 {
 .info-text {
   margin-bottom: 1em;
   font-size: 1em;
-  color: #50514f;
+  color: var(--primaryColor);
 }
 .custom-modal {
   display: flex;
@@ -478,11 +478,14 @@ h6 {
   margin-left: -5em;
 }
 
+@media screen and (max-width: 1000px) {
+  body{
+    padding-left: 6em;
+  } 
+}
+
 /* Styles for screens between 768px and 1200px */
 @media only screen and (max-width: 1200px) {
-  .container {
-    margin-left: 10em;
-  }
 
   .list-box {
     height: 80%;
@@ -515,9 +518,6 @@ h6 {
 
 /* Styles for screens smaller than 768px */
 @media only screen and (max-width: 767px) {
-  .container {
-    margin-left: 5em;
-  }
 
   .list-box {
     height: 70%;
@@ -560,9 +560,6 @@ h6 {
 }
 /* Styles for screens smaller than 640px */
 @media only screen and (max-width: 639px) {
-  .container {
-    margin-left: 6em;
-  }
 }
 /* end of global */
 /* navbar */
@@ -577,7 +574,7 @@ h6 {
   align-items: center;
   justify-content: space-between;
 
-  border-right: 1px solid rgba(80, 81, 79, 0.5);
+  border-right: 1px solid rgba(80, 81, 79, 0.2);
 
   padding: 0em 0.75em;
 
@@ -611,7 +608,7 @@ h6 {
   font-family: "Roboto";
   font-size: 17px;
   font-weight: 500;
-  color: #50514f;
+  color: var(--primaryColor);
   text-decoration: none;
 }
 
@@ -622,7 +619,7 @@ h6 {
 
 .active {
   font-weight: 900;
-  color: #50514f;
+  color: var(--primaryColor);
   cursor: pointer;
 }
 
@@ -637,38 +634,50 @@ h6 {
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
   .navbar {
-    width: 5em;
-    height: 100%;
+    width: 6em;
 
     position: fixed;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 
-    border-right: 1px solid rgba(80, 81, 79, 0.5);
+    border-right: 1px solid rgba(80, 81, 79, 0.2);
 
     padding: 0em 0.75em;
+
+    top: 0;
+    left: 0;
+
+    z-index: 2;
   }
 
   .nav-link {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 8em;
-    padding: 0.5em 0.75em;
     margin-top: 0.5em;
-    font-family: "Roboto";
     font-size: 17px;
     font-weight: 500;
+    padding: 0.5em;
+    width: 6em;
     color: #50514f;
+
+
   }
 
-  .nav-link:hover {
-    background-color: rgba(80, 81, 79, 0.1);
-    border-radius: 50%;
+  .icons {
+    width: 28px;
+    height: 24px;
+    margin-right: 0.5em;
+  }
+
+  .logo img {
+    width: 6em;
+    height: 2em;
   }
 
   .logout {
@@ -679,5 +688,106 @@ h6 {
     display: none;
   }
 }
-
 /* end of navbar */
+/* Options */
+.account-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3em 0em;
+}
+.account-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 75%;
+  
+  padding: 3em 0;
+}
+
+.account-section h2{
+  margin-bottom: 0.1em;
+}
+
+.account-section h5{
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.settings-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.settings-box{
+  width: 45%;
+  padding: 1em 3em;
+  border: 1px solid var(--mainGrey);
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: row;
+  margin-right: 1em;
+  margin-bottom: 1em;
+
+  text-decoration: none;
+  color: var(--primaryColor)
+}
+
+.settings-box:hover {
+  color: var(--secondaryColor);
+}
+
+.settings-box:hover .settings-link{
+  text-decoration: underline;
+}
+
+.settings-icon{
+  font-size: 40px;
+  margin-right: 0.5em;
+}
+.settings-box h3{
+  margin-bottom: 0.3em;
+  font-size: 1.4em;
+}
+.settings-box p{
+  font-size: 15px;
+  margin-bottom: 0.3em;
+}
+.settings-link{
+  text-decoration: none;
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--secondaryColor);
+}
+
+@media screen and (max-width: 1000px) {
+
+  .account-section{
+    width: 100%;
+  }
+  .account-section h2{
+    margin-left: 0.5em;
+  }
+  .account-section h5{
+    margin-left: 0.8em;
+  }
+  .settings-box{
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0em;
+  }
+  .settings-icon{
+    display: none;
+  }
+  .settings-box{
+    width: 100%;
+    margin-right: 0;
+    padding: 1em;
+  }
+  .settings-link{
+    display: none;
+  }
+}
+/* end of options */

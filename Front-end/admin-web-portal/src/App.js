@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ReactModal from "react-modal";
 
 // Componenents
@@ -19,6 +19,7 @@ import RoomItem from "./Componenents/Rooms/RoomItem";
 import BusinessesRequests from "./Global/Components/Businesses Request/Requests";
 import RequestItem from "./Global/Components/Businesses Request/RequestItem";
 import PrivateRoute from "./Routes/PrivateRoutes";
+
 ReactModal.setAppElement("#root");
 function App() {
   return (

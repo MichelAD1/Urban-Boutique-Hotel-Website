@@ -15,13 +15,16 @@ import {
 import { HiOutlineUserGroup, HiUserGroup } from "react-icons/hi";
 import { BsPerson, BsPersonFill } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
+import finance_fill from "../../assets/icons/finance-fill.svg";
+import support_fill from "../../assets/icons/support-fill.svg";
+import finance_nf from "../../assets/icons/finance-nf.svg";
+import support_nf from "../../assets/icons/support-nf.svg";
 
 import Logout from "../../api-client/Auth/Logout";
 
 export default function Navbar() {
 	const path = useLocation().pathname;
 	const navigate = useNavigate();
-
 	return (
 		<nav className='navbar'>
 			<div>
@@ -94,8 +97,34 @@ export default function Navbar() {
 						<div className='routes'>Users</div>
 					</Link>
 				)}
-			</div>
+        {/* Finance Page navigation */}
+        {path === "/finance" && (
+          <div className="nav-link">
+            <img className="icons" src={finance_fill} alt="" />
+            <div className="routes active">Finance</div>
+          </div>
+        )}
 
+        {path !== "/finance" && (
+          <Link to="/finance" className="nav-link">
+            <img className="icons" src={finance_nf} alt="" />
+            <div className="routes">Finance</div>
+          </Link>
+        )}
+        {/* Support Page navigation */}
+        {path === "/support" && (
+          <div className="nav-link">
+            <img className="icons" src={support_fill} alt="" />
+            <div className="routes active">Support</div>
+          </div>
+        )}
+        {path !== "/support" && (
+          <Link to="/support" className="nav-link">
+            <img className="icons" src={support_nf} alt="" />
+            <div className="routes">Support</div>
+          </Link>
+        )}
+			</div>
 			<div
 				className='nav-link logout'
 				onClick={() => {

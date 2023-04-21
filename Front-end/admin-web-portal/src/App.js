@@ -117,7 +117,7 @@ function App() {
 					</Route>
 					<Route exact path='/' element={<PrivateRoute />}>
 						<Route
-							path='/businesses/requests/info'
+							path='/maintenance/requests/info'
 							element={
 								<>
 									<Navbar />

@@ -235,6 +235,10 @@ h6 {
   padding: 3em 2em;
 }
 
+.edit-container-large{
+  width: 100%;
+}
+
 .edit-container h2{
   width: 100%;
   margin: 0;
@@ -258,8 +262,16 @@ h6 {
   width: 50%;
 }
 
+.info-large{
+  width: 60%;
+}
+
 .edit-info div{
   width: 11em;
+}
+
+.info-large div{
+  width: 30em;
 }
 
 .input-dropdown {
@@ -1186,16 +1198,6 @@ h6 {
 /* ************************************** */
 /*              Room Item                 */
 /* ************************************** */
-
-/* .edit-container {
-  height: 100%;
-
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-
-  flex-wrap: wrap-reverse;
-} */
 .gallery-box {
   width: 35em;
 

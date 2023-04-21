@@ -246,7 +246,7 @@ h6 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(42, 50, 73, 0.5);
+  border-bottom: 1px solid rgba(42, 50, 73, 0.35);
   padding: 1em 1em;
 }
 
@@ -262,6 +262,55 @@ h6 {
   width: 11em;
 }
 
+.input-dropdown {
+  border: 1px solid var(--primaryColor);
+  color: var(--primaryColor);
+  border-radius: 1em;
+  padding: 0.5em 1em;
+}
+
+.input-dropdown:focus {
+  outline: none;
+}
+
+.edit-button{
+
+}
+
+.save-button{
+  background-color: var(--primaryColor);
+  color: #fff;
+
+  border: none;
+  border-radius: 0.2em;
+
+  padding: 0.6em 1.2em;
+
+  cursor: pointer;
+}
+
+.button{
+  background-color: #fff;
+  color: var(--secondaryColor);
+  border:none;
+  border-radius: 0.2em;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+  margin-left: 0.5em;
+}
+
+.button:hover{
+  background-color: rgba(172, 160, 160, 0.2);
+}
+
+.option-dropdown{
+  padding: 0.5em 1em;
+}
+
+.option-dropdown:hover{
+  background-color: rgba(80, 81, 79, 0.1);
+}
+
 .inputs-section {
   display: flex;
   flex-direction: column;
@@ -274,15 +323,6 @@ h6 {
   border-radius: 3px;
   border: 1px solid var(--primaryColor);
   margin-bottom: 0.95em;
-}
-
-.input-dropdown {
-  width: 20.75em;
-  font-size: 0.9em;
-  padding: 0.2em 0.3em;
-  margin-bottom: 0.95em;
-  border-radius: 3px;
-  border: 1px solid var(--primaryColor);
 }
 
 .input-box:focus {

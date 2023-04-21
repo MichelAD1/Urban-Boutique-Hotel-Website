@@ -1,9 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const RequestItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
+
+	const [reqData, setReqData] = useState([]);
 
 	const [name, setName] = useState(data.name);
 	const [res, setRes] = useState(data.res);
@@ -12,17 +14,48 @@ const RequestItem = () => {
 	const [employee, setEmployee] = useState(data.employee);
 
 	const [edit, setEdit] = useState(false);
+	const [selected, setSelected] = useState(false);
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setData(data);
-	}, [data]);
+	}, []);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log("Submitted");
+	};
+
+	const handleCancel = () => {
+		setEdit(false);
+		setSelected(false);
+	};
+
+	const openEdit = () => {
+		setEdit(true);
+	};
+
 	return (
 		<div className='container'>
-			<div className='edit-container'>
+			<form className='edit-container' onSubmit={handleSubmit}>
 				<div className='edit-item'>
 					<h2>Request #{data.id}</h2>
-					{edit && <button type='button'>Edit</button>}
-					<button type='button'>Edit</button>
+					{data.employee !== null && !edit && (
+						<button type='button' className='button' onClick={openEdit}>
+							Edit
+						</button>
+					)}
+					{(selected || edit) && (
+						<>
+							<button type='submit' className='save-button'>
+								Save
+							</button>
+							<button type='button' className='button' onClick={handleCancel}>
+								Cancel
+							</button>
+						</>
+					)}
 				</div>
 				<div className='edit-item'>
 					<div className='edit-info'>
@@ -69,13 +102,32 @@ const RequestItem = () => {
 						<div>
 							<label>Employee</label>
 						</div>
-						<div>
-							{employee && <p>{employee}</p>}
-							{!employee && <p>No employee assigned</p>}
-						</div>
+						{data.employee && !edit && (
+							<div>
+								<p>{employee}</p>
+							</div>
+						)}
+						{(!data.employee || edit) && (
+							<div>
+								<select
+									className='input-dropdown'
+									value={employee}
+									onChange={(e) => {
+										setEmployee(e.target.value);
+										setSelected(true);
+									}}>
+									<option value='' hidden>
+										Select Employee
+									</option>
+									<option value='1'>Employee 1</option>
+									<option value='2'>Employee 2</option>
+									<option value='3'>Employee 3</option>
+								</select>
+							</div>
+						)}
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	);
 };

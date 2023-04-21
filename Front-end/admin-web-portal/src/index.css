@@ -791,3 +791,259 @@ h6 {
   }
 }
 /* end of options */
+/* Home */
+.headerStats{
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap:wrap;
+  padding: 2em 0em;
+}
+.smallStats{
+  background-color:  rgba(172, 160, 160, 0.3);
+  border-radius: 10px;
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 20em;
+  text-decoration: none;
+  color: var(--primaryColor);
+  margin-top: 1em;
+}
+.smallStats:hover{
+  background-color: rgba(172, 160, 160, 0.4);
+}
+.statsTitle{
+  font-weight: 700; 
+  font-size: 16px;
+  margin: 0.25em 0em;
+}
+.statsAmount{
+  font-weight: 500; 
+  font-size: 28px;
+  margin: 0.25em 0em;
+}
+.statsLink{
+  font-size: 14px;
+  margin: 0.25em 0em;
+}
+.smallStats:hover .statsLink{
+  text-decoration: underline;
+}
+.bottomStats{
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1400px) {
+  .headerStats{
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+  }
+}
+
+@media (max-width: 1000px) {
+.headerStats {
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  
+}
+.smallStats {
+  width: 100%;
+  margin-bottom: 1em;
+  width: 85%;
+}
+}
+
+@media (max-width: 575px) {
+.statsTitle {
+  font-size: 14px;
+}
+.statsAmount {
+  font-size: 20px;
+}
+.statsLink {
+  font-size: 12px;
+}
+}
+/* End of home */
+/* Tables */
+.basic-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.basic-heading {
+  padding: 1em 1.5em;
+  text-align: left;
+  font-size: 1em;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(80, 81, 79, 0.2);
+  border-bottom-style: solid;
+  color: var(--primaryColor);
+}
+
+.basic-body {
+  padding: 1em 1.5em;
+  text-align: left;
+  color: var(--primaryColor);
+  font-size: 1em;
+}
+
+.basic-row {
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(80, 81, 79, 0.1);
+  border-bottom-style: solid;
+  text-align: left;
+  color: var(--primaryColor);
+  font-size: 0.9em;
+  max-height: 3.5em;
+}
+
+.basic-row:last-child {
+  border-bottom-width: 0em;
+}
+
+.basic-row:hover {
+  background-color: rgba(80, 81, 79, 0.2);
+  cursor: pointer;
+}
+
+.no-hover:hover {
+  background-color: rgba(80, 81, 79, 0);
+  cursor: default;
+}
+
+.action-button {
+  text-align: left;
+  font-size: 1em;
+  color: #fff;
+  font-weight: 600;
+  background-color: #ff686b;
+  border: 3px solid #ff686b;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  color: #ff686b;
+  background-color: rgba(80, 81, 79, 0.01);
+}
+
+.pagination {
+  position: absolute;
+  bottom: 0;
+  left: 50;
+  right: 0;
+  width: 100%;
+  text-align: end;
+  padding-top: 1%;
+  padding-right: 5%;
+}
+
+.paginationButton {
+  background-color: rgba(80, 81, 79, 0.1);
+  color: rgb(80, 81, 79);
+  border: 0;
+  border-radius: 3px;
+  padding: 0.5%;
+  cursor: pointer;
+}
+
+.paginationButton:hover {
+  background-color: rgba(80, 81, 79, 0.2);
+}
+
+.paginationText {
+  color: rgb(80, 81, 79);
+}
+
+.error {
+  position: absolute;
+  width: 78.5%;
+  height: 11em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Media query for screens with a maximum width of 768px */
+@media (max-width: 800px) {
+  .basic-heading {
+    font-size: 0.9em;
+  }
+
+  .basic-body {
+    font-size: 0.8em;
+  }
+
+  .basic-row {
+    font-size: 0.7em;
+  }
+
+  .pagination {
+    padding-right: 2%;
+  }
+
+  .paginationButton {
+    padding: 0.3%;
+  }
+
+  .error {
+    width: 100%;
+    height: auto;
+  }
+}
+/* end of tables */
+/* Room maintenance requests */
+.request-box{
+  width: 100%;
+  background-color: rgba(172, 160, 160, 0.3);
+  border-radius: 10px;
+
+  height: 30em;
+
+  margin-bottom: 2em;
+}
+.request-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7em 1em;
+  
+}
+.item-redirect{
+  color: rgb(80,81,79);
+  font-weight: 500;
+  font-size: 13px;
+  text-decoration: underline;
+}
+.title{
+  color: var(--primaryColor);
+  font-weight: 700;
+  font-size: 16px;   
+}
+
+@media screen and (max-width: 1000px) {
+  .request-header{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .item-redirect{
+    margin-top: 0.5em;
+  }
+  .request-box{
+    overflow-x:scroll;
+  }
+}
+
+/* End of room maintenance */

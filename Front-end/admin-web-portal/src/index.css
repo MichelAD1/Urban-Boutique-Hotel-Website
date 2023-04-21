@@ -863,15 +863,15 @@ h6 {
 }
 
 @media (max-width: 575px) {
-.statsTitle {
-  font-size: 14px;
-}
-.statsAmount {
-  font-size: 20px;
-}
-.statsLink {
-  font-size: 12px;
-}
+  .statsTitle {
+    font-size: 14px;
+  }
+  .statsAmount {
+    font-size: 20px;
+  }
+  .statsLink {
+    font-size: 12px;
+  }
 }
 /* End of home */
 /* Tables */
@@ -975,7 +975,6 @@ h6 {
   align-items: center;
 }
 
-/* Media query for screens with a maximum width of 768px */
 @media (max-width: 800px) {
   .basic-heading {
     font-size: 0.9em;
@@ -1043,6 +1042,15 @@ h6 {
   }
   .request-box{
     overflow-x:scroll;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .item-redirect{
+    font-size: 12px;
+  }
+  .title{
+    font-size: 14px;
   }
 }
 

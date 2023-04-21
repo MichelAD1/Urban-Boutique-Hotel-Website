@@ -204,8 +204,6 @@ const Requests = () => {
 		},
 	);
 
-	console.log(data);
-
 	function search(items) {
 		return items.filter(
 			(item) =>

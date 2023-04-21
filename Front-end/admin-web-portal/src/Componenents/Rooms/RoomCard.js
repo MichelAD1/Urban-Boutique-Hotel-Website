@@ -5,29 +5,32 @@ import { useNavigate } from "react-router-dom";
 // Images
 
 function RoomCard({ data }) {
-  const navigate = useNavigate();
-  const showPopup = (item) => {
-    navigate("/room/profile", { state: { data: item } });
-  };
-  return (
-    <div className="link" onClick={() => showPopup(data)}>
-      <div className="room-logo">
-        <img className="image" src={data.logo_url} alt="Room logo" />
-      </div>
-      <div className="name">{data.name}</div>
-      <div className="room-details">
-        <p className="paragraph">
-          <b>Phone number:</b> {data.number}
-        </p>
-        <p className="paragraph">
-          <b>Email:</b> {data.email}
-        </p>
-        <p className="paragraph">
-          <b>Location:</b> {data.location}
-        </p>
-      </div>
-    </div>
-  );
+	const navigate = useNavigate();
+	const showPopup = (item) => {
+		navigate("/room/profile", { state: { data: item } });
+	};
+	console.log(data);
+	return (
+		<div className='link' onClick={() => showPopup(data)}>
+			<div className='room-logo'>
+				<img className='image' src={data.images[0]} alt='Room image' />
+			</div>
+			<div className='name'>{data.name}</div>
+			<div className='room-details'>
+				<p className='paragraph'>
+					<b>Size:</b> {data.size}
+				</p>
+				<p className='paragraph'>
+					<b>Price:</b> {data.price}
+				</p>
+				{data.old_price && (
+					<p className='paragraph'>
+						<b>New Price</b> {data.old_price}
+					</p>
+				)}
+			</div>
+		</div>
+	);
 }
 
 export default RoomCard;

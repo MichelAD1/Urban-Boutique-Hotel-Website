@@ -6,6 +6,10 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useEffect } from "react";
+
+// logo
+import logo from "../../assets/logo.png";
 
 const theme = createTheme({
 	palette: {
@@ -35,8 +39,7 @@ const Login = () => {
 						flexDirection: "column",
 						alignItems: "center",
 					}}>
-					{/* Add hotel logo here */}
-					<h1>Log in</h1>
+					<img src={logo} alt='' />
 					<form onSubmit={handleSubmit}>
 						<TextField
 							margin='normal'

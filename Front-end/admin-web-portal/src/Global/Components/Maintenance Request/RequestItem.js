@@ -1,65 +1,133 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const RequestItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
 
-	console.log(data);
+	const [reqData, setReqData] = useState([]);
 
 	const [name, setName] = useState(data.name);
-	const [email, setEmail] = useState(data.email);
-	const [phoneNumber, setPhoneNumber] = useState(data.phone);
-	const [business, setBusiness] = useState(data.business);
+	const [res, setRes] = useState(data.res);
+	const [room, setRoom] = useState(data.room);
 	const [status, setStatus] = useState(data.status);
 	const [employee, setEmployee] = useState(data.employee);
 
+	const [edit, setEdit] = useState(false);
+	const [selected, setSelected] = useState(false);
+
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		setData(data);
-	}, [data]);
+	}, []);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log("Submitted");
+	};
+
+	const handleCancel = () => {
+		setEdit(false);
+		setSelected(false);
+	};
+
+	const openEdit = () => {
+		setEdit(true);
+	};
+
 	return (
 		<div className='container'>
-			<div className='edit-user'>
-				<div className='info-box'>
+			<form className='edit-container' onSubmit={handleSubmit}>
+				<div className='edit-item'>
+					<h2>Request #{data.id}</h2>
+					{data.employee !== null && !edit && (
+						<button type='button' className='button' onClick={openEdit}>
+							Edit
+						</button>
+					)}
+					{(selected || edit) && (
+						<>
+							<button type='submit' className='save-button'>
+								Save
+							</button>
+							<button type='button' className='button' onClick={handleCancel}>
+								Cancel
+							</button>
+						</>
+					)}
+				</div>
+				<div className='edit-item'>
 					<div className='edit-info'>
-						<div className='labels-section'>
-							<div className='label-text'>Name: </div>
-							<div className='label-text'>Email: </div>
-							<div className='label-text'>Phone number: </div>
-							<div className='label-text'>Business name: </div>
-							<div className='label-text'>Status: </div>
-							<div className='label-text'>Assign employee: </div>
+						<div>
+							<label>Name</label>
 						</div>
-						<div className='inputs-section'>
-							<div type='text' className='info-text'>
-								{name}
-							</div>
-							<div type='text' className='info-text'>
-								{email}
-							</div>
-							<div type='text' className='info-text'>
-								{phoneNumber}
-							</div>
-							<div type='text' className='info-text'>
-								{business}
-							</div>
-							<div type='text' className='info-text'>
-								{status}
-							</div>
-							<div type='text' className='info-text'>
-								<select>
-									<option value=''>Employees</option>
-									<option></option>
-								</select>
-							</div>
+						<div>
+							<p>{name}</p>
 						</div>
-					</div>
-					<div className='action-buttons'>
-						<button className='action-bt save'>Save</button>
-						<button className='action-bt delete'>Reject</button>
 					</div>
 				</div>
-			</div>
+				<div className='edit-item'>
+					<div className='edit-info'>
+						<div>
+							<label>Reservation</label>
+						</div>
+						<div>
+							<p>#{res}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info'>
+						<div>
+							<label>Room</label>
+						</div>
+						<div>
+							<p>#{room}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info'>
+						<div>
+							<label>Status</label>
+						</div>
+						<div>
+							<p>{status}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info'>
+						<div>
+							<label>Employee</label>
+						</div>
+						{data.employee && !edit && (
+							<div>
+								<p>{employee}</p>
+							</div>
+						)}
+						{(!data.employee || edit) && (
+							<div>
+								<select
+									className='input-dropdown'
+									value={employee}
+									onChange={(e) => {
+										setEmployee(e.target.value);
+										setSelected(true);
+									}}>
+									<option value='' hidden>
+										Select Employee
+									</option>
+									<option value='1'>Employee 1</option>
+									<option value='2'>Employee 2</option>
+									<option value='3'>Employee 3</option>
+								</select>
+							</div>
+						)}
+					</div>
+				</div>
+			</form>
 		</div>
 	);
 };

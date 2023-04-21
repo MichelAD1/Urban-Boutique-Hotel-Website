@@ -225,47 +225,86 @@ h6 {
 .delete:hover {
   background-color: #f69e9e;
 }
-
-.info-box {
-  width: 35em;
-
+.edit-container {
   display: flex;
-  flex-direction: column;
-
-  padding: 1em;
-}
-.edit-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-}
-.budget-section {
-  display: flex;
-  width: 100%;
-  height: 4em;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-}
-.budget-text {
-  font-size: 1em;
-  font-weight: 700;
-  color: rgb(80, 81, 79);
+
+  width: 70%;
+
+  padding: 3em 2em;
 }
 
-.labels-section {
+.edit-container h2{
+  width: 100%;
+  margin: 0;
+}
+
+.edit-item{
+  width: 100%;
   display: flex;
-  width: 50%;
   flex-direction: row;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(42, 50, 73, 0.35);
+  padding: 1em 1em;
 }
 
-.label-text {
-  font-size: 0.5em;
-  font-weight: 700;
+.edit-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+
+.edit-info div{
+  width: 11em;
+}
+
+.input-dropdown {
+  border: 1px solid var(--primaryColor);
   color: var(--primaryColor);
-  margin-bottom: 1em;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+}
+
+.input-dropdown:focus {
+  outline: none;
+}
+
+.save-button{
+  background-color: var(--primaryColor);
+  color: #fff;
+
+  border: none;
+  border-radius: 0.2em;
+
+  padding: 0.6em 1.2em;
+
+  cursor: pointer;
+}
+
+.button{
+  background-color: #fff;
+  color: var(--secondaryColor);
+  border:none;
+  border-radius: 0.2em;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+  margin-left: 0.5em;
+}
+
+.button:hover{
+  background-color: rgba(172, 160, 160, 0.2);
+}
+
+.option-dropdown{
+  padding: 0.5em 1em;
+}
+
+.option-dropdown:hover{
+  background-color: rgba(80, 81, 79, 0.1);
 }
 
 .inputs-section {
@@ -282,17 +321,22 @@ h6 {
   margin-bottom: 0.95em;
 }
 
-.input-dropdown {
-  width: 20.75em;
-  font-size: 0.9em;
-  padding: 0.2em 0.3em;
-  margin-bottom: 0.95em;
-  border-radius: 3px;
-  border: 1px solid var(--primaryColor);
-}
-
 .input-box:focus {
   outline: none;
+}
+
+.budget-section {
+  display: flex;
+  width: 100%;
+  height: 4em;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.budget-text {
+  font-size: 1em;
+  font-weight: 700;
+  color: rgb(80, 81, 79);
 }
 
 /* *********************************** */
@@ -377,9 +421,6 @@ h6 {
   margin-top: 0em;
   margin-bottom: 1em;
   color: rgb(80, 81, 79);
-}
-.edit-info.packages {
-  width: 30em;
 }
 .label-text.options {
   width: 10em;
@@ -507,10 +548,6 @@ h6 {
     width: 25em;
   }
 
-  .edit-info.packages {
-    width: 25em;
-  }
-
   .label-text.options {
     width: 8em;
   }
@@ -550,10 +587,6 @@ h6 {
     width: 20em;
   }
 
-  .edit-info.packages {
-    width: 20em;
-  }
-
   .label-text.options {
     width: 6em;
   }
@@ -582,6 +615,8 @@ h6 {
   left: 0;
 
   z-index: 2;
+
+  background-color: #fff;
 }
 
 .logo {
@@ -863,15 +898,15 @@ h6 {
 }
 
 @media (max-width: 575px) {
-.statsTitle {
-  font-size: 14px;
-}
-.statsAmount {
-  font-size: 20px;
-}
-.statsLink {
-  font-size: 12px;
-}
+  .statsTitle {
+    font-size: 14px;
+  }
+  .statsAmount {
+    font-size: 20px;
+  }
+  .statsLink {
+    font-size: 12px;
+  }
 }
 /* End of home */
 /* Tables */
@@ -975,10 +1010,9 @@ h6 {
   align-items: center;
 }
 
-/* Media query for screens with a maximum width of 768px */
 @media (max-width: 800px) {
   .basic-heading {
-    font-size: 0.9em;
+    font-size: 0.8em;
   }
 
   .basic-body {
@@ -1004,6 +1038,15 @@ h6 {
 }
 /* end of tables */
 /* Room maintenance requests */
+.requests-container{
+  width: 100%;
+  height: 60em;
+}
+
+.requests-container h2{
+  padding: 1.5em 1em;
+  padding-bottom: 0;
+}
 .request-box{
   width: 100%;
   background-color: rgba(172, 160, 160, 0.3);
@@ -1043,6 +1086,23 @@ h6 {
   }
   .request-box{
     overflow-x:scroll;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .item-redirect{
+    font-size: 12px;
+  }
+  .title{
+    font-size: 14px;
+  }
+  .requests-container{
+    overflow-x: scroll;
+  }
+  .requests-container h2{
+    padding: 1.5em 1em;
+    padding-bottom: 0;
+    font-size: 18px;
   }
 }
 

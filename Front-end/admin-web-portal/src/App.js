@@ -17,7 +17,7 @@ import Finance from "./Componenents/Finance/Finance";
 import Rooms from "./Componenents/Rooms/Rooms";
 import RoomItem from "./Componenents/Rooms/RoomItem";
 import MaintenanceRequest from "./Global/Components/Maintenance Request/Requests";
-import RequestItem from "./Global/Components/Businesses Request/RequestItem";
+import RequestItem from "./Global/Components/Maintenance Request/RequestItem";
 import PrivateRoute from "./Routes/PrivateRoutes";
 
 ReactModal.setAppElement("#root");
@@ -117,7 +117,7 @@ function App() {
 					</Route>
 					<Route exact path='/' element={<PrivateRoute />}>
 						<Route
-							path='/businesses/requests/info'
+							path='/maintenance/requests/info'
 							element={
 								<>
 									<Navbar />

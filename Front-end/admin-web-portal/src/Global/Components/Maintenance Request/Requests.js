@@ -159,32 +159,8 @@ const Requests = () => {
 	}
 	return (
 		<div className='container'>
-			<div className='list-box'>
-				<div className='searchAndFilter'>
-					<div className='search-bar'>
-						<img src={search_icon} alt='' className='search-icon' />
-						<input
-							className='search-input'
-							type='text'
-							placeholder='Search'
-							onChange={(e) => setQuery(e.target.value)}
-						/>
-					</div>
-					<select
-						className='filterDropDown'
-						onChange={(e) => setFilter(e.target.value)}>
-						<option value=''>Filter by position</option>
-						{filter_items.map((item) => (
-							<option value={item.status} key={item.id}>
-								{item.status.charAt(0).toUpperCase() + item.status.slice(1)}{" "}
-								applications
-							</option>
-						))}
-					</select>
-					<div className='add-button'>
-						<img src={add_box} width='28px' height='28px' alt='' />
-					</div>
-				</div>
+			<div className='requests-container'>
+				<h2>Room maintenance requests</h2>
 				<BasicTable
 					reqData={search(data)}
 					columns={columns}

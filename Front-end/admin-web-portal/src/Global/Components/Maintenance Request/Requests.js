@@ -108,6 +108,48 @@ const Requests = () => {
 				room: "1578",
 				status: "pending",
 			},
+			{
+				id: 1,
+				name: "John Doe",
+				res: "11254",
+				room: "1578",
+				status: "pending",
+			},
+			{
+				id: 1,
+				name: "John Doe",
+				res: "11254",
+				room: "1578",
+				status: "pending",
+			},
+			{
+				id: 1,
+				name: "John Doe",
+				res: "11254",
+				room: "1578",
+				status: "pending",
+			},
+			{
+				id: 1,
+				name: "John Doe",
+				res: "11254",
+				room: "1578",
+				status: "pending",
+			},
+			{
+				id: 1,
+				name: "John Doe",
+				res: "11254",
+				room: "1578",
+				status: "pending",
+			},
+			{
+				id: 1,
+				name: "John Doe",
+				res: "11254",
+				room: "1578",
+				status: "pending",
+			},
 		]);
 	}, []);
 

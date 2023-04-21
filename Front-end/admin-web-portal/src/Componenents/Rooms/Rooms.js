@@ -49,7 +49,7 @@ function Rooms() {
 				images: [room1],
 				description:
 					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfase: false,
+				breakfast: false,
 				pets: true,
 			},
 			{
@@ -69,7 +69,7 @@ function Rooms() {
 				images: [room1],
 				description:
 					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfase: false,
+				breakfast: false,
 				pets: true,
 			},
 			{
@@ -89,7 +89,7 @@ function Rooms() {
 				images: [room1],
 				description:
 					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfase: false,
+				breakfast: false,
 				pets: true,
 			},
 			{
@@ -109,7 +109,7 @@ function Rooms() {
 				images: [room1],
 				description:
 					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfase: false,
+				breakfast: false,
 				pets: true,
 			},
 			{
@@ -129,7 +129,7 @@ function Rooms() {
 				images: [room1],
 				description:
 					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfase: false,
+				breakfast: false,
 				pets: true,
 			},
 		]);

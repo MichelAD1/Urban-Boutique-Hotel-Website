@@ -199,8 +199,6 @@ const RoomItem = () => {
 		setIsModalOpen(false);
 	};
 
-	console.log(isValid);
-
 	return (
 		<div className='container'>
 			<form

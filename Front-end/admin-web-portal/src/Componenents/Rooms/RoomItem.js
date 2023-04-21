@@ -13,6 +13,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import delete_icon from "../../assets/icons/cancel-icon.svg";
 import DeleteRoom from "../../api-client/Rooms/DeleteRoom";
 
+import dummy from "../../assets/dummy.png";
+
 const RoomItem = () => {
 	const loc = useLocation();
 	const navigate = useNavigate();
@@ -335,6 +337,17 @@ const RoomItem = () => {
 							</div>
 
 							<AiOutlinePlus className='add-button' />
+						</div>
+						<div className='gallery'>
+							<img className='gallery-images' src={dummy} />
+							<img className='gallery-images' src={dummy} />
+							<img className='gallery-images' src={dummy} />
+							<img className='gallery-images' src={dummy} />
+							<img className='gallery-images' src={dummy} />
+							<img className='gallery-images' src={dummy} />
+							<img className='gallery-images' src={dummy} />
+							<img className='gallery-images' src={dummy} />
+							<img className='gallery-images' src={dummy} />
 						</div>
 					</div>
 				</div>

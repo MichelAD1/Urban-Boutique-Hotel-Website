@@ -45,7 +45,7 @@ export default function PendingRequests() {
 		<div className='request-box'>
 			<div className='request-header'>
 				<div className='title'>Pending room maintanance requests</div>
-				<Link to='/businesses/requests' className='item-redirect'>
+				<Link to='/maintenance/requests' className='item-redirect'>
 					View All
 				</Link>
 			</div>

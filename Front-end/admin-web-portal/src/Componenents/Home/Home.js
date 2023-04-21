@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // used components
-import BusinessRequest from "../../Global/Components/Businesses Request/PendingRequests";
+import MaintenanceRequest from "../../Global/Components/Maintenance Request/PendingRequests";
 
 export default function Home() {
 	const [client_count, setClientsCount] = useState("");
@@ -50,7 +50,7 @@ export default function Home() {
 				</Link>
 			</div>
 			<div className='bottomStats'>
-				<BusinessRequest />
+				<MaintenanceRequest />
 			</div>
 		</div>
 	);

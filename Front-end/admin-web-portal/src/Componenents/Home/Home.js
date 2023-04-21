@@ -1,5 +1,3 @@
-import "./home-styles.css";
-import "../../Global/Styles/styles.css";
 import GetCounts from "../../api-client/Home/GetCounts";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -30,34 +28,26 @@ export default function Home() {
 	return (
 		<div className='container'>
 			<div className='headerStats'>
-				<div className='smallStats'>
+				<Link className='smallStats'>
 					<p className='statsTitle'>Monthly Revenue</p>
 					<p className='statsAmount'>USD 20K</p>
-					<p className='statsLink'>
-						<br />
-					</p>
-				</div>
-				<div className='smallStats'>
-					<p className='statsTitle'>Live Deals</p>
-					<p className='statsAmount'>{deal_count}</p>
-					<p className='statsLink'>
-						<br />
-					</p>
-				</div>
-				<div className='smallStats'>
+					<p className='statsLink'>View entire list</p>
+				</Link>
+				<Link className='smallStats'>
+					<p className='statsTitle'>Total reservations</p>
+					<p className='statsAmount'>1000</p>
+					<p className='statsLink'>View entire list</p>
+				</Link>
+				<Link to='/users' className='smallStats'>
 					<p className='statsTitle'>Total Customers</p>
-					<p className='statsAmount'>{client_count}</p>
-					<Link to='/users' className='statsLink'>
-						View entire list
-					</Link>
-				</div>
-				<div className='smallStats'>
-					<p className='statsTitle'>Total Partners</p>
-					<p className='statsAmount'>{business_count}</p>
-					<Link to='/businesses' className='statsLink'>
-						View entire list
-					</Link>
-				</div>
+					<p className='statsAmount'>2000</p>
+					<p className='statsLink'>View entire list</p>
+				</Link>
+				<Link to='/rooms' className='smallStats'>
+					<p className='statsTitle'>Total Rooms</p>
+					<p className='statsAmount'>500</p>
+					<p className='statsLink'>View entire list</p>
+				</Link>
 			</div>
 			<div className='bottomStats'>
 				<BusinessRequest />

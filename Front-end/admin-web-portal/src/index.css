@@ -273,10 +273,6 @@ h6 {
   outline: none;
 }
 
-.edit-button{
-
-}
-
 .save-button{
   background-color: var(--primaryColor);
   color: #fff;

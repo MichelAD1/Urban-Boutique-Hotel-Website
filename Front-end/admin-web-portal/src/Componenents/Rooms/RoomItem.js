@@ -339,15 +339,9 @@ const RoomItem = () => {
 							<AiOutlinePlus className='add-button' />
 						</div>
 						<div className='gallery'>
-							<img className='gallery-images' src={dummy} />
-							<img className='gallery-images' src={dummy} />
-							<img className='gallery-images' src={dummy} />
-							<img className='gallery-images' src={dummy} />
-							<img className='gallery-images' src={dummy} />
-							<img className='gallery-images' src={dummy} />
-							<img className='gallery-images' src={dummy} />
-							<img className='gallery-images' src={dummy} />
-							<img className='gallery-images' src={dummy} />
+							{images.map((image) => {
+								return <img className='gallery-images' src={image} />;
+							})}
 						</div>
 					</div>
 				</div>

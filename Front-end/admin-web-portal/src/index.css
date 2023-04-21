@@ -241,8 +241,17 @@ h6 {
 }
 
 .edit-container-large{
-  width: 100%;
+  width: 50%;
   padding: 0;
+}
+
+@media screen and (max-width: 1700px) {
+  .edit-container {
+    width: 100%;
+  }
+  .edit-container-large{
+    width: 100%;
+  }
 }
 
 .edit-container h2{
@@ -269,7 +278,7 @@ h6 {
 }
 
 .info-large{
-  width: 60%;
+  width:80%;
 }
 
 .edit-info div{
@@ -1161,13 +1170,15 @@ h6 {
   display:flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   padding: 3em 2em;
   width: 100%;
 }
 
 
 .rooms-container{
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -1230,12 +1241,18 @@ h6 {
 /*              Room Item                 */
 /* ************************************** */
 .gallery-container{
-  width: 100%;
+  width: 40em;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+@media screen and (max-width: 1700px) {
+  .gallery-container{
+    width: 100%;
+    height: 0;
+  }
 }
 .gallery-box {
   width: 100%;
@@ -1268,14 +1285,15 @@ h6 {
 
 .gallery {
   width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-wrap: wrap;
   overflow: hidden;
-  height: 100%;
+  padding: 1em;
 }
 
 .gallery-images {

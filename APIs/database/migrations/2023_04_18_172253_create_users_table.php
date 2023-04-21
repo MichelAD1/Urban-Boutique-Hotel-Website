@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer("type"); //0 for customers and 1 for admins
             $table->date("dob");
             $table->string("gender");
+            $table->integer("banned");
             $table->timestamps();
         });
     }

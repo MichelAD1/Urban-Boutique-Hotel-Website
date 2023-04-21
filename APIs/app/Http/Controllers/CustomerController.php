@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -56,6 +57,17 @@ class CustomerController extends Controller
             'reservation_end'=>$request->reservation_end
         ]);
         return "success";
+    }
+    public function banCustomer($customerid){
+        $user=Auth::user();
+        $employee = Admin::where("user_id",$user->id)->first();
+        if($employee->position=="admin"){
+            $target=User::find($customerid);
+            $target->banned=1;
+            $target->save();
+            return "sucess";
+        }
+        return "Failed";
     }
 
 

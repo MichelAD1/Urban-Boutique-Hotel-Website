@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Admin;
 use Closure;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAdmin
+class CheckBanned
 {
     /**
      * Handle an incoming request.
@@ -17,25 +17,23 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user=Auth::user();
 
-        if($user->type == 1){
-            $employee = Admin::where('user_id',$user->id)->first();
-            if($employee->position=="admin"){
+        try {
+            $user = Auth::user();
+            if($user->banned==0){
                 return $next($request);
             }else{
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Not an Admin',
+                    'message' => 'User is banned',
                 ], 401);
             }
-
-        }else{
+          } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Not an Employee',
+                'message' => 'There is no Logged In User',
             ], 401);
-        }
+          }
 
     }
 }

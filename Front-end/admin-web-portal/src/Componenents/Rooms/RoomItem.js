@@ -10,7 +10,6 @@ import GetOptions from "../../api-client/Options/GetOptions";
 import add from "../../assets/icons/add-cp.svg";
 
 // Images
-import default_profile from "../../assets/default-profile.png";
 import delete_icon from "../../assets/icons/cancel-icon.svg";
 import DeleteRoom from "../../api-client/Rooms/DeleteRoom";
 
@@ -27,11 +26,19 @@ const RoomItem = () => {
 	const [price, setPrice] = useState(0);
 	const [oldPrice, setOldPrice] = useState(0);
 	const [size, setSize] = useState(0);
+	const [guests, setGuests] = useState(0);
+	const [type, setType] = useState("");
 	const [minibar, setMinibar] = useState(false);
+	const [shower, setShower] = useState(false);
+	const [towels, setTowels] = useState(false);
+	const [tv, setTv] = useState(false);
+	const [wifi, setWifi] = useState(false);
+	const [desk, setDesk] = useState(false);
+	const [breakfast, setBreakfast] = useState(false);
+	const [pets, setPets] = useState(false);
 
 	const [err, setErr] = useState("");
 
-	const [profile, setProfile] = useState(default_profile);
 	const [images, setImages] = useState([]);
 
 	const [imagesChanged, setImagesChanged] = useState(false);
@@ -42,6 +49,20 @@ const RoomItem = () => {
 		if (isValid) {
 			setName(isValid.data.name);
 			setDescription(isValid.data.description);
+			setImages(isValid.data.images);
+			setPrice(isValid.data.price);
+			setOldPrice(isValid.data.old_price);
+			setSize(isValid.data.size);
+			setMinibar(isValid.data.minibar);
+			setGuests(isValid.data.guests);
+			setType(isValid.data.type);
+			setShower(isValid.data.shower);
+			setTowels(isValid.data.towels);
+			setTv(isValid.data.tv);
+			setWifi(isValid.data.wifi);
+			setDesk(isValid.data.desk);
+			setBreakfast(isValid.data.breakfast);
+			setPets(isValid.data.pets);
 		}
 	}, []);
 
@@ -77,9 +98,7 @@ const RoomItem = () => {
 	};
 
 	const checkChange = () => {
-		return !(
-			name === isValid.data.name &&
-		);
+		return !(name === isValid.data.name);
 	};
 
 	const mergeJson = (obj1, obj2, obj3) => {
@@ -132,7 +151,7 @@ const RoomItem = () => {
 		// 		}
 		// 	});
 		// }
-    console.log("submit")
+		console.log("submit");
 	};
 
 	const handleEdit = (e) => {
@@ -149,7 +168,7 @@ const RoomItem = () => {
 		// 	navigate("/room/profile", { state: { data: res } });
 		// 	window.location.reload();
 		// });
-    console.log("Edit")
+		console.log("Edit");
 	};
 
 	// Modal

@@ -8,6 +8,7 @@ import EditRoom from "../../api-client/Rooms/EditRoom";
 import GetOptions from "../../api-client/Options/GetOptions";
 //Icons
 import { AiOutlinePlus } from "react-icons/ai";
+import { RiDeleteBin2Fill } from "react-icons/ri";
 
 // Images
 import delete_icon from "../../assets/icons/cancel-icon.svg";
@@ -335,12 +336,28 @@ const RoomItem = () => {
 								<h2>Gallery</h2>
 								<p>Add up to 9 images</p>
 							</div>
-
-							<AiOutlinePlus className='add-button' />
+							<div>
+								<label htmlFor='images-upload'>
+									<AiOutlinePlus className='add-button' />
+								</label>
+								<input
+									type='file'
+									multiple
+									onChange={(e) => addImage(e)}
+									id='images-upload'
+									name='images-upload'
+									className='upload-image'
+								/>
+							</div>
 						</div>
 						<div className='gallery'>
 							{images.map((image) => {
-								return <img className='gallery-images' src={image} />;
+								return (
+									<div>
+										<img className='gallery-images' src={image} />
+										<RiDeleteBin2Fill className='delete-icon' />
+									</div>
+								);
 							})}
 						</div>
 					</div>

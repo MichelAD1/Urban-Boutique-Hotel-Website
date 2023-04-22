@@ -1294,7 +1294,11 @@ h6 {
 /* Employees */
 .employees-container{
   width: 100%;
-  height: 100%;
-  overflow-x: scroll;
+  height: 52em;
+}
+@media screen and (max-width: 1000px) {
+  .employees-container{
+    overflow-x: scroll;
+  }
 }
 /* End of employees */

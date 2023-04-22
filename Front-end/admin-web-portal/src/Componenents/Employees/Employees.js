@@ -154,7 +154,6 @@ export default function Employees() {
 	// ).sort();
 	return (
 		<div className='container'>
-			<h2>Staff</h2>
 			<div className='searchAndFilter'>
 				<div className='search-bar'>
 					<img src={search_icon} alt='' className='search-icon' />

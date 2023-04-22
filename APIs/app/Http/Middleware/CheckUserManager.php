@@ -21,7 +21,7 @@ class CheckUserManager
 
         if($user->type == 1){
             $employee = Staff::where('user_id',$user->id)->first();
-            if($employee->position==3){
+            if($employee->position==3 || $employee->position==1){
                 return $next($request);
             }else{
                 return response()->json([

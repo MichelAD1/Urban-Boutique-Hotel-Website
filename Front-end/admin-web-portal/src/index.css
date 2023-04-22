@@ -180,7 +180,7 @@ h6 {
 }
 
 .add-button {
-  font-size: 48px;
+  font-size: 38px;
   color: var(--primaryColor);
   border-radius: 50%;
   cursor: pointer;
@@ -327,6 +327,8 @@ h6 {
 
   padding: 0.6em 1.2em;
 
+  margin-left: 1em;
+
   cursor: pointer;
 }
 
@@ -450,60 +452,40 @@ h6 {
   font-size: 1em;
   color: var(--primaryColor);
 }
-.custom-modal {
-  display: flex;
-  align-self: center;
-  justify-content: center;
-}
-.custom-modal.packages {
-  margin-top: 10em;
-}
-.custom-modal.packages > div {
+
+.custom-modal div {
   width: 30em;
+  height: 15em;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 0.5em;
+  border: 0.1px solid rgb(215, 215, 215);
+  z-index: 100;
 }
+
 .custom-modal h1 {
   width: 10em;
   font-size: 30px;
   margin-top: 0em;
   margin-bottom: 1em;
-  color: rgb(80, 81, 79);
-}
-.label-text.options {
-  width: 10em;
-}
-.label-text.options.category {
-  width: 3em;
+  color: --var(primaryColor);
 }
 
-.custom-modal > div {
-  width: 100%;
-  /* background-color: rgb(255, 255, 255); */
-  padding: 20px;
-  border-radius: 0.5em;
-  border: 0.1px solid rgb(215, 215, 215);
-}
 .custom-modal p {
-  padding-left: 1%;
-  padding-bottom: 5%;
-  font-size: 14px;
+  font-size: 15px;
   width: 100%;
+  margin-bottom: 1em;
+  color: var(--primaryColor)
 }
-.custom-modal h1 {
-  width: 10em;
-  margin-top: 0em;
-  color: rgb(80, 81, 79);
-}
+
 .custom-modal button {
-  background-color: #f08080;
+  background-color: var(--secondaryColor);
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   margin-right: 10px;
-}
-.custom-modal button:hover {
-  background-color: #f69e9e;
 }
 .seperator {
   padding: 5%;
@@ -590,10 +572,6 @@ h6 {
     width: 75em;
   }
 
-  .custom-modal.packages > div {
-    width: 25em;
-  }
-
   .label-text.options {
     width: 8em;
   }
@@ -627,10 +605,6 @@ h6 {
 
   .full {
     width: 100%;
-  }
-
-  .custom-modal.packages > div {
-    width: 20em;
   }
 
   .label-text.options {
@@ -1138,17 +1112,6 @@ h6 {
 
 /* End of room maintenance */
 /* Rooms */
-.add-icon {
-  width: 28px;
-  height: 28px;
-  padding: 0.4em;
-  cursor: pointer;
-}
-
-.add-icon:hover {
-  background-color: rgba(80, 81, 79, 0.2);
-  border-radius: 10em;
-}
 
 .room-edit-container{
   display:flex;

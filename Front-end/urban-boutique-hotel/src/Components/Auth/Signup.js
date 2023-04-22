@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // MUI
 import countries from "../../Global/Components/CountryCodes";
@@ -9,6 +10,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
+
+//APIs
+import Register from "../../api-client/Auth/Register";
 
 const theme = createTheme({
   palette: {
@@ -21,6 +25,8 @@ const theme = createTheme({
 });
 
 const Signup = () => {
+  const navigation = useNavigate();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,23 +34,68 @@ const Signup = () => {
   const [phone_number, setPhoneNumber] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
+  const [err, setErr] = useState("");
 
-  const navigation = useNavigate();
+  //Validators
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+  const validateUsername = (username) => {
+    return username.length >= 25;
+  };
+  const validateDate = (dob) => {
+    return dob.length === 0;
+  };
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    // Do something with the form data
-    console.log({
-      username,
-      email,
-      password,
-      countryCode,
-      phone_number,
-      dob,
-      gender,
+    setErr("");
+    if (!validateEmail(email)) {
+      setErr("Please enter a valid email address");
+      return;
+    }
+    if (!validatePassword(password)) {
+      setErr("Please enter a password with at least 8 characters");
+      return;
+    }
+    if (!validateUsername(username)) {
+      setErr("Please enter a username that is not too long");
+      return;
+    }
+    const parsedDate = new Date(dob);
+    const year = parsedDate.getFullYear();
+    const month =
+      parsedDate.getMonth() + 1 < 10
+        ? `0${parsedDate.getMonth() + 1}`
+        : parsedDate.getMonth() + 1;
+    const day =
+      parsedDate.getDate() < 10
+        ? `0${parsedDate.getDate()}`
+        : parsedDate.getDate();
+    const formattedDate = `${year}/${month}/${day}`;
+    setDob(new Date(formattedDate));
+
+    const data = { username, email, password, gender };
+    let response = Register(data);
+    response.then((res) => {
+      if (res.data.status === "error") {
+        setErr("Wrong credentials, Try again");
+      } else {
+        let token = res.data.authorisation.token;
+        localStorage.setItem("token", "Bearer " + token);
+        localStorage.setItem(
+          "username",
+          JSON.stringify(res.data.user.username)
+        );
+        axios.defaults.headers.common["Authorization"] = "Bearer" + token;
+        navigation("/");
+      }
     });
-    navigation("/");
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>

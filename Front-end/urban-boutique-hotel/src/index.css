@@ -2498,11 +2498,17 @@ h6 {
   margin-left: 0.5em;
   border-radius: 0.5em;
 }
+
 .account-input:focus {
   outline: none;
   border: 1px solid var(--secondaryColor);
 }
 .info-item {
   width: 100%;
+}
+.info-item.phone {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 /* end of profile */

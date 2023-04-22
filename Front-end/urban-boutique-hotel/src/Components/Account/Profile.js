@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 // Components
 import Footer from "../../Global/Components/Footer";
+import countries from "../../Global/Components/CountryCodes";
 
 //APIs
 import GetProfile from "../../api-client/Account/GetProfile";
@@ -14,13 +15,14 @@ const Profile = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phone_number, setPhoneNumber] = useState("");
+  const [countryCode, setCountryCode] = useState("");
+  const [tmp_number, setTmpNumber] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
 
   const [edit, setEdit] = useState(false);
   useEffect(() => {
     let user = GetProfile();
-    console.log("Request");
     user
       .then((res) => {
         setUsername(res.user.username);
@@ -37,6 +39,12 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
+    if (phone_number) {
+      setCountryCode(phone_number.split(" ")[0]);
+      setTmpNumber(phone_number.split(" ")[1]);
+    }
+  }, [edit, phone_number]);
+  useEffect(() => {
     handleCancel();
   }, [user, user_details]);
 
@@ -52,6 +60,7 @@ const Profile = () => {
     setGender(user.gender);
   };
   const handleSubmit = () => {
+    console.log(countryCode);
     setEdit(console.log("Submitted"));
   };
   function formatDate(dateString) {
@@ -150,13 +159,26 @@ const Profile = () => {
                 <label>Phone number</label>
               </div>
               {edit && (
-                <div className="info-item">
+                <div className="info-item phone">
+                  <select
+                    className="account-input code"
+                    value={countryCode}
+                    onChange={(e) => {
+                      setCountryCode(e.target.value);
+                    }}
+                  >
+                    {countries.map((country) => (
+                      <option key={country.name} value={country.dial_code}>
+                        {country.dial_code} ({country.name})
+                      </option>
+                    ))}
+                  </select>
                   <input
                     type="text"
                     className="account-input"
-                    value={phone_number}
+                    value={tmp_number}
                     onChange={(e) => {
-                      setPhoneNumber(e.target.value);
+                      setTmpNumber(e.target.value);
                     }}
                   />
                 </div>
@@ -200,14 +222,25 @@ const Profile = () => {
               </div>
               {edit && (
                 <div className="info-item">
-                  <input
-                    type="text"
+                  <select
                     className="account-input"
                     value={gender}
                     onChange={(e) => {
                       setGender(e.target.value);
                     }}
-                  />
+                  >
+                    {gender === "Female" ? (
+                      <>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </>
+                    )}
+                  </select>
                 </div>
               )}
               {!edit && (

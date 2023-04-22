@@ -1291,3 +1291,10 @@ h6 {
 }
 
 /* End of Rooms */
+/* Employees */
+.employees-container{
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+}
+/* End of employees */

@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ReactModal from "react-modal";
-import { useState, useEffect } from "react";
 
 // Components
 import Login from "./Components/Auth/Login";
@@ -18,6 +17,8 @@ import Navbar from "./Components/Navbar/Navbar";
 import Account from "./Components/Account/Account";
 import AccountNav from "./Components/Navbar/AccountNav";
 
+import PrivateRoute from "./Routes/PrivateRoute";
+
 import Profile from "./Components/Account/Profile";
 import Preferences from "./Components/Account/Preferences";
 import Security from "./Components/Account/Security";
@@ -34,7 +35,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/reset" element={<ForgotPassword />} />
-
           <Route
             path="/"
             element={
@@ -64,15 +64,17 @@ function App() {
               </>
             }
           />
-          <Route
-            path="/rooms/booking"
-            element={
-              <>
-                <ScrollToTop />
-                <Book />
-              </>
-            }
-          />
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              path="/rooms/booking"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Book />
+                </>
+              }
+            />
+          </Route>
           <Route
             path="/services"
             element={
@@ -113,46 +115,54 @@ function App() {
               </>
             }
           />
-          <Route
-            path="/account"
-            element={
-              <>
-                <ScrollToTop />
-                <AccountNav />
-                <Account />
-              </>
-            }
-          />
-          <Route
-            path="/account/profile"
-            element={
-              <>
-                <ScrollToTop />
-                <AccountNav />
-                <Profile />
-              </>
-            }
-          />
-          <Route
-            path="/account/preferences"
-            element={
-              <>
-                <ScrollToTop />
-                <AccountNav />
-                <Preferences />
-              </>
-            }
-          />
-          <Route
-            path="/account/security"
-            element={
-              <>
-                <ScrollToTop />
-                <AccountNav />
-                <Security />
-              </>
-            }
-          />
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              path="/account"
+              element={
+                <>
+                  <ScrollToTop />
+                  <AccountNav />
+                  <Account />
+                </>
+              }
+            />
+          </Route>
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              path="/account/profile"
+              element={
+                <>
+                  <ScrollToTop />
+                  <AccountNav />
+                  <Profile />
+                </>
+              }
+            />
+          </Route>
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              path="/account/preferences"
+              element={
+                <>
+                  <ScrollToTop />
+                  <AccountNav />
+                  <Preferences />
+                </>
+              }
+            />
+          </Route>
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              path="/account/security"
+              element={
+                <>
+                  <ScrollToTop />
+                  <AccountNav />
+                  <Security />
+                </>
+              }
+            />
+          </Route>
           <Route
             path="*"
             element={

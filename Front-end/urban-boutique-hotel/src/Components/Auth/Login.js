@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // MUI
 import CssBaseline from "@mui/material/CssBaseline";
@@ -58,7 +59,10 @@ const Login = () => {
       if (res.data.status === "error") {
         setErr("Wrong credentials, Try again");
       } else {
-        console.log(res.data.authorisation.token);
+        let token = res.data.authorisation.token;
+        localStorage.setItem("token", "Bearer " + token);
+        axios.defaults.headers.common["Authorization"] = "Bearer" + token;
+        navigation("/");
       }
     });
   };

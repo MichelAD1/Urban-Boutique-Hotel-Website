@@ -18,7 +18,6 @@ const EmployeeItem = () => {
 	const [username, setUsername] = useState("");
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-	const [phoneNumber, setPhoneNumber] = useState("");
 	const [dob, setDob] = useState(new Date());
 	const [gender, setGender] = useState("Male");
 	const [position, setPosition] = useState("");
@@ -61,21 +60,31 @@ const EmployeeItem = () => {
 	const formattedDate = () => {
 		const parsedDate = new Date(isValid.data.dob);
 		const year = parsedDate.getFullYear();
-
 		const month =
 			parsedDate.getMonth() + 1 < 10
 				? `0${parsedDate.getMonth() + 1}`
 				: parsedDate.getMonth() + 1;
-
 		const day =
 			parsedDate.getDate() < 10
 				? `0${parsedDate.getDate()}`
 				: parsedDate.getDate();
+		const formattedDate = `${year}-${month}-${day}`;
+		return formattedDate;
+	};
 
-		const formattedDate = `${year}/${month}/${day}`;
-
-		const new_date = new Date(formattedDate);
-		return new_date;
+	const dateChange = (setDob) => {
+		const parsedDate = new Date(dob);
+		const year = parsedDate.getFullYear();
+		const month =
+			parsedDate.getMonth() + 1 < 10
+				? `0${parsedDate.getMonth() + 1}`
+				: parsedDate.getMonth() + 1;
+		const day =
+			parsedDate.getDate() < 10
+				? `0${parsedDate.getDate()}`
+				: parsedDate.getDate();
+		const formattedDate = `${month}/${day}/${year}`;
+		return formattedDate;
 	};
 
 	const checkChange = () => {
@@ -83,8 +92,7 @@ const EmployeeItem = () => {
 			username === isValid.data.username &&
 			name === isValid.data.full_name &&
 			email === isValid.data.email &&
-			phoneNumber === isValid.data.number &&
-			checkDatesAreEqual() &&
+			// checkDatesAreEqual() &&
 			gender === isValid.data.gender &&
 			position === isValid.data.position &&
 			password === ""
@@ -102,9 +110,6 @@ const EmployeeItem = () => {
 		}
 		if (email !== isValid.data.email) {
 			requestData.append("email", email);
-		}
-		if (phoneNumber !== isValid.data.number) {
-			requestData.append("number", phoneNumber);
 		}
 		if (gender !== isValid.data.gender) {
 			requestData.append("gender", gender);
@@ -161,8 +166,7 @@ const EmployeeItem = () => {
 			setUsername(isValid.data.username);
 			setName(isValid.data.full_name);
 			setEmail(isValid.data.email);
-			setDob(formattedDate());
-			setPhoneNumber(isValid.data.number);
+			// setDob(formattedDate());
 			setGender(isValid.data.gender);
 			setPosition(isValid.data.position);
 			setAuth(isValid.data.authorization);
@@ -181,7 +185,6 @@ const EmployeeItem = () => {
 		// 		email === "" ||
 		// 		password === "" ||
 		// 		name === "" ||
-		// 		phoneNumber === "" ||
 		// 		dob === "" ||
 		// 		position === "" ||
 		// 		gender === ""
@@ -197,7 +200,6 @@ const EmployeeItem = () => {
 		// 			email,
 		// 			password,
 		// 			name,
-		// 			phoneNumber,
 		// 			dob,
 		// 			position,
 		// 			gender,
@@ -351,28 +353,10 @@ const EmployeeItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info'>
 						<div>
-							<label>Phone number</label>
-						</div>
-						<div>
-							{!edit && <p>{phoneNumber}</p>}
-							{edit && (
-								<input
-									type='text'
-									value={phoneNumber}
-									className='input-box'
-									onChange={(e) => setPhoneNumber(e.target.value)}
-								/>
-							)}
-						</div>
-					</div>
-				</div>
-				{/* <div className='edit-item'>
-					<div className='edit-info'>
-						<div>
 							<label>Date of birth</label>
 						</div>
 						<div>
-							{!edit && <p>{dob}</p>}
+							{!edit && <p>{dateChange()}</p>}
 							{edit && (
 								<input
 									type='date'
@@ -383,7 +367,7 @@ const EmployeeItem = () => {
 							)}
 						</div>
 					</div>
-				</div> */}
+				</div>
 				<div className='edit-item'>
 					<div className='edit-info'>
 						<div>
@@ -449,14 +433,13 @@ const EmployeeItem = () => {
 						</div>
 					</div>
 				</div>
-				<div className='edit-item'>
-					<div className='edit-info'>
-						<div>
-							<label>Change Password</label>
-						</div>
-						<div>
-							{!edit && <p>{password}</p>}
-							{edit && (
+				{edit && (
+					<div className='edit-item'>
+						<div className='edit-info'>
+							<div>
+								<label>Change Password</label>
+							</div>
+							<div>
 								<input
 									type='password'
 									placeholder='*************'
@@ -464,10 +447,10 @@ const EmployeeItem = () => {
 									className='input-box'
 									onChange={(e) => setPassword(e.target.value)}
 								/>
-							)}
+							</div>
 						</div>
 					</div>
-				</div>
+				)}
 			</form>
 			<ReactModal
 				className='custom-modal'

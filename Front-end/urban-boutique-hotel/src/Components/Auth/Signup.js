@@ -31,7 +31,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [countryCode, setCountryCode] = useState("+1");
-  const [phone_number, setPhoneNumber] = useState("");
+  const [tmp_number, setTmpNumber] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [err, setErr] = useState("");
@@ -45,15 +45,63 @@ const Signup = () => {
     return password.length >= 8;
   };
   const validateUsername = (username) => {
-    return username.length >= 25;
+    return username.length <= 25 && username.length > 0;
   };
+
   const validateDate = (dob) => {
-    return dob.length === 0;
+    const ageLimit = 18;
+    const parsedDate = Date.parse(dob);
+    if (dob === "") {
+      return false;
+    }
+    // Check if input is a valid date string
+    if (isNaN(parsedDate)) {
+      return false;
+    }
+
+    const inputDate = new Date(parsedDate);
+
+    // Check if input date is in the future
+    if (inputDate.getTime() > Date.now()) {
+      return false;
+    }
+
+    const diff = Date.now() - inputDate.getTime();
+    const age = new Date(diff);
+
+    // Check if age is exactly 18 years old
+    if (age.getUTCFullYear() - 1970 === ageLimit) {
+      const birthYear = inputDate.getFullYear();
+      const todayYear = new Date().getFullYear();
+      const isLeapYear = new Date(todayYear, 1, 29).getMonth() === 1;
+
+      if (isLeapYear) {
+        // Leap year, so February 29th is valid
+        return inputDate.getMonth() === 1 && inputDate.getDate() === 29;
+      } else {
+        // Not a leap year, so February 28th is valid
+        return inputDate.getMonth() === 1 && inputDate.getDate() === 28;
+      }
+    }
+
+    return age.getUTCFullYear() - 1970 >= ageLimit;
+  };
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberPattern = /^\d{7,15}$/;
+    return phoneNumberPattern.test(phoneNumber);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setErr("");
+    if (!validateUsername(username)) {
+      if (username.length === 0) {
+        setErr("Username field required");
+      } else {
+        setErr("Please enter a username that is not too long");
+      }
+      return;
+    }
     if (!validateEmail(email)) {
       setErr("Please enter a valid email address");
       return;
@@ -62,28 +110,34 @@ const Signup = () => {
       setErr("Please enter a password with at least 8 characters");
       return;
     }
-    if (!validateUsername(username)) {
-      setErr("Please enter a username that is not too long");
+    if (!validatePhoneNumber(tmp_number)) {
+      setErr("Please enter a valid phone number");
       return;
     }
-    const parsedDate = new Date(dob);
-    const year = parsedDate.getFullYear();
-    const month =
-      parsedDate.getMonth() + 1 < 10
-        ? `0${parsedDate.getMonth() + 1}`
-        : parsedDate.getMonth() + 1;
-    const day =
-      parsedDate.getDate() < 10
-        ? `0${parsedDate.getDate()}`
-        : parsedDate.getDate();
-    const formattedDate = `${year}/${month}/${day}`;
-    setDob(new Date(formattedDate));
-
-    const data = { username, email, password, gender };
+    if (!validateDate(dob)) {
+      setErr("Invalid date of birth");
+      return;
+    }
+    if (!gender) {
+      setErr("Please select a gender");
+      return;
+    }
+    const phone_number = countryCode + " " + tmp_number;
+    const type = 0;
+    const data = {
+      username,
+      email,
+      password,
+      gender,
+      dob,
+      gender,
+      phone_number,
+      type,
+    };
     let response = Register(data);
     response.then((res) => {
-      if (res.data.status === "error") {
-        setErr("Wrong credentials, Try again");
+      if (res.status === 422) {
+        setErr("The email has already been taken");
       } else {
         let token = res.data.authorisation.token;
         localStorage.setItem("token", "Bearer " + token);
@@ -144,7 +198,7 @@ const Signup = () => {
             <Box sx={{ display: "flex" }}>
               <TextField
                 margin="normal"
-                id="phone_number_country_code"
+                id="tmp_number_country_code"
                 label="Country Code"
                 select
                 sx={{ minWidth: 100, mr: 1 }}
@@ -192,14 +246,14 @@ const Signup = () => {
               <TextField
                 margin="normal"
                 fullWidth
-                id="phone_number"
+                id="tmp_number"
                 label="Phone Number"
                 type="number"
                 InputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                autoComplete="phone_number"
+                autoComplete="tmp_number"
                 autoFocus
-                value={phone_number}
-                onChange={(event) => setPhoneNumber(event.target.value)}
+                value={tmp_number}
+                onChange={(event) => setTmpNumber(event.target.value)}
               />
             </Box>
             <TextField
@@ -229,7 +283,7 @@ const Signup = () => {
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </TextField>
-
+            <div className="login-error">{err}</div>
             <button type="submit" className="btn-primary">
               Sign up
             </button>

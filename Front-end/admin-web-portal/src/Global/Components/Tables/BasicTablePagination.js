@@ -43,6 +43,8 @@ const Table = ({ reqData, columns, redirect, err }) => {
 			navigate("/support/feedback/info", {
 				state: { data: row.original },
 			});
+		} else if (redirect === "reservation") {
+			navigate("/reservations/info", { state: { data: row.original } });
 		}
 	};
 

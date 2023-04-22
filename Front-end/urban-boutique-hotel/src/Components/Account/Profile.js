@@ -14,7 +14,7 @@ const Profile = () => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [phone_number, setPhoneNumber] = useState("");
+  const [full_number, setPhoneNumber] = useState("");
   const [countryCode, setCountryCode] = useState("");
   const [tmp_number, setTmpNumber] = useState("");
   const [dob, setDob] = useState("");
@@ -29,7 +29,7 @@ const Profile = () => {
         setEmail(res.user.email);
         setDob(res.user.dob);
         setGender(res.user.gender);
-        setPhoneNumber(res.user_details.phone_number);
+        setPhoneNumber(res.user_details.full_number);
         setUser(res.user);
         setUserDetails(res.user_details);
       })
@@ -39,11 +39,11 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    if (phone_number) {
-      setCountryCode(phone_number.split(" ")[0]);
-      setTmpNumber(phone_number.split(" ")[1]);
+    if (full_number) {
+      setCountryCode(full_number.split(" ")[0]);
+      setTmpNumber(full_number.split(" ")[1]);
     }
-  }, [edit, phone_number]);
+  }, [edit, full_number]);
   useEffect(() => {
     handleCancel();
   }, [user, user_details]);
@@ -59,9 +59,33 @@ const Profile = () => {
     setDob(user.dob);
     setGender(user.gender);
   };
-  const handleSubmit = () => {
-    console.log(countryCode);
-    setEdit(console.log("Submitted"));
+  const handleSubmit = async (event) => {
+    const phone_number = countryCode + " " + tmp_number;
+    event.preventDefault();
+    const data = {
+      username,
+      email,
+      gender,
+      dob,
+      phone_number,
+    };
+    try {
+      const response = await EditProfile(data);
+      setUser({
+        ...user,
+        username,
+        email,
+        gender,
+        dob,
+      });
+      setUserDetails({
+        ...user_details,
+        phone_number,
+      });
+      setEdit(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   function formatDate(dateString) {
     if (!dateString || !dateString.includes("-")) {

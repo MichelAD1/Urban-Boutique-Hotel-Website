@@ -16,16 +16,20 @@ const Reservations = () => {
 			accessor: "id",
 		},
 		{
+			Header: "Customer Name",
+			accessor: "customer_name",
+		},
+		{
+			Header: "Room",
+			accessor: "room_name",
+		},
+		{
 			Header: "Check-in",
 			accessor: "checkin",
 		},
 		{
 			Header: "Check-out",
 			accessor: "checkout",
-		},
-		{
-			Header: "Room",
-			accessor: "room_id",
 		},
 		{
 			Header: "Payment amount",
@@ -42,49 +46,67 @@ const Reservations = () => {
 				id: 1,
 				checkin: "2021-01-01",
 				checkout: "2021-01-02",
-				room_id: 1,
+				room_name: "Room 1",
+				customer_name: "John Doe",
 				amount: 100,
 				status: "paid",
+				requests:
+					"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis maiores reprehenderit id dolor non minima quis",
 			},
 			{
 				id: 2,
 				checkin: "2021-01-01",
 				checkout: "2021-01-02",
-				room_id: 1,
+				room_name: "Room 2",
+				customer_name: "John Doe",
 				amount: 100,
 				status: "paid",
+				requests:
+					"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis maiores reprehenderit id dolor non minima quis",
 			},
 			{
 				id: 3,
 				checkin: "2021-01-01",
 				checkout: "2021-01-02",
-				room_id: 1,
+				room_name: "Room 1",
+				customer_name: "John Doe",
 				amount: 100,
 				status: "paid",
+				requests:
+					"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis maiores reprehenderit id dolor non minima quis",
 			},
 			{
 				id: 4,
 				checkin: "2021-01-01",
 				checkout: "2021-01-02",
-				room_id: 1,
+				room_name: "Room 1",
+				customer_name: "John Doe",
 				amount: 100,
 				status: "paid",
+				requests:
+					"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis maiores reprehenderit id dolor non minima quis",
 			},
 			{
 				id: 5,
 				checkin: "2021-01-01",
 				checkout: "2021-01-02",
-				room_id: 1,
+				room_name: "Room 1",
+				customer_name: "John Doe",
 				amount: 100,
 				status: "paid",
+				requests:
+					"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis maiores reprehenderit id dolor non minima quis",
 			},
 			{
 				id: 6,
 				checkin: "2021-01-01",
 				checkout: "2021-01-02",
-				room_id: 1,
+				room_name: "Room 1",
+				customer_name: "John Doe",
 				amount: 100,
 				status: "paid",
+				requests:
+					"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis maiores reprehenderit id dolor non minima quis",
 			},
 		]);
 	}, []);

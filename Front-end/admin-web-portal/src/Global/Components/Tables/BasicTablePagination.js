@@ -101,6 +101,14 @@ const Table = ({ reqData, columns, redirect, err }) => {
 									className='basic-row hovering'
 									onClick={() => handleRedirect(row)}>
 									{row.cells.map((cell) => {
+										let amount_col = cell.column.Header === "Payment amount";
+										if (amount_col) {
+											return (
+												<td {...cell.getCellProps()} className='basic-body'>
+													USD {cell.render("Cell")}
+												</td>
+											);
+										}
 										return (
 											<td {...cell.getCellProps()} className='basic-body'>
 												{cell.render("Cell")}

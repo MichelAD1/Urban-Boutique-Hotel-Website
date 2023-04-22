@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminController extends Controller
+class StaffController extends Controller
 {
     public function editInformation(Request $request){
         $user = Auth::user();
         $userinfo = User::find($user->id);
-        $employee = Admin::where("user_id",$user->id)->first();
+        $employee = Staff::where("user_id",$user->id)->first();
         if($request->has("username")){
             $userinfo->username=$request->username;
         }
@@ -33,10 +33,10 @@ class AdminController extends Controller
     }
     public function banEmployee($employeeid){
         $user=Auth::user();
-        $employee = Admin::where("user_id",$user->id)->first();
+        $employee = Staff::where("user_id",$user->id)->first();
         if($employee->position=="admin"){
             $target=User::where('id',$employeeid)->first();
-            Admin::where('user_id',$target->id)->delete();
+            Staff::where('user_id',$target->id)->delete();
             $target->banned=1;
             $target->save();
             return "sucess";

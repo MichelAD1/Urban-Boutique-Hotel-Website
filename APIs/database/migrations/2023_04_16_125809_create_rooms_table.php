@@ -27,6 +27,8 @@ return new class extends Migration
             $table->boolean("mini_bar");
             $table->boolean("desk");
             $table->boolean("featured");
+            $table->boolean("breakfast");
+            $table->boolean("pets");
             $table->integer("discount");
 
 

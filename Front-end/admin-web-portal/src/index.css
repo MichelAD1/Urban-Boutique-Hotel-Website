@@ -180,7 +180,7 @@ h6 {
 }
 
 .add-button {
-  font-size: 48px;
+  font-size: 38px;
   color: var(--primaryColor);
   border-radius: 50%;
   cursor: pointer;
@@ -1112,17 +1112,6 @@ h6 {
 
 /* End of room maintenance */
 /* Rooms */
-.add-icon {
-  width: 28px;
-  height: 28px;
-  padding: 0.4em;
-  cursor: pointer;
-}
-
-.add-icon:hover {
-  background-color: rgba(80, 81, 79, 0.2);
-  border-radius: 10em;
-}
 
 .room-edit-container{
   display:flex;

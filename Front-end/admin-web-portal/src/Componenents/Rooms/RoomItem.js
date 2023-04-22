@@ -14,8 +14,6 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import delete_icon from "../../assets/icons/cancel-icon.svg";
 import DeleteRoom from "../../api-client/Rooms/DeleteRoom";
 
-import dummy from "../../assets/dummy.png";
-
 const RoomItem = () => {
 	const loc = useLocation();
 	const navigate = useNavigate();
@@ -51,6 +49,8 @@ const RoomItem = () => {
 	useEffect(() => {
 		if (isValid) {
 			handleCancel();
+		} else {
+			setEdit(true);
 		}
 	}, []);
 
@@ -162,23 +162,27 @@ const RoomItem = () => {
 	};
 
 	const handleCancel = () => {
-		setEdit(false);
-		setName(isValid.data.name);
-		setDescription(isValid.data.description);
-		setImages(isValid.data.images);
-		setPrice(isValid.data.price);
-		setOldPrice(isValid.data.old_price);
-		setSize(isValid.data.size);
-		setMinibar(isValid.data.minibar);
-		setGuests(isValid.data.guests);
-		setType(isValid.data.type);
-		setShower(isValid.data.shower);
-		setTowels(isValid.data.towels);
-		setTv(isValid.data.tv);
-		setWifi(isValid.data.wifi);
-		setDesk(isValid.data.desk);
-		setBreakfast(isValid.data.breakfast);
-		setPets(isValid.data.pets);
+		if (isValid) {
+			setEdit(false);
+			setName(isValid.data.name);
+			setDescription(isValid.data.description);
+			setImages(isValid.data.images);
+			setPrice(isValid.data.price);
+			setOldPrice(isValid.data.old_price);
+			setSize(isValid.data.size);
+			setMinibar(isValid.data.minibar);
+			setGuests(isValid.data.guests);
+			setType(isValid.data.type);
+			setShower(isValid.data.shower);
+			setTowels(isValid.data.towels);
+			setTv(isValid.data.tv);
+			setWifi(isValid.data.wifi);
+			setDesk(isValid.data.desk);
+			setBreakfast(isValid.data.breakfast);
+			setPets(isValid.data.pets);
+		} else {
+			navigate("/rooms");
+		}
 	};
 
 	// Modal
@@ -222,18 +226,19 @@ const RoomItem = () => {
 				}}>
 				<div className='edit-container edit-container-large'>
 					<div className='edit-item'>
-						<h2>Room #{isValid.data.id}</h2>
+						{isValid && <h2>Room #{isValid.data.id}</h2>}
+						{!isValid && <h2>Add Room</h2>}
 						{isValid && (
 							<button className='button' onClick={() => handleDelete()}>
 								Delete
 							</button>
 						)}
-						{!edit && (
+						{!edit && isValid && (
 							<button className='button' onClick={() => setEdit(true)}>
 								Edit
 							</button>
 						)}
-						{edit && (
+						{(edit || !isValid) && (
 							<>
 								<button className='save-button' type='submit'>
 									Save

@@ -83,7 +83,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'type'=>$request->type,
             'dob'=>$request->dob,
-            'gender'=>$request->gender
+            'gender'=>$request->gender,
+            'banned'=>0
         ]);
         if($request->type==0){ //user a customer
             $customer = Customer::create([

@@ -1355,4 +1355,7 @@ h6 {
     height: auto;
   }
 }
+.review-rating{
+  color: var(--secondaryColor);
+}
 /* End of reviews */

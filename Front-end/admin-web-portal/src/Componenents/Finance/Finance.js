@@ -18,9 +18,11 @@ const Finance = () => {
 
 	const [isBudgetModalOpen, setBudgetModalOpen] = useState(false);
 
+	const [budgets, setBudgets] = useState([]);
 	const [budget_name, setBudgetName] = useState("");
 	const [amount, setAmount] = useState("");
-	const [budgets, setBudgets] = useState([]);
+
+	const [transactions, setTransactions] = useState([]);
 
 	useEffect(() => {
 		setBudgets([
@@ -31,6 +33,38 @@ const Finance = () => {
 			{ id: 3, budget_name: "Maintenance", amount: 3000 },
 			{ id: 3, budget_name: "Maintenance", amount: 3000 },
 			{ id: 3, budget_name: "Maintenance", amount: 3000 },
+		]);
+		setTransactions([
+			{
+				reservation_number: 1234,
+				customer_name: "John Smith",
+				amount: 1000.5,
+				date: "2023-04-22",
+			},
+			{
+				reservation_number: 5678,
+				customer_name: "Jane Doe",
+				amount: 750.2,
+				date: "2023-05-10",
+			},
+			{
+				reservation_number: 9101,
+				customer_name: "Bob Johnson",
+				amount: 2500.0,
+				date: "2023-06-15",
+			},
+			{
+				reservation_number: 1121,
+				customer_name: "Alice Lee",
+				amount: 500.0,
+				date: "2023-07-01",
+			},
+			{
+				reservation_number: 3141,
+				customer_name: "Charlie Brown",
+				amount: 1500.75,
+				date: "2023-08-20",
+			},
 		]);
 	}, []);
 
@@ -70,16 +104,16 @@ const Finance = () => {
 	const columns = useMemo(
 		() => [
 			{
-				Header: "Revenue",
-				accessor: "revenue",
+				Header: "Reservation number",
+				accessor: "reservation_number",
 			},
 			{
-				Header: "Number of Transactions",
-				accessor: "number_of_transactions",
+				Header: "Customer name",
+				accessor: "customer_name",
 			},
 			{
-				Header: "Average Transaction Value",
-				accessor: "average_transaction_value",
+				Header: "Transaction Amount",
+				accessor: "amount",
 			},
 			{
 				Header: "Date",
@@ -92,7 +126,7 @@ const Finance = () => {
 	return (
 		<div className='container'>
 			<div className='budget-container'>
-				<div className='request-box' style={{ maxHeight: "25em" }}>
+				<div className='request-box' style={{ maxHeight: "24em" }}>
 					<div className='request-header'>
 						<div className='title'>Budgets</div>
 						<AiOutlinePlus className='add-button' onClick={handleAddBudget} />
@@ -104,7 +138,7 @@ const Finance = () => {
 						type={"budget"}
 					/>
 				</div>
-				<div className='request-box' style={{ maxHeight: "25em" }}>
+				<div className='request-box' style={{ maxHeight: "24em" }}>
 					<div className='request-header'>
 						<div className='title'>Revenue</div>
 						<Link to='/maintenance/requests' className='item-redirect'>
@@ -113,8 +147,8 @@ const Finance = () => {
 					</div>
 
 					<BasicTable
-						reqData={budgets}
-						columns={budget_columns}
+						reqData={transactions}
+						columns={columns}
 						type={"budget"}
 					/>
 				</div>

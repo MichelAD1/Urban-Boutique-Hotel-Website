@@ -79,7 +79,9 @@ const Table = ({ reqData, columns, type, err }) => {
 									key={row.original.id}>
 									{row.cells.map((cell) => {
 										let action_col = cell.column.Header === "action";
-										let duration_col = cell.column.Header === "duration";
+										let amount_col =
+											cell.column.Header === "amount" ||
+											cell.column.Header === "Transaction Amount";
 
 										if (action_col) {
 											return (
@@ -96,10 +98,10 @@ const Table = ({ reqData, columns, type, err }) => {
 											);
 										}
 
-										if (duration_col) {
+										if (amount_col) {
 											return (
 												<td {...cell.getCellProps()} className='basic-body'>
-													{cell.render("Cell")}h
+													USD {cell.render("Cell")}
 												</td>
 											);
 										}

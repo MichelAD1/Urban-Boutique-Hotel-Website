@@ -14,6 +14,10 @@ import Home from "./Componenents/Home/Home";
 import Employees from "./Componenents/Employees/Employees";
 import EmployeeItem from "./Componenents/Employees/EmployeeItem";
 
+// ******** Reservations ********
+import Reservations from "./Componenents/Reservations/Reservations";
+import ReservationItem from "./Componenents/Reservations/ReservationItem";
+
 // ******** Users ********
 import Users from "./Componenents/Users/Users";
 import UserItem from "./Componenents/Users/UserItem";
@@ -83,6 +87,28 @@ function App() {
 								<>
 									<Navbar />
 									<Rooms />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/reservations'
+							element={
+								<>
+									<Navbar />
+									<Reservations />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/reservations/info'
+							element={
+								<>
+									<Navbar />
+									<ReservationItem />
 								</>
 							}
 						/>

@@ -29,6 +29,10 @@ const UserItem = () => {
 		setGender(data.gender);
 	}, []);
 
+	function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openModal = () => {
@@ -58,54 +62,72 @@ const UserItem = () => {
 
 	return (
 		<div className='container'>
-			<div className='edit-user'>
-				<div className='info-box'>
+			<div className='edit-container'>
+				<div className='edit-item'>
+					<h2>User #{data.id}</h2>
+					<button className='button' onClick={() => handleBan()}>
+						Ban
+					</button>
+				</div>
+				<div className='edit-item'>
 					<div className='edit-info'>
-						<div className='labels-section'>
-							<div className='label-text'>Username: </div>
-							<div className='label-text'>Name: </div>
-							<div className='label-text'>Email: </div>
-							<div className='label-text'>Phone number: </div>
-							<div className='label-text'>Date of Birth: </div>
-							<div className='label-text'>Gender: </div>
-						</div>
-						<div className='inputs-section'>
-							<div type='text' className='info-text'>
-								{username}
-							</div>
-							<div type='text' className='info-text'>
-								{name}
-							</div>
-							<div type='text' className='info-text'>
-								{email}
-							</div>
-							<div type='text' className='info-text'>
-								{phoneNumber}
-							</div>
-							<div type='text' className='info-text'>
-								{dob}
-							</div>
-							<div type='text' className='info-text'>
-								{gender}
-							</div>
-						</div>
-					</div>
-					<div className='action-buttons'>
-						<button onClick={handleBan} className='action-bt delete'>
-							{ban}
-						</button>
-					</div>
-					<ReactModal
-						className='custom-modal'
-						isOpen={isModalOpen}
-						style={{ overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" } }}>
 						<div>
-							<h1>Confirm {ban}</h1>
-							<p>Are you sure you want to {ban} this user?</p>
-							<button onClick={handleConfirmBan}>Yes</button>
-							<button onClick={closeModal}>No</button>
+							<label>Username</label>
 						</div>
-					</ReactModal>
+						<div>
+							<p>{username}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info'>
+						<div>
+							<label>Name</label>
+						</div>
+						<div>
+							<p>{name}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info'>
+						<div>
+							<label>Email</label>
+						</div>
+						<div>
+							<p>{email}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info'>
+						<div>
+							<label>Phone number</label>
+						</div>
+						<div>
+							<p>{phoneNumber}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info'>
+						<div>
+							<label>Date of birth</label>
+						</div>
+						<div>
+							<p>{dob}</p>
+						</div>
+					</div>
+				</div>
+				<div className='edit-item'>
+					<div className='edit-info'>
+						<div>
+							<label>Gender</label>
+						</div>
+						<div>
+							<p>{capitalizeFirstLetter(gender)}</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

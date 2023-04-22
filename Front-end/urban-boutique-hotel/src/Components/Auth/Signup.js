@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // MUI
@@ -20,9 +21,28 @@ const theme = createTheme({
 });
 
 const Signup = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [countryCode, setCountryCode] = useState("+1");
+  const [phone_number, setPhoneNumber] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
+
   const navigation = useNavigate();
 
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault();
+    // Do something with the form data
+    console.log({
+      username,
+      email,
+      password,
+      countryCode,
+      phone_number,
+      dob,
+      gender,
+    });
     navigation("/");
   }
 
@@ -47,6 +67,8 @@ const Signup = () => {
               label="Username"
               autoComplete="username"
               autoFocus
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
             />
             <TextField
               margin="normal"
@@ -55,6 +77,8 @@ const Signup = () => {
               label="Email Address"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
             <TextField
               margin="normal"
@@ -63,6 +87,8 @@ const Signup = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
             <Box sx={{ display: "flex" }}>
               <TextField
@@ -70,8 +96,6 @@ const Signup = () => {
                 id="phone_number_country_code"
                 label="Country Code"
                 select
-                value=""
-                onChange={() => {}}
                 sx={{ minWidth: 100, mr: 1 }}
                 SelectProps={{
                   MenuProps: {
@@ -83,13 +107,24 @@ const Signup = () => {
                       },
                     },
                   },
+                  renderValue: (selected) => {
+                    const selectedCountry = countries.find(
+                      (item) => item.dial_code === selected
+                    );
+                    return selectedCountry
+                      ? `${selectedCountry.dial_code}`
+                      : "";
+                  },
+                }}
+                value={countryCode}
+                onChange={(event) => {
+                  setCountryCode(event.target.value);
                 }}
               >
-                {/* You can add more countries and codes as needed */}
                 {countries.map((item) => {
                   return (
                     <MenuItem
-                      key={item.dial_code}
+                      key={item.name}
                       value={item.dial_code}
                       sx={{
                         width: "100%",
@@ -97,7 +132,7 @@ const Signup = () => {
                         fontSize: "13px",
                       }}
                     >
-                      {item.dial_code} ({item.name})
+                      {`${item.dial_code} (${item.name})`}
                     </MenuItem>
                   );
                 })}
@@ -112,6 +147,8 @@ const Signup = () => {
                 InputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                 autoComplete="phone_number"
                 autoFocus
+                value={phone_number}
+                onChange={(event) => setPhoneNumber(event.target.value)}
               />
             </Box>
             <TextField
@@ -125,6 +162,8 @@ const Signup = () => {
               }}
               autoComplete="dob"
               autoFocus
+              value={dob}
+              onChange={(event) => setDob(event.target.value)}
             />
             <TextField
               margin="normal"
@@ -132,8 +171,8 @@ const Signup = () => {
               select
               id="gender"
               label="Gender"
-              value=""
-              onChange={() => {}}
+              value={gender}
+              onChange={(event) => setGender(event.target.value)}
               autoFocus
             >
               <MenuItem value="male">Male</MenuItem>

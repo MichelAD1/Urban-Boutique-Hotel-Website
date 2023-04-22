@@ -29,7 +29,7 @@ const ReviewItem = () => {
 			<div className='edit-container'>
 				<div className='edit-item'>
 					<h2>Review #{data.id}</h2>
-					<button className='button'>Ban</button>
+					<button className='button button-large'>Show on website</button>
 				</div>
 				<div className='edit-item'>
 					<div className='edit-info'>

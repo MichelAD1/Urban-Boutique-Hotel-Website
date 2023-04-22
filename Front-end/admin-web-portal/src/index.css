@@ -342,6 +342,10 @@ h6 {
   margin-left: 0.5em;
 }
 
+.button-large{
+  width: 15em;
+}
+
 .button:hover{
   background-color: rgba(172, 160, 160, 0.2);
 }

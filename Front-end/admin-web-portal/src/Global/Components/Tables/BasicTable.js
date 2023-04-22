@@ -46,7 +46,7 @@ const Table = ({ reqData, columns, type, err }) => {
 		setIsModalOpen(false);
 	};
 	return (
-		<>
+		<div>
 			<table {...getTableProps()} className='basic-table'>
 				<thead>
 					{headerGroups.map((headerGroup) => (
@@ -120,6 +120,17 @@ const Table = ({ reqData, columns, type, err }) => {
 				isOpen={isModalOpen}
 				style={{
 					overlay: { backgroundColor: "rgba(0, 0, 0, 0.2)" },
+					content: {
+						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						border: "none",
+						width: "100%",
+						height: "100%",
+						margin: "auto",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						zIndex: "100",
+					},
 				}}>
 				<div>
 					<h1>Confirm Delete</h1>
@@ -131,7 +142,7 @@ const Table = ({ reqData, columns, type, err }) => {
 					<button onClick={closeModal}>No</button>
 				</div>
 			</ReactModal>
-		</>
+		</div>
 	);
 };
 

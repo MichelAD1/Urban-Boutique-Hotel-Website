@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
+// Icons
 import { MdMarkEmailUnread } from "react-icons/md";
 import { IoMdOptions } from "react-icons/io";
 import { BiPhotoAlbum } from "react-icons/bi";
-import { TbShoppingCartDiscount } from "react-icons/tb";
-import { FaQuestion, FaUserLock } from "react-icons/fa";
+import { FaQuestion } from "react-icons/fa";
 import { GoLaw } from "react-icons/go";
 
 const Options = () => {

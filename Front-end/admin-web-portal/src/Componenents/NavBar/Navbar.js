@@ -15,6 +15,13 @@ import {
 import { HiOutlineUserGroup, HiUserGroup } from "react-icons/hi";
 import { BsPerson, BsPersonFill } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
+import {
+	RiMoneyDollarBoxFill,
+	RiMoneyDollarBoxLine,
+	RiFeedbackLine,
+	RiFeedbackFill,
+} from "react-icons/ri";
+
 import finance_fill from "../../assets/icons/finance-fill.svg";
 import support_fill from "../../assets/icons/support-fill.svg";
 import finance_nf from "../../assets/icons/finance-nf.svg";
@@ -97,33 +104,33 @@ export default function Navbar() {
 						<div className='routes'>Users</div>
 					</Link>
 				)}
-        {/* Finance Page navigation */}
-        {path === "/finance" && (
-          <div className="nav-link">
-            <img className="icons" src={finance_fill} alt="" />
-            <div className="routes active">Finance</div>
-          </div>
-        )}
+				{/* Finance Page navigation */}
+				{path === "/finance" && (
+					<div className='nav-link'>
+						<RiMoneyDollarBoxFill className='icons' />
+						<div className='routes active'>Finance</div>
+					</div>
+				)}
 
-        {path !== "/finance" && (
-          <Link to="/finance" className="nav-link">
-            <img className="icons" src={finance_nf} alt="" />
-            <div className="routes">Finance</div>
-          </Link>
-        )}
-        {/* Support Page navigation */}
-        {path === "/support" && (
-          <div className="nav-link">
-            <img className="icons" src={support_fill} alt="" />
-            <div className="routes active">Support</div>
-          </div>
-        )}
-        {path !== "/support" && (
-          <Link to="/support" className="nav-link">
-            <img className="icons" src={support_nf} alt="" />
-            <div className="routes">Support</div>
-          </Link>
-        )}
+				{path !== "/finance" && (
+					<Link to='/finance' className='nav-link'>
+						<RiMoneyDollarBoxLine className='icons' s />
+						<div className='routes'>Finance</div>
+					</Link>
+				)}
+				{/* Support Page navigation */}
+				{path === "/support" && (
+					<div className='nav-link'>
+						<RiFeedbackFill className='icons' />
+						<div className='routes active'>Support</div>
+					</div>
+				)}
+				{path !== "/support" && (
+					<Link to='/support' className='nav-link'>
+						<RiFeedbackLine className='icons' />
+						<div className='routes'>Support</div>
+					</Link>
+				)}
 			</div>
 			<div
 				className='nav-link logout'

@@ -7,7 +7,8 @@ import GetEmployees from "../../api-client/Employees/GetEmployees";
 import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
 
 // Icons
-import add_box from "../../assets/icons/add-nf.svg";
+import { AiOutlinePlus } from "react-icons/ai";
+
 import search_icon from "../../assets/icons/search.svg";
 
 export default function Employees() {
@@ -176,8 +177,8 @@ export default function Employees() {
 							</option>
 						))} */}
 				</select>
-				<Link to='/employee/profile' className='add-button'>
-					<img src={add_box} width='28px' height='28px' alt='' />
+				<Link to='/employee/profile'>
+					<AiOutlinePlus className='add-button' />
 				</Link>
 			</div>
 			<div className='employees-container'>

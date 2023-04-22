@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 
 // Components
 import Rating from "../../../Global/Components/Rating";
+import ReactModal from "react-modal";
 
 const ReviewItem = () => {
 	const loc = useLocation();
@@ -20,16 +21,32 @@ const ReviewItem = () => {
 		setDate(data.date);
 	}, []);
 
-	function capitalizeFirstLetter(string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	}
+	// Modal
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const handleAdd = () => {
+		openModal();
+	};
+
+	const handleConfirmAdd = () => {
+		closeModal();
+	};
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 
 	return (
 		<div className='container'>
 			<div className='edit-container'>
 				<div className='edit-item'>
 					<h2>Review #{data.id}</h2>
-					<button className='button button-large'>Show on website</button>
+					<button className='button button-large' onClick={handleAdd}>
+						Show on website
+					</button>
 				</div>
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
@@ -72,6 +89,30 @@ const ReviewItem = () => {
 					</div>
 				</div>
 			</div>
+			<ReactModal
+				className='custom-modal'
+				isOpen={isModalOpen}
+				style={{
+					overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+					content: {
+						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						border: "none",
+						width: "100%",
+						height: "100%",
+						margin: "auto",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						zIndex: "100",
+					},
+				}}>
+				<div>
+					<h1>Confirm Add</h1>
+					<p>Are you sure you want to add this to the website home page?</p>
+					<button onClick={handleConfirmAdd}>Yes</button>
+					<button onClick={closeModal}>No</button>
+				</div>
+			</ReactModal>
 		</div>
 	);
 };

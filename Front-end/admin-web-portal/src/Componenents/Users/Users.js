@@ -6,7 +6,6 @@ import { useMemo, useState, useEffect } from "react";
 import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
 
 // Icons
-import add_box from "../../assets/icons/add-nf.svg";
 import search_icon from "../../assets/icons/search.svg";
 
 export default function Users() {

@@ -88,7 +88,7 @@ const Table = ({ reqData, columns, type, err }) => {
 														onClick={() => {
 															handleDeleteOptions(row.original.id);
 														}}
-														className='action-button'
+														className='table-button'
 														key={row.original.id}>
 														Delete
 													</button>

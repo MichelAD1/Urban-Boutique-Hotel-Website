@@ -346,6 +346,21 @@ h6 {
   background-color: rgba(172, 160, 160, 0.2);
 }
 
+.table-button{
+  color: var(--primaryColor);
+  border:none;
+  border-radius: 0.2em;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+  margin-left: 0.5em;
+  background-color: transparent;
+  font-weight: 600;
+}
+
+.table-button:hover{
+  background-color: rgba(172, 160, 160, 0.2);
+}
+
 .option-dropdown{
   padding: 0.5em 1em;
 }
@@ -1059,6 +1074,8 @@ h6 {
   height: 30em;
 
   margin-bottom: 2em;
+
+  overflow: auto;
 }
 .request-header{
   display: flex;
@@ -1077,7 +1094,7 @@ h6 {
 .title{
   color: var(--primaryColor);
   font-weight: 700;
-  font-size: 16px;   
+  font-size: 16px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -1315,3 +1332,8 @@ h6 {
   }
 }
 /* End of users */
+/* Finances page */
+.budget-container{
+  width: 100%;
+  padding: 2em 1em;
+}

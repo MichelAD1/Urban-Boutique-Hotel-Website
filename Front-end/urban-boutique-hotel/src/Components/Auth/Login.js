@@ -61,6 +61,10 @@ const Login = () => {
       } else {
         let token = res.data.authorisation.token;
         localStorage.setItem("token", "Bearer " + token);
+        localStorage.setItem(
+          "username",
+          JSON.stringify(res.data.user.username)
+        );
         axios.defaults.headers.common["Authorization"] = "Bearer" + token;
         navigation("/");
       }

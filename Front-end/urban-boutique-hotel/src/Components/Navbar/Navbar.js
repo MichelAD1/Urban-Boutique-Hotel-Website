@@ -1,139 +1,158 @@
 import { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-
 // Images
 import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
-	const path = useLocation().pathname;
-	const [active, setActive] = useState(false);
-	const [windowSize, setWindowSize] = useState([
-		window.innerWidth,
-		window.innerHeight,
-	]);
+  const navigation = useNavigate();
+  const token = localStorage.getItem("token");
+  const location = useLocation();
+  const [username, setUser] = useState(
+    localStorage.getItem("username").replace(/"/g, "")
+  );
+  const path = useLocation().pathname;
+  const [active, setActive] = useState(false);
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+    window.addEventListener("resize", handleWindowResize);
 
-	useEffect(() => {
-		const handleWindowResize = () => {
-			setWindowSize([window.innerWidth, window.innerHeight]);
-		};
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
-		window.addEventListener("resize", handleWindowResize);
+  useEffect(() => {
+    const navbar = document.getElementById("navbar");
+    const links = document.getElementById("links-section");
+    const login_btn = document.getElementById("login-btn");
 
-		return () => {
-			window.removeEventListener("resize", handleWindowResize);
-		};
-	}, []);
+    if (windowSize[0] > 1000) {
+      navbar.style.height = "4em";
+      links.style.pointerEvents = "all";
+      login_btn.style.opacity = "1";
+      login_btn.style.pointerEvents = "all";
+    }
+    if (windowSize[0] < 1000) {
+      login_btn.style.opacity = "0";
+      login_btn.style.pointerEvents = "none";
+    }
+  }, [windowSize]);
 
-	useEffect(() => {
-		const navbar = document.getElementById("navbar");
-		const links = document.getElementById("links-section");
-		const login_btn = document.getElementById("login-btn");
+  const handleToggle = () => {
+    if (windowSize[0] < 1000) {
+      setActive(!active);
+      const navbar = document.getElementById("navbar");
+      const links = document.getElementById("links-section");
+      const login_btn = document.getElementById("login-btn");
 
-		if (windowSize[0] > 1000) {
-			navbar.style.height = "4em";
-			links.style.pointerEvents = "all";
-			login_btn.style.opacity = "1";
-			login_btn.style.pointerEvents = "all";
-		}
-		if (windowSize[0] < 1000) {
-			login_btn.style.opacity = "0";
-			login_btn.style.pointerEvents = "none";
-		}
-	}, [windowSize]);
+      navbar.style.height = "auto";
+      links.style.pointerEvents = "all";
+      login_btn.style.opacity = "1";
+      login_btn.style.pointerEvents = "all";
+    }
+  };
+  const handleAccount = () => {
+    navigation("/account", { state: { data: user } });
+  };
 
-	const handleToggle = () => {
-		if (windowSize[0] < 1000) {
-			setActive(!active);
-			const navbar = document.getElementById("navbar");
-			const links = document.getElementById("links-section");
-			const login_btn = document.getElementById("login-btn");
+  const handleClose = () => {
+    if (windowSize[0] < 1000) {
+      setActive(!active);
+      const navbar = document.getElementById("navbar");
+      const links = document.getElementById("links-section");
+      const login_btn = document.getElementById("login-btn");
 
-			navbar.style.height = "auto";
-			links.style.pointerEvents = "all";
-			login_btn.style.opacity = "1";
-			login_btn.style.pointerEvents = "all";
-		}
-	};
+      navbar.style.height = "4em";
+      login_btn.style.opacity = "0";
+      links.style.pointerEvents = "none";
+      login_btn.style.pointerEvents = "none";
+    }
+  };
 
-	const handleClose = () => {
-		if (windowSize[0] < 1000) {
-			setActive(!active);
-			const navbar = document.getElementById("navbar");
-			const links = document.getElementById("links-section");
-			const login_btn = document.getElementById("login-btn");
-
-			navbar.style.height = "4em";
-			login_btn.style.opacity = "0";
-			links.style.pointerEvents = "none";
-			login_btn.style.pointerEvents = "none";
-		}
-	};
-
-	return (
-		<nav className='navbar' id='navbar'>
-			<Link to='/'>
-				<img className='nav-image' src={logo} />
-			</Link>
-			<ul
-				className={active ? "links-section" : "links-section show-nav"}
-				id='links-section'>
-				{" "}
-				<Link to='/' className='nav-link' onClick={handleClose}>
-					<li className={`routes ${path === "/" ? "active" : ""}`}>Home</li>
-				</Link>
-				<Link to='/rooms' className='nav-link' onClick={handleClose}>
-					<li className={`routes ${path === "/rooms" ? "active" : ""}`}>
-						Rooms
-					</li>
-				</Link>
-				<Link to='/services' className='nav-link' onClick={handleClose}>
-					<li className={`routes ${path === "/services" ? "active" : ""}`}>
-						Services
-					</li>
-				</Link>
-				<Link to='/findus' className='nav-link' onClick={handleClose}>
-					<li className={`routes ${path === "/findus" ? "active" : ""}`}>
-						Find Us
-					</li>
-				</Link>
-				<Link to='/discover' className='nav-link' onClick={handleClose}>
-					<li className={`routes ${path === "/discover" ? "active" : ""}`}>
-						Discover
-					</li>
-				</Link>
-				<Link to='/contact' className='nav-link' onClick={handleClose}>
-					<li className={`routes ${path === "/contact" ? "active" : ""}`}>
-						Contact
-					</li>
-				</Link>
-			</ul>
-			<div className='login-section'>
-				<div className='login-btn' id='login-btn'>
-					<Link to='/login' className='nav-link' onClick={handleClose}>
-						<div className='login-img'>
-							<HiUserCircle className='nav-image' />
-						</div>
-						<div className='routes'>Log in</div>
-					</Link>
-				</div>
-			</div>
-			{!active && (
-				<button type='button' className='nav-btn' onClick={handleToggle}>
-					<AiOutlineMenu className='nav-icon' />
-				</button>
-			)}
-			{active && (
-				<button
-					type='button'
-					className='nav-btn close-btn'
-					onClick={handleClose}>
-					<AiOutlineClose className='nav-icon' />
-				</button>
-			)}
-		</nav>
-	);
+  return (
+    <nav className="navbar" id="navbar">
+      <Link to="/">
+        <img className="nav-image" src={logo} />
+      </Link>
+      <ul
+        className={active ? "links-section" : "links-section show-nav"}
+        id="links-section"
+      >
+        {" "}
+        <Link to="/" className="nav-link" onClick={handleClose}>
+          <li className={`routes ${path === "/" ? "active" : ""}`}>Home</li>
+        </Link>
+        <Link to="/rooms" className="nav-link" onClick={handleClose}>
+          <li className={`routes ${path === "/rooms" ? "active" : ""}`}>
+            Rooms
+          </li>
+        </Link>
+        <Link to="/services" className="nav-link" onClick={handleClose}>
+          <li className={`routes ${path === "/services" ? "active" : ""}`}>
+            Services
+          </li>
+        </Link>
+        <Link to="/findus" className="nav-link" onClick={handleClose}>
+          <li className={`routes ${path === "/findus" ? "active" : ""}`}>
+            Find Us
+          </li>
+        </Link>
+        <Link to="/discover" className="nav-link" onClick={handleClose}>
+          <li className={`routes ${path === "/discover" ? "active" : ""}`}>
+            Discover
+          </li>
+        </Link>
+        <Link to="/contact" className="nav-link" onClick={handleClose}>
+          <li className={`routes ${path === "/contact" ? "active" : ""}`}>
+            Contact
+          </li>
+        </Link>
+      </ul>
+      <div className="login-section">
+        {username ? (
+          <div className="login-btn" id="login-btn">
+            <div className="nav-link" onClick={handleAccount}>
+              <div className="login-img">
+                <HiUserCircle className="nav-image" />
+              </div>
+              <div className="routes">{username}</div>
+            </div>
+          </div>
+        ) : (
+          <div className="login-btn" id="login-btn">
+            <Link to="/login" className="nav-link" onClick={handleClose}>
+              <div className="login-img">
+                <HiUserCircle className="nav-image" />
+              </div>
+              <div className="routes">Log in</div>
+            </Link>
+          </div>
+        )}
+      </div>
+      {!active && (
+        <button type="button" className="nav-btn" onClick={handleToggle}>
+          <AiOutlineMenu className="nav-icon" />
+        </button>
+      )}
+      {active && (
+        <button
+          type="button"
+          className="nav-btn close-btn"
+          onClick={handleClose}
+        >
+          <AiOutlineClose className="nav-icon" />
+        </button>
+      )}
+    </nav>
+  );
 };
 
 export default Navbar;

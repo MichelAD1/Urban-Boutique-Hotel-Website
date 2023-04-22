@@ -49,17 +49,17 @@ const Discover = () => {
         </div>
       </div>
       <div className="about">
-        <section class="about-section" id="about-section">
-          <div class="about-img">
+        <section className="about-section" id="about-section">
+          <div className="about-img">
             <div className="about-img1">
-              <img src={aboutImage2} alt="" class="about-image1" />
+              <img src={aboutImage2} alt="" className="about-image1" />
             </div>
             <div className="about-img2">
-              <img src={aboutImage1} alt="" class="about-image2" />
+              <img src={aboutImage1} alt="" className="about-image2" />
             </div>
           </div>
-          <div class="about-description">
-            <div class="heading">
+          <div className="about-description">
+            <div className="heading">
               <h5>RAISING COMFOMRT TO THE HIGHEST LEVEL</h5>
             </div>
             <h2>Discover the Hotel</h2>

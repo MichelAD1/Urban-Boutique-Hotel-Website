@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // MUI
@@ -7,6 +8,9 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+//APIs
+import FetchCred from "../../api-client/Auth/FetchCred";
 
 const theme = createTheme({
   palette: {
@@ -20,10 +24,44 @@ const theme = createTheme({
 
 const Login = () => {
   const navigation = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
 
-  function handleSubmit() {
-    navigation("/");
-  }
+  //Validators
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
+  //Submit
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErr("");
+    if (!validateEmail(email)) {
+      setErr("Please enter a valid email address");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setErr("Please enter a password with at least 8 characters");
+      return;
+    }
+
+    const data = { email, password };
+    let response = FetchCred(data);
+    response.then((res) => {
+      if (res.data.status === "error") {
+        setErr("Wrong credentials, Try again");
+      } else {
+        console.log(res.data.authorisation.token);
+      }
+    });
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -47,6 +85,8 @@ const Login = () => {
               label="Email Address"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
             <TextField
               margin="normal"
@@ -55,13 +95,15 @@ const Login = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
             <div className="login-forgot">
               <div className="link" onClick={() => navigation("/reset")}>
                 Forgot password?
               </div>
             </div>
-
+            <div className="login-error">{err}</div>
             <button type="submit" className="btn-primary">
               Log in
             </button>

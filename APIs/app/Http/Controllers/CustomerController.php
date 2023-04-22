@@ -11,6 +11,22 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+    public function getInformation(){
+        $user = Auth::user();
+        $customer = Customer::where("user_id",$user->id)->first();
+
+        if($user && $customer){
+            return response()->json([
+                'status' => 'success',
+                'user' => $user,
+                'user_details' => $customer,
+            ]);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'No user found',
+        ], 404);
+    }
     public function editInformation(Request $request){
         //username,email,password for user
         //phone_number for customer
@@ -47,6 +63,7 @@ class CustomerController extends Controller
         ]);
         return 'success';
     }
+    
     public function cancelReservation($reservationid){
         DB::table("customer_reserves_room")->where("id",$reservationid)->delete();
         return "success";

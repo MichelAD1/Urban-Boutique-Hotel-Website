@@ -1,6 +1,5 @@
 import { useTable, usePagination } from "react-table";
 import { useNavigate } from "react-router-dom";
-import "./basic-styles.css";
 import { useEffect, useState } from "react";
 import GetClients from "../../../api-client/Clients/GetClients";
 

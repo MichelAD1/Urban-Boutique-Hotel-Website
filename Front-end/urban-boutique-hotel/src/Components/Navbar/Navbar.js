@@ -131,7 +131,7 @@ const Navbar = () => {
               <div className="login-img">
                 <HiUserCircle className="nav-image" />
               </div>
-              <div className="routes">{username.replace(/"/g, "")}</div>
+              <div className="routes login">{username.replace(/"/g, "")}</div>
             </div>
           </div>
         ) : (
@@ -140,7 +140,7 @@ const Navbar = () => {
               <div className="login-img">
                 <HiUserCircle className="nav-image" />
               </div>
-              <div className="routes">Log in</div>
+              <div className="routes login">Log in</div>
             </Link>
           </div>
         )}

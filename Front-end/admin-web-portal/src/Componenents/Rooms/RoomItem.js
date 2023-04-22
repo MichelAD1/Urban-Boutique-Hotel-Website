@@ -223,6 +223,11 @@ const RoomItem = () => {
 				<div className='edit-container edit-container-large'>
 					<div className='edit-item'>
 						<h2>Room #{isValid.data.id}</h2>
+						{isValid && (
+							<button className='button' onClick={() => handleDelete()}>
+								Delete
+							</button>
+						)}
 						{!edit && (
 							<button className='button' onClick={() => setEdit(true)}>
 								Edit

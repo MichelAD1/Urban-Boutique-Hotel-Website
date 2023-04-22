@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -37,10 +38,24 @@ class CustomerController extends Controller
             $userinfo->username = $request->username;
         }
         if($request->has("email")){
-            $userinfo->email = $request->email;
+            // check if the new email already exists in the database
+            $existingUser = User::where('email', $request->email)->first();
+            if ($existingUser && $existingUser->id !== $userinfo->id) {
+                return response()->json([
+                    'message'=>"This email is already taken."
+                ], 409);
+            } else {
+                $userinfo->email = $request->email;
+            }
         }
         if($request->has("password")){
-            $userinfo->password = $request->password;
+            $userinfo->password = Hash::make($request->password);
+        }
+        if($request->has("dob")){
+            $userinfo->dob = $request->dob;
+        }
+        if($request->has("gender")){
+            $userinfo->gender = $request->gender;
         }
         if($request->has("phone_number")){
             $customer->phone_number = $request->phone_number;
@@ -50,8 +65,6 @@ class CustomerController extends Controller
                 'message'=>"Editted successfuly"
             ]);
         }
-
-
     }
     public function reserveRoom(Request $request){
         $user = Auth::user();

@@ -12,7 +12,7 @@ export default function Support() {
 				<div className='account-section'>
 					<h2 style={{ marginBottom: "1em" }}>Support</h2>
 					<div className='settings-container'>
-						<Link to='/options/preferences' className='settings-box'>
+						<Link to='/support/reviews' className='settings-box'>
 							<MdOutlineRateReview className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Reviews</h3>
@@ -20,7 +20,7 @@ export default function Support() {
 								<div className='settings-link'>Manage reviews</div>
 							</div>
 						</Link>
-						<Link to='/account/security' className='settings-box'>
+						<Link to='/support/feedback' className='settings-box'>
 							<VscFeedback className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Feedback</h3>
@@ -28,7 +28,7 @@ export default function Support() {
 								<div className='settings-link'>Manage photo gallery</div>
 							</div>
 						</Link>
-						<Link to='' className='settings-box'>
+						<Link to='/support/livechat' className='settings-box'>
 							<BsFillChatDotsFill className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Liva chat</h3>

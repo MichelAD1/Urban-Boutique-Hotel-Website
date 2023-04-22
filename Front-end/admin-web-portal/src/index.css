@@ -352,22 +352,22 @@ h6 {
   background-color: rgba(80, 81, 79, 0.1);
 }
 
-.inputs-section {
-  display: flex;
-  flex-direction: column;
-}
-
 .input-box {
-  width: 20em;
+  width: 100%;
   font-size: 0.9em;
-  padding: 0.2em 0.3em;
-  border-radius: 3px;
-  border: 1px solid var(--primaryColor);
-  margin-bottom: 0.95em;
+  padding: 0.4em 0.5em;
+  border-radius: 5px;
+  border: 1px solid rgba(172, 160, 160, 0.5);
 }
 
 .input-box:focus {
   outline: none;
+}
+
+.bio-input {
+  width: 100%;
+  min-height: 10em;
+  max-height: 14em;
 }
 
 .budget-section {
@@ -1002,22 +1002,6 @@ h6 {
   cursor: default;
 }
 
-.action-button {
-  text-align: left;
-  font-size: 1em;
-  color: #fff;
-  font-weight: 600;
-  background-color: #ff686b;
-  border: 3px solid #ff686b;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.action-button:hover {
-  color: #ff686b;
-  background-color: rgba(80, 81, 79, 0.01);
-}
-
 .pagination {
   position: absolute;
   bottom: 0;
@@ -1331,18 +1315,7 @@ h6 {
   cursor: pointer;
 }
 
-.bio-input {
-  min-width: 24.75em;
-  min-height: 15em;
-  max-width: 24.75em;
-  max-height: 15em;
 
-  margin-bottom: 1.4em;
-}
-
-.bio-label {
-  margin-bottom: 11em;
-}
 
 .delete-icon {
   position: absolute;

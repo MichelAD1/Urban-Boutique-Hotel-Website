@@ -20,7 +20,7 @@ const RoomItem = () => {
 	const loc = useLocation();
 	const navigate = useNavigate();
 
-	const [categories, setCategories] = useState([]);
+	const [edit, setEdit] = useState(false);
 
 	const [isValid, setIsValid] = useState(loc.state);
 
@@ -50,22 +50,7 @@ const RoomItem = () => {
 
 	useEffect(() => {
 		if (isValid) {
-			setName(isValid.data.name);
-			setDescription(isValid.data.description);
-			setImages(isValid.data.images);
-			setPrice(isValid.data.price);
-			setOldPrice(isValid.data.old_price);
-			setSize(isValid.data.size);
-			setMinibar(isValid.data.minibar);
-			setGuests(isValid.data.guests);
-			setType(isValid.data.type);
-			setShower(isValid.data.shower);
-			setTowels(isValid.data.towels);
-			setTv(isValid.data.tv);
-			setWifi(isValid.data.wifi);
-			setDesk(isValid.data.desk);
-			setBreakfast(isValid.data.breakfast);
-			setPets(isValid.data.pets);
+			handleCancel();
 		}
 	}, []);
 
@@ -155,6 +140,7 @@ const RoomItem = () => {
 		// 	});
 		// }
 		console.log("submit");
+		setEdit(false);
 	};
 
 	const handleEdit = (e) => {
@@ -172,6 +158,27 @@ const RoomItem = () => {
 		// 	window.location.reload();
 		// });
 		console.log("Edit");
+		setEdit(false);
+	};
+
+	const handleCancel = () => {
+		setEdit(false);
+		setName(isValid.data.name);
+		setDescription(isValid.data.description);
+		setImages(isValid.data.images);
+		setPrice(isValid.data.price);
+		setOldPrice(isValid.data.old_price);
+		setSize(isValid.data.size);
+		setMinibar(isValid.data.minibar);
+		setGuests(isValid.data.guests);
+		setType(isValid.data.type);
+		setShower(isValid.data.shower);
+		setTowels(isValid.data.towels);
+		setTv(isValid.data.tv);
+		setWifi(isValid.data.wifi);
+		setDesk(isValid.data.desk);
+		setBreakfast(isValid.data.breakfast);
+		setPets(isValid.data.pets);
 	};
 
 	// Modal
@@ -216,6 +223,24 @@ const RoomItem = () => {
 				<div className='edit-container edit-container-large'>
 					<div className='edit-item'>
 						<h2>Room #{isValid.data.id}</h2>
+						{!edit && (
+							<button className='button' onClick={() => setEdit(true)}>
+								Edit
+							</button>
+						)}
+						{edit && (
+							<>
+								<button className='save-button' type='submit'>
+									Save
+								</button>
+								<button
+									className='button'
+									type='button'
+									onClick={() => handleCancel()}>
+									Cancel
+								</button>
+							</>
+						)}
 					</div>
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
@@ -223,7 +248,15 @@ const RoomItem = () => {
 								<label>Name</label>
 							</div>
 							<div>
-								<p>{name}</p>
+								{!edit && <p>{name}</p>}
+								{edit && (
+									<input
+										type='text'
+										value={name}
+										onChange={(e) => setName(e.target.value)}
+										className='input-box'
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -233,7 +266,14 @@ const RoomItem = () => {
 								<label>Description</label>
 							</div>
 							<div>
-								<p>{description}</p>
+								{!edit && <p>{description}</p>}
+								{edit && (
+									<textarea
+										value={description}
+										onChange={(e) => setDescription(e.target.value)}
+										className='input-box bio-input'
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -243,7 +283,15 @@ const RoomItem = () => {
 								<label>Type</label>
 							</div>
 							<div>
-								<p>{type}</p>
+								{!edit && <p>{type}</p>}
+								{edit && (
+									<input
+										type='text'
+										value={type}
+										className='input-box'
+										onChange={(e) => setType(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>

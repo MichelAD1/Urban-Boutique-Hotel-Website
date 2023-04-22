@@ -15,16 +15,6 @@ const Options = () => {
 					<h2>Account settings</h2>
 					<h5>Manage your booking experience</h5>
 					<div className='settings-container'>
-						<Link to='/account/profile' className='settings-box'>
-							<TbShoppingCartDiscount className='settings-icon' />
-							<div className='settings-content'>
-								<h3>Promotions & Discounts</h3>
-								<p>Add or remove room promotions</p>
-								<div className='settings-link'>
-									Manage discounts and promotions
-								</div>
-							</div>
-						</Link>
 						<Link to='/options/preferences' className='settings-box'>
 							<IoMdOptions className='settings-icon' />
 							<div className='settings-content'>
@@ -67,14 +57,6 @@ const Options = () => {
 								<div className='settings-link'>
 									Manage Regulations & Disaster response plan
 								</div>
-							</div>
-						</Link>
-						<Link to='' className='settings-box'>
-							<FaUserLock className='settings-icon' />
-							<div className='settings-content'>
-								<h3>Staff access</h3>
-								<p>Give staff access and manage their permissions</p>
-								<div className='settings-link'>Manage staff access</div>
 							</div>
 						</Link>
 					</div>

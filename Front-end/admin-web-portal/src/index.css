@@ -1303,3 +1303,15 @@ h6 {
   }
 }
 /* End of employees */
+/* users */
+.users-container{
+  width: 100%;
+  height: 52em;
+}
+@media screen and (max-width: 1000px) {
+  .users-container{
+    overflow-x: scroll;
+    height: auto;
+  }
+}
+/* End of users */

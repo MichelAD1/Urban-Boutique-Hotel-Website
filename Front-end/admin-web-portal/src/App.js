@@ -14,6 +14,7 @@ import FeedbackItem from "./Componenents/Support/FeedbackItem";
 import UserItem from "./Componenents/Users/UserItem";
 import Options from "./Componenents/Options/Options";
 import Finance from "./Componenents/Finance/Finance";
+import Transacrtions from "./Componenents/Finance/Transactions";
 import Rooms from "./Componenents/Rooms/Rooms";
 import RoomItem from "./Componenents/Rooms/RoomItem";
 import MaintenanceRequest from "./Global/Components/Maintenance Request/Requests";
@@ -177,6 +178,17 @@ function App() {
 								<>
 									<Navbar />
 									<Finance />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/finance/transactions'
+							element={
+								<>
+									<Navbar />
+									<Transacrtions />
 								</>
 							}
 						/>

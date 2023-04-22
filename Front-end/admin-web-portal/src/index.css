@@ -346,6 +346,21 @@ h6 {
   background-color: rgba(172, 160, 160, 0.2);
 }
 
+.table-button{
+  color: var(--primaryColor);
+  border:none;
+  border-radius: 0.2em;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+  margin-left: 0.5em;
+  background-color: transparent;
+  font-weight: 600;
+}
+
+.table-button:hover{
+  background-color: rgba(172, 160, 160, 0.2);
+}
+
 .option-dropdown{
   padding: 0.5em 1em;
 }
@@ -453,7 +468,7 @@ h6 {
   color: var(--primaryColor);
 }
 
-.custom-modal div {
+.custom-modal > div {
   width: 30em;
   height: 15em;
   background-color: rgb(255, 255, 255);
@@ -1058,26 +1073,34 @@ h6 {
 
   height: 30em;
 
-  margin-bottom: 2em;
+  margin-bottom: 1em;
+
+  overflow: auto;
 }
 .request-header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7em 1em;
-  
+  flex-wrap: nowrap;
+  padding: 0.5em 1em;
+  background-color: rgba(172, 160, 160, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 .item-redirect{
-  color: rgb(80,81,79);
+  color: var(--primaryColor);
   font-weight: 500;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: underline;
+  
+  padding: 5px;
 }
 .title{
   color: var(--primaryColor);
   font-weight: 700;
-  font-size: 16px;   
+  font-size: 16px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -1315,3 +1338,8 @@ h6 {
   }
 }
 /* End of users */
+/* Finances page */
+.budget-container{
+  width: 100%;
+  padding: 2em 1em;
+}

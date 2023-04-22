@@ -5,6 +5,7 @@ import Footer from "../../Global/Components/Footer";
 
 //APIs
 import GetProfile from "../../api-client/Account/GetProfile";
+import EditProfile from "../../api-client/Account/EditProfile";
 
 const Profile = () => {
   const [user, setUser] = useState({});

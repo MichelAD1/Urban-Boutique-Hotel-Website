@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 // Components
 import Login from "./Components/Auth/Login";
+import Signup from "./Components/Auth/Signup";
 import ForgotPassword from "./Components/Auth/ForgotPassword";
 import Home from "./Components/Home/Home";
 import Rooms from "./Components/Rooms/Rooms";
@@ -26,144 +27,145 @@ import PageNotFound from "./Global/Components/PageNotFound";
 
 ReactModal.setAppElement("#root");
 function App() {
-	return (
-		<BrowserRouter>
-			<div className='App'>
-				<Routes>
-					<Route path='/login' element={<Login />} />
-					<Route path='/reset' element={<ForgotPassword />} />
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/reset" element={<ForgotPassword />} />
 
-					<Route
-						path='/'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Home />
-							</>
-						}
-					/>
-					<Route
-						path='/rooms'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Rooms />
-							</>
-						}
-					/>
-					<Route
-						path='/rooms/:roomname'
-						element={
-							<>
-								<ScrollToTop />
-								<RoomsItem />
-							</>
-						}
-					/>
-					<Route
-						path='/rooms/booking'
-						element={
-							<>
-								<ScrollToTop />
-								<Book />
-							</>
-						}
-					/>
-					<Route
-						path='/services'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Services />
-							</>
-						}
-					/>
-					<Route
-						path='/findus'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<FindUs />
-							</>
-						}
-					/>
-					<Route
-						path='/discover'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Discover />
-							</>
-						}
-					/>
-					<Route
-						path='/contact'
-						element={
-							<>
-								<ScrollToTop />
-								<Navbar />
-								<Contact />
-							</>
-						}
-					/>
-					<Route
-						path='/account'
-						element={
-							<>
-								<ScrollToTop />
-								<AccountNav />
-								<Account />
-							</>
-						}
-					/>
-					<Route
-						path='/account/profile'
-						element={
-							<>
-								<ScrollToTop />
-								<AccountNav />
-								<Profile />
-							</>
-						}
-					/>
-					<Route
-						path='/account/preferences'
-						element={
-							<>
-								<ScrollToTop />
-								<AccountNav />
-								<Preferences />
-							</>
-						}
-					/>
-					<Route
-						path='/account/security'
-						element={
-							<>
-								<ScrollToTop />
-								<AccountNav />
-								<Security />
-							</>
-						}
-					/>
-					<Route
-						path='*'
-						element={
-							<>
-								<ScrollToTop />
-								<PageNotFound />
-							</>
-						}
-					/>
-				</Routes>
-			</div>
-		</BrowserRouter>
-	);
+          <Route
+            path="/"
+            element={
+              <>
+                <ScrollToTop />
+                <Navbar />
+                <Home />
+              </>
+            }
+          />
+          <Route
+            path="/rooms"
+            element={
+              <>
+                <ScrollToTop />
+                <Navbar />
+                <Rooms />
+              </>
+            }
+          />
+          <Route
+            path="/rooms/:roomname"
+            element={
+              <>
+                <ScrollToTop />
+                <RoomsItem />
+              </>
+            }
+          />
+          <Route
+            path="/rooms/booking"
+            element={
+              <>
+                <ScrollToTop />
+                <Book />
+              </>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <>
+                <ScrollToTop />
+                <Navbar />
+                <Services />
+              </>
+            }
+          />
+          <Route
+            path="/findus"
+            element={
+              <>
+                <ScrollToTop />
+                <Navbar />
+                <FindUs />
+              </>
+            }
+          />
+          <Route
+            path="/discover"
+            element={
+              <>
+                <ScrollToTop />
+                <Navbar />
+                <Discover />
+              </>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <>
+                <ScrollToTop />
+                <Navbar />
+                <Contact />
+              </>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <>
+                <ScrollToTop />
+                <AccountNav />
+                <Account />
+              </>
+            }
+          />
+          <Route
+            path="/account/profile"
+            element={
+              <>
+                <ScrollToTop />
+                <AccountNav />
+                <Profile />
+              </>
+            }
+          />
+          <Route
+            path="/account/preferences"
+            element={
+              <>
+                <ScrollToTop />
+                <AccountNav />
+                <Preferences />
+              </>
+            }
+          />
+          <Route
+            path="/account/security"
+            element={
+              <>
+                <ScrollToTop />
+                <AccountNav />
+                <Security />
+              </>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <>
+                <ScrollToTop />
+                <PageNotFound />
+              </>
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;

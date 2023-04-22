@@ -32,7 +32,7 @@ const ReviewItem = () => {
 					<button className='button button-large'>Show on website</button>
 				</div>
 				<div className='edit-item'>
-					<div className='edit-info'>
+					<div className='edit-info info-large'>
 						<div>
 							<label>Username</label>
 						</div>
@@ -42,7 +42,7 @@ const ReviewItem = () => {
 					</div>
 				</div>
 				<div className='edit-item'>
-					<div className='edit-info'>
+					<div className='edit-info info-large'>
 						<div>
 							<label>Review</label>
 						</div>
@@ -52,7 +52,7 @@ const ReviewItem = () => {
 					</div>
 				</div>
 				<div className='edit-item'>
-					<div className='edit-info'>
+					<div className='edit-info info-large'>
 						<div>
 							<label>Rating</label>
 						</div>
@@ -62,7 +62,7 @@ const ReviewItem = () => {
 					</div>
 				</div>
 				<div className='edit-item'>
-					<div className='edit-info'>
+					<div className='edit-info info-large'>
 						<div>
 							<label>Date</label>
 						</div>

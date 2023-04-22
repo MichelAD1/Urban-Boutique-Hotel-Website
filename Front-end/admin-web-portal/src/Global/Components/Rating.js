@@ -6,7 +6,7 @@ const Rating = ({ rate }) => {
 	const emptyStar = Math.max(0, 5 - fillStar - halfStar);
 
 	return (
-		<div className='review-rating'>
+		<p className='review-rating'>
 			{[...Array(fillStar)].map((_, i) => (
 				<FaStar key={i} />
 			))}
@@ -16,7 +16,7 @@ const Rating = ({ rate }) => {
 			{[...Array(emptyStar)].map((_, i) => (
 				<FaRegStar key={i} />
 			))}
-		</div>
+		</p>
 	);
 };
 

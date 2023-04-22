@@ -308,9 +308,10 @@ h6 {
 }
 
 .input-dropdown {
+  width: 100%;
   border: 1px solid var(--primaryColor);
   color: var(--primaryColor);
-  border-radius: 1em;
+  border-radius: 0.5em;
   padding: 0.5em 1em;
 }
 
@@ -364,15 +365,6 @@ h6 {
 .table-button:hover{
   background-color: rgba(172, 160, 160, 0.2);
 }
-
-.option-dropdown{
-  padding: 0.5em 1em;
-}
-
-.option-dropdown:hover{
-  background-color: rgba(80, 81, 79, 0.1);
-}
-
 .input-box {
   width: 100%;
   font-size: 0.9em;

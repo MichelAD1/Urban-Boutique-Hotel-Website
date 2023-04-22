@@ -36,31 +36,31 @@ const Finance = () => {
 		]);
 		setTransactions([
 			{
-				reservation_number: 1234,
+				id: 1234,
 				customer_name: "John Smith",
 				amount: 1000.5,
 				date: "2023-04-22",
 			},
 			{
-				reservation_number: 5678,
+				id: 5678,
 				customer_name: "Jane Doe",
 				amount: 750.2,
 				date: "2023-05-10",
 			},
 			{
-				reservation_number: 9101,
+				id: 9101,
 				customer_name: "Bob Johnson",
 				amount: 2500.0,
 				date: "2023-06-15",
 			},
 			{
-				reservation_number: 1121,
+				id: 1121,
 				customer_name: "Alice Lee",
 				amount: 500.0,
 				date: "2023-07-01",
 			},
 			{
-				reservation_number: 3141,
+				id: 3141,
 				customer_name: "Charlie Brown",
 				amount: 1500.75,
 				date: "2023-08-20",
@@ -105,7 +105,7 @@ const Finance = () => {
 		() => [
 			{
 				Header: "Reservation number",
-				accessor: "reservation_number",
+				accessor: "id",
 			},
 			{
 				Header: "Customer name",
@@ -141,7 +141,7 @@ const Finance = () => {
 				<div className='request-box' style={{ maxHeight: "24em" }}>
 					<div className='request-header'>
 						<div className='title'>Revenue</div>
-						<Link to='/maintenance/requests' className='item-redirect'>
+						<Link to='/finance/transactions' className='item-redirect'>
 							View All
 						</Link>
 					</div>

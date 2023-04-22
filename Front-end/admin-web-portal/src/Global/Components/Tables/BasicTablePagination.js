@@ -38,7 +38,7 @@ const Table = ({ reqData, columns, redirect, err }) => {
 		} else if (redirect === "request") {
 			navigate("/maintenance/requests/info", { state: { data: row.original } });
 		} else if (redirect === "review") {
-			navigate("/support/review", { state: { data: row.original } });
+			navigate("/support/reviews/info", { state: { data: row.original } });
 		} else if (redirect === "feedback") {
 			navigate("/support/feedback", {
 				state: { data: row.original },

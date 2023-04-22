@@ -1343,3 +1343,16 @@ h6 {
   width: 100%;
   padding: 2em 1em;
 }
+/* end of Finances page */
+/* Reviews */
+.reviews-container{
+  width: 100%;
+  height: 52em;
+}
+@media screen and (max-width: 1000px) {
+  .reviews-container{
+    overflow-x: scroll;
+    height: auto;
+  }
+}
+/* End of reviews */

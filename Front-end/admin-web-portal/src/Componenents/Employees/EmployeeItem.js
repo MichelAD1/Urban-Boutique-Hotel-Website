@@ -28,11 +28,25 @@ const EmployeeItem = () => {
 
 	const [edit, setEdit] = useState(false);
 
+	const authorizations = [
+		"super admin",
+		"content manager",
+		"user manager",
+		"reservation manager",
+		"default employee",
+	];
+
 	useEffect(() => {
 		if (isValid) {
 			handleCancel();
+		} else {
+			setEdit(true);
 		}
 	}, []);
+
+	function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
 
 	function checkDatesAreEqual() {
 		const date1 = new Date(formattedDate());
@@ -210,7 +224,7 @@ const EmployeeItem = () => {
 		// 		});
 		// 	}
 		// }
-
+		setEdit(false);
 		console.log("Add Employee");
 	}
 
@@ -238,7 +252,7 @@ const EmployeeItem = () => {
 		// 		}
 		// 	});
 		// }
-
+		setEdit(false);
 		console.log("Edit Employee");
 	}
 
@@ -376,14 +390,18 @@ const EmployeeItem = () => {
 							<label>Gender</label>
 						</div>
 						<div>
-							{!edit && <p>{gender}sqft</p>}
+							{!edit && <p>{capitalizeFirstLetter(gender)}</p>}
 							{edit && (
-								<input
-									type='text'
+								<select
 									value={gender}
 									className='input-box'
-									onChange={(e) => setGender(e.target.value)}
-								/>
+									onChange={(e) => setGender(e.target.value)}>
+									<option value='' hidden>
+										Select gender
+									</option>
+									<option value='male'>Male</option>
+									<option value='female'>Female</option>
+								</select>
 							)}
 						</div>
 					</div>
@@ -412,14 +430,21 @@ const EmployeeItem = () => {
 							<label>Authorization</label>
 						</div>
 						<div>
-							{!edit && <p>{auth}</p>}
+							{!edit && <p>{capitalizeFirstLetter(auth)}</p>}
 							{edit && (
-								<input
-									type='text'
+								<select
 									value={auth}
 									className='input-box'
-									onChange={(e) => setAuth(e.target.value)}
-								/>
+									onChange={(e) => setAuth(e.target.value)}>
+									<option value='' hidden>
+										Select authorization
+									</option>
+									{authorizations.map((auth, index) => (
+										<option key={index} value={auth}>
+											{capitalizeFirstLetter(auth)}
+										</option>
+									))}
+								</select>
 							)}
 						</div>
 					</div>
@@ -433,7 +458,8 @@ const EmployeeItem = () => {
 							{!edit && <p>{password}</p>}
 							{edit && (
 								<input
-									type='text'
+									type='password'
+									placeholder='*************'
 									value={password}
 									className='input-box'
 									onChange={(e) => setPassword(e.target.value)}

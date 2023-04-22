@@ -38,8 +38,8 @@ export default function Employees() {
 				number: "555-1234",
 				position: "Software Engineer",
 				dob: "1985-01-01",
-				gender: "Male",
-				authorization: "Super Admin",
+				gender: "male",
+				authorization: "super admin",
 			},
 			{
 				id: 2,
@@ -49,8 +49,8 @@ export default function Employees() {
 				number: "555-5678",
 				position: "Product Manager",
 				dob: "1990-02-15",
-				gender: "Female",
-				authorization: "Content Manager",
+				gender: "female",
+				authorization: "content manager",
 			},
 			{
 				id: 3,
@@ -60,8 +60,8 @@ export default function Employees() {
 				number: "555-9012",
 				position: "UI/UX Designer",
 				dob: "1988-07-22",
-				gender: "Male",
-				authorization: "User Manager",
+				gender: "male",
+				authorization: "user manager",
 			},
 			{
 				id: 4,
@@ -71,8 +71,8 @@ export default function Employees() {
 				number: "555-3456",
 				position: "Data Analyst",
 				dob: "1992-05-09",
-				gender: "Female",
-				authorization: "Reservation Manager",
+				gender: "female",
+				authorization: "reservation manager",
 			},
 			{
 				id: 5,
@@ -82,8 +82,8 @@ export default function Employees() {
 				number: "555-7890",
 				position: "DevOps Engineer",
 				dob: "1986-11-30",
-				gender: "Male",
-				authorization: "Finance Manager",
+				gender: "male",
+				authorization: "finance manager",
 			},
 			{
 				id: 6,
@@ -93,8 +93,8 @@ export default function Employees() {
 				number: "555-2345",
 				position: "Marketing Manager",
 				dob: "1994-04-18",
-				gender: "Female",
-				authorization: "Default Employee",
+				gender: "female",
+				authorization: "default employee",
 			},
 			{
 				id: 7,
@@ -104,8 +104,8 @@ export default function Employees() {
 				number: "555-6789",
 				position: "Software Engineer",
 				dob: "1989-09-12",
-				gender: "Male",
-				authorization: "Default Employee",
+				gender: "male",
+				authorization: "default employee",
 			},
 		]);
 	}, []);

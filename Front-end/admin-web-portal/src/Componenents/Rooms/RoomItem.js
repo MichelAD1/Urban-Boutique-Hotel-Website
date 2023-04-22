@@ -301,7 +301,15 @@ const RoomItem = () => {
 								<label>Guests</label>
 							</div>
 							<div>
-								<p>{guests}</p>
+								{!edit && <p>{guests}</p>}
+								{edit && (
+									<input
+										type='number'
+										value={guests}
+										className='input-box'
+										onChange={(e) => setGuests(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -311,7 +319,15 @@ const RoomItem = () => {
 								<label>Size</label>
 							</div>
 							<div>
-								<p>{size}sqft</p>
+								{!edit && <p>{size}sqft</p>}
+								{edit && (
+									<input
+										type='number'
+										value={size}
+										className='input-box'
+										onChange={(e) => setSize(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -321,7 +337,15 @@ const RoomItem = () => {
 								<label>Price</label>
 							</div>
 							<div>
-								<p>${price}</p>
+								{!edit && <p>${price}</p>}
+								{edit && (
+									<input
+										type='number'
+										value={price}
+										className='input-box'
+										onChange={(e) => setPrice(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -331,7 +355,15 @@ const RoomItem = () => {
 								<label>Old price</label>
 							</div>
 							<div>
-								<p>${oldPrice}</p>
+								{!edit && <p>${oldPrice}</p>}
+								{edit && (
+									<input
+										type='number'
+										value={oldPrice}
+										className='input-box'
+										onChange={(e) => setOldPrice(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -341,38 +373,102 @@ const RoomItem = () => {
 								<label>Ammeneties</label>
 							</div>
 							<div className='amm-checkbox'>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={minibar} />
-									<label>Minibar</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={shower} />
-									<label>Shower</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={towels} />
-									<label>Towels</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={tv} />
-									<label>Tv</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={wifi} />
-									<label>WI-FI</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={desk} />
-									<label>Desk</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={breakfast} />
-									<label>Breakfast</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={pets} />
-									<label>Pets</label>
-								</div>
+								{(minibar || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={minibar}
+												onChange={(e) => setMinibar(e.target.checked)}
+											/>
+										)}
+										<label>Minibar</label>
+									</div>
+								)}
+								{(shower || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={shower}
+												onChange={(e) => setShower(e.target.checked)}
+											/>
+										)}
+										<label>Shower</label>
+									</div>
+								)}
+								{(towels || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={towels}
+												onChange={(e) => setTowels(e.target.checked)}
+											/>
+										)}
+										<label>Towels</label>
+									</div>
+								)}
+								{(tv || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={tv}
+												onChange={(e) => setTv(e.target.checked)}
+											/>
+										)}
+										<label>Tv</label>
+									</div>
+								)}
+								{(wifi || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={wifi}
+												onChange={(e) => setWifi(e.target.checked)}
+											/>
+										)}
+										<label>WI-FI</label>
+									</div>
+								)}
+								{(desk || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={desk}
+												onChange={(e) => setDesk(e.target.checked)}
+											/>
+										)}
+										<label>Desk</label>
+									</div>
+								)}
+								{(breakfast || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={breakfast}
+												onChange={(e) => setBreakfast(e.target.checked)}
+											/>
+										)}
+										<label>Breakfast</label>
+									</div>
+								)}
+								{(pets || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={pets}
+												onChange={(e) => setPets(e.target.checked)}
+											/>
+										)}
+										<label>Pets</label>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
@@ -384,26 +480,28 @@ const RoomItem = () => {
 								<h2>Gallery</h2>
 								<p>Add up to 9 images</p>
 							</div>
-							<div>
-								<label htmlFor='images-upload'>
-									<AiOutlinePlus className='add-button' />
-								</label>
-								<input
-									type='file'
-									multiple
-									onChange={(e) => addImage(e)}
-									id='images-upload'
-									name='images-upload'
-									className='upload-image'
-								/>
-							</div>
+							{edit && (
+								<div>
+									<label htmlFor='images-upload'>
+										<AiOutlinePlus className='add-button' />
+									</label>
+									<input
+										type='file'
+										multiple
+										onChange={(e) => addImage(e)}
+										id='images-upload'
+										name='images-upload'
+										className='upload-image'
+									/>
+								</div>
+							)}
 						</div>
 						<div className='gallery'>
 							{images.map((image) => {
 								return (
 									<div>
 										<img className='gallery-images' src={image} />
-										<RiDeleteBin2Fill className='delete-icon' />
+										{edit && <RiDeleteBin2Fill className='delete-icon' />}
 									</div>
 								);
 							})}

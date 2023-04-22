@@ -8,6 +8,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SupplyController;
+use App\Models\Maintenance_Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +30,11 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::get('logout',[AuthController::class, 'logout']);
         Route::post('refresh',[AuthController::class, 'refresh']);
     });
+
+
     Route::middleware(['auth', 'check.banned'])->group(function(){
         Route::group(['prefix'=>'room'],function(){
-            Route::middleware(['auth', 'check.employee'])->group(function(){
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
                 Route::post('add',[RoomController::class,'addRoom']);
                 Route::post('edit',[RoomController::class,'editRoom']);
                 Route::get('remove/{roomid}',[RoomController::class,'removeRoom']);
@@ -41,16 +44,37 @@ Route::group(["prefix"=>"v0.1"], function(){
                 });
 
             });
-            Route::middleware(['auth', 'check.customer'])->group(function(){
-                Route::post('reserve',[CustomerController::class,'reserveRoom']);
-                Route::post('editreservation',[CustomerController::class,'editReservation']);
-                Route::get('cancelreservation/{reservationid}',[CustomerController::class,'cancelReservation']);
-            });
-            Route::get('getrooms',[RoomController::class,'getRooms']);
-        });
-        Route::group(['prefix'=>'customer'],function(){
             Route::middleware(['auth', 'check.admin'])->group(function(){
+                Route::get('getcount',[RoomController::class,'getRoomCount']);
+            });
+            Route::group(['prefix'=>'reservation'],function(){
+                Route::middleware(['auth', 'check.reservationmanager'])->group(function(){
+                    Route::get('get',[RoomController::class,'getReservations']);
+                    Route::get('cancel/{reservationid}',[CustomerController::class,'cancelReservation']);
+                });
+                Route::middleware(['auth', 'check.admin'])->group(function(){
+                    Route::get('getcount',[RoomController::class,'getReservationsCount']);
+                    Route::get('getrevenue',[StaffController::class,'getRevenue']);
+                });
+                Route::middleware(['auth', 'check.customer'])->group(function(){
+                    Route::post('reserve',[CustomerController::class,'reserveRoom']);
+                    Route::post('edit',[CustomerController::class,'editReservation']);
+                    Route::get('cancel/{reservationid}',[CustomerController::class,'cancelReservation']);
+                });
+
+            });
+
+            Route::get('get',[RoomController::class,'getRooms']);
+        });
+
+
+
+        Route::group(['prefix'=>'customer'],function(){
+            Route::middleware(['auth', 'check.usermanager'])->group(function(){
                 Route::get('ban/{customerid}',[CustomerController::class,'banCustomer']);
+            });
+            Route::middleware(['auth', 'check.admin'])->group(function(){
+                Route::get('getcount',[CustomerController::class,'getCustomerCount']);
             });
             Route::middleware(['auth', 'check.customer'])->group(function(){
                 Route::post('editinfo',[CustomerController::class,'editInformation']);
@@ -59,16 +83,22 @@ Route::group(["prefix"=>"v0.1"], function(){
             });
 
         });
-        Route::group(['prefix'=>'employee'],function(){
+
+
+
+        Route::group(['prefix'=>'staff'],function(){
             Route::middleware(['auth', 'check.employee'])->group(function(){
 
-                Route::post('editinfo',[CustomerController::class,'editInformation']);
+                Route::post('editinfo',[StaffController::class,'editInformation']);
             });
             Route::middleware(['auth', 'check.admin'])->group(function(){
-                Route::get('ban/{customerid}',[CustomerController::class,'banCustomer']);
+                Route::get('ban/{employeeid}',[StaffController::class,'banEmployee']);
             });
 
         });
+
+
+
         Route::group(['prefix'=>'discount'],function(){
             Route::middleware(['auth', 'check.employee'])->group(function(){
                 Route::post("addwhole",[DiscountController::class,'addWholeDiscount']);
@@ -87,6 +117,9 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::get("get",[DiscountController::class,'getDiscountedRooms']);
 
         });
+
+
+
         Route::group(['prefix'=>'faq'],function(){
             Route::middleware(['auth', 'check.employee'])->group(function(){
                 Route::post('add',[FAQController::class,'addFAQ']);
@@ -102,6 +135,9 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::get('get',[FAQController::class,'getFAQs']);
 
         });
+
+
+
         Route::group(['prefix'=>'policy'],function(){
             Route::middleware(['auth', 'check.employee'])->group(function(){
                 Route::post('add',[PolicyController::class,'addPolicy']);
@@ -117,6 +153,9 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::get('get',[PolicyController::class,'getPolicies']);
 
         });
+
+
+
         Route::group(['prefix'=>'supply'],function(){
             Route::middleware(['auth', 'check.employee'])->group(function(){
                 Route::post('add',[SupplyController::class,'addNewSupplyItem']);
@@ -133,6 +172,9 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::get('get',[SupplyController::class,'getSupplies']);
 
         });
+
+
+
         Route::group(['prefix'=>'supply'],function(){
             Route::middleware(['auth', 'check.employee'])->group(function(){
 
@@ -148,6 +190,20 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::get('get',[ReviewController::class,'getReviews']);
 
         });
+
+        Route::group(['prefix'=>'maintenance'],function(){
+            Route::middleware(['auth', 'check.usermanager'])->group(function(){
+                Route::get('remove/{requestid}',[Maintenance_Request::class,'removeRequest']);
+
+            });
+            Route::middleware(['auth', 'check.customer'])->group(function(){
+                Route::post('add',[Maintenance_Request::class,'addRequest']);
+            });
+            Route::get('get',[ReviewController::class,'getRequests']);
+
+
+        });
+
 
 
     });

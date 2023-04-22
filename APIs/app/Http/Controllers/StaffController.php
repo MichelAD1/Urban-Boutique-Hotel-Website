@@ -6,13 +6,13 @@ use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class StaffController extends Controller
 {
     public function editInformation(Request $request){
-        $user = Auth::user();
-        $userinfo = User::find($user->id);
-        $employee = Staff::where("user_id",$user->id)->first();
+        $userinfo = User::find($request->employeeid);
+        $employee = Staff::where("user_id",$userinfo->id)->first();
         if($request->has("username")){
             $userinfo->username=$request->username;
         }
@@ -42,5 +42,10 @@ class StaffController extends Controller
             return "sucess";
         }
         return "Failed";
+    }
+    public function getRevenue(){
+        $revenue = DB::table('customer_reserves_room')->join("rooms",'rooms.id','=','customer_reserves_room.room_id')
+                    ->sum("rooms.price");
+        return $revenue;
     }
 }

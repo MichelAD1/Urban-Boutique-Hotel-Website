@@ -40,6 +40,7 @@ const Reviews = () => {
 				rating: "5",
 				review: "This is a review",
 				date: "2021-01-01",
+				reply: "",
 			},
 			{
 				id: 2,
@@ -47,6 +48,7 @@ const Reviews = () => {
 				rating: "4",
 				review: "This is a review",
 				date: "2021-01-01",
+				reply: "",
 			},
 			{
 				id: 3,
@@ -54,6 +56,7 @@ const Reviews = () => {
 				rating: "3",
 				review: "This is a review",
 				date: "2021-01-01",
+				reply: "This is a reply",
 			},
 			{
 				id: 4,
@@ -61,6 +64,7 @@ const Reviews = () => {
 				rating: "2",
 				review: "This is a review",
 				date: "2021-01-01",
+				reply: "This is a reply",
 			},
 			{
 				id: 5,
@@ -68,6 +72,7 @@ const Reviews = () => {
 				rating: "1",
 				review: "This is a review",
 				date: "2021-01-01",
+				reply: "This is a reply",
 			},
 		]);
 	}, []);

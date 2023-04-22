@@ -7,17 +7,26 @@ import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
   const navigation = useNavigate();
-  const token = localStorage.getItem("token");
-  const location = useLocation();
-  const [username, setUser] = useState(
-    localStorage.getItem("username").replace(/"/g, "")
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const path = useLocation().pathname;
   const [active, setActive] = useState(false);
+  const [username, setUsername] = useState("");
   const [windowSize, setWindowSize] = useState([
     window.innerWidth,
     window.innerHeight,
   ]);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+  useEffect(() => {
+    setUsername(localStorage.getItem("username"));
+  }, [isLoggedIn]);
+
   useEffect(() => {
     const handleWindowResize = () => {
       setWindowSize([window.innerWidth, window.innerHeight]);
@@ -60,7 +69,7 @@ const Navbar = () => {
     }
   };
   const handleAccount = () => {
-    navigation("/account", { state: { data: user } });
+    navigation("/account");
   };
 
   const handleClose = () => {
@@ -76,7 +85,6 @@ const Navbar = () => {
       login_btn.style.pointerEvents = "none";
     }
   };
-
   return (
     <nav className="navbar" id="navbar">
       <Link to="/">
@@ -117,13 +125,13 @@ const Navbar = () => {
         </Link>
       </ul>
       <div className="login-section">
-        {username ? (
+        {isLoggedIn ? (
           <div className="login-btn" id="login-btn">
             <div className="nav-link" onClick={handleAccount}>
               <div className="login-img">
                 <HiUserCircle className="nav-image" />
               </div>
-              <div className="routes">{username}</div>
+              <div className="routes">{username.replace(/"/g, "")}</div>
             </div>
           </div>
         ) : (

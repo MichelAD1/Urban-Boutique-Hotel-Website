@@ -3,22 +3,48 @@ import ReactModal from "react-modal";
 
 // Componenents
 import Navbar from "./Componenents/NavBar/Navbar";
+
+// ******** Login ********
 import Login from "./Componenents/LogIn/Login";
+
+// ******** Home ********
 import Home from "./Componenents/Home/Home";
+
+// ******** Employees ********
 import Employees from "./Componenents/Employees/Employees";
 import EmployeeItem from "./Componenents/Employees/EmployeeItem";
+
+// ******** Users ********
 import Users from "./Componenents/Users/Users";
-import Support from "./Componenents/Support/Support";
-import ReviewItem from "./Componenents/Support/ReviewItem";
-import FeedbackItem from "./Componenents/Support/FeedbackItem";
 import UserItem from "./Componenents/Users/UserItem";
+
+// ******** Support ********
+import Support from "./Componenents/Support/Support";
+// Reviews
+import Reviews from "./Componenents/Support/Reviews/Reviews";
+import ReviewItem from "./Componenents/Support/Reviews/ReviewItem";
+//Feedback
+import Feedback from "./Componenents/Support/Feedback/Feedback";
+import FeedbackItem from "./Componenents/Support/Feedback/FeedbackItem";
+// Live Chat
+import LiveChat from "./Componenents/Support/Live Chat/LiveChat";
+
+// ******** Options ********
 import Options from "./Componenents/Options/Options";
+
+// ******** Finance ********
 import Finance from "./Componenents/Finance/Finance";
 import Transacrtions from "./Componenents/Finance/Transactions";
+
+// ******** Rooms ********
 import Rooms from "./Componenents/Rooms/Rooms";
 import RoomItem from "./Componenents/Rooms/RoomItem";
+
+// ******** Global ********
 import MaintenanceRequest from "./Global/Components/Maintenance Request/Requests";
 import RequestItem from "./Global/Components/Maintenance Request/RequestItem";
+
+// ******** Private Routes ********
 import PrivateRoute from "./Routes/PrivateRoutes";
 
 ReactModal.setAppElement("#root");
@@ -74,7 +100,18 @@ function App() {
 					</Route>
 					<Route exact path='/' element={<PrivateRoute />}>
 						<Route
-							path='/support/review'
+							path='/support/reviews'
+							element={
+								<>
+									<Navbar />
+									<Reviews />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/support/reviews/info'
 							element={
 								<>
 									<Navbar />
@@ -89,7 +126,29 @@ function App() {
 							element={
 								<>
 									<Navbar />
+									<Feedback />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/support/feedback/info'
+							element={
+								<>
+									<Navbar />
 									<FeedbackItem />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/support/livechat'
+							element={
+								<>
+									<Navbar />
+									<LiveChat />
 								</>
 							}
 						/>

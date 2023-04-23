@@ -18,7 +18,11 @@ const OptionsCard = (reqData) => {
 	};
 
 	const redirect = () => {
-		navigate("/options/faqs_policies/info", { state: { data: data } });
+		if (data.tag === "policy" || data.tag === "faq") {
+			navigate("/options/faqs_policies/info", { state: { data: data } });
+		} else if (data.tag === "regulation" || data.tag === "disaster") {
+			navigate("/options/regulation_disaster/info", { state: { data: data } });
+		}
 	};
 
 	return (

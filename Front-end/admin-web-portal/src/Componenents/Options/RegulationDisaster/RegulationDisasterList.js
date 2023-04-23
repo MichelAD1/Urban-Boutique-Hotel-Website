@@ -109,7 +109,7 @@ const RegulationDisasterList = () => {
 
 	const handleRedirect = (item) => {
 		closeModal();
-		// navigate("/options/faqs_policies/info", item);
+		navigate("/options/regulation_disaster/info", item);
 	};
 
 	return (
@@ -172,15 +172,15 @@ const RegulationDisasterList = () => {
 					<button
 						onClick={() =>
 							handleRedirect({
-								state: { tag: "Disaster response plan", type: "add" },
+								state: { tag: "disaster", type: "add" },
 							})
 						}>
-						Disaster response plan
+						Disaster
 					</button>
 					<button
 						style={{ backgroundColor: "#aca0a0", color: "#fff" }}
 						onClick={() =>
-							handleRedirect({ state: { tag: "Regulation", type: "add" } })
+							handleRedirect({ state: { tag: "regulation", type: "add" } })
 						}>
 						Regulation
 					</button>

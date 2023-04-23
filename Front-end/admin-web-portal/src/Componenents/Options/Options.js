@@ -23,7 +23,7 @@ const Options = () => {
 								<div className='settings-link'>Manage preferences</div>
 							</div>
 						</Link>
-						<Link to='/account/security' className='settings-box'>
+						<Link to='/options/gallery' className='settings-box'>
 							<BiPhotoAlbum className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Photo gallery</h3>
@@ -39,7 +39,7 @@ const Options = () => {
 								<div className='settings-link'>Manage email marketing</div>
 							</div>
 						</Link>
-						<Link to='' className='settings-box'>
+						<Link to='/options/faqs_policies' className='settings-box'>
 							<FaQuestion className='settings-icon' />
 							<div className='settings-content'>
 								<h3>FAQ & Policies</h3>
@@ -47,7 +47,7 @@ const Options = () => {
 								<div className='settings-link'>Manage FAQ & Policies</div>
 							</div>
 						</Link>
-						<Link to='' className='settings-box'>
+						<Link to='/options/regulation_disaster' className='settings-box'>
 							<GoLaw className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Regulations & Disaster response plan</h3>

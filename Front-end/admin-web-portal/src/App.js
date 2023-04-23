@@ -35,10 +35,16 @@ import LiveChat from "./Componenents/Support/Live Chat/LiveChat";
 
 // ******** Options ********
 import Options from "./Componenents/Options/Options";
+import Preferences from "./Componenents/Options/Preferences";
+import PhotoGallery from "./Componenents/Options/PhotoGallery";
+import FaqPolicyList from "./Componenents/Options/FaqPolicy/FaqPolicyList";
+import FaqPolicyItem from "./Componenents/Options/FaqPolicy/FaqPolicyItem";
+import RegulationDisasterList from "./Componenents/Options/RegulationDisaster/RegulationDisasterList";
+import RegulationDisasterItem from "./Componenents/Options/RegulationDisaster/RegulationDisasterItem";
 
 // ******** Finance ********
 import Finance from "./Componenents/Finance/Finance";
-import Transacrtions from "./Componenents/Finance/Transactions";
+import Transactions from "./Componenents/Finance/Transactions";
 
 // ******** Rooms ********
 import Rooms from "./Componenents/Rooms/Rooms";
@@ -76,6 +82,72 @@ function App() {
 								<>
 									<Navbar />
 									<Options />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/preferences'
+							element={
+								<>
+									<Navbar />
+									<Preferences />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/gallery'
+							element={
+								<>
+									<Navbar />
+									<PhotoGallery />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/faqs_policies'
+							element={
+								<>
+									<Navbar />
+									<FaqPolicyList />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/faqs_policies/info'
+							element={
+								<>
+									<Navbar />
+									<FaqPolicyItem />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/regulation_disaster'
+							element={
+								<>
+									<Navbar />
+									<RegulationDisasterList />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/regulation_disaster/info'
+							element={
+								<>
+									<Navbar />
+									<RegulationDisasterItem />
 								</>
 							}
 						/>
@@ -273,7 +345,7 @@ function App() {
 							element={
 								<>
 									<Navbar />
-									<Transacrtions />
+									<Transactions />
 								</>
 							}
 						/>

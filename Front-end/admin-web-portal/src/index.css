@@ -172,11 +172,10 @@ h6 {
 .list-box {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 
-  height: 90%;
-  width: 100%;
+  width: 75%;
 }
 
 .add-button {
@@ -306,6 +305,24 @@ h6 {
   accent-color: var(--primaryColor);
   transform: scale(1.5);
 }
+.amm-checkbox span{
+  font-size: 0.7em;
+  background-color: var(--secondaryColor);
+  color: #fff;
+  padding: 0.2em 0.5em;
+  border-radius: 0.2em;
+  margin-left: 0.5em;
+}
+
+.currencies{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.currencies div{
+  width: 20em;
+}
 
 .input-dropdown {
   width: 100%;
@@ -349,6 +366,18 @@ h6 {
 
 .button:hover{
   background-color: rgba(172, 160, 160, 0.2);
+}
+
+.close-button{
+  font-size: 32px;
+  color: var(--primaryColor);
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.close-button:hover{
+  background-color: rgba(172, 160, 160, 0.5);
 }
 
 .table-button{
@@ -516,6 +545,15 @@ h6 {
 }
 .custom-modal button:last-child:hover {
   background-color: #e5e4e4;
+}
+
+.modal-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  width: 100%;
 }
 
 .custom-modal input {
@@ -1144,12 +1182,11 @@ h6 {
 
 
 .rooms-container{
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
 }
 
 .room-card {
@@ -1231,6 +1268,12 @@ h6 {
 
   background-color: rgba(172, 160, 160, 0.2);
   border: 1px solid rgba(80, 81, 79, 0.2);
+  
+}
+
+.photo-gallery{
+  width: 100%;
+  height: 45em;
 }
 
 .gallery-header {
@@ -1355,3 +1398,63 @@ h6 {
   color: var(--secondaryColor);
 }
 /* End of reviews */
+/* Faqs and policies */
+.options-list{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.options-card{
+  width: 22em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1em 1em;
+  margin: 1em 1em;
+  background-color: transparent;
+  border: 1px solid rgba(80, 81, 79, 0.2);
+  border-radius: 0.5em;
+
+  text-decoration: none;
+
+  color: var(--primaryColor);
+}
+.options-card h2{
+  margin: 0;
+  font-size: 0.9em;
+}
+.options-card p{
+  margin: 0;
+  font-size: 0.9em;
+  word-break: keep-all;
+  word-wrap: break-word;
+}
+
+.options-card span{
+  font-size: 0.8em;
+  background-color: var(--secondaryColor);
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  color: #fff;
+}
+
+.options-card:hover{
+  color: var(--secondaryColor);
+  cursor: pointer;
+}
+
+.options-card-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+  width: 100%;
+}
+/* End of faqs and policies */

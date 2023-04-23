@@ -40,6 +40,7 @@ import PhotoGallery from "./Componenents/Options/PhotoGallery";
 import FaqPolicyList from "./Componenents/Options/FaqPolicy/FaqPolicyList";
 import FaqPolicyItem from "./Componenents/Options/FaqPolicy/FaqPolicyItem";
 import RegulationDisasterList from "./Componenents/Options/RegulationDisaster/RegulationDisasterList";
+import RegulationDisasterItem from "./Componenents/Options/RegulationDisaster/RegulationDisasterItem";
 
 // ******** Finance ********
 import Finance from "./Componenents/Finance/Finance";
@@ -136,6 +137,17 @@ function App() {
 								<>
 									<Navbar />
 									<RegulationDisasterList />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/regulation_disaster/info'
+							element={
+								<>
+									<Navbar />
+									<RegulationDisasterItem />
 								</>
 							}
 						/>

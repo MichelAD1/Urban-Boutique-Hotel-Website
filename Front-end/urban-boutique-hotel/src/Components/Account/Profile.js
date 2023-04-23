@@ -107,6 +107,7 @@ const Profile = () => {
     setEdit(true);
   };
   const handleCancel = () => {
+    setErr("");
     setEdit(false);
     setUsername(user.username);
     setEmail(user.email);
@@ -115,6 +116,28 @@ const Profile = () => {
     setGender(user.gender);
   };
   const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErr("");
+    if (!validateUsername(username)) {
+      if (username.length === 0) {
+        setErr("Username field required");
+      } else {
+        setErr("Please enter a username that is not too long");
+      }
+      return;
+    }
+    if (!validateEmail(email)) {
+      setErr("Please enter a valid email address");
+      return;
+    }
+    if (!validatePhoneNumber(tmp_number)) {
+      setErr("Please enter a valid phone number");
+      return;
+    }
+    if (!validateDate(dob)) {
+      setErr("Invalid date of birth");
+      return;
+    }
     const phone_number = countryCode + " " + tmp_number;
     event.preventDefault();
     const data = {
@@ -124,23 +147,25 @@ const Profile = () => {
       dob,
       phone_number,
     };
-    try {
-      const response = await EditProfile(data);
-      setUser({
-        ...user,
-        username,
-        email,
-        gender,
-        dob,
-      });
-      setUserDetails({
-        ...user_details,
-        phone_number,
-      });
-      setEdit(false);
-    } catch (error) {
-      console.log(error);
-    }
+    let response = EditProfile(data);
+    response.then((res) => {
+      if (res.status === 409) {
+        setErr("The email has already been taken");
+      } else {
+        setUser({
+          ...user,
+          username,
+          email,
+          gender,
+          dob,
+        });
+        setUserDetails({
+          ...user_details,
+          phone_number,
+        });
+        setEdit(false);
+      }
+    });
   };
   function formatDate(dateString) {
     if (!dateString || !dateString.includes("-")) {
@@ -158,7 +183,7 @@ const Profile = () => {
             <div className="profile-title">
               <h2>Personal information</h2>
               <h5>Update your personal information</h5>
-              <div className="login-error">{err}</div>
+              <div className="edit-error">{err}</div>
             </div>
             <div>
               {edit && (

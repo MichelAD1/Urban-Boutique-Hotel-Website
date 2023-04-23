@@ -254,6 +254,12 @@ h6 {
   padding: 3%;
   color: red;
 }
+.edit-error {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 2%;
+  color: red;
+}
 .login-signup {
   display: flex;
   flex-direction: row;

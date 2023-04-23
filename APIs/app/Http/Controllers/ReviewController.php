@@ -13,7 +13,8 @@ class ReviewController extends Controller
         Review::create([
             'customer_id'=>$user->id,
             'rating'=>$request->rating,
-            'comment'=>$request->comment
+            'comment'=>$request->comment,
+            'featured'=>false
         ]);
         return "success";
     }

@@ -193,13 +193,14 @@ Route::group(["prefix"=>"v0.1"], function(){
 
         Route::group(['prefix'=>'maintenance'],function(){
             Route::middleware(['auth', 'check.usermanager'])->group(function(){
-                Route::get('remove/{requestid}',[Maintenance_Request::class,'removeRequest']);
-
+                Route::get('complete/{requestid}',[Maintenance_Request::class,'completeRequest']);
+                Route::get('get',[ReviewController::class,'getPendingRequests']);
+                Route::get('getall',[ReviewController::class,'getAllRequests']);
             });
             Route::middleware(['auth', 'check.customer'])->group(function(){
                 Route::post('add',[Maintenance_Request::class,'addRequest']);
             });
-            Route::get('get',[ReviewController::class,'getRequests']);
+
 
 
         });

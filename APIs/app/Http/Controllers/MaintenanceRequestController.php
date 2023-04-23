@@ -16,12 +16,17 @@ class MaintenanceRequestController extends Controller
         ]);
         return "success";
     }
-    public function removeRequest($requestid){
-        Maintenance_Request::find($requestid)->delete();
+    public function completeRequest($requestid){
+        $maintenance=Maintenance_Request::find($requestid);
+        $maintenance->status="completed";
+        $maintenance->save();
         return "Success";
     }
 
-    public function getRequests(){
+    public function getPendingRequests(){
+        return Maintenance_Request::where('status','=','pending')->get();
+    }
+    public function getAllRequests(){
         return Maintenance_Request::all();
     }
 }

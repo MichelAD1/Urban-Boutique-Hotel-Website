@@ -55,6 +55,7 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::middleware(['auth', 'check.customer'])->group(function(){
                 Route::post('editinfo',[CustomerController::class,'editInformation']);
                 Route::get('getinfo',[CustomerController::class,'getInformation']);
+                Route::get('remove',[CustomerController::class,'removeAccount']);
 
 
             });

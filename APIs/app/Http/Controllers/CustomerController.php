@@ -99,6 +99,27 @@ class CustomerController extends Controller
         }
         return "Failed";
     }
+    public function removeAccount()
+{
+    $user = Auth::user();
+
+    // Delete all customer reservations
+    DB::table('customer_reserves_room')->where('customer_id', $user->id)->delete();
+    DB::table('reviews')->where('customer_id', $user->id)->delete();
+
+    // Delete customer details
+    Customer::where('user_id', $user->id)->delete();
+
+    // Delete user account
+    User::where('id', $user->id)->delete();
+
+    // Logout user
+    Auth::logout();
+
+    return response()->json([
+        'message' => 'Account removed successfully'
+    ]);
+}
 
 
 

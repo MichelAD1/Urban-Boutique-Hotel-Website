@@ -79,6 +79,21 @@ const FaqPolicyList = () => {
 		return mergedAndTaggedData;
 	};
 
+	const capitalize = (str) => {
+		if (str) {
+			return str.charAt(0).toUpperCase() + str.slice(1);
+		}
+	};
+
+	const filterByTag = (data) => {
+		if (filter) {
+			return data.filter((item) => item.tag === filter.toLowerCase());
+		}
+		return data;
+	};
+
+	const tags = ["Policy", "FAQ"];
+
 	return (
 		<div className='container'>
 			<div className='searchAndFilter'>
@@ -94,7 +109,12 @@ const FaqPolicyList = () => {
 				<select
 					className='filterDropDown'
 					onChange={(e) => setFilter(e.target.value)}>
-					<option value=''>Filter by category</option>
+					<option value=''>All</option>
+					{tags.map((tag) => (
+						<option key={tag} value={tag}>
+							{capitalize(tag)}
+						</option>
+					))}
 				</select>
 				<Link to='/room/profile'>
 					<AiOutlinePlus className='add-button' />
@@ -102,7 +122,7 @@ const FaqPolicyList = () => {
 			</div>
 			<div className='options-list'>
 				<div className='list-box'>
-					{data.map((item, i) => (
+					{filterByTag(data).map((item, i) => (
 						<OptionsCard reqData={item} key={i} />
 					))}
 				</div>

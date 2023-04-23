@@ -1399,6 +1399,8 @@ h6 {
   border: 1px solid rgba(80, 81, 79, 0.2);
   border-radius: 0.5em;
 
+  text-decoration: none;
+
   color: var(--primaryColor);
 }
 .options-card h2{
@@ -1423,7 +1425,6 @@ h6 {
 .options-card:hover{
   color: var(--secondaryColor);
   cursor: pointer;
-  text-decoration: none;
 }
 
 .options-card-header{

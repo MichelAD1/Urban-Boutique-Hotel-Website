@@ -38,10 +38,11 @@ import Options from "./Componenents/Options/Options";
 import Preferences from "./Componenents/Options/Preferences";
 import PhotoGallery from "./Componenents/Options/PhotoGallery";
 import FaqPolicyList from "./Componenents/Options/FaqPolicy/FaqPolicyList";
+import FaqPolicyItem from "./Componenents/Options/FaqPolicy/FaqPolicyItem";
 
 // ******** Finance ********
 import Finance from "./Componenents/Finance/Finance";
-import Transacrtions from "./Componenents/Finance/Transactions";
+import Transactions from "./Componenents/Finance/Transactions";
 
 // ******** Rooms ********
 import Rooms from "./Componenents/Rooms/Rooms";
@@ -112,6 +113,17 @@ function App() {
 								<>
 									<Navbar />
 									<FaqPolicyList />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/faqs_policies/info'
+							element={
+								<>
+									<Navbar />
+									<FaqPolicyItem />
 								</>
 							}
 						/>
@@ -309,7 +321,7 @@ function App() {
 							element={
 								<>
 									<Navbar />
-									<Transacrtions />
+									<Transactions />
 								</>
 							}
 						/>

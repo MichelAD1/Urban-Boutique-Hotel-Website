@@ -368,6 +368,18 @@ h6 {
   background-color: rgba(172, 160, 160, 0.2);
 }
 
+.close-button{
+  font-size: 32px;
+  color: var(--primaryColor);
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.close-button:hover{
+  background-color: rgba(172, 160, 160, 0.5);
+}
+
 .table-button{
   color: var(--primaryColor);
   border:none;
@@ -533,6 +545,15 @@ h6 {
 }
 .custom-modal button:last-child:hover {
   background-color: #e5e4e4;
+}
+
+.modal-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  width: 100%;
 }
 
 .custom-modal input {

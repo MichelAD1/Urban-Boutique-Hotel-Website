@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // Icons
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import search_icon from "../../../assets/icons/search.svg";
 
 // Components
 import OptionsCard from "../../../Global/Components/OptionsCard";
+import ReactModal from "react-modal";
 
 const FaqPolicyList = () => {
 	const [data, setData] = useState([]);
@@ -94,6 +95,21 @@ const FaqPolicyList = () => {
 
 	const tags = ["Policy", "FAQ"];
 
+	// Modal
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
+
+	const handleRedirect = (item) => {
+		console.log(item);
+		closeModal();
+	};
+
 	return (
 		<div className='container'>
 			<div className='searchAndFilter'>
@@ -116,9 +132,9 @@ const FaqPolicyList = () => {
 						</option>
 					))}
 				</select>
-				<Link to='/room/profile'>
+				<div onClick={() => openModal()}>
 					<AiOutlinePlus className='add-button' />
-				</Link>
+				</div>
 			</div>
 			<div className='options-list'>
 				<div className='list-box'>
@@ -127,6 +143,40 @@ const FaqPolicyList = () => {
 					))}
 				</div>
 			</div>
+			<ReactModal
+				className='custom-modal'
+				isOpen={isModalOpen}
+				style={{
+					overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+					content: {
+						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						border: "none",
+						width: "100%",
+						height: "100%",
+						margin: "auto",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						zIndex: "100",
+					},
+				}}>
+				<div>
+					<div className='modal-header'>
+						<h1>Choose option</h1>
+						<AiOutlineClose className='close-button' onClick={closeModal} />
+					</div>
+
+					<p>Which option do you want to add?</p>
+					<button onClick={() => handleRedirect({ state: { tag: "faq" } })}>
+						FAQ
+					</button>
+					<button
+						style={{ backgroundColor: "#aca0a0", color: "#fff" }}
+						onClick={() => handleRedirect({ state: { tag: "Policy" } })}>
+						Policy
+					</button>
+				</div>
+			</ReactModal>
 		</div>
 	);
 };

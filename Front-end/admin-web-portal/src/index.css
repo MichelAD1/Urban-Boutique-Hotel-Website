@@ -1388,12 +1388,12 @@ h6 {
   flex-wrap: wrap;
 }
 .options-card{
-  width: 16em;
+  width: 20em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 2em;
+  padding: 1em 1em;
   margin: 1em 1em;
   background-color: transparent;
   border: 1px solid rgba(80, 81, 79, 0.2);
@@ -1403,12 +1403,36 @@ h6 {
 }
 .options-card h2{
   margin: 0;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 .options-card p{
   margin: 0;
   font-size: 0.9em;
   word-break: keep-all;
   word-wrap: break-word;
+}
+
+.options-card span{
+  font-size: 0.8em;
+  background-color: var(--secondaryColor);
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  color: #fff;
+}
+
+.options-card:hover{
+  color: var(--secondaryColor);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.options-card-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+  width: 100%;
 }
 /* End of faqs and policies */

@@ -111,26 +111,24 @@ export default function Users() {
 
 	return (
 		<div className='container'>
-			<div className='list-box'>
-				<div className='searchAndFilter'>
-					<div className='search-bar full'>
-						<img src={search_icon} alt='' className='search-icon' />
-						<input
-							className='search-input'
-							type='text'
-							placeholder='Search'
-							onChange={(e) => setQuery(e.target.value)}
-						/>
-					</div>
-				</div>
-				<div className='users-container'>
-					<BasicTable
-						reqData={data}
-						columns={columns}
-						redirect={"user"}
-						err={err}
+			<div className='searchAndFilter'>
+				<div className='search-bar full'>
+					<img src={search_icon} alt='' className='search-icon' />
+					<input
+						className='search-input'
+						type='text'
+						placeholder='Search'
+						onChange={(e) => setQuery(e.target.value)}
 					/>
 				</div>
+			</div>
+			<div className='users-container'>
+				<BasicTable
+					reqData={data}
+					columns={columns}
+					redirect={"user"}
+					err={err}
+				/>
 			</div>
 		</div>
 	);

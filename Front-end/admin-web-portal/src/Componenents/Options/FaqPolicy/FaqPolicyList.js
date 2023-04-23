@@ -169,12 +169,17 @@ const FaqPolicyList = () => {
 					</div>
 
 					<p>Which option do you want to add?</p>
-					<button onClick={() => handleRedirect({ state: { tag: "faq" } })}>
+					<button
+						onClick={() =>
+							handleRedirect({ state: { tag: "faq", type: "add" } })
+						}>
 						FAQ
 					</button>
 					<button
 						style={{ backgroundColor: "#aca0a0", color: "#fff" }}
-						onClick={() => handleRedirect({ state: { tag: "Policy" } })}>
+						onClick={() =>
+							handleRedirect({ state: { tag: "Policy", type: "add" } })
+						}>
 						Policy
 					</button>
 				</div>

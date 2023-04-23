@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // Components
 import ReactModal from "react-modal";
@@ -15,14 +15,21 @@ const FaqPolicyItem = () => {
 
 	const [edit, setEdit] = useState(false);
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		if (isValid) {
-			setIsValid(loc.state.data);
+			if (isValid.type) {
+				setTag(isValid.tag);
+				setEdit(true);
+			} else {
+				setIsValid(loc.state.data);
+			}
 		}
 	}, [loc.state]);
 
 	useEffect(() => {
-		if (isValid) {
+		if (!isValid.type) {
 			setTitle(isValid.title);
 			setDescription(isValid.description);
 			setTag(isValid.tag);
@@ -37,10 +44,14 @@ const FaqPolicyItem = () => {
 
 	const handleCancel = (e) => {
 		e.preventDefault();
-		setEdit(false);
-		setTitle(isValid.title);
-		setDescription(isValid.description);
-		setTag(isValid.tag);
+		if (isValid.type) {
+			navigate(-1);
+		} else {
+			setEdit(false);
+			setTitle(isValid.title);
+			setDescription(isValid.description);
+			setTag(isValid.tag);
+		}
 	};
 
 	const handleEdit = (e) => {
@@ -51,6 +62,7 @@ const FaqPolicyItem = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setEdit(false);
+		console.log("Submit");
 	};
 
 	const handleDelete = () => {
@@ -77,18 +89,26 @@ const FaqPolicyItem = () => {
 				className='edit-container'
 				onSubmit={(e) => {
 					if (isValid) {
-						handleSubmit(e);
-					} else {
-						handleEdit(e);
+						if (isValid.type) {
+							handleSubmit(e);
+						} else {
+							handleEdit(e);
+						}
 					}
 				}}>
 				<div className='edit-item'>
-					<h2>
-						{capitalize(tag)} #{isValid.id}
-					</h2>
-					<button className='button' onClick={() => handleDelete()}>
-						Delete
-					</button>
+					{!isValid.type && (
+						<h2>
+							{capitalize(tag)} #{isValid.id}
+						</h2>
+					)}
+					{isValid.type && <h2>{capitalize(tag)}</h2>}
+
+					{!isValid.type && (
+						<button className='button' onClick={() => handleDelete()}>
+							Delete
+						</button>
+					)}
 					{edit && (
 						<>
 							<button className='save-button' type='submit'>

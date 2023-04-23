@@ -101,7 +101,11 @@ const FaqPolicyList = () => {
 				</Link>
 			</div>
 			<div className='options-list'>
-				<div className='list-box'></div>
+				<div className='list-box'>
+					{data.map((item, i) => (
+						<OptionsCard reqData={item} key={i} />
+					))}
+				</div>
 			</div>
 		</div>
 	);

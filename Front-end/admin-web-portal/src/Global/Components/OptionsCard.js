@@ -1,13 +1,20 @@
-const OptionsCard = () => {
+import { useState, useEffect } from "react";
+
+const OptionsCard = (reqData) => {
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		setData(reqData.reqData);
+	}, [reqData]);
+
+	console.log(data.reqData);
+
 	return (
 		<div className='options-card'>
 			<div className='options-card-header'>
-				<h3>FAQs & Policies</h3>
-				<p>Manage FAQs and Policies</p>
+				<h2>{data.title}</h2>
 			</div>
-			<div className='options-card-body'>
-				<p>Manage FAQs and Policies</p>
-			</div>
+			<p>{data.description}</p>
 		</div>
 	);
 };

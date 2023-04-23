@@ -181,9 +181,11 @@ function Rooms() {
 				</Link>
 			</div>
 			<div className='rooms-container'>
-				{data.map((item) => (
-					<Room data={item} key={item.id} />
-				))}
+				<div className='list-box'>
+					{data.map((item) => (
+						<Room data={item} key={item.id} />
+					))}
+				</div>
 			</div>
 		</div>
 	);

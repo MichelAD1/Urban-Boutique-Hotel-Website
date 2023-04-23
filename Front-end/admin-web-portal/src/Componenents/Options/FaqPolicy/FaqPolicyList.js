@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Icons
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
@@ -18,6 +18,8 @@ const FaqPolicyList = () => {
 	const [query, setQuery] = useState("");
 	const [filter, setFilter] = useState("");
 	const [err, setErr] = useState("");
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setPolicies([
@@ -106,8 +108,8 @@ const FaqPolicyList = () => {
 	};
 
 	const handleRedirect = (item) => {
-		console.log(item);
 		closeModal();
+		navigate("/options/faqs_policies/info", item);
 	};
 
 	return (

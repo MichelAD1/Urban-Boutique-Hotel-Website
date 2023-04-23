@@ -184,6 +184,7 @@ const Profile = () => {
           phone_number,
         });
         setEdit(false);
+        localStorage.setItem("username", username);
       }
     });
   };

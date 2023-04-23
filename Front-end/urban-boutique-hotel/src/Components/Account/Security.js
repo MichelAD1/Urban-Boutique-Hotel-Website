@@ -37,11 +37,11 @@ const Security = () => {
           <div className="profile-item">
             <div className="profile-title">
               <h2>Security</h2>
-              <h5>Change your language and currency</h5>
+              <h5>Change your password & remove account</h5>
             </div>
           </div>
           <div className="account-item">
-            <label>Passwosrd</label>
+            <label>Password</label>
             <form className="account-info">
               <div>
                 {reset && (
@@ -70,7 +70,7 @@ const Security = () => {
             </form>
           </div>
           <div className="account-item">
-            <label>Language</label>
+            <label>Account</label>
             <form className="account-info">
               <div>
                 {deleteAcc && (

@@ -177,11 +177,10 @@ const Preferences = () => {
 						<div style={{ alignSelf: "flex-start" }}>
 							<label>Payment</label>
 						</div>
-						<div className='amm-checkbox'>
+						<div className='amm-checkbox currencies'>
 							{paymentMethods.map(
 								(paymentMethod) =>
-									paymentMethod.available ||
-									(edit && (
+									(paymentMethod.available || edit) && (
 										<div className='checkbox-item' key={paymentMethod.id}>
 											{edit && (
 												<input
@@ -195,7 +194,7 @@ const Preferences = () => {
 											<label>{paymentMethod.name}</label>
 											{paymentMethod.isDefault && <span>Default</span>}
 										</div>
-									)),
+									),
 							)}
 						</div>
 					</div>

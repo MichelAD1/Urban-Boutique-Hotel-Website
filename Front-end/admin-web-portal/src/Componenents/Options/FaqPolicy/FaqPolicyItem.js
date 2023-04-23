@@ -1,79 +1,122 @@
 import { useState, useEffect } from "react";
 
+import { useLocation } from "react-router-dom";
+
 const FaqPolicyItem = () => {
+	const loc = useLocation();
+	const [isValid, setIsValid] = useState(loc.state);
+
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [tag, setTag] = useState("");
+
+	const [edit, setEdit] = useState(false);
+
+	useEffect(() => {
+		if (isValid) {
+			setIsValid(loc.state.data);
+		}
+	}, [loc.state]);
+
+	useEffect(() => {
+		if (isValid) {
+			setTitle(isValid.title);
+			setDescription(isValid.description);
+			setTag(isValid.tag);
+		}
+	}, [isValid]);
+
+	const capitalize = (str) => {
+		if (str) {
+			return str.charAt(0).toUpperCase() + str.slice(1);
+		}
+	};
+
+	const handleCancel = (e) => {
+		e.preventDefault();
+		setEdit(false);
+		setTitle(isValid.title);
+		setDescription(isValid.description);
+		setTag(isValid.tag);
+	};
+
+	const handleEdit = (e) => {
+		e.preventDefault();
+		setEdit(false);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setEdit(false);
+	};
+
 	return (
 		<div className='container'>
-			{/* <div className='edit-container'>
+			<form
+				className='edit-container'
+				onSubmit={(e) => {
+					if (isValid) {
+						handleSubmit(e);
+					} else {
+						handleEdit(e);
+					}
+				}}>
 				<div className='edit-item'>
-					<h2>Review #{data.id}</h2>
-					{!replied && (
-						<button className='save-button' onClick={handleAddReply}>
-							Save
+					<h2>
+						{capitalize(tag)} #{isValid.id}
+					</h2>
+					{edit && (
+						<>
+							<button className='save-button' type='submit'>
+								Save
+							</button>
+							<button className='button' onClick={(e) => handleCancel(e)}>
+								cancel
+							</button>
+						</>
+					)}
+					{!edit && (
+						<button className='button' onClick={() => setEdit(true)}>
+							Edit
 						</button>
 					)}
-					<button className='button' onClick={handleAdd}>
-						Show
-					</button>
-				</div>
-				<div className='edit-item'>
-					<div className='edit-info info-large'>
-						<div>
-							<label>Username</label>
-						</div>
-						<div>
-							<p>{username}</p>
-						</div>
-					</div>
-				</div>
-				<div className='edit-item'>
-					<div className='edit-info info-large'>
-						<div>
-							<label>Review</label>
-						</div>
-						<div>
-							<p>{review}</p>
-						</div>
-					</div>
-				</div>
-				<div className='edit-item'>
-					<div className='edit-info info-large'>
-						<div>
-							<label>Rating</label>
-						</div>
-						<div>
-							<Rating rate={rating} />
-						</div>
-					</div>
-				</div>
-				<div className='edit-item'>
-					<div className='edit-info info-large'>
-						<div>
-							<label>Date</label>
-						</div>
-						<div>
-							<p>{date}</p>
-						</div>
-					</div>
 				</div>
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div style={{ alignSelf: "flex-start" }}>
-							<label>Reply</label>
+							<label>Title</label>
 						</div>
 						<div>
-							{replied && <p>{reply}</p>}
-							{!replied && (
+							{!edit && <p>{title}</p>}
+							{edit && (
 								<textarea
-									value={reply}
-									onChange={(e) => setReply(e.target.value)}
+									value={title}
+									onChange={(e) => setTitle(e.target.value)}
 									className='input-box bio-input'
 								/>
 							)}
 						</div>
 					</div>
 				</div>
-			</div>
-			<ReactModal
+				<div className='edit-item'>
+					<div className='edit-info info-large'>
+						<div style={{ alignSelf: "flex-start" }}>
+							<label>Description</label>
+						</div>
+						<div>
+							{!edit && <p>{description}</p>}
+							{edit && (
+								<textarea
+									value={description}
+									onChange={(e) => setDescription(e.target.value)}
+									className='input-box bio-input'
+								/>
+							)}
+						</div>
+					</div>
+				</div>
+			</form>
+			{/* <ReactModal
 				className='custom-modal'
 				isOpen={isModalOpen}
 				style={{

@@ -12,6 +12,8 @@ const Profile = () => {
   const [user, setUser] = useState({});
   const [user_details, setUserDetails] = useState({});
 
+  const [err, setErr] = useState("");
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [full_number, setPhoneNumber] = useState("");
@@ -21,6 +23,8 @@ const Profile = () => {
   const [gender, setGender] = useState("");
 
   const [edit, setEdit] = useState(false);
+
+  //useEffects
   useEffect(() => {
     let user = GetProfile();
     user
@@ -47,6 +51,57 @@ const Profile = () => {
   useEffect(() => {
     handleCancel();
   }, [user, user_details]);
+
+  //Validators
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+  const validateUsername = (username) => {
+    return username.length <= 25 && username.length > 0;
+  };
+  const validateDate = (dob) => {
+    const ageLimit = 18;
+    const parsedDate = Date.parse(dob);
+    if (dob === "") {
+      return false;
+    }
+    // Check if input is a valid date string
+    if (isNaN(parsedDate)) {
+      return false;
+    }
+
+    const inputDate = new Date(parsedDate);
+
+    // Check if input date is in the future
+    if (inputDate.getTime() > Date.now()) {
+      return false;
+    }
+
+    const diff = Date.now() - inputDate.getTime();
+    const age = new Date(diff);
+
+    // Check if age is exactly 18 years old
+    if (age.getUTCFullYear() - 1970 === ageLimit) {
+      const birthYear = inputDate.getFullYear();
+      const todayYear = new Date().getFullYear();
+      const isLeapYear = new Date(todayYear, 1, 29).getMonth() === 1;
+
+      if (isLeapYear) {
+        // Leap year, so February 29th is valid
+        return inputDate.getMonth() === 1 && inputDate.getDate() === 29;
+      } else {
+        // Not a leap year, so February 28th is valid
+        return inputDate.getMonth() === 1 && inputDate.getDate() === 28;
+      }
+    }
+
+    return age.getUTCFullYear() - 1970 >= ageLimit;
+  };
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberPattern = /^\d{7,15}$/;
+    return phoneNumberPattern.test(phoneNumber);
+  };
 
   const handleEdit = () => {
     setEdit(true);
@@ -103,6 +158,7 @@ const Profile = () => {
             <div className="profile-title">
               <h2>Personal information</h2>
               <h5>Update your personal information</h5>
+              <div className="login-error">{err}</div>
             </div>
             <div>
               {edit && (

@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 
 import { useLocation } from "react-router-dom";
 
+// Components
+import ReactModal from "react-modal";
+
 const FaqPolicyItem = () => {
 	const loc = useLocation();
 	const [isValid, setIsValid] = useState(loc.state);
@@ -50,6 +53,24 @@ const FaqPolicyItem = () => {
 		setEdit(false);
 	};
 
+	const handleDelete = () => {
+		openModal();
+	};
+
+	// Modal
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const handleConfirmDelete = () => {
+		closeModal();
+	};
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
+
 	return (
 		<div className='container'>
 			<form
@@ -65,6 +86,9 @@ const FaqPolicyItem = () => {
 					<h2>
 						{capitalize(tag)} #{isValid.id}
 					</h2>
+					<button className='button' onClick={() => handleDelete()}>
+						Delete
+					</button>
 					{edit && (
 						<>
 							<button className='save-button' type='submit'>
@@ -116,7 +140,7 @@ const FaqPolicyItem = () => {
 					</div>
 				</div>
 			</form>
-			{/* <ReactModal
+			<ReactModal
 				className='custom-modal'
 				isOpen={isModalOpen}
 				style={{
@@ -134,12 +158,15 @@ const FaqPolicyItem = () => {
 					},
 				}}>
 				<div>
-					<h1>Confirm Add</h1>
-					<p>Are you sure you want to add this to the website home page?</p>
-					<button onClick={handleConfirmAdd}>Yes</button>
+					<h1>Confirm Delete</h1>
+					<p>
+						Are you sure you want to delete this {capitalize(tag)}? This action
+						cannot be undone.
+					</p>
+					<button onClick={handleConfirmDelete}>Yes</button>
 					<button onClick={closeModal}>No</button>
 				</div>
-			</ReactModal> */}
+			</ReactModal>
 		</div>
 	);
 };

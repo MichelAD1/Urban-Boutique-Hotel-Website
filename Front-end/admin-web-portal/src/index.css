@@ -1409,7 +1409,7 @@ h6 {
   flex-wrap: wrap;
 }
 .options-card{
-  width: 20em;
+  width: 22em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

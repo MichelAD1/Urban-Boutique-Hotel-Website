@@ -73,10 +73,10 @@ const RegulationDisasterList = () => {
 
 	const mergeAndTagData = () => {
 		let mergedAndTaggedData = [];
-		regulations.forEach((policy) => {
-			mergedAndTaggedData.push({ ...regulations, tag: "regulation" });
+		regulations.forEach((regulation) => {
+			mergedAndTaggedData.push({ ...regulation, tag: "regulation" });
 		});
-		disaster.forEach((faq) => {
+		disaster.forEach((disaster) => {
 			mergedAndTaggedData.push({ ...disaster, tag: "disaster" });
 		});
 		return mergedAndTaggedData;

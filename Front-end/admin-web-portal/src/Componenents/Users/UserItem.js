@@ -1,8 +1,8 @@
-import "../../Global/Styles/styles.css";
 import ReactModal from "react-modal";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import BanUser from "../../api-client/Clients/BanUser";
+
 const UserItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);

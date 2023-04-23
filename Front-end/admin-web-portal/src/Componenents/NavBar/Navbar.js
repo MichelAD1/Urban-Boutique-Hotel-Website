@@ -20,6 +20,8 @@ import {
 	RiMoneyDollarBoxLine,
 	RiFeedbackLine,
 	RiFeedbackFill,
+	RiFileList2Fill,
+	RiFileList2Line,
 } from "react-icons/ri";
 
 import finance_fill from "../../assets/icons/finance-fill.svg";
@@ -76,6 +78,18 @@ export default function Navbar() {
 					<div className='nav-link'>
 						<IoBed className='icons' alt='' />
 						<div className='routes active'>Rooms</div>
+					</div>
+				)}
+				{path !== "/reservations" && (
+					<Link to='/reservations' className='nav-link'>
+						<RiFileList2Line className='icons' alt='' />
+						<div className='routes'>Reservations</div>
+					</Link>
+				)}
+				{path === "/reservations" && (
+					<div className='nav-link'>
+						<RiFileList2Fill className='icons' alt='' />
+						<div className='routes active'>Reservations</div>
 					</div>
 				)}
 				{/* Employees Page navigation */}

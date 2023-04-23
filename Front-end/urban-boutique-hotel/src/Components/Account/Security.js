@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import removeProfile from "../../api-client/Account/RemoveProfile";
+import { useNavigate } from "react-router-dom";
 
 const Security = () => {
+  const navigation = useNavigate();
+
   const [reset, setReset] = useState(false);
   const [deleteAcc, setDeleteAcc] = useState(false);
-  const [language, setLanguage] = useState("English");
 
   useEffect(() => {
     handleResetCancel();
@@ -26,8 +29,14 @@ const Security = () => {
   const handleDeleteCancel = () => {
     setDeleteAcc(false);
   };
-  const handleDelete = () => {
-    console.log("Deleted");
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    try {
+      await removeProfile();
+      navigation("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -46,7 +55,7 @@ const Security = () => {
               <div>
                 {reset && (
                   <button
-                    type="Submit"
+                    type="button"
                     className="profile-btn save"
                     onClick={handleSubmit}
                   >
@@ -75,7 +84,7 @@ const Security = () => {
               <div>
                 {deleteAcc && (
                   <button
-                    type="Submit"
+                    type="button"
                     className="profile-btn save"
                     onClick={handleDelete}
                   >

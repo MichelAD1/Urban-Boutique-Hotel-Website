@@ -36,6 +36,7 @@ import LiveChat from "./Componenents/Support/Live Chat/LiveChat";
 // ******** Options ********
 import Options from "./Componenents/Options/Options";
 import Preferences from "./Componenents/Options/Preferences";
+import PhotoGallery from "./Componenents/Options/PhotoGallery";
 
 // ******** Finance ********
 import Finance from "./Componenents/Finance/Finance";
@@ -88,6 +89,17 @@ function App() {
 								<>
 									<Navbar />
 									<Preferences />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/gallery'
+							element={
+								<>
+									<Navbar />
+									<PhotoGallery />
 								</>
 							}
 						/>

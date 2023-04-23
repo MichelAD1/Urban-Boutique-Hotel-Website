@@ -23,7 +23,7 @@ const Options = () => {
 								<div className='settings-link'>Manage preferences</div>
 							</div>
 						</Link>
-						<Link to='/account/security' className='settings-box'>
+						<Link to='/options/gallery' className='settings-box'>
 							<BiPhotoAlbum className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Photo gallery</h3>

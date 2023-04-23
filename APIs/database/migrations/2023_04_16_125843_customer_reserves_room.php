@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer("room_id");
             $table->date("reservation_date");
             $table->date("reservation_end");
+            $table->string("status");
+            $table->string("requests");
             $table->timestamps();
         });
     }

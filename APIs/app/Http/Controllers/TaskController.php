@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -48,5 +49,10 @@ class TaskController extends Controller
     }
     public function getTasks(){
         return Task::all();
+    }
+    public function getEmployeeTasks(){
+        $employee = Auth::user();
+        $tasks = Task::where('employeeid',$employee->id)->get();
+        return $tasks;
     }
 }

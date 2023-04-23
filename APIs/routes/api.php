@@ -1,13 +1,21 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DisasterResponseController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\PaymentOptionController;
 use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\RegulationController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SupplyController;
+use App\Http\Controllers\TaskController;
 use App\Models\Maintenance_Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -87,11 +95,9 @@ Route::group(["prefix"=>"v0.1"], function(){
 
 
         Route::group(['prefix'=>'staff'],function(){
-            Route::middleware(['auth', 'check.employee'])->group(function(){
+            Route::middleware(['auth', 'check.usermanager'])->group(function(){
 
                 Route::post('editinfo',[StaffController::class,'editInformation']);
-            });
-            Route::middleware(['auth', 'check.admin'])->group(function(){
                 Route::get('ban/{employeeid}',[StaffController::class,'banEmployee']);
             });
 
@@ -100,7 +106,7 @@ Route::group(["prefix"=>"v0.1"], function(){
 
 
         Route::group(['prefix'=>'discount'],function(){
-            Route::middleware(['auth', 'check.employee'])->group(function(){
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
                 Route::post("addwhole",[DiscountController::class,'addWholeDiscount']);
                 Route::post("add",[DiscountController::class,'addRoomDiscount']);
                 Route::post("removewhole",[DiscountController::class,'removeWholeDiscount']);
@@ -121,7 +127,7 @@ Route::group(["prefix"=>"v0.1"], function(){
 
 
         Route::group(['prefix'=>'faq'],function(){
-            Route::middleware(['auth', 'check.employee'])->group(function(){
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
                 Route::post('add',[FAQController::class,'addFAQ']);
                 Route::post('edit',[FAQController::class,'editFAQ']);
                 Route::get('remove',[FAQController::class,'removeFAQ']);
@@ -139,7 +145,7 @@ Route::group(["prefix"=>"v0.1"], function(){
 
 
         Route::group(['prefix'=>'policy'],function(){
-            Route::middleware(['auth', 'check.employee'])->group(function(){
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
                 Route::post('add',[PolicyController::class,'addPolicy']);
                 Route::post('edit',[PolicyController::class,'editPolicy']);
                 Route::get('remove',[PolicyController::class,'removePolicy']);
@@ -157,39 +163,20 @@ Route::group(["prefix"=>"v0.1"], function(){
 
 
         Route::group(['prefix'=>'supply'],function(){
-            Route::middleware(['auth', 'check.employee'])->group(function(){
+            Route::middleware(['auth', 'check.usermanager'])->group(function(){
                 Route::post('add',[SupplyController::class,'addNewSupplyItem']);
                 Route::post('increment',[SupplyController::class,'IncreaseAmount']);
                 Route::post('edit',[SupplyController::class,'edit']);
-                Route::get('remove',[SupplyController::class,'deleteItem']);
+                Route::get('remove/{supplyid}',[SupplyController::class,'deleteItem']);
+                Route::get('get',[SupplyController::class,'getSupplies']);
 
             });
-            Route::middleware(['auth', 'check.customer'])->group(function(){
 
-
-
-            });
-            Route::get('get',[SupplyController::class,'getSupplies']);
 
         });
 
 
 
-        Route::group(['prefix'=>'supply'],function(){
-            Route::middleware(['auth', 'check.employee'])->group(function(){
-
-
-            });
-            Route::middleware(['auth', 'check.customer'])->group(function(){
-                Route::post('add',[ReviewController::class,'addReview']);
-                Route::post('edit',[ReviewController::class,'editReview']);
-                Route::get('remove',[ReviewController::class,'deleteReview']);
-
-
-            });
-            Route::get('get',[ReviewController::class,'getReviews']);
-
-        });
 
         Route::group(['prefix'=>'maintenance'],function(){
             Route::middleware(['auth', 'check.usermanager'])->group(function(){
@@ -200,12 +187,90 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::middleware(['auth', 'check.customer'])->group(function(){
                 Route::post('add',[Maintenance_Request::class,'addRequest']);
             });
+        });
 
 
+        Route::group(['prefix'=>'task'],function(){
+            Route::middleware(['auth', 'check.usermanager'])->group(function(){
+                Route::post('add',[TaskController::class,'addTask']);
+                Route::post('edit',[TaskController::class,'editTask']);
+                Route::get('remove/{taskid}',[TaskController::class,'removeTask']);
+                Route::get('getall',[TaskController::class,'getTasks']);
+
+            });
+            Route::middleware(['auth', 'check.employee'])->group(function(){
+                Route::get('get',[TaskController::class,'getEmployeeTasks']);
+            });
+        });
+
+        Route::group(['prefix'=>'feedback'],function(){
+            Route::middleware(['auth', 'check.usermanager'])->group(function(){
+                Route::get('get',[FeedbackController::class,'getFeedbacks']);
+
+            });
+            Route::middleware(['auth', 'check.customer'])->group(function(){
+                Route::post('add',[FeedbackController::class,'addFeedback']);
+            });
+        });
+
+        Route::group(['prefix'=>'budget'],function(){
+            Route::middleware(['auth', 'check.financemanager'])->group(function(){
+                Route::post('add',[BudgetController::class,'addBudget']);
+                Route::get('remove/{budgetid}',[BudgetController::class,'removeBudget']);
+                Route::get('get',[BudgetController::class,'getBudgets']);
+            });
+
+        });
+
+        Route::group(['prefix'=>'response'],function(){
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
+                Route::post('add',[DisasterResponseController::class,'addDisasterResponse']);
+                Route::post('edit',[DisasterResponseController::class,'editDisasterResponse']);
+                Route::get('remove/{responseid}',[DisasterResponseController::class,'removeDisasterResponse']);
+
+            });
+            Route::get('get',[DisasterResponseController::class,'getDisasterResponses']);
 
         });
 
 
+        Route::group(['prefix'=>'regulation'],function(){
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
+                Route::post('add',[RegulationController::class,'addRegulation']);
+                Route::post('edit',[RegulationController::class,'editRegulation']);
+                Route::get('remove/{regulationid}',[RegulationController::class,'removeRegulation']);
+            });
+            Route::get('get',[RegulationController::class,'getRegulations']);
+        });
+
+
+        Route::group(['prefix'=>'payment'],function(){
+            Route::middleware(['auth', 'check.financemanager'])->group(function(){
+                Route::post('add',[PaymentOptionController::class,'addPaymentOption']);
+                Route::post('select',[PaymentOptionController::class,'selectOptions']);
+                Route::get('getall',[PaymentOptionController::class,'getPaymentOptions']);
+            });
+            Route::get('get',[PaymentOptionController::class,'getAvailablePaymentOptions']);
+        });
+
+
+        Route::group(['prefix'=>'currency'],function(){
+            Route::middleware(['auth', 'check.financemanager'])->group(function(){
+                Route::post('add',[CurrencyController::class,'addCurrency']);
+                Route::get('get',[CurrencyController::class,'getCurrencies']);
+            });
+
+        });
+
+
+        Route::group(['prefix'=>'language'],function(){
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
+                Route::post('add',[LanguageController::class,'addLanguage']);
+                Route::post('select',[LanguageController::class,'selectLanguages']);
+                Route::get('getall',[LanguageController::class,'getLanguages']);
+            });
+            Route::get('get',[LanguageController::class,'getAvailableLanguages']);
+        });
 
     });
 });

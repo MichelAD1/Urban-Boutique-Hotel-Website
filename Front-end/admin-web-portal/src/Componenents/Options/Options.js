@@ -47,7 +47,7 @@ const Options = () => {
 								<div className='settings-link'>Manage FAQ & Policies</div>
 							</div>
 						</Link>
-						<Link to='' className='settings-box'>
+						<Link to='/options/regulation_disaster' className='settings-box'>
 							<GoLaw className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Regulations & Disaster response plan</h3>

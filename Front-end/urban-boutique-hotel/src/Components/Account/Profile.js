@@ -23,6 +23,7 @@ const Profile = () => {
   const [gender, setGender] = useState("");
 
   const [edit, setEdit] = useState(false);
+  const [hasChanged, setHasChanged] = useState(false);
 
   //useEffects
   useEffect(() => {
@@ -41,6 +42,20 @@ const Profile = () => {
         return err.response;
       });
   }, []);
+  // Only send request if changes have been made
+  useEffect(() => {
+    if (
+      username !== user.username ||
+      email !== user.email ||
+      full_number !== user_details.phone_number ||
+      dob !== user.dob ||
+      gender !== user.gender
+    ) {
+      setHasChanged(true);
+    } else {
+      setHasChanged(false);
+    }
+  }, [username, email, full_number, dob, gender, user, user_details]);
 
   useEffect(() => {
     if (full_number) {
@@ -117,6 +132,10 @@ const Profile = () => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!hasChanged) {
+      setEdit(false);
+      return;
+    }
     setErr("");
     if (!validateUsername(username)) {
       if (username.length === 0) {
@@ -139,6 +158,7 @@ const Profile = () => {
       return;
     }
     const phone_number = countryCode + " " + tmp_number;
+    setPhoneNumber(phone_number);
     event.preventDefault();
     const data = {
       username,

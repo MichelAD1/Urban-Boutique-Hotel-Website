@@ -306,6 +306,24 @@ h6 {
   accent-color: var(--primaryColor);
   transform: scale(1.5);
 }
+.amm-checkbox span{
+  font-size: 0.7em;
+  background-color: var(--secondaryColor);
+  color: #fff;
+  padding: 0.2em 0.5em;
+  border-radius: 0.2em;
+  margin-left: 0.5em;
+}
+
+.currencies{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.currencies div{
+  width: 20em;
+}
 
 .input-dropdown {
   width: 100%;
@@ -1355,3 +1373,6 @@ h6 {
   color: var(--secondaryColor);
 }
 /* End of reviews */
+/* preferences */
+
+/* End of preferences */

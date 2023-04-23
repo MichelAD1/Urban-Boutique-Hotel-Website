@@ -44,13 +44,15 @@ const Preferences = () => {
 		setPaymentMethods([
 			{
 				id: 1,
-				name: "Cash",
+				name: "Credit Card",
 				isDefault: true,
+				available: true,
 			},
 			{
 				id: 2,
-				name: "Credit Card",
+				name: "Debit Card",
 				isDefault: false,
+				available: false,
 			},
 		]);
 	}, [output]);
@@ -72,7 +74,7 @@ const Preferences = () => {
 	const handleCurrencyChange = (e, id) => {
 		const newCurrencies = currencies.map((currency) => {
 			if (currency.id === id) {
-				currency.isDefault = e.target.checked;
+				currency.available = e.target.checked;
 			}
 			return currency;
 		});
@@ -82,7 +84,7 @@ const Preferences = () => {
 	const handlePaymentMethodChange = (e, id) => {
 		const newPaymentMethods = paymentMethods.map((paymentMethod) => {
 			if (paymentMethod.id === id) {
-				paymentMethod.isDefault = e.target.checked;
+				paymentMethod.available = e.target.checked;
 			}
 			return paymentMethod;
 		});
@@ -124,19 +126,22 @@ const Preferences = () => {
 							<label>Languages</label>
 						</div>
 						<div className='amm-checkbox'>
-							{languages.map((language) => (
-								<div className='checkbox-item' key={language.id}>
-									{edit && (
-										<input
-											type='checkbox'
-											checked={language.available}
-											onChange={(e) => handleLanguageChange(e, language.id)}
-										/>
-									)}
-									<label>{language.name}</label>
-									{language.isDefault && <span>Default</span>}
-								</div>
-							))}
+							{languages.map(
+								(language) =>
+									(language.available || edit) && (
+										<div className='checkbox-item' key={language.id}>
+											{edit && (
+												<input
+													type='checkbox'
+													checked={language.available}
+													onChange={(e) => handleLanguageChange(e, language.id)}
+												/>
+											)}
+											<label>{language.name}</label>
+											{language.isDefault && <span>Default</span>}
+										</div>
+									),
+							)}
 						</div>
 					</div>
 				</div>
@@ -146,19 +151,24 @@ const Preferences = () => {
 							<label>Currencies</label>
 						</div>
 						<div className='amm-checkbox currencies'>
-							{currencies.map((currency) => (
-								<div className='checkbox-item' key={currency.id}>
-									{edit && (
-										<input
-											type='checkbox'
-											checked={currency.isDefault}
-											onChange={(e) => handleCurrencyChange(e, currency.id)}
-										/>
-									)}
-									<label>{currency.name}</label>
-									{currency.isDefault && <span>Default</span>}
-								</div>
-							))}
+							{currencies.map(
+								(currency) =>
+									(currency.available || edit) && (
+										<div className='checkbox-item' key={currency.id}>
+											{edit && (
+												<input
+													type='checkbox'
+													checked={currency.available}
+													onChange={(e) => handleCurrencyChange(e, currency.id)}
+												/>
+											)}
+											{(currency.available || edit) && (
+												<label>{currency.name}</label>
+											)}
+											{currency.isDefault && <span>Default</span>}
+										</div>
+									),
+							)}
 						</div>
 					</div>
 				</div>
@@ -168,21 +178,25 @@ const Preferences = () => {
 							<label>Payment</label>
 						</div>
 						<div className='amm-checkbox'>
-							{paymentMethods.map((paymentMethod) => (
-								<div className='checkbox-item' key={paymentMethod.id}>
-									{edit && (
-										<input
-											type='checkbox'
-											checked={paymentMethod.isDefault}
-											onChange={(e) =>
-												handlePaymentMethodChange(e, paymentMethod.id)
-											}
-										/>
-									)}
-									<label>{paymentMethod.name}</label>
-									{paymentMethod.isDefault && <span>Default</span>}
-								</div>
-							))}
+							{paymentMethods.map(
+								(paymentMethod) =>
+									paymentMethod.available ||
+									(edit && (
+										<div className='checkbox-item' key={paymentMethod.id}>
+											{edit && (
+												<input
+													type='checkbox'
+													checked={paymentMethod.available}
+													onChange={(e) =>
+														handlePaymentMethodChange(e, paymentMethod.id)
+													}
+												/>
+											)}
+											<label>{paymentMethod.name}</label>
+											{paymentMethod.isDefault && <span>Default</span>}
+										</div>
+									)),
+							)}
 						</div>
 					</div>
 				</div>

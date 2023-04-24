@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 // used components
 import MaintenanceRequest from "../../Global/Components/Maintenance Request/PendingRequests";
@@ -7,6 +8,7 @@ import MaintenanceRequest from "../../Global/Components/Maintenance Request/Pend
 // API
 import GetCounts from "../../api-client/Home/GetCounts";
 import PendingMaintenance from "../../api-client/Home/PendingMaintenance";
+import PendingRequests from "../../Global/Components/Maintenance Request/PendingRequests";
 
 export default function Home() {
 	const [revenueCount, setRevenueCount] = useState([]);
@@ -17,24 +19,37 @@ export default function Home() {
 	const [data, setData] = useState([]);
 	const [err, setErr] = useState("");
 
+	const {
+		status,
+		error,
+		data: pendingRequests,
+	} = useQuery(["pending_requests"], GetCounts, {
+		staleTime: 300000, // 5 minutes
+	});
 	useEffect(() => {
-		let counts = GetCounts();
-		counts
-			.then((res) => {
-				Promise.all(res).then((results) => {
-					setReservationsCount(results[1].room_count);
-					setCustomersCount(results[2].customer_count);
-					setRoomsCount(results[3].room_count);
-				});
-			})
-			.catch((err) => {
-				return err;
+		if (pendingRequests) {
+			Promise.all(pendingRequests).then((results) => {
+				setReservationsCount(results[0].room_count);
+				setCustomersCount(results[1].customer_count);
+				setRoomsCount(results[2].room_count);
 			});
-		let pending_maintenance = PendingMaintenance();
-		pending_maintenance.then((res) => {
-			setData(res);
-		});
-	}, []);
+		}
+	}, [pendingRequests, status]);
+
+	// useEffect(() => {
+	// 	let counts = ();
+	// 	counts
+	// 		.then((res) => {
+	//
+	// 		})
+	// 		.catch((err) => {
+	// 			return err;
+	// 		});
+	// 	let pending_maintenance = PendingMaintenance();
+	// 	pending_maintenance.then((res) => {
+	// 		setData(res);
+	// 	});
+	// }, []);
 	return (
 		<div className='container'>
 			<div className='headerStats'>

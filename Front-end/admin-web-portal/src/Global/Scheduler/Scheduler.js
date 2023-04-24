@@ -115,33 +115,21 @@ const StyledTextField = styled(TextField)(({ theme: { spacing } }) => ({
 		width: "120px",
 	},
 }));
-const ShadeCellsCheckBox = ({ shadePreviousCells, handleChange }) => (
-	<FormControlLabel
-		control={
-			<Checkbox
-				checked={shadePreviousCells}
-				onChange={() => handleChange("shadePreviousCells")}
-				color='primary'
-			/>
-		}
-		label='Shade previous cells'
-	/>
-);
 
-const ShadePreviousAppointmentsCheckBox = ({
-	shadePreviousAppointments,
-	handleChange,
-}) => (
-	<FormControlLabel
-		control={
-			<Checkbox
-				checked={shadePreviousAppointments}
-				onChange={() => handleChange("shadePreviousAppointments")}
-				color='primary'
-			/>
-		}
-		label='Shade previous appointments'
-	/>
+const UpdateIntervalBox = ({ updateInterval, onValueChange }) => (
+	<Grid item container xs={6} alignItems='center' justifyContent='flex-end'>
+		<Typography>Staff schedule</Typography>
+		<StyledTextField
+			className={classes.textField}
+			variant='outlined'
+			onChange={(event) => onValueChange(event.target.value)}
+			value={updateInterval / 1000}
+			type='number'
+			InputProps={{
+				endAdornment: <InputAdornment position='end'>s</InputAdornment>,
+			}}
+		/>
+	</Grid>
 );
 
 export default class Demo extends React.PureComponent {
@@ -217,34 +205,40 @@ export default class Demo extends React.PureComponent {
 		} = this.state;
 
 		return (
-			<Paper>
-				<Scheduler data={data} height={850}>
-					<ViewState defaultCurrentDate={current} />
-					<EditingState onCommitChanges={this.commitChanges} />
-					<GroupingState grouping={grouping} />
+			<React.Fragment>
+				<Grid container paddingTop='1em' paddingLeft='1em'>
+					{/* <UpdateIntervalBox updateInterval={updateInterval} /> */}
+					<h2>Staff Schedule</h2>
+				</Grid>
+				<Paper>
+					<Scheduler data={data} height={850}>
+						<ViewState defaultCurrentDate={current} />
+						<EditingState onCommitChanges={this.commitChanges} />
+						<GroupingState grouping={grouping} />
 
-					<WeekView />
-					<DayView />
-					<Appointments />
-					<Resources data={resources} mainResourceName='members' />
-					<IntegratedGrouping />
-					<IntegratedEditing />
+						<WeekView />
+						<DayView />
+						<Appointments />
+						<Resources data={resources} mainResourceName='members' />
+						<IntegratedGrouping />
+						<IntegratedEditing />
 
-					<Toolbar />
-					<ViewSwitcher />
-					<DateNavigator />
-					<TodayButton />
-					<AppointmentTooltip showOpenButton />
-					<AppointmentForm />
-					<GroupingPanel />
-					<DragDropProvider />
-					<CurrentTimeIndicator
-						shadePreviousCells={shadePreviousCells}
-						shadePreviousAppointments={shadePreviousAppointments}
-						updateInterval={updateInterval}
-					/>
-				</Scheduler>
-			</Paper>
+						<Toolbar />
+						<ViewSwitcher />
+						<DateNavigator />
+						<TodayButton />
+						<AppointmentTooltip showOpenButton />
+						<AppointmentForm />
+						<GroupingPanel />
+						<DragDropProvider />
+						<CurrentTimeIndicator
+							shadePreviousCells={shadePreviousCells}
+							shadePreviousAppointments={shadePreviousAppointments}
+							updateInterval={updateInterval}
+						/>
+					</Scheduler>
+				</Paper>
+			</React.Fragment>
 		);
 	}
 }

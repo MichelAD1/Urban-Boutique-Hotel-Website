@@ -37,7 +37,9 @@ class ReviewController extends Controller
         return "success";
     }
     public function getReviews(){
-        return Review::all();
+        return Review::join('users', 'reviews.customer_id', '=', 'users.id')
+                     ->select('reviews.*', 'users.username')
+                     ->get();
     }
     public function featureReview($reviewid){
         $review = Review::find($reviewid);

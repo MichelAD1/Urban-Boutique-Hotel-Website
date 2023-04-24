@@ -1349,6 +1349,10 @@ h6 {
 .services {
   padding: 5rem 0;
 }
+.services-section {
+  margin-top: 5%;
+  padding-top: 1rem;
+}
 
 .services {
   background: var(--darkGrey);

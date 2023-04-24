@@ -102,12 +102,13 @@ const Home = () => {
           ))}
         </div>
       )}
-
-      <div className="services">
+      <div className="services-section">
         <div className="section-title">
           <h4>Services</h4>
           <div />
         </div>
+      </div>
+      <div className="services">
         <div className="services-center">
           {services.map((item, index) => {
             return (

@@ -53,6 +53,7 @@ import RoomItem from "./Componenents/Rooms/RoomItem";
 // ******** Global ********
 import MaintenanceRequest from "./Global/Components/Maintenance Request/Requests";
 import RequestItem from "./Global/Components/Maintenance Request/RequestItem";
+import Scheduler from "./Global/Scheduler/Scheduler";
 
 // ******** Private Routes ********
 import PrivateRoute from "./Routes/PrivateRoutes";
@@ -148,6 +149,17 @@ function App() {
 								<>
 									<Navbar />
 									<RegulationDisasterItem />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/calendar'
+							element={
+								<>
+									<Navbar />
+									<Scheduler />
 								</>
 							}
 						/>

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAdmin
+class CheckReservationManager
 {
     /**
      * Handle an incoming request.
@@ -21,12 +21,12 @@ class CheckAdmin
 
         if($user->type == 1){
             $employee = Staff::where('user_id',$user->id)->first();
-            if($employee->position==1){
+            if($employee->position==4 || $employee->position==1){
                 return $next($request);
             }else{
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Not an Admin',
+                    'message' => 'Not a reservation manager',
                 ], 401);
             }
 
@@ -36,6 +36,5 @@ class CheckAdmin
                 'message' => 'Not an Employee',
             ], 401);
         }
-
     }
 }

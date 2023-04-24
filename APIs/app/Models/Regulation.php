@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Regulation extends Model
 {
     use HasFactory;
-    protected $fillable = ['customer_id', 'rating','comment','featured'];
+    protected $fillable =['text'];
 }

@@ -66,6 +66,10 @@ class Kernel extends HttpKernel
         'check.employee' => \App\Http\Middleware\CheckEmployee::class,
         'check.customer' =>\App\Http\Middleware\CheckCustomer::class,
         'check.admin' =>\App\Http\Middleware\CheckAdmin::class,
+        'check.contentmanager' =>\App\Http\Middleware\CheckContentManager::class,
+        'check.financemanager' =>\App\Http\Middleware\CheckFinanceManager::class,
+        'check.reservationmanager' =>\App\Http\Middleware\CheckReservationManager::class,
+        'check.usermanager' =>\App\Http\Middleware\CheckUserManager::class,
         'check.banned' =>\App\Http\Middleware\CheckBanned::class,
     ];
 }

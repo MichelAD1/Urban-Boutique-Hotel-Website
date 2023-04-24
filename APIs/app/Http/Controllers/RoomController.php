@@ -195,5 +195,23 @@ class RoomController extends Controller
         return response()->json($roomDates);
 
     }
+    public function getRoomCount(){
+        $count = Room::count();
+        return response()->json([
+            'room_count'=>$count
+        ]);
+    }
+    public function getReservations(){
+        $reservations = DB::table('customer_reserves_room')->get();
+        return response()->json([
+            'reservations'=>$reservations
+        ]);
+    }
+    public function getReservationsCount(){
+        $count = DB::table('customer_reserves_room')->count();
+        return response()->json([
+            'room_count'=>$count
+        ]);
+    }
 
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer("customer_id");
             $table->float("rating"); //1-5
             $table->string("comment");
+            $table->boolean("featured");
             $table->timestamps();
         });
     }

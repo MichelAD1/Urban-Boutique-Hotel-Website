@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\Staff;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -90,7 +90,7 @@ class CustomerController extends Controller
     }
     public function banCustomer($customerid){
         $user=Auth::user();
-        $employee = Admin::where("user_id",$user->id)->first();
+        $employee = Staff::where("user_id",$user->id)->first();
         if($employee->position=="admin"){
             $target=User::find($customerid);
             $target->banned=1;
@@ -99,6 +99,14 @@ class CustomerController extends Controller
         }
         return "Failed";
     }
+
+    public function getCustomerCount(){
+        $count = Customer::count();
+        return response()->json([
+            'customer_count'=>$count
+        ]);
+    }
+
     public function removeAccount()
 {
     $user = Auth::user();
@@ -120,6 +128,7 @@ class CustomerController extends Controller
         'message' => 'Account removed successfully'
     ]);
 }
+
 
 
 

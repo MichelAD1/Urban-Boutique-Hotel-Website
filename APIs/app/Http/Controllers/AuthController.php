@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -55,7 +55,7 @@ class AuthController extends Controller
                 ]
             ]);
         }else if($user->type==1){
-            $admin = Admin::where('user_id',$user->id)->first();
+            $admin = Staff::where('user_id',$user->id)->first();
             return response()->json([
                 'status' => 'success',
                 'user' => $user,
@@ -104,7 +104,7 @@ class AuthController extends Controller
             ]
         ]);
         }else if($request->type==1){ //user an admin
-            $admin = Admin::create([
+            $staff = Staff::create([
                 'user_id'=>$user->id,
                 'position'=>$request->position
             ]);
@@ -113,6 +113,7 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'User created successfully',
             'user' => $user,
+            'staff'=>$staff,
             'authorisation' => [
                 'token' => $token,
                 'type' => 'bearer',

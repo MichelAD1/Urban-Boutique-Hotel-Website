@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ReactModal from "react-modal";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // Components
 import Login from "./Components/Auth/Login";
 import Signup from "./Components/Auth/Signup";
@@ -26,154 +26,157 @@ import Security from "./Components/Account/Security";
 import ScrollToTop from "./Global/Function/ScrollToTop";
 import PageNotFound from "./Global/Components/PageNotFound";
 
+const queryClient = new QueryClient();
 ReactModal.setAppElement("#root");
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/reset" element={<ForgotPassword />} />
-          <Route
-            path="/"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Home />
-              </>
-            }
-          />
-          <Route
-            path="/rooms"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Rooms />
-              </>
-            }
-          />
-          <Route
-            path="/rooms/:roomname"
-            element={
-              <>
-                <ScrollToTop />
-                <RoomsItem />
-              </>
-            }
-          />
-          <Route exact path="/" element={<PrivateRoute />}>
+      <QueryClientProvider client={queryClient}>
+        <div className="App">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/reset" element={<ForgotPassword />} />
             <Route
-              path="/rooms/booking"
+              path="/"
               element={
                 <>
                   <ScrollToTop />
-                  <Book />
+                  <Navbar />
+                  <Home />
                 </>
               }
             />
-          </Route>
-          <Route
-            path="/services"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Services />
-              </>
-            }
-          />
-          <Route
-            path="/findus"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <FindUs />
-              </>
-            }
-          />
-          <Route
-            path="/discover"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Discover />
-              </>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <>
-                <ScrollToTop />
-                <Navbar />
-                <Contact />
-              </>
-            }
-          />
-          <Route exact path="/" element={<PrivateRoute />}>
             <Route
-              path="/account"
+              path="/rooms"
               element={
                 <>
                   <ScrollToTop />
-                  <AccountNav />
-                  <Account />
+                  <Navbar />
+                  <Rooms />
                 </>
               }
             />
-          </Route>
-          <Route exact path="/" element={<PrivateRoute />}>
             <Route
-              path="/account/profile"
+              path="/rooms/:roomname"
               element={
                 <>
                   <ScrollToTop />
-                  <AccountNav />
-                  <Profile />
+                  <RoomsItem />
                 </>
               }
             />
-          </Route>
-          <Route exact path="/" element={<PrivateRoute />}>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/rooms/booking"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <Book />
+                  </>
+                }
+              />
+            </Route>
             <Route
-              path="/account/preferences"
+              path="/services"
               element={
                 <>
                   <ScrollToTop />
-                  <AccountNav />
-                  <Preferences />
+                  <Navbar />
+                  <Services />
                 </>
               }
             />
-          </Route>
-          <Route exact path="/" element={<PrivateRoute />}>
             <Route
-              path="/account/security"
+              path="/findus"
               element={
                 <>
                   <ScrollToTop />
-                  <AccountNav />
-                  <Security />
+                  <Navbar />
+                  <FindUs />
                 </>
               }
             />
-          </Route>
-          <Route
-            path="*"
-            element={
-              <>
-                <ScrollToTop />
-                <PageNotFound />
-              </>
-            }
-          />
-        </Routes>
-      </div>
+            <Route
+              path="/discover"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Navbar />
+                  <Discover />
+                </>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Navbar />
+                  <Contact />
+                </>
+              }
+            />
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/account"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <AccountNav />
+                    <Account />
+                  </>
+                }
+              />
+            </Route>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/account/profile"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <AccountNav />
+                    <Profile />
+                  </>
+                }
+              />
+            </Route>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/account/preferences"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <AccountNav />
+                    <Preferences />
+                  </>
+                }
+              />
+            </Route>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/account/security"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <AccountNav />
+                    <Security />
+                  </>
+                }
+              />
+            </Route>
+            <Route
+              path="*"
+              element={
+                <>
+                  <ScrollToTop />
+                  <PageNotFound />
+                </>
+              }
+            />
+          </Routes>
+        </div>
+      </QueryClientProvider>
     </BrowserRouter>
   );
 }

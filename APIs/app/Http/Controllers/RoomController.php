@@ -28,6 +28,8 @@ class RoomController extends Controller
         $room->towels = $request->towels;
         $room->mini_bar = $request->mini_bar;
         $room->desk = $request->desk;
+        $room->breakfast = $request->breakfast;
+        $room->pets = $request->pets;
         $room->featured = false;
         $room->discount = 0;
         if($room->save()){

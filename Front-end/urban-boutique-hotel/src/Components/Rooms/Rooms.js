@@ -29,6 +29,7 @@ const Rooms = () => {
   const [pets, setPets] = useState(false);
 
   const [type, setType] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   // Get all unique items
   const getUnique = (items, value) => {
@@ -39,6 +40,7 @@ const Rooms = () => {
     if (status === "success" && roomData) {
       setRooms(roomData);
       setTmpRooms(roomData);
+      setLoading(false);
     }
   }, [roomData, status]);
 
@@ -102,106 +104,114 @@ const Rooms = () => {
           </ScrollLink>
         </div>
       </div>
-      <section className="filter-container">
-        <div className="section-title">
-          <h4>Search rooms</h4>
-          <div />
+      {loading ? (
+        <div className="buffer-space">
+          <div className="buffer-loader home"></div>
         </div>
-        <form className="filter-form">
-          {/* select type */}
-          <div className="form-group">
-            <label htmlFor="type">room type</label>
-            <select
-              name="type"
-              id="type"
-              value={type}
-              className="form-control"
-              onChange={(e) => {
-                setType(e.target.value);
-              }}
-            >
-              {types.map((item, id) => {
-                return (
-                  <option key={id} value={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          {/* end of select type */}
-          {/* guest */}
-          <div className="form-group">
-            <label htmlFor="capacity">guests</label>
-            <select
-              name="capacity"
-              id="capacity"
-              value={capacity}
-              className="form-control"
-              onChange={(e) => {
-                setCapacity(e.target.value);
-              }}
-            >
-              {people.map((item, id) => {
-                return (
-                  <option key={id} value={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          {/* end of guest */}
-          {/* rooms price */}
-          <div className="form-group">
-            <label htmlFor="price">room price ${price}</label>
-            <input
-              type="range"
-              id="price"
-              name="price"
-              min={minPrice}
-              max={maxPrice}
-              value={price}
-              onChange={(e) => {
-                setPrice(e.target.value);
-              }}
-              className="form-control price-range"
-            />
-          </div>
-          {/* end of rooms price */}
-          {/* extras */}
-          <div className="form-group">
-            <div className="single-extra">
-              <input
-                type="checkbox"
-                name="breakfast"
-                id="breakfast"
-                checked={breakfast}
-                className="checkbox-input"
-                onChange={(e) => {
-                  setBreakfast(e.target.checked);
-                }}
-              />
-              <label htmlFor="breakfast">breakfast</label>
+      ) : (
+        <div>
+          <section className="filter-container">
+            <div className="section-title">
+              <h4>Search rooms</h4>
+              <div />
             </div>
-            <div className="single-extra">
-              <input
-                type="checkbox"
-                name="pets"
-                id="pets"
-                checked={pets}
-                className="checkbox-input"
-                onChange={(e) => {
-                  setPets(e.target.checked);
-                }}
-              />
-              <label htmlFor="pets">pets</label>
-            </div>
-          </div>
-          {/* end of extras */}
-        </form>
-      </section>
-      <RoomsList rooms={filterRoom(tmpRooms)} />
+            <form className="filter-form">
+              {/* select type */}
+              <div className="form-group">
+                <label htmlFor="type">room type</label>
+                <select
+                  name="type"
+                  id="type"
+                  value={type}
+                  className="form-control"
+                  onChange={(e) => {
+                    setType(e.target.value);
+                  }}
+                >
+                  {types.map((item, id) => {
+                    return (
+                      <option key={id} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              {/* end of select type */}
+              {/* guest */}
+              <div className="form-group">
+                <label htmlFor="capacity">guests</label>
+                <select
+                  name="capacity"
+                  id="capacity"
+                  value={capacity}
+                  className="form-control"
+                  onChange={(e) => {
+                    setCapacity(e.target.value);
+                  }}
+                >
+                  {people.map((item, id) => {
+                    return (
+                      <option key={id} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              {/* end of guest */}
+              {/* rooms price */}
+              <div className="form-group">
+                <label htmlFor="price">room price ${price}</label>
+                <input
+                  type="range"
+                  id="price"
+                  name="price"
+                  min={minPrice}
+                  max={maxPrice}
+                  value={price}
+                  onChange={(e) => {
+                    setPrice(e.target.value);
+                  }}
+                  className="form-control price-range"
+                />
+              </div>
+              {/* end of rooms price */}
+              {/* extras */}
+              <div className="form-group">
+                <div className="single-extra">
+                  <input
+                    type="checkbox"
+                    name="breakfast"
+                    id="breakfast"
+                    checked={breakfast}
+                    className="checkbox-input"
+                    onChange={(e) => {
+                      setBreakfast(e.target.checked);
+                    }}
+                  />
+                  <label htmlFor="breakfast">breakfast</label>
+                </div>
+                <div className="single-extra">
+                  <input
+                    type="checkbox"
+                    name="pets"
+                    id="pets"
+                    checked={pets}
+                    className="checkbox-input"
+                    onChange={(e) => {
+                      setPets(e.target.checked);
+                    }}
+                  />
+                  <label htmlFor="pets">pets</label>
+                </div>
+              </div>
+              {/* end of extras */}
+            </form>
+          </section>
+          <RoomsList rooms={filterRoom(tmpRooms)} />
+        </div>
+      )}
     </>
   );
 };

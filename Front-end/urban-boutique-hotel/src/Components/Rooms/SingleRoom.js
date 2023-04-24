@@ -79,11 +79,11 @@ const SingleRoom = ({ reverse, room, type }) => {
         </div>
         <div className="prices">
           <h4>${room.room.rent}</h4>
-          {room.room.discount && (
+          {room.room.discount ? (
             <h4 className="old-price">
               ${room.room.rent + room.room.discount}
             </h4>
-          )}
+          ) : null}
         </div>
         <button className="btn-secondary">
           Learn more

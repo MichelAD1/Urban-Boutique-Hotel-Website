@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 // Componenets
 import Footer from "../../Global/Components/Footer";
 import SingleRoom from "../Rooms/SingleRoom";
 import Reviews from "../../Global/Components/Reviews";
 
+//APIS
+import GetDiscountedRooms from "../../api-client/Rooms/GetDiscountedRooms";
 // Images
 import room1 from "../../assets/images/room-1.jpeg";
 import room2 from "../../assets/images/room-2.jpeg";
 
 const Home = () => {
+  const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  //Token handler
   const token = localStorage.getItem("token");
   useEffect(() => {
     const shouldReload = localStorage.getItem("shouldReload");
@@ -29,6 +36,21 @@ const Home = () => {
       localStorage.removeItem("username");
     }
   }
+
+  //Api handler
+  const {
+    status,
+    error,
+    data: responsedata,
+  } = useQuery(["data"], GetDiscountedRooms);
+  useEffect(() => {
+    if (responsedata) {
+      setRooms(responsedata);
+      setLoading(false);
+    }
+  }, [responsedata, error]);
+
+  console.log(rooms);
   const services = [
     {
       icon: <FaCocktail />,
@@ -49,45 +71,6 @@ const Home = () => {
       icon: <FaBeer />,
       title: "strongest beers",
       info: "Lorem There are many variations of passages of Lorem Ipsum available, but the majority form.",
-    },
-  ];
-
-  const rooms = [
-    {
-      id: 1,
-      room_name: "Standard Room",
-      price: 100.0,
-      old_price: 150.0,
-      guests: 2,
-      room_type: "Queen Bed",
-      room_size: 250,
-      wifi: true,
-      tv: true,
-      shower: true,
-      towels: false,
-      minibar: true,
-      desk: false,
-      images: [room1],
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-    },
-    {
-      id: 2,
-      room_name: "Executive Suite",
-      price: 350.0,
-      old_price: 400.0,
-      guests: 4,
-      room_type: "Two Queen Beds",
-      room_size: 600,
-      wifi: true,
-      tv: false,
-      shower: true,
-      towels: true,
-      minibar: false,
-      desk: false,
-      images: [room2],
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
     },
   ];
 
@@ -127,8 +110,16 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <SingleRoom reverse={false} room={rooms[0]} type={"Deal of the month"} />
-      <SingleRoom reverse={true} room={rooms[1]} type={"Featured room"} />
+      {rooms.map((room, index) => (
+        <SingleRoom
+          key={index}
+          reverse={index % 2 === 0}
+          room={room}
+          type={
+            room.room.featured === 1 ? "Featured room" : "Deal of the month"
+          }
+        />
+      ))}
 
       <div className="services">
         <div className="section-title">

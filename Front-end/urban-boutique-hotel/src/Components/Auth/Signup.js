@@ -280,8 +280,8 @@ const Signup = () => {
               onChange={(event) => setGender(event.target.value)}
               autoFocus
             >
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
             </TextField>
             <div className="login-error">{err}</div>
             <button type="submit" className="btn-primary">

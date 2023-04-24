@@ -45,7 +45,7 @@ const Profile = () => {
     if (
       username !== user.username ||
       email !== user.email ||
-      full_number !== user_details.phone_number ||
+      countryCode + " " + tmp_number !== user_details.phone_number ||
       dob !== user.dob ||
       gender !== user.gender
     ) {
@@ -53,7 +53,16 @@ const Profile = () => {
     } else {
       setHasChanged(false);
     }
-  }, [username, email, full_number, dob, gender, user, user_details]);
+  }, [
+    username,
+    email,
+    tmp_number,
+    countryCode,
+    dob,
+    gender,
+    user,
+    user_details,
+  ]);
 
   useEffect(() => {
     if (full_number) {

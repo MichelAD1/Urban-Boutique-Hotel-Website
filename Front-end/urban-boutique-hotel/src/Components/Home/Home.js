@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
-
+import { useEffect } from "react";
 // Componenets
 import Footer from "../../Global/Components/Footer";
 import SingleRoom from "../Rooms/SingleRoom";
@@ -13,7 +13,13 @@ import room2 from "../../assets/images/room-2.jpeg";
 
 const Home = () => {
   const token = localStorage.getItem("token");
-
+  useEffect(() => {
+    const shouldReload = localStorage.getItem("shouldReload");
+    if (shouldReload === "true") {
+      localStorage.removeItem("shouldReload");
+      window.location.reload(true);
+    }
+  }, []);
   if (token) {
     const decoded = jwt_decode(token);
     const currentTime = Date.now() / 1000; // Convert to seconds

@@ -19,7 +19,7 @@ class CheckAdmin
     {
         $user=Auth::user();
 
-        if($user->type == 1){
+        if($user->type == 1 && $user->banned==0){
             $employee = Staff::where('user_id',$user->id)->first();
             if($employee->position==1){
                 return $next($request);

@@ -17,7 +17,7 @@ class CheckCustomer
     public function handle(Request $request, Closure $next): Response
     {
         $user=Auth::user();
-        if($user->type == 0){
+        if($user->type == 0 && $user->banned==0){
             return $next($request);
         }else{
             return response()->json([

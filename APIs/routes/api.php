@@ -10,6 +10,7 @@ use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PaymentOptionController;
+use App\Http\Controllers\Photo_Gallery;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\RegulationController;
 use App\Http\Controllers\ReviewController;
@@ -80,6 +81,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::group(['prefix'=>'customer'],function(){
             Route::middleware(['auth', 'check.usermanager'])->group(function(){
                 Route::get('ban/{customerid}',[CustomerController::class,'banCustomer']);
+                Route::get('get',[CustomerController::class,'getCustomers']);
             });
             Route::middleware(['auth', 'check.admin'])->group(function(){
                 Route::get('getcount',[CustomerController::class,'getCustomerCount']);
@@ -272,6 +274,15 @@ Route::group(["prefix"=>"v0.1"], function(){
                 Route::get('getall',[LanguageController::class,'getLanguages']);
             });
             Route::get('get',[LanguageController::class,'getAvailableLanguages']);
+        });
+
+
+        Route::group(['prefix'=>'gallery'],function(){
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
+                Route::post('edit',[Photo_Gallery::class,'addAndRemoveImages']);
+
+            });
+            Route::get('get',[Photo_Gallery::class,'getImages']);
         });
 
     });

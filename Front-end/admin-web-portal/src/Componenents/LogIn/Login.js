@@ -32,7 +32,11 @@ const Login = () => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		FetchCred(email, password).then((res) => {
+		const reqData = {
+			email: email,
+			password: password,
+		};
+		FetchCred(reqData).then((res) => {
 			if (res.status === "success") {
 				localStorage.setItem("token", res.authorisation.token);
 				navigate("/");

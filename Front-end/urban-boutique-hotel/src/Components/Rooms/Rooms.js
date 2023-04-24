@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import RoomsList from "./RoomsList";
+import Footer from "../../Global/Components/Footer";
+
 //APIS
 import GetRooms from "../../api-client/Rooms/GetRooms";
 import room1 from "../../assets/images/room-1.jpeg";
@@ -218,6 +220,7 @@ const Rooms = () => {
           <RoomsList rooms={filterRoom(tmpRooms)} />
         </div>
       )}
+      <Footer />
     </>
   );
 };

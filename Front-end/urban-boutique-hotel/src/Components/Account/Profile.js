@@ -24,7 +24,7 @@ const Profile = () => {
 
   const [edit, setEdit] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   //useEffects
   const { status, error, data: responsedata } = useQuery(["data"], GetProfile);
   useEffect(() => {
@@ -36,6 +36,7 @@ const Profile = () => {
       setPhoneNumber(responsedata.user_details.full_number);
       setUser(responsedata.user);
       setUserDetails(responsedata.user_details);
+      setLoading(false);
     }
   }, [responsedata, error]);
 
@@ -228,151 +229,208 @@ const Profile = () => {
               </button>
             </div>
           </div>
-          <div className="account-item">
-            <div className="account-info">
-              <div className="info-item">
-                <label>Display name</label>
+          {loading ? (
+            <div>
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Display name</label>
+                  </div>
+                  <div className="info-item">
+                    <div className="buffer-loader"></div>
+                  </div>
+                </div>
               </div>
-              {edit && (
-                <div className="info-item">
-                  <input
-                    type="text"
-                    className="account-input"
-                    value={username}
-                    onChange={(e) => {
-                      setUsername(e.target.value);
-                    }}
-                  />
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Email</label>
+                  </div>
+                  <div className="info-item">
+                    <div className="buffer-loader"></div>
+                  </div>
                 </div>
-              )}
-              {!edit && (
-                <div className="info-item">
-                  <p>{user.username}</p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="account-item">
-            <div className="account-info">
-              <div className="info-item">
-                <label>Email</label>
               </div>
-              {edit && (
-                <div className="info-item">
-                  <input
-                    type="email"
-                    className="account-input"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                  />
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Phone number</label>
+                  </div>
+                  <div className="info-item">
+                    <div className="buffer-loader"></div>
+                  </div>
                 </div>
-              )}
-              {!edit && (
-                <div className="info-item">
-                  <p>{user.email}</p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="account-item">
-            <div className="account-info">
-              <div className="info-item">
-                <label>Phone number</label>
               </div>
-              {edit && (
-                <div className="info-item phone">
-                  <select
-                    className="account-input code"
-                    value={countryCode}
-                    onChange={(e) => {
-                      setCountryCode(e.target.value);
-                    }}
-                  >
-                    {countries.map((country) => (
-                      <option key={country.name} value={country.dial_code}>
-                        {country.dial_code} ({country.name})
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    type="text"
-                    className="account-input"
-                    value={tmp_number}
-                    onChange={(e) => {
-                      setTmpNumber(e.target.value);
-                    }}
-                  />
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Date of birth</label>
+                  </div>
+                  <div className="info-item">
+                    <div className="buffer-loader"></div>
+                  </div>
                 </div>
-              )}
-              {!edit && (
-                <div className="info-item">
-                  <p>{user_details.phone_number}</p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="account-item">
-            <div className="account-info">
-              <div className="info-item">
-                <label>Date of birth</label>
               </div>
-              {edit && (
-                <div className="info-item">
-                  <input
-                    type="date"
-                    className="account-input"
-                    value={dob}
-                    onChange={(e) => {
-                      setDob(e.target.value);
-                    }}
-                  />
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Gender</label>
+                  </div>
+                  <div className="info-item">
+                    <div className="buffer-loader"></div>
+                  </div>
                 </div>
-              )}
-              {!edit && (
-                <div className="info-item">
-                  <p>{formatDate(user.dob)}</p>
-                </div>
-              )}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div>
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Display name</label>
+                  </div>
+                  {edit && (
+                    <div className="info-item">
+                      <input
+                        type="text"
+                        className="account-input"
+                        value={username}
+                        onChange={(e) => {
+                          setUsername(e.target.value);
+                        }}
+                      />
+                    </div>
+                  )}
+                  {!edit && (
+                    <div className="info-item">
+                      <p>{user.username}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Email</label>
+                  </div>
+                  {edit && (
+                    <div className="info-item">
+                      <input
+                        type="email"
+                        className="account-input"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                      />
+                    </div>
+                  )}
+                  {!edit && (
+                    <div className="info-item">
+                      <p>{user.email}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Phone number</label>
+                  </div>
+                  {edit && (
+                    <div className="info-item phone">
+                      <select
+                        className="account-input code"
+                        value={countryCode}
+                        onChange={(e) => {
+                          setCountryCode(e.target.value);
+                        }}
+                      >
+                        {countries.map((country) => (
+                          <option key={country.name} value={country.dial_code}>
+                            {country.dial_code} ({country.name})
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        type="text"
+                        className="account-input"
+                        value={tmp_number}
+                        onChange={(e) => {
+                          setTmpNumber(e.target.value);
+                        }}
+                      />
+                    </div>
+                  )}
+                  {!edit && (
+                    <div className="info-item">
+                      <p>{user_details.phone_number}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Date of birth</label>
+                  </div>
+                  {edit && (
+                    <div className="info-item">
+                      <input
+                        type="date"
+                        className="account-input"
+                        value={dob}
+                        onChange={(e) => {
+                          setDob(e.target.value);
+                        }}
+                      />
+                    </div>
+                  )}
+                  {!edit && (
+                    <div className="info-item">
+                      <p>{formatDate(user.dob)}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
 
-          <div className="account-item">
-            <div className="account-info">
-              <div className="info-item">
-                <label>Gender</label>
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Gender</label>
+                  </div>
+                  {edit && (
+                    <div className="info-item">
+                      <select
+                        className="account-input"
+                        value={gender}
+                        onChange={(e) => {
+                          setGender(e.target.value);
+                        }}
+                      >
+                        {gender === "Female" ? (
+                          <>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                          </>
+                        ) : (
+                          <>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </>
+                        )}
+                      </select>
+                    </div>
+                  )}
+                  {!edit && (
+                    <div className="info-item">
+                      <p>{user.gender}</p>
+                    </div>
+                  )}
+                </div>
               </div>
-              {edit && (
-                <div className="info-item">
-                  <select
-                    className="account-input"
-                    value={gender}
-                    onChange={(e) => {
-                      setGender(e.target.value);
-                    }}
-                  >
-                    {gender === "Female" ? (
-                      <>
-                        <option value="Female">Female</option>
-                        <option value="Male">Male</option>
-                      </>
-                    ) : (
-                      <>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                      </>
-                    )}
-                  </select>
-                </div>
-              )}
-              {!edit && (
-                <div className="info-item">
-                  <p>{user.gender}</p>
-                </div>
-              )}
             </div>
-          </div>
+          )}
         </form>
       </div>
       <Footer />

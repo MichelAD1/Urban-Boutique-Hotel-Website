@@ -9,13 +9,14 @@ import SingleRoom from "../Rooms/SingleRoom";
 import Reviews from "../../Global/Components/Reviews";
 
 //APIS
-import GetDiscountedRooms from "../../api-client/Rooms/GetDiscountedRooms";
+import GetHomePage from "../../api-client/Home/GetHomePage";
 // Images
 import room1 from "../../assets/images/room-1.jpeg";
 import room2 from "../../assets/images/room-2.jpeg";
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
   //Token handler
@@ -38,15 +39,14 @@ const Home = () => {
   }
 
   //Api handler
-  const {
-    status,
-    error,
-    data: responsedata,
-  } = useQuery(["data"], GetDiscountedRooms);
+  const { status, error, data: responsedata } = useQuery(["data"], GetHomePage);
   useEffect(() => {
     if (responsedata) {
-      setRooms(responsedata);
-      setLoading(false);
+      Promise.all(responsedata).then((results) => {
+        setRooms(results[0]);
+        setReviews(results[1]);
+        setLoading(false);
+      });
     }
   }, [responsedata, error]);
 
@@ -72,31 +72,6 @@ const Home = () => {
       info: "Lorem There are many variations of passages of Lorem Ipsum available, but the majority form.",
     },
   ];
-
-  const reviews = [
-    {
-      id: 1,
-      name: "Sara Smith",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
-      rating: 4,
-    },
-    {
-      id: 2,
-      name: "John Doe",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
-      rating: 3.5,
-    },
-    {
-      id: 3,
-      name: "Peter Jones",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
-      rating: 2,
-    },
-  ];
-
   return (
     <>
       <div className="defaultHero">

@@ -50,5 +50,17 @@ export default async function GetCounts() {
 			return err.response;
 		});
 
-	return [reservations, customers, rooms];
+	const pending_maintenance = axios({
+		method: "get",
+		url: `${base_url}maintenance/get`,
+		headers: { Authorization: localStorage.getItem("token") },
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			return err.response;
+		});
+
+	return [reservations, customers, rooms, pending_maintenance];
 }

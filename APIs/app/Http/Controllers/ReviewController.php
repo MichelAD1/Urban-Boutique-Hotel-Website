@@ -39,4 +39,10 @@ class ReviewController extends Controller
     public function getReviews(){
         return Review::all();
     }
+    public function featureReview($reviewid){
+        $review = Review::find($reviewid);
+        $review->featured=true;
+        $review->save();
+        return "success";
+    }
 }

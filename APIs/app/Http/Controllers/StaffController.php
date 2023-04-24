@@ -48,4 +48,5 @@ class StaffController extends Controller
                     ->sum("rooms.price");
         return $revenue;
     }
+
 }

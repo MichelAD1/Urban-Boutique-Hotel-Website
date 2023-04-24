@@ -202,7 +202,7 @@ class RoomController extends Controller
         ]);
     }
     public function getReservations(){
-        $reservations = DB::table('customer_reserves_room')->get();
+        $reservations = DB::table('customer_reserves_room')->paginate(10);
         return response()->json([
             'reservations'=>$reservations
         ]);
@@ -212,6 +212,10 @@ class RoomController extends Controller
         return response()->json([
             'room_count'=>$count
         ]);
+    }
+    public function searchReservation($reservationid){
+        return DB::table('customer_reserves_room')->where('id','=',$reservationid)->first();
+
     }
 
 }

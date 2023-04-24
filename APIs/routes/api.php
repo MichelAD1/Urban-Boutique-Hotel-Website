@@ -6,9 +6,11 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DisasterResponseController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\MaintenanceRequestController;
 use App\Http\Controllers\PaymentOptionController;
 use App\Http\Controllers\Photo_Gallery;
 use App\Http\Controllers\PolicyController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\TaskController;
+use App\Models\EmailSender;
 use App\Models\Maintenance_Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +63,7 @@ Route::group(["prefix"=>"v0.1"], function(){
                 Route::middleware(['auth', 'check.reservationmanager'])->group(function(){
                     Route::get('get',[RoomController::class,'getReservations']);
                     Route::get('cancel/{reservationid}',[CustomerController::class,'cancelReservation']);
+                    Route::get('search/{reservationid}',[RoomController::class,'searchReservation']);
                 });
                 Route::middleware(['auth', 'check.admin'])->group(function(){
                     Route::get('getcount',[RoomController::class,'getReservationsCount']);
@@ -184,12 +188,12 @@ Route::group(["prefix"=>"v0.1"], function(){
 
         Route::group(['prefix'=>'maintenance'],function(){
             Route::middleware(['auth', 'check.usermanager'])->group(function(){
-                Route::get('complete/{requestid}',[Maintenance_Request::class,'completeRequest']);
-                Route::get('get',[ReviewController::class,'getPendingRequests']);
-                Route::get('getall',[ReviewController::class,'getAllRequests']);
+                Route::get('complete/{requestid}',[MaintenanceRequestController::class,'completeRequest']);
+                Route::get('get',[MaintenanceRequestController::class,'getPendingRequests']);
+                Route::get('getall',[MaintenanceRequestController::class,'getAllRequests']);
             });
             Route::middleware(['auth', 'check.customer'])->group(function(){
-                Route::post('add',[Maintenance_Request::class,'addRequest']);
+                Route::post('add',[MaintenanceRequestController::class,'addRequest']);
             });
         });
 
@@ -283,6 +287,32 @@ Route::group(["prefix"=>"v0.1"], function(){
 
             });
             Route::get('get',[Photo_Gallery::class,'getImages']);
+        });
+
+
+        Route::group(['prefix'=>'email'],function(){
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
+                Route::post('sendall',[EmailController::class,'sendEmailToUsers']);
+            });
+            Route::middleware(['auth', 'check.customer'])->group(function(){
+                Route::post('sendform',[EmailController::class,'sendEmailToUsers']);
+            });
+
+
+        });
+
+        Route::group(['prefix'=>'review'],function(){
+            Route::middleware(['auth', 'check.customer'])->group(function(){
+                Route::post('add',[ReviewController::class,'addReview']);
+                Route::post('edit',[ReviewController::class,'editReview']);
+                Route::get('remove/{reviewid}',[ReviewController::class,'deleteReview']);
+
+            });
+            Route::middleware(['auth', 'check.contentmanager'])->group(function(){
+                Route::get('feature/{reviewid}',[ReviewController::class,'featureReview']);
+
+            });
+            Route::get('get',[ReviewController::class,'getReviews']);
         });
 
     });

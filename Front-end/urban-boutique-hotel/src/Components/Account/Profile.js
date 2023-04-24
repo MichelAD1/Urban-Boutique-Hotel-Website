@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { useQuery } from "@tanstack/react-query";
 // Components
 import Footer from "../../Global/Components/Footer";
 import countries from "../../Global/Components/CountryCodes";
@@ -26,22 +26,19 @@ const Profile = () => {
   const [hasChanged, setHasChanged] = useState(false);
 
   //useEffects
+  const { status, error, data: responsedata } = useQuery(["data"], GetProfile);
   useEffect(() => {
-    let user = GetProfile();
-    user
-      .then((res) => {
-        setUsername(res.user.username);
-        setEmail(res.user.email);
-        setDob(res.user.dob);
-        setGender(res.user.gender);
-        setPhoneNumber(res.user_details.full_number);
-        setUser(res.user);
-        setUserDetails(res.user_details);
-      })
-      .catch((err) => {
-        return err.response;
-      });
-  }, []);
+    if (responsedata) {
+      setUsername(responsedata.user.username);
+      setEmail(responsedata.user.email);
+      setDob(responsedata.user.dob);
+      setGender(responsedata.user.gender);
+      setPhoneNumber(responsedata.user_details.full_number);
+      setUser(responsedata.user);
+      setUserDetails(responsedata.user_details);
+    }
+  }, [responsedata, error]);
+
   // Only send request if changes have been made
   useEffect(() => {
     if (

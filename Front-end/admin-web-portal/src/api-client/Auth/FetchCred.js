@@ -5,7 +5,7 @@ export default async function FetchCred(email, password) {
 	let args = new FormData();
 	args.append("email", email);
 	args.append("password", password);
-	args.append("type", 2);
+	args.append("type", 1);
 
 	return axios({
 		method: "post",

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 // MUI
 import CssBaseline from "@mui/material/CssBaseline";
@@ -6,10 +7,12 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useEffect } from "react";
 
 // logo
 import logo from "../../assets/logo.png";
+
+// API
+import FetchCred from "../../api-client/Auth/FetchCred";
 
 const theme = createTheme({
 	palette: {
@@ -22,10 +25,21 @@ const theme = createTheme({
 });
 
 const Login = () => {
-	const navigation = useNavigate();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
-	function handleSubmit() {
-		navigation("/");
+	const navigate = useNavigate();
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		FetchCred(email, password).then((res) => {
+			if (res.status === "success") {
+				localStorage.setItem("token", res.authorisation.token);
+				navigate("/");
+			} else if (res.status === 401) {
+				console.log("Unauthorized");
+			}
+		});
 	}
 
 	return (
@@ -40,7 +54,7 @@ const Login = () => {
 						alignItems: "center",
 					}}>
 					<img src={logo} alt='' />
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={(e) => handleSubmit(e)}>
 						<TextField
 							margin='normal'
 							fullWidth
@@ -48,6 +62,7 @@ const Login = () => {
 							label='Email Address'
 							autoComplete='email'
 							autoFocus
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<TextField
 							margin='normal'
@@ -56,6 +71,7 @@ const Login = () => {
 							type='password'
 							id='password'
 							autoComplete='current-password'
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<button type='submit' className='btn-primary'>
 							Log in

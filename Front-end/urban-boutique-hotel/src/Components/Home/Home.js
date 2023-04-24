@@ -120,8 +120,16 @@ const Home = () => {
           })}
         </div>
       </div>
-      <Reviews data={reviews} />
-      <Footer />
+      {loading ? (
+        <div className="buffer-space">
+          <div className="buffer-loader home"></div>
+        </div>
+      ) : (
+        <div>
+          <Reviews data={reviews} />
+          <Footer />
+        </div>
+      )}
     </>
   );
 };

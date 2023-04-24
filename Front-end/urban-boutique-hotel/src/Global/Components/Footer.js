@@ -4,6 +4,7 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -12,26 +13,29 @@ const Footer = () => {
         <div className="footer-col">
           <h4>Explore</h4>
           <ul className="footer-links">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Rooms</a>
-            </li>
-            <li>
-              <a href="#">Services</a>
-            </li>
+            <Link to="/" className="footer-link">
+              <li>Home</li>
+            </Link>
+
+            <Link to="/discover" className="footer-link">
+              <li>Discover</li>
+            </Link>
+
+            <Link to="/rooms" className="footer-link">
+              <li>Rooms</li>
+            </Link>
+
+            <Link to="/services" className="footer-link">
+              <li>Services</li>
+            </Link>
           </ul>
         </div>
         <div className="footer-col">
           <h4>About Us</h4>
           <ul className="footer-links">
-            <li>
-              <a href="#">Contact</a>
-            </li>
+            <Link to="/contact" className="footer-link">
+              <li>Contact</li>
+            </Link>
             <li>
               <a href="#">Privacy Policy</a>
             </li>

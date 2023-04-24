@@ -38,7 +38,7 @@ const Login = () => {
 		};
 		FetchCred(reqData).then((res) => {
 			if (res.status === "success") {
-				localStorage.setItem("token", res.authorisation.token);
+				localStorage.setItem("token", `Bearer ${res.authorisation.token}`);
 				navigate("/");
 			} else if (res.status === 401) {
 				console.log("Unauthorized");

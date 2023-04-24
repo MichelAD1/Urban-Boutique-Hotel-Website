@@ -168,11 +168,11 @@ export default function Navbar() {
 				className='nav-link logout'
 				onClick={() => {
 					const response = Logout();
-					response
-						.then((res) => {
+					response.then((res) => {
+						if (res.status === "success") {
 							navigate("/login");
-						})
-						.catch((err) => err);
+						}
+					});
 				}}>
 				<MdLogout className='icons' alt='' />
 				<div className='routes'>Log out</div>

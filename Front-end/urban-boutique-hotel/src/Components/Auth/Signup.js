@@ -145,6 +145,7 @@ const Signup = () => {
           "username",
           JSON.stringify(res.data.user.username)
         );
+        localStorage.setItem("shouldReload", JSON.stringify(true));
         axios.defaults.headers.common["Authorization"] = "Bearer" + token;
         navigation("/");
       }
@@ -280,8 +281,8 @@ const Signup = () => {
               onChange={(event) => setGender(event.target.value)}
               autoFocus
             >
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
             </TextField>
             <div className="login-error">{err}</div>
             <button type="submit" className="btn-primary">

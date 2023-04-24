@@ -12,81 +12,86 @@ import dummy1 from "../../assets/images/room-1.jpeg";
 import { useEffect } from "react";
 
 const SingleRoom = ({ reverse, room, type }) => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const handleRedirect = (item) => {
-		navigate(`/rooms/${item.room_name}`, { state: { data: item } });
-	};
-	return (
-		<div
-			className={`deals-rooms ${type ? "" : "mg-bot"} ${
-				reverse ? "reverse" : ""
-			}`}
-			id='deals-rooms'
-			onClick={() => handleRedirect(room)}>
-			<img src={dummy1} alt='' className='deal-image' />
-			<div className='deal-info'>
-				{type && <h2>{type}</h2>}
-				{type && <h5>{room.room_name}</h5>}
-				{!type && <h2>{room.room_name}</h2>}
-				<p>{room.description}</p>
-				<div className='deal-stats'>
-					<div className='stat-item'>
-						<RxPerson />
-						<p>Occupancy: {room.guests}</p>
-					</div>
-					<div className='stat-item'>
-						<TbResize />
-						<p>Size: {room.room_size}sqm</p>
-					</div>
-					{room.wifi && (
-						<div className='stat-item'>
-							<AiOutlineWifi />
-							<p>WI-Fi</p>
-						</div>
-					)}
-					{room.tv && (
-						<div className='stat-item'>
-							<CgScreen />
-							<p>TV</p>
-						</div>
-					)}
-					{room.shower && (
-						<div className='stat-item'>
-							<MdOutlineShower />
-							<p>Shower</p>
-						</div>
-					)}
-					{room.towels && (
-						<div className='stat-item'>
-							<GiTowel />
-							<p>Towels</p>
-						</div>
-					)}
-					{room.minibar && (
-						<div className='stat-item'>
-							<MdOutlineLocalBar />
-							<p>Minibar</p>
-						</div>
-					)}
-					{room.work_space && (
-						<div className='stat-item'>
-							<GiDesk />
-							<p>Work Space</p>
-						</div>
-					)}
-				</div>
-				<div className='prices'>
-					<h4>${room.price}</h4>
-					{room.old_price && <h4 className='old-price'>${room.old_price}</h4>}
-				</div>
-				<button className='btn-secondary'>
-					Learn more
-					<IoIosArrowUp className='arrow' />
-				</button>
-			</div>
-		</div>
-	);
+  const handleRedirect = (item) => {
+    navigate(`/rooms/${item.title}`, { state: { data: item } });
+  };
+  return (
+    <div
+      className={`deals-rooms ${type ? "" : "mg-bot"} ${
+        reverse ? "reverse" : ""
+      }`}
+      id="deals-rooms"
+      onClick={() => handleRedirect(room.room)}
+    >
+      <img src={dummy1} alt="" className="deal-image" />
+      <div className="deal-info">
+        {type && <h2>{type}</h2>}
+        {type && <h5>{room.room.title}</h5>}
+        {!type && <h2>{room.room.title}</h2>}
+        <p>{room.room.description}</p>
+        <div className="deal-stats">
+          <div className="stat-item">
+            <RxPerson />
+            <p>Occupancy: {room.room.guests}</p>
+          </div>
+          <div className="stat-item">
+            <TbResize />
+            <p>Size: {room.room.size}sqm</p>
+          </div>
+          {room.room.wifi ? (
+            <div className="stat-item">
+              <AiOutlineWifi />
+              <p>WI-Fi</p>
+            </div>
+          ) : null}
+          {room.room.tv ? (
+            <div className="stat-item">
+              <CgScreen />
+              <p>TV</p>
+            </div>
+          ) : null}
+          {room.room.shower ? (
+            <div className="stat-item">
+              <MdOutlineShower />
+              <p>Shower</p>
+            </div>
+          ) : null}
+          {room.room.towels ? (
+            <div className="stat-item">
+              <GiTowel />
+              <p>Towels</p>
+            </div>
+          ) : null}
+          {room.room.mini_bar ? (
+            <div className="stat-item">
+              <MdOutlineLocalBar />
+              <p>Minibar</p>
+            </div>
+          ) : null}
+          {room.room.desk ? (
+            <div className="stat-item">
+              <GiDesk />
+              <p>Work Space</p>
+            </div>
+          ) : null}
+        </div>
+        <div className="prices">
+          <h4>${room.room.rent}</h4>
+          {room.room.discount && (
+            <h4 className="old-price">
+              ${room.room.rent + room.room.discount}
+            </h4>
+          )}
+        </div>
+        <button className="btn-secondary">
+          Learn more
+          <IoIosArrowUp className="arrow" />
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default SingleRoom;

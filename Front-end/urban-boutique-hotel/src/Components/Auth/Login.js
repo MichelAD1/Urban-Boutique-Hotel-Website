@@ -65,6 +65,7 @@ const Login = () => {
           "username",
           JSON.stringify(res.data.user.username)
         );
+        localStorage.setItem("shouldReload", JSON.stringify(true));
         axios.defaults.headers.common["Authorization"] = "Bearer" + token;
         navigation("/");
       }

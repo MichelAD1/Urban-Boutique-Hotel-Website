@@ -1,19 +1,33 @@
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
-
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 // Componenets
 import Footer from "../../Global/Components/Footer";
 import SingleRoom from "../Rooms/SingleRoom";
 import Reviews from "../../Global/Components/Reviews";
 
+//APIS
+import GetHomePage from "../../api-client/Home/GetHomePage";
 // Images
 import room1 from "../../assets/images/room-1.jpeg";
 import room2 from "../../assets/images/room-2.jpeg";
 
 const Home = () => {
-  const token = localStorage.getItem("token");
+  const [rooms, setRooms] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  //Token handler
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const shouldReload = localStorage.getItem("shouldReload");
+    if (shouldReload === "true") {
+      localStorage.removeItem("shouldReload");
+      window.location.reload(true);
+    }
+  }, []);
   if (token) {
     const decoded = jwt_decode(token);
     const currentTime = Date.now() / 1000; // Convert to seconds
@@ -23,6 +37,19 @@ const Home = () => {
       localStorage.removeItem("username");
     }
   }
+
+  //Api handler
+  const { status, error, data: responsedata } = useQuery(["data"], GetHomePage);
+  useEffect(() => {
+    if (responsedata) {
+      Promise.all(responsedata).then((results) => {
+        setRooms(results[0]);
+        setReviews(results[1]);
+        setLoading(false);
+      });
+    }
+  }, [responsedata, error]);
+
   const services = [
     {
       icon: <FaCocktail />,
@@ -45,70 +72,6 @@ const Home = () => {
       info: "Lorem There are many variations of passages of Lorem Ipsum available, but the majority form.",
     },
   ];
-
-  const rooms = [
-    {
-      id: 1,
-      room_name: "Standard Room",
-      price: 100.0,
-      old_price: 150.0,
-      guests: 2,
-      room_type: "Queen Bed",
-      room_size: 250,
-      wifi: true,
-      tv: true,
-      shower: true,
-      towels: false,
-      minibar: true,
-      desk: false,
-      images: [room1],
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-    },
-    {
-      id: 2,
-      room_name: "Executive Suite",
-      price: 350.0,
-      old_price: 400.0,
-      guests: 4,
-      room_type: "Two Queen Beds",
-      room_size: 600,
-      wifi: true,
-      tv: false,
-      shower: true,
-      towels: true,
-      minibar: false,
-      desk: false,
-      images: [room2],
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-    },
-  ];
-
-  const reviews = [
-    {
-      id: 1,
-      name: "Sara Smith",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
-      rating: 4,
-    },
-    {
-      id: 2,
-      name: "John Doe",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
-      rating: 3.5,
-    },
-    {
-      id: 3,
-      name: "Peter Jones",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestiae repudiandae aspernatur nisi temporibus eligendi aperiam magnam recusandae! Soluta dolor quam dignissimos architecto accusamus consequuntur qui, quod similique ullam error?",
-      rating: 2,
-    },
-  ];
-
   return (
     <>
       <div className="defaultHero">
@@ -121,8 +84,24 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <SingleRoom reverse={false} room={rooms[0]} type={"Deal of the month"} />
-      <SingleRoom reverse={true} room={rooms[1]} type={"Featured room"} />
+      {loading ? (
+        <div className="buffer-space">
+          <div className="buffer-loader home"></div>
+        </div>
+      ) : (
+        <div>
+          {rooms.map((room, index) => (
+            <SingleRoom
+              key={index}
+              reverse={index % 2 === 0}
+              room={room}
+              type={
+                room.room.featured === 1 ? "Featured room" : "Deal of the month"
+              }
+            />
+          ))}
+        </div>
+      )}
 
       <div className="services">
         <div className="section-title">

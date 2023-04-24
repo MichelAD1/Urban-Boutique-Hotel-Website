@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
+// Icons
 import { MdMarkEmailUnread } from "react-icons/md";
 import { IoMdOptions } from "react-icons/io";
 import { BiPhotoAlbum } from "react-icons/bi";
-import { TbShoppingCartDiscount } from "react-icons/tb";
-import { FaQuestion, FaUserLock } from "react-icons/fa";
+import { FaQuestion } from "react-icons/fa";
 import { GoLaw } from "react-icons/go";
 
 const Options = () => {
@@ -15,16 +15,6 @@ const Options = () => {
 					<h2>Account settings</h2>
 					<h5>Manage your booking experience</h5>
 					<div className='settings-container'>
-						<Link to='/account/profile' className='settings-box'>
-							<TbShoppingCartDiscount className='settings-icon' />
-							<div className='settings-content'>
-								<h3>Promotions & Discounts</h3>
-								<p>Add or remove room promotions</p>
-								<div className='settings-link'>
-									Manage discounts and promotions
-								</div>
-							</div>
-						</Link>
 						<Link to='/options/preferences' className='settings-box'>
 							<IoMdOptions className='settings-icon' />
 							<div className='settings-content'>
@@ -33,7 +23,7 @@ const Options = () => {
 								<div className='settings-link'>Manage preferences</div>
 							</div>
 						</Link>
-						<Link to='/account/security' className='settings-box'>
+						<Link to='/options/gallery' className='settings-box'>
 							<BiPhotoAlbum className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Photo gallery</h3>
@@ -49,7 +39,7 @@ const Options = () => {
 								<div className='settings-link'>Manage email marketing</div>
 							</div>
 						</Link>
-						<Link to='' className='settings-box'>
+						<Link to='/options/faqs_policies' className='settings-box'>
 							<FaQuestion className='settings-icon' />
 							<div className='settings-content'>
 								<h3>FAQ & Policies</h3>
@@ -57,7 +47,7 @@ const Options = () => {
 								<div className='settings-link'>Manage FAQ & Policies</div>
 							</div>
 						</Link>
-						<Link to='' className='settings-box'>
+						<Link to='/options/regulation_disaster' className='settings-box'>
 							<GoLaw className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Regulations & Disaster response plan</h3>
@@ -67,14 +57,6 @@ const Options = () => {
 								<div className='settings-link'>
 									Manage Regulations & Disaster response plan
 								</div>
-							</div>
-						</Link>
-						<Link to='' className='settings-box'>
-							<FaUserLock className='settings-icon' />
-							<div className='settings-content'>
-								<h3>Staff access</h3>
-								<p>Give staff access and manage their permissions</p>
-								<div className='settings-link'>Manage staff access</div>
 							</div>
 						</Link>
 					</div>

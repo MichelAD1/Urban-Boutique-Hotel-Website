@@ -46,7 +46,7 @@ const Table = ({ reqData, columns, type, err }) => {
 		setIsModalOpen(false);
 	};
 	return (
-		<>
+		<div>
 			<table {...getTableProps()} className='basic-table'>
 				<thead>
 					{headerGroups.map((headerGroup) => (
@@ -79,7 +79,9 @@ const Table = ({ reqData, columns, type, err }) => {
 									key={row.original.id}>
 									{row.cells.map((cell) => {
 										let action_col = cell.column.Header === "action";
-										let duration_col = cell.column.Header === "duration";
+										let amount_col =
+											cell.column.Header === "amount" ||
+											cell.column.Header === "Transaction Amount";
 
 										if (action_col) {
 											return (
@@ -88,7 +90,7 @@ const Table = ({ reqData, columns, type, err }) => {
 														onClick={() => {
 															handleDeleteOptions(row.original.id);
 														}}
-														className='action-button'
+														className='table-button'
 														key={row.original.id}>
 														Delete
 													</button>
@@ -96,10 +98,10 @@ const Table = ({ reqData, columns, type, err }) => {
 											);
 										}
 
-										if (duration_col) {
+										if (amount_col) {
 											return (
 												<td {...cell.getCellProps()} className='basic-body'>
-													{cell.render("Cell")}h
+													USD {cell.render("Cell")}
 												</td>
 											);
 										}
@@ -120,6 +122,17 @@ const Table = ({ reqData, columns, type, err }) => {
 				isOpen={isModalOpen}
 				style={{
 					overlay: { backgroundColor: "rgba(0, 0, 0, 0.2)" },
+					content: {
+						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						border: "none",
+						width: "100%",
+						height: "100%",
+						margin: "auto",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						zIndex: "100",
+					},
 				}}>
 				<div>
 					<h1>Confirm Delete</h1>
@@ -131,7 +144,7 @@ const Table = ({ reqData, columns, type, err }) => {
 					<button onClick={closeModal}>No</button>
 				</div>
 			</ReactModal>
-		</>
+		</div>
 	);
 };
 

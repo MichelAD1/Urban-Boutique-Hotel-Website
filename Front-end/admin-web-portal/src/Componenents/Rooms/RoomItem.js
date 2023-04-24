@@ -14,13 +14,11 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import delete_icon from "../../assets/icons/cancel-icon.svg";
 import DeleteRoom from "../../api-client/Rooms/DeleteRoom";
 
-import dummy from "../../assets/dummy.png";
-
 const RoomItem = () => {
 	const loc = useLocation();
 	const navigate = useNavigate();
 
-	const [categories, setCategories] = useState([]);
+	const [edit, setEdit] = useState(false);
 
 	const [isValid, setIsValid] = useState(loc.state);
 
@@ -50,22 +48,9 @@ const RoomItem = () => {
 
 	useEffect(() => {
 		if (isValid) {
-			setName(isValid.data.name);
-			setDescription(isValid.data.description);
-			setImages(isValid.data.images);
-			setPrice(isValid.data.price);
-			setOldPrice(isValid.data.old_price);
-			setSize(isValid.data.size);
-			setMinibar(isValid.data.minibar);
-			setGuests(isValid.data.guests);
-			setType(isValid.data.type);
-			setShower(isValid.data.shower);
-			setTowels(isValid.data.towels);
-			setTv(isValid.data.tv);
-			setWifi(isValid.data.wifi);
-			setDesk(isValid.data.desk);
-			setBreakfast(isValid.data.breakfast);
-			setPets(isValid.data.pets);
+			handleCancel();
+		} else {
+			setEdit(true);
 		}
 	}, []);
 
@@ -155,6 +140,7 @@ const RoomItem = () => {
 		// 	});
 		// }
 		console.log("submit");
+		setEdit(false);
 	};
 
 	const handleEdit = (e) => {
@@ -172,6 +158,31 @@ const RoomItem = () => {
 		// 	window.location.reload();
 		// });
 		console.log("Edit");
+		setEdit(false);
+	};
+
+	const handleCancel = () => {
+		if (isValid) {
+			setEdit(false);
+			setName(isValid.data.name);
+			setDescription(isValid.data.description);
+			setImages(isValid.data.images);
+			setPrice(isValid.data.price);
+			setOldPrice(isValid.data.old_price);
+			setSize(isValid.data.size);
+			setMinibar(isValid.data.minibar);
+			setGuests(isValid.data.guests);
+			setType(isValid.data.type);
+			setShower(isValid.data.shower);
+			setTowels(isValid.data.towels);
+			setTv(isValid.data.tv);
+			setWifi(isValid.data.wifi);
+			setDesk(isValid.data.desk);
+			setBreakfast(isValid.data.breakfast);
+			setPets(isValid.data.pets);
+		} else {
+			navigate("/rooms");
+		}
 	};
 
 	// Modal
@@ -215,7 +226,31 @@ const RoomItem = () => {
 				}}>
 				<div className='edit-container edit-container-large'>
 					<div className='edit-item'>
-						<h2>Room #{isValid.data.id}</h2>
+						{isValid && <h2>Room #{isValid.data.id}</h2>}
+						{!isValid && <h2>Add Room</h2>}
+						{isValid && (
+							<button className='button' onClick={() => handleDelete()}>
+								Delete
+							</button>
+						)}
+						{!edit && isValid && (
+							<button className='button' onClick={() => setEdit(true)}>
+								Edit
+							</button>
+						)}
+						{(edit || !isValid) && (
+							<>
+								<button className='save-button' type='submit'>
+									Save
+								</button>
+								<button
+									className='button'
+									type='button'
+									onClick={() => handleCancel()}>
+									Cancel
+								</button>
+							</>
+						)}
 					</div>
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
@@ -223,7 +258,15 @@ const RoomItem = () => {
 								<label>Name</label>
 							</div>
 							<div>
-								<p>{name}</p>
+								{!edit && <p>{name}</p>}
+								{edit && (
+									<input
+										type='text'
+										value={name}
+										onChange={(e) => setName(e.target.value)}
+										className='input-box'
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -233,7 +276,14 @@ const RoomItem = () => {
 								<label>Description</label>
 							</div>
 							<div>
-								<p>{description}</p>
+								{!edit && <p>{description}</p>}
+								{edit && (
+									<textarea
+										value={description}
+										onChange={(e) => setDescription(e.target.value)}
+										className='input-box bio-input'
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -243,7 +293,15 @@ const RoomItem = () => {
 								<label>Type</label>
 							</div>
 							<div>
-								<p>{type}</p>
+								{!edit && <p>{type}</p>}
+								{edit && (
+									<input
+										type='text'
+										value={type}
+										className='input-box'
+										onChange={(e) => setType(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -253,7 +311,15 @@ const RoomItem = () => {
 								<label>Guests</label>
 							</div>
 							<div>
-								<p>{guests}</p>
+								{!edit && <p>{guests}</p>}
+								{edit && (
+									<input
+										type='number'
+										value={guests}
+										className='input-box'
+										onChange={(e) => setGuests(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -263,7 +329,15 @@ const RoomItem = () => {
 								<label>Size</label>
 							</div>
 							<div>
-								<p>{size}sqft</p>
+								{!edit && <p>{size}sqft</p>}
+								{edit && (
+									<input
+										type='number'
+										value={size}
+										className='input-box'
+										onChange={(e) => setSize(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -273,7 +347,15 @@ const RoomItem = () => {
 								<label>Price</label>
 							</div>
 							<div>
-								<p>${price}</p>
+								{!edit && <p>${price}</p>}
+								{edit && (
+									<input
+										type='number'
+										value={price}
+										className='input-box'
+										onChange={(e) => setPrice(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -283,7 +365,15 @@ const RoomItem = () => {
 								<label>Old price</label>
 							</div>
 							<div>
-								<p>${oldPrice}</p>
+								{!edit && <p>${oldPrice}</p>}
+								{edit && (
+									<input
+										type='number'
+										value={oldPrice}
+										className='input-box'
+										onChange={(e) => setOldPrice(e.target.value)}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
@@ -293,38 +383,102 @@ const RoomItem = () => {
 								<label>Ammeneties</label>
 							</div>
 							<div className='amm-checkbox'>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={minibar} />
-									<label>Minibar</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={shower} />
-									<label>Shower</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={towels} />
-									<label>Towels</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={tv} />
-									<label>Tv</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={wifi} />
-									<label>WI-FI</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={desk} />
-									<label>Desk</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={breakfast} />
-									<label>Breakfast</label>
-								</div>
-								<div className='checkbox-item'>
-									<input type='checkbox' checked={pets} />
-									<label>Pets</label>
-								</div>
+								{(minibar || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={minibar}
+												onChange={(e) => setMinibar(e.target.checked)}
+											/>
+										)}
+										<label>Minibar</label>
+									</div>
+								)}
+								{(shower || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={shower}
+												onChange={(e) => setShower(e.target.checked)}
+											/>
+										)}
+										<label>Shower</label>
+									</div>
+								)}
+								{(towels || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={towels}
+												onChange={(e) => setTowels(e.target.checked)}
+											/>
+										)}
+										<label>Towels</label>
+									</div>
+								)}
+								{(tv || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={tv}
+												onChange={(e) => setTv(e.target.checked)}
+											/>
+										)}
+										<label>Tv</label>
+									</div>
+								)}
+								{(wifi || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={wifi}
+												onChange={(e) => setWifi(e.target.checked)}
+											/>
+										)}
+										<label>WI-FI</label>
+									</div>
+								)}
+								{(desk || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={desk}
+												onChange={(e) => setDesk(e.target.checked)}
+											/>
+										)}
+										<label>Desk</label>
+									</div>
+								)}
+								{(breakfast || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={breakfast}
+												onChange={(e) => setBreakfast(e.target.checked)}
+											/>
+										)}
+										<label>Breakfast</label>
+									</div>
+								)}
+								{(pets || edit) && (
+									<div className='checkbox-item'>
+										{edit && (
+											<input
+												type='checkbox'
+												checked={pets}
+												onChange={(e) => setPets(e.target.checked)}
+											/>
+										)}
+										<label>Pets</label>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
@@ -336,26 +490,28 @@ const RoomItem = () => {
 								<h2>Gallery</h2>
 								<p>Add up to 9 images</p>
 							</div>
-							<div>
-								<label htmlFor='images-upload'>
-									<AiOutlinePlus className='add-button' />
-								</label>
-								<input
-									type='file'
-									multiple
-									onChange={(e) => addImage(e)}
-									id='images-upload'
-									name='images-upload'
-									className='upload-image'
-								/>
-							</div>
+							{edit && (
+								<div>
+									<label htmlFor='images-upload'>
+										<AiOutlinePlus className='add-button' />
+									</label>
+									<input
+										type='file'
+										multiple
+										onChange={(e) => addImage(e)}
+										id='images-upload'
+										name='images-upload'
+										className='upload-image'
+									/>
+								</div>
+							)}
 						</div>
 						<div className='gallery'>
 							{images.map((image) => {
 								return (
 									<div>
 										<img className='gallery-images' src={image} />
-										<RiDeleteBin2Fill className='delete-icon' />
+										{edit && <RiDeleteBin2Fill className='delete-icon' />}
 									</div>
 								);
 							})}
@@ -363,6 +519,33 @@ const RoomItem = () => {
 					</div>
 				</div>
 			</form>
+			<ReactModal
+				className='custom-modal'
+				isOpen={isModalOpen}
+				style={{
+					overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+					content: {
+						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						border: "none",
+						width: "100%",
+						height: "100%",
+						margin: "auto",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						zIndex: "100",
+					},
+				}}>
+				<div>
+					<h1>Confirm Delete</h1>
+					<p>
+						Are you sure you want to remove this room? This action cannot be
+						undone.
+					</p>
+					<button onClick={handleConfirmDelete}>Yes</button>
+					<button onClick={closeModal}>No</button>
+				</div>
+			</ReactModal>
 		</div>
 	);
 };

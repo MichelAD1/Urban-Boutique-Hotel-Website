@@ -1,4 +1,3 @@
-import "../../Global/Styles/styles.css";
 import { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,7 +7,8 @@ import GetEmployees from "../../api-client/Employees/GetEmployees";
 import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
 
 // Icons
-import add_box from "../../assets/icons/add-nf.svg";
+import { AiOutlinePlus } from "react-icons/ai";
+
 import search_icon from "../../assets/icons/search.svg";
 
 export default function Employees() {
@@ -18,18 +18,90 @@ export default function Employees() {
 	const [err, setErr] = useState("");
 
 	useEffect(() => {
-		let employees = GetEmployees();
-		employees
-			.then((res) => {
-				if (res.data.data.length > 0) {
-					setData(res.data);
-				} else {
-					setErr("No employees found");
-				}
-			})
-			.catch((err) => {
-				return err;
-			});
+		// let employees = GetEmployees();
+		// employees
+		// 	.then((res) => {
+		// 		if (res.data.data.length > 0) {
+		// 			setData(res.data);
+		// 		} else {
+		// 			setErr("No employees found");
+		// 		}
+		// 	})
+		// 	.catch((err) => {
+		// 		return err;
+		// 	});
+		setData([
+			{
+				id: 1,
+				username: "jdoe",
+				full_name: "John Doe",
+				email: "jdoe@example.com",
+				position: "Software Engineer",
+				dob: "1985-01-01",
+				gender: "male",
+				authorization: "super admin",
+			},
+			{
+				id: 2,
+				username: "asmith",
+				full_name: "Alice Smith",
+				email: "asmith@example.com",
+				position: "Product Manager",
+				dob: "1990-02-15",
+				gender: "female",
+				authorization: "content manager",
+			},
+			{
+				id: 3,
+				username: "bbrown",
+				full_name: "Bob Brown",
+				email: "bbrown@example.com",
+				position: "UI/UX Designer",
+				dob: "1988-07-22",
+				gender: "male",
+				authorization: "user manager",
+			},
+			{
+				id: 4,
+				username: "clee",
+				full_name: "Carla Lee",
+				email: "clee@example.com",
+				position: "Data Analyst",
+				dob: "1992-05-09",
+				gender: "female",
+				authorization: "reservation manager",
+			},
+			{
+				id: 5,
+				username: "drodriguez",
+				full_name: "David Rodriguez",
+				email: "drodriguez@example.com",
+				position: "DevOps Engineer",
+				dob: "1986-11-30",
+				gender: "male",
+				authorization: "finance manager",
+			},
+			{
+				id: 6,
+				username: "ereed",
+				full_name: "Emily Reed",
+				email: "ereed@example.com",
+				position: "Marketing Manager",
+				dob: "1994-04-18",
+				gender: "female",
+				authorization: "default employee",
+			},
+			{
+				id: 7,
+				username: "fhernandez",
+				full_name: "Frank Hernandez",
+				email: "fhernandez@example.com",
+				position: "Software Engineer",
+				dob: "1989-09-12",
+				gender: "male",
+				authorization: "default employee",
+			},
+		]);
 	}, []);
 
 	const columns = useMemo(
@@ -49,10 +121,6 @@ export default function Employees() {
 			{
 				Header: "Email",
 				accessor: "email",
-			},
-			{
-				Header: "Phone Number",
-				accessor: "number",
 			},
 			{
 				Header: "Position",
@@ -87,33 +155,33 @@ export default function Employees() {
 	// ).sort();
 	return (
 		<div className='container'>
-			<div className='list-box'>
-				<div className='searchAndFilter'>
-					<div className='search-bar'>
-						<img src={search_icon} alt='' className='search-icon' />
-						<input
-							className='search-input'
-							type='text'
-							placeholder='Search'
-							value={query}
-							onChange={(e) => setQuery(e.target.value)}
-						/>
-					</div>
-					<select
-						className='filterDropDown'
-						value={filter}
-						onChange={(e) => setFilter(e.target.value)}>
-						<option value=''>Filter by position</option>
-						{/* {positions.map((position) => (
+			<div className='searchAndFilter'>
+				<div className='search-bar'>
+					<img src={search_icon} alt='' className='search-icon' />
+					<input
+						className='search-input'
+						type='text'
+						placeholder='Search'
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
+					/>
+				</div>
+				<select
+					className='filterDropDown'
+					value={filter}
+					onChange={(e) => setFilter(e.target.value)}>
+					<option value=''>Filter by position</option>
+					{/* {positions.map((position) => (
 							<option key={position} value={position}>
 								{position}
 							</option>
 						))} */}
-					</select>
-					<Link to='/employee/profile' className='add-button'>
-						<img src={add_box} width='28px' height='28px' alt='' />
-					</Link>
-				</div>
+				</select>
+				<Link to='/employee/profile'>
+					<AiOutlinePlus className='add-button' />
+				</Link>
+			</div>
+			<div className='employees-container'>
 				<BasicTable
 					reqData={data}
 					columns={columns}

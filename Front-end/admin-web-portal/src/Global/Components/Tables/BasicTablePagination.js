@@ -1,6 +1,5 @@
 import { useTable, usePagination } from "react-table";
 import { useNavigate } from "react-router-dom";
-import "./basic-styles.css";
 import { useEffect, useState } from "react";
 import GetClients from "../../../api-client/Clients/GetClients";
 
@@ -39,11 +38,13 @@ const Table = ({ reqData, columns, redirect, err }) => {
 		} else if (redirect === "request") {
 			navigate("/maintenance/requests/info", { state: { data: row.original } });
 		} else if (redirect === "review") {
-			navigate("/support/review", { state: { data: row.original } });
+			navigate("/support/reviews/info", { state: { data: row.original } });
 		} else if (redirect === "feedback") {
-			navigate("/support/feedback", {
+			navigate("/support/feedback/info", {
 				state: { data: row.original },
 			});
+		} else if (redirect === "reservation") {
+			navigate("/reservations/info", { state: { data: row.original } });
 		}
 	};
 
@@ -100,6 +101,14 @@ const Table = ({ reqData, columns, redirect, err }) => {
 									className='basic-row hovering'
 									onClick={() => handleRedirect(row)}>
 									{row.cells.map((cell) => {
+										let amount_col = cell.column.Header === "Payment amount";
+										if (amount_col) {
+											return (
+												<td {...cell.getCellProps()} className='basic-body'>
+													USD {cell.render("Cell")}
+												</td>
+											);
+										}
 										return (
 											<td {...cell.getCellProps()} className='basic-body'>
 												{cell.render("Cell")}

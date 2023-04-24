@@ -12,7 +12,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
 
-    protected $fillable = ['username','email','password','type','dob','gender'];
+    protected $fillable = ['username','email','password','type','dob','gender','banned'];
     use HasFactory, Notifiable;
 
     /**

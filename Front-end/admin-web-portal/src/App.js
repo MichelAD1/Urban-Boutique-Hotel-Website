@@ -3,21 +3,58 @@ import ReactModal from "react-modal";
 
 // Componenents
 import Navbar from "./Componenents/NavBar/Navbar";
+
+// ******** Login ********
 import Login from "./Componenents/LogIn/Login";
+
+// ******** Home ********
 import Home from "./Componenents/Home/Home";
+
+// ******** Employees ********
 import Employees from "./Componenents/Employees/Employees";
 import EmployeeItem from "./Componenents/Employees/EmployeeItem";
+
+// ******** Reservations ********
+import Reservations from "./Componenents/Reservations/Reservations";
+import ReservationItem from "./Componenents/Reservations/ReservationItem";
+
+// ******** Users ********
 import Users from "./Componenents/Users/Users";
-import Support from "./Componenents/Support/Support";
-import ReviewItem from "./Componenents/Support/ReviewItem";
-import FeedbackItem from "./Componenents/Support/FeedbackItem";
 import UserItem from "./Componenents/Users/UserItem";
+
+// ******** Support ********
+import Support from "./Componenents/Support/Support";
+// Reviews
+import Reviews from "./Componenents/Support/Reviews/Reviews";
+import ReviewItem from "./Componenents/Support/Reviews/ReviewItem";
+//Feedback
+import Feedback from "./Componenents/Support/Feedback/Feedback";
+import FeedbackItem from "./Componenents/Support/Feedback/FeedbackItem";
+// Live Chat
+import LiveChat from "./Componenents/Support/Live Chat/LiveChat";
+
+// ******** Options ********
 import Options from "./Componenents/Options/Options";
+import Preferences from "./Componenents/Options/Preferences";
+import PhotoGallery from "./Componenents/Options/PhotoGallery";
+import FaqPolicyList from "./Componenents/Options/FaqPolicy/FaqPolicyList";
+import FaqPolicyItem from "./Componenents/Options/FaqPolicy/FaqPolicyItem";
+import RegulationDisasterList from "./Componenents/Options/RegulationDisaster/RegulationDisasterList";
+import RegulationDisasterItem from "./Componenents/Options/RegulationDisaster/RegulationDisasterItem";
+
+// ******** Finance ********
 import Finance from "./Componenents/Finance/Finance";
+import Transactions from "./Componenents/Finance/Transactions";
+
+// ******** Rooms ********
 import Rooms from "./Componenents/Rooms/Rooms";
 import RoomItem from "./Componenents/Rooms/RoomItem";
+
+// ******** Global ********
 import MaintenanceRequest from "./Global/Components/Maintenance Request/Requests";
 import RequestItem from "./Global/Components/Maintenance Request/RequestItem";
+
+// ******** Private Routes ********
 import PrivateRoute from "./Routes/PrivateRoutes";
 
 ReactModal.setAppElement("#root");
@@ -51,11 +88,99 @@ function App() {
 					</Route>
 					<Route exact path='/' element={<PrivateRoute />}>
 						<Route
+							path='/options/preferences'
+							element={
+								<>
+									<Navbar />
+									<Preferences />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/gallery'
+							element={
+								<>
+									<Navbar />
+									<PhotoGallery />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/faqs_policies'
+							element={
+								<>
+									<Navbar />
+									<FaqPolicyList />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/faqs_policies/info'
+							element={
+								<>
+									<Navbar />
+									<FaqPolicyItem />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/regulation_disaster'
+							element={
+								<>
+									<Navbar />
+									<RegulationDisasterList />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/options/regulation_disaster/info'
+							element={
+								<>
+									<Navbar />
+									<RegulationDisasterItem />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
 							path='/rooms'
 							element={
 								<>
 									<Navbar />
 									<Rooms />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/reservations'
+							element={
+								<>
+									<Navbar />
+									<Reservations />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/reservations/info'
+							element={
+								<>
+									<Navbar />
+									<ReservationItem />
 								</>
 							}
 						/>
@@ -73,7 +198,18 @@ function App() {
 					</Route>
 					<Route exact path='/' element={<PrivateRoute />}>
 						<Route
-							path='/support/review'
+							path='/support/reviews'
+							element={
+								<>
+									<Navbar />
+									<Reviews />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/support/reviews/info'
 							element={
 								<>
 									<Navbar />
@@ -88,7 +224,29 @@ function App() {
 							element={
 								<>
 									<Navbar />
+									<Feedback />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/support/feedback/info'
+							element={
+								<>
+									<Navbar />
 									<FeedbackItem />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/support/livechat'
+							element={
+								<>
+									<Navbar />
+									<LiveChat />
 								</>
 							}
 						/>
@@ -177,6 +335,17 @@ function App() {
 								<>
 									<Navbar />
 									<Finance />
+								</>
+							}
+						/>
+					</Route>
+					<Route exact path='/' element={<PrivateRoute />}>
+						<Route
+							path='/finance/transactions'
+							element={
+								<>
+									<Navbar />
+									<Transactions />
 								</>
 							}
 						/>

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Room from "./RoomCard";
 
 // Icons
-import add_cp from "../../assets/icons/add-cp.svg";
+import { AiOutlinePlus } from "react-icons/ai";
 import search_icon from "../../assets/icons/search.svg";
 
 import GetRoom from "../../api-client/Rooms/GetRoom";
@@ -176,14 +176,16 @@ function Rooms() {
 						</option>
 					))}
 				</select>
-				<Link to='/room/profile' className='add-button'>
-					<img src={add_cp} width='28px' height='28px' alt='' />
+				<Link to='/room/profile'>
+					<AiOutlinePlus className='add-button' />
 				</Link>
 			</div>
 			<div className='rooms-container'>
-				{data.map((item) => (
-					<Room data={item} key={item.id} />
-				))}
+				<div className='list-box'>
+					{data.map((item) => (
+						<Room data={item} key={item.id} />
+					))}
+				</div>
 			</div>
 		</div>
 	);

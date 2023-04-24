@@ -223,6 +223,9 @@ h6 {
   text-decoration: none;
   letter-spacing: 0.5;
 }
+.footer-link {
+  color: white;
+}
 .links-section .nav-link::after {
   content: "";
   position: absolute;

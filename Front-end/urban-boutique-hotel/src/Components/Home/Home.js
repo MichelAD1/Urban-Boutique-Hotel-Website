@@ -39,7 +39,13 @@ const Home = () => {
   }
 
   //Api handler
-  const { status, error, data: homeData } = useQuery(["homedata"], GetHomePage);
+  const {
+    status,
+    error,
+    data: homeData,
+  } = useQuery(["homedata"], GetHomePage, {
+    staleTime: 300000, // 5 minutes
+  });
   useEffect(() => {
     if (status === "success" && homeData) {
       const promises = Object.values(homeData);

@@ -35,7 +35,13 @@ const Rooms = () => {
   const getUnique = (items, value) => {
     return [...new Set(items.map((item) => item.room[value]))];
   };
-  const { status, error, data: roomData } = useQuery(["roomdata"], GetRooms);
+  const {
+    status,
+    error,
+    data: roomData,
+  } = useQuery(["roomdata"], GetRooms, {
+    staleTime: 300000, // 5 minutes
+  });
   useEffect(() => {
     if (status === "success" && roomData) {
       setRooms(roomData);

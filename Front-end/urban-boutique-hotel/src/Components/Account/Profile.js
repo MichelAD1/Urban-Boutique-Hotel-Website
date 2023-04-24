@@ -26,6 +26,7 @@ const Profile = () => {
   const [hasChanged, setHasChanged] = useState(false);
   const [loading, setLoading] = useState(true);
   //useEffects
+
   const {
     status,
     error,
@@ -44,16 +45,22 @@ const Profile = () => {
     } else if (error) {
       setErr(error.message);
     }
-  }, [profileData, error]);
+  }, [profileData, status, error]);
 
   // Only send request if changes have been made
   useEffect(() => {
     if (
-      username !== user.username ||
-      email !== user.email ||
-      countryCode + " " + tmp_number !== user_details.phone_number ||
-      dob !== user.dob ||
-      gender !== user.gender
+      username &&
+      email &&
+      countryCode &&
+      tmp_number &&
+      dob &&
+      gender &&
+      (username !== user.username ||
+        email !== user.email ||
+        countryCode + " " + tmp_number !== user_details.phone_number ||
+        dob !== user.dob ||
+        gender !== user.gender)
     ) {
       setHasChanged(true);
     } else {
@@ -62,8 +69,8 @@ const Profile = () => {
   }, [
     username,
     email,
-    tmp_number,
     countryCode,
+    tmp_number,
     dob,
     gender,
     user,
@@ -142,6 +149,7 @@ const Profile = () => {
     setPhoneNumber(user_details.phone_number);
     setDob(user.dob);
     setGender(user.gender);
+    setHasChanged(false);
   };
   const handleSubmit = async (event) => {
     event.preventDefault();

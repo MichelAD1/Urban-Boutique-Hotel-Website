@@ -6,12 +6,16 @@ import MaintenanceRequest from "../../Global/Components/Maintenance Request/Pend
 
 // API
 import GetCounts from "../../api-client/Home/GetCounts";
+import PendingMaintenance from "../../api-client/Home/PendingMaintenance";
 
 export default function Home() {
 	const [revenueCount, setRevenueCount] = useState([]);
 	const [reservationsCount, setReservationsCount] = useState([]);
 	const [customersCount, setCustomersCount] = useState([]);
 	const [roomsCount, setRoomsCount] = useState([]);
+
+	const [data, setData] = useState([]);
+	const [err, setErr] = useState("");
 
 	useEffect(() => {
 		let counts = GetCounts();
@@ -26,6 +30,10 @@ export default function Home() {
 			.catch((err) => {
 				return err;
 			});
+		let pending_maintenance = PendingMaintenance();
+		pending_maintenance.then((res) => {
+			setData(res);
+		});
 	}, []);
 	return (
 		<div className='container'>
@@ -52,7 +60,7 @@ export default function Home() {
 				</Link>
 			</div>
 			<div className='bottomStats'>
-				<MaintenanceRequest />
+				<MaintenanceRequest reqData={data} />
 			</div>
 		</div>
 	);

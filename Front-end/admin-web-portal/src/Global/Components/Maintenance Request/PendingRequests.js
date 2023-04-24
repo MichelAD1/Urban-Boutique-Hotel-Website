@@ -1,19 +1,17 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // Components
 import BasicTable from "../Tables/BasicTable";
 
-export default function PendingRequests() {
-	const data = [
-		{
-			id: 1,
-			name: "John Doe",
-			res: "11254",
-			room: "1578",
-			status: "pending",
-		},
-	];
+export default function PendingRequests({ reqData }) {
+	const [data, setData] = useState([]);
+	const [err, setErr] = useState("");
+
+	useEffect(() => {
+		if (reqData > 0) setData(reqData);
+		else setErr("No pending requests");
+	}, [reqData]);
 
 	const columns = useMemo(
 		() => [
@@ -50,7 +48,7 @@ export default function PendingRequests() {
 				</Link>
 			</div>
 
-			<BasicTable reqData={data} columns={columns} />
+			<BasicTable reqData={data} columns={columns} err={err} />
 		</div>
 	);
 }

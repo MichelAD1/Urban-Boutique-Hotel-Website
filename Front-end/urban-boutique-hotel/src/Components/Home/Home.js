@@ -39,16 +39,17 @@ const Home = () => {
   }
 
   //Api handler
-  const { status, error, data: responsedata } = useQuery(["data"], GetHomePage);
+  const { status, error, data: homeData } = useQuery(["homedata"], GetHomePage);
   useEffect(() => {
-    if (responsedata) {
-      Promise.all(responsedata).then((results) => {
+    if (status === "success" && homeData) {
+      const promises = Object.values(homeData);
+      Promise.all(promises).then((results) => {
         setRooms(results[0]);
         setReviews(results[1]);
         setLoading(false);
       });
     }
-  }, [responsedata, error]);
+  }, [homeData, status]);
 
   const services = [
     {

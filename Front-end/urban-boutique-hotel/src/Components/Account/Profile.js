@@ -26,19 +26,25 @@ const Profile = () => {
   const [hasChanged, setHasChanged] = useState(false);
   const [loading, setLoading] = useState(true);
   //useEffects
-  const { status, error, data: responsedata } = useQuery(["data"], GetProfile);
+  const {
+    status,
+    error,
+    data: profileData,
+  } = useQuery(["profiledata"], GetProfile);
   useEffect(() => {
-    if (responsedata) {
-      setUsername(responsedata.user.username);
-      setEmail(responsedata.user.email);
-      setDob(responsedata.user.dob);
-      setGender(responsedata.user.gender);
-      setPhoneNumber(responsedata.user_details.full_number);
-      setUser(responsedata.user);
-      setUserDetails(responsedata.user_details);
+    if (status === "success" && profileData) {
+      setUsername(profileData.user?.username);
+      setEmail(profileData.user?.email);
+      setDob(profileData.user?.dob);
+      setGender(profileData.user?.gender);
+      setPhoneNumber(profileData.user_details?.full_number);
+      setUser(profileData.user);
+      setUserDetails(profileData.user_details);
       setLoading(false);
+    } else if (error) {
+      setErr(error.message);
     }
-  }, [responsedata, error]);
+  }, [profileData, error]);
 
   // Only send request if changes have been made
   useEffect(() => {

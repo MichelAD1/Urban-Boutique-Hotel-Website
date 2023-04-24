@@ -14,7 +14,11 @@ import {
 } from "react-icons/io5";
 import { HiOutlineUserGroup, HiUserGroup } from "react-icons/hi";
 import { BsPerson, BsPersonFill } from "react-icons/bs";
-import { MdLogout } from "react-icons/md";
+import {
+	MdLogout,
+	MdOutlineViewTimeline,
+	MdViewTimeline,
+} from "react-icons/md";
 import {
 	RiMoneyDollarBoxFill,
 	RiMoneyDollarBoxLine,
@@ -65,6 +69,20 @@ export default function Navbar() {
 					<Link to='/options' className='nav-link'>
 						<IoOptionsOutline className='icons' alt='' />
 						<div className='routes'>Options</div>
+					</Link>
+				)}
+				{/* Timeline Page navigation */}
+				{path === "/calendar" && (
+					<div className='nav-link'>
+						<MdViewTimeline className='icons' alt='' />
+						<div className='routes active'>Timeline</div>
+					</div>
+				)}
+
+				{path !== "/calendar" && (
+					<Link to='/calendar' className='nav-link'>
+						<MdOutlineViewTimeline className='icons' alt='' />
+						<div className='routes'>Timeline</div>
 					</Link>
 				)}
 				{/* Room Page navigation */}

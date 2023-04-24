@@ -50,7 +50,6 @@ const Home = () => {
     }
   }, [responsedata, error]);
 
-  console.log(rooms);
   const services = [
     {
       icon: <FaCocktail />,
@@ -110,16 +109,24 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      {rooms.map((room, index) => (
-        <SingleRoom
-          key={index}
-          reverse={index % 2 === 0}
-          room={room}
-          type={
-            room.room.featured === 1 ? "Featured room" : "Deal of the month"
-          }
-        />
-      ))}
+      {loading ? (
+        <div className="buffer-space">
+          <div className="buffer-loader home"></div>
+        </div>
+      ) : (
+        <div>
+          {rooms.map((room, index) => (
+            <SingleRoom
+              key={index}
+              reverse={index % 2 === 0}
+              room={room}
+              type={
+                room.room.featured === 1 ? "Featured room" : "Deal of the month"
+              }
+            />
+          ))}
+        </div>
+      )}
 
       <div className="services">
         <div className="section-title">

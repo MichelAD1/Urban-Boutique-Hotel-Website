@@ -9,13 +9,12 @@ import { GiTowel, GiDesk } from "react-icons/gi";
 import { IoIosArrowUp } from "react-icons/io";
 
 import dummy1 from "../../assets/images/room-1.jpeg";
-import { useEffect } from "react";
 
 const SingleRoom = ({ reverse, room, type }) => {
   const navigate = useNavigate();
 
   const handleRedirect = (item) => {
-    navigate(`/rooms/${item.title}`, { state: { data: item } });
+    navigate(`/rooms/${item.room.title}`, { state: { data: item } });
   };
   return (
     <div
@@ -23,7 +22,7 @@ const SingleRoom = ({ reverse, room, type }) => {
         reverse ? "reverse" : ""
       }`}
       id="deals-rooms"
-      onClick={() => handleRedirect(room.room)}
+      onClick={() => handleRedirect(room)}
     >
       <img src={dummy1} alt="" className="deal-image" />
       <div className="deal-info">

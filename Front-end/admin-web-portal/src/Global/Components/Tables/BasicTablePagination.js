@@ -12,7 +12,6 @@ const Table = ({ reqData, columns, redirect, err }) => {
 
 	useEffect(() => {
 		if (reqData.data) {
-			console.log(reqData.next_page_url);
 			setData(reqData.data);
 			setNext(reqData.next_page_url);
 			setPrev(reqData.prev_page_url);

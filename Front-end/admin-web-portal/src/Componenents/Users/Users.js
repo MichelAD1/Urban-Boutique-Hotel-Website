@@ -19,7 +19,6 @@ export default function Users() {
 			.then((res) => {
 				if (res.data.length > 0) {
 					setData(res);
-					console.log(res);
 				} else {
 					setErr("No clients found");
 				}
@@ -27,53 +26,6 @@ export default function Users() {
 			.catch((err) => {
 				return err;
 			});
-		setData([
-			{
-				id: 1,
-				username: "jdoe",
-				full_name: "John Doe",
-				email: "jdoe@example.com",
-				dob: "1985-01-01",
-				gender: "male",
-				number: "555-87521",
-			},
-			{
-				id: 2,
-				username: "asmith",
-				full_name: "Alice Smith",
-				email: "asmith@example.com",
-				dob: "1990-02-15",
-				gender: "female",
-				number: "555-87521",
-			},
-			{
-				id: 3,
-				username: "bbrown",
-				full_name: "Bob Brown",
-				email: "bbrown@example.com",
-				dob: "1988-07-22",
-				gender: "male",
-				number: "555-87521",
-			},
-			{
-				id: 4,
-				username: "clee",
-				full_name: "Carla Lee",
-				email: "clee@example.com",
-				dob: "1992-05-09",
-				gender: "female",
-				number: "555-87521",
-			},
-			{
-				id: 5,
-				username: "drodriguez",
-				full_name: "David Rodriguez",
-				email: "drodriguez@example.com",
-				dob: "1986-11-30",
-				gender: "male",
-				number: "555-87521",
-			},
-		]);
 	}, []);
 
 	const columns = useMemo(
@@ -88,7 +40,7 @@ export default function Users() {
 			},
 			{
 				Header: "Full name",
-				accessor: "full_name",
+				accessor: "name",
 			},
 			{
 				Header: "Email",
@@ -96,7 +48,7 @@ export default function Users() {
 			},
 			{
 				Header: "Phone Number",
-				accessor: "number",
+				accessor: "phone_number",
 			},
 			{
 				Header: "Date of Birth",

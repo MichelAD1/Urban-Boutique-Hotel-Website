@@ -6,6 +6,8 @@ const RequestItem = () => {
 	const [data, setData] = useState(loc.state.data);
 
 	const [room, setRoom] = useState({});
+	const [reservation, setReservation] = useState({});
+	const [employee, setEmployee] = useState({});
 
 	const [reqData, setReqData] = useState([]);
 
@@ -36,7 +38,8 @@ const RequestItem = () => {
 			discount: data.discount,
 		});
 		setReservation({
-			check_in: data.check_in,
+			check_in: data.reservation_date,
+			check_out: data.reservation_end,
 		});
 	}, [data]);
 
@@ -78,10 +81,10 @@ const RequestItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info'>
 						<div>
-							<label>Name</label>
+							<label>Customer Email</label>
 						</div>
 						<div>
-							<p>{name}</p>
+							<p>{data.email}</p>
 						</div>
 					</div>
 				</div>
@@ -91,7 +94,7 @@ const RequestItem = () => {
 							<label>Reservation</label>
 						</div>
 						<div>
-							<p>#{res}</p>
+							<p>#{}</p>
 						</div>
 					</div>
 				</div>
@@ -101,7 +104,7 @@ const RequestItem = () => {
 							<label>Room</label>
 						</div>
 						<div>
-							<p>#{room}</p>
+							<p>#{}</p>
 						</div>
 					</div>
 				</div>
@@ -111,7 +114,7 @@ const RequestItem = () => {
 							<label>Status</label>
 						</div>
 						<div>
-							<p>{status}</p>
+							<p>{}</p>
 						</div>
 					</div>
 				</div>
@@ -120,12 +123,12 @@ const RequestItem = () => {
 						<div>
 							<label>Employee</label>
 						</div>
-						{data.employee && !edit && (
+						{data && !edit && (
 							<div>
-								<p>{employee}</p>
+								<p>{}</p>
 							</div>
 						)}
-						{(!data.employee || edit) && (
+						{(!data || edit) && (
 							<div>
 								<select
 									className='input-dropdown'

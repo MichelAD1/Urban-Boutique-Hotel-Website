@@ -123,7 +123,6 @@ const Book = () => {
     const reservation_end = `${year}-${month}-${day}`;
     const requests = special_request;
     const data = { room_id, reservation_date, reservation_end, requests };
-    console.log(data);
     navigation(`/rooms/payment`, { state: { data: data } });
   };
 

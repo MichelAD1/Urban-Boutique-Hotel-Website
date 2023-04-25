@@ -25,23 +25,24 @@ const Requests = () => {
 	const columns = useMemo(
 		() => [
 			{
-				Header: "id",
+				Header: "ID",
 				accessor: "id",
 			},
 			{
-				Header: "customer",
-				accessor: "name",
+				Header: "Reservation Number",
+				accessor: "reservation_id",
 			},
 			{
-				Header: "reservation number",
-				accessor: "res",
+				Header: "Customer",
+				accessor: "email",
+			},
+
+			{
+				Header: "Room",
+				accessor: "title",
 			},
 			{
-				Header: "room number",
-				accessor: "room",
-			},
-			{
-				Header: "status",
+				Header: "Status",
 				accessor: "status",
 			},
 		],

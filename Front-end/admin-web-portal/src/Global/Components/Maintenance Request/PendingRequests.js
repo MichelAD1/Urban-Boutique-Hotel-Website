@@ -17,23 +17,24 @@ export default function PendingRequests({ reqData }) {
 	const columns = useMemo(
 		() => [
 			{
-				Header: "id",
+				Header: "ID",
 				accessor: "id",
 			},
 			{
-				Header: "customer",
-				accessor: "customer_id",
-			},
-			{
-				Header: "reservation number",
+				Header: "Reservation Number",
 				accessor: "reservation_id",
 			},
 			{
-				Header: "room number",
-				accessor: "room_id",
+				Header: "Customer",
+				accessor: "email",
+			},
+
+			{
+				Header: "Room",
+				accessor: "title",
 			},
 			{
-				Header: "status",
+				Header: "Status",
 				accessor: "status",
 			},
 		],
@@ -57,7 +58,7 @@ export default function PendingRequests({ reqData }) {
 			<BasicTable
 				reqData={data}
 				columns={columns}
-				err={err === "" ? null : err}
+				err={err === "" ? err : null}
 			/>
 		</div>
 	);

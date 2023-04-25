@@ -15,6 +15,7 @@ const Profile = () => {
   const [err, setErr] = useState("");
 
   const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [full_number, setPhoneNumber] = useState("");
   const [countryCode, setCountryCode] = useState("");
@@ -34,6 +35,7 @@ const Profile = () => {
   } = useQuery(["profiledata"], GetProfile);
   useEffect(() => {
     if (status === "success" && profileData) {
+      setName(profileData.user?.name);
       setUsername(profileData.user?.username);
       setEmail(profileData.user?.email);
       setDob(profileData.user?.dob);
@@ -51,12 +53,14 @@ const Profile = () => {
   useEffect(() => {
     if (
       username &&
+      name &&
       email &&
       countryCode &&
       tmp_number &&
       dob &&
       gender &&
       (username !== user.username ||
+        name !== user.name ||
         email !== user.email ||
         countryCode + " " + tmp_number !== user_details.phone_number ||
         dob !== user.dob ||
@@ -67,6 +71,7 @@ const Profile = () => {
       setHasChanged(false);
     }
   }, [
+    name,
     username,
     email,
     countryCode,
@@ -94,6 +99,9 @@ const Profile = () => {
   };
   const validateUsername = (username) => {
     return username.length <= 25 && username.length > 0;
+  };
+  const validateName = (name) => {
+    return name.length > 0;
   };
   const validateDate = (dob) => {
     const ageLimit = 18;
@@ -145,6 +153,7 @@ const Profile = () => {
     setErr("");
     setEdit(false);
     setUsername(user.username);
+    setName(user.name);
     setEmail(user.email);
     setPhoneNumber(user_details.phone_number);
     setDob(user.dob);
@@ -166,6 +175,10 @@ const Profile = () => {
       }
       return;
     }
+    if (!validateName(name)) {
+      setErr("Name field required");
+      return;
+    }
     if (!validateEmail(email)) {
       setErr("Please enter a valid email address");
       return;
@@ -183,6 +196,7 @@ const Profile = () => {
     event.preventDefault();
     const data = {
       username,
+      name,
       email,
       gender,
       dob,
@@ -195,6 +209,7 @@ const Profile = () => {
       } else {
         setUser({
           ...user,
+          name,
           username,
           email,
           gender,
@@ -267,6 +282,16 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
+                    <label>Username</label>
+                  </div>
+                  <div className="info-item">
+                    <div className="buffer-loader"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
                     <label>Email</label>
                   </div>
                   <div className="info-item">
@@ -311,6 +336,30 @@ const Profile = () => {
                 <div className="account-info">
                   <div className="info-item">
                     <label>Display name</label>
+                  </div>
+                  {edit && (
+                    <div className="info-item">
+                      <input
+                        type="text"
+                        className="account-input"
+                        value={name}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                        }}
+                      />
+                    </div>
+                  )}
+                  {!edit && (
+                    <div className="info-item">
+                      <p>{user.name}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="account-item">
+                <div className="account-info">
+                  <div className="info-item">
+                    <label>Username</label>
                   </div>
                   {edit && (
                     <div className="info-item">

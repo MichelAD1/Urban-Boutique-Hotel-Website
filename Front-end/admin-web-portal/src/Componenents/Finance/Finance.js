@@ -75,8 +75,16 @@ const Finance = () => {
 			amount: amount,
 		};
 
-		addBudget(reqData);
-		openBudgetModal();
+		addBudget(reqData).then((res) => {
+			console.log(res);
+			if (res.status === "success") {
+				console.log(res);
+				setBudgets([...budgets, res.budget]);
+				closeBudgetModal();
+			} else {
+				setBudgetErr(res.data);
+			}
+		});
 	};
 	const openBudgetModal = () => {
 		setBudgetModalOpen(true);

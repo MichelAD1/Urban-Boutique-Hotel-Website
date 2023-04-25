@@ -1,28 +1,44 @@
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+//APIs
+import GetFAQ from "../../api-client/Policies/GetFAQ";
+
 const FAQ = () => {
+  const [loading, setLoading] = useState(true);
+  const [faq, setFaq] = useState([]);
+
+  //Api handler
+  const {
+    status,
+    error,
+    data: faqData,
+  } = useQuery(["faqdata"], GetFAQ, {
+    staleTime: 18000000, // 5 hours
+  });
+  useEffect(() => {
+    if (status === "success" && faqData) {
+      setFaq(faqData);
+      setLoading(false);
+    }
+  }, [faqData, status]);
   return (
-    <div className="faq-container">
-      <h1>FREQUENTLY ASKED QUESTIONS</h1>
-      <div className="faq">
-        <p className="faq-question">
-          Which platforms does the Urban Boutique Hotel support?
-        </p>
-        <p className="faq-response">
-          The Hotel currently offers PC and Mac support. You can check platform
-          compatibility for individual titles by referring to the
-          "Specifications" section of any product page.
-        </p>
-      </div>
-      <div className="faq">
-        <p className="faq-question">
-          Which platforms does the Urban Boutique Hotel support?
-        </p>
-        <p className="faq-response">
-          The Hotel currently offers PC and Mac support. You can check platform
-          compatibility for individual titles by referring to the
-          "Specifications" section of any product page.
-        </p>
-      </div>
-    </div>
+    <>
+      {loading ? (
+        <div className="buffer-space">
+          <div className="buffer-loader home"></div>
+        </div>
+      ) : (
+        <div className="faq-container">
+          <h1>FREQUENTLY ASKED QUESTIONS</h1>
+          {faq.map((item, index) => (
+            <div className="faq" key={index}>
+              <p className="faq-question">{item.question}</p>
+              <p className="faq-response">{item.answer}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 

@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
-    protected $fillable =['employeeid','due_date','text'];
+    protected $fillable =['text','start_date','end_date'];
 }

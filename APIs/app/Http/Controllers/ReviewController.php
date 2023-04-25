@@ -41,10 +41,15 @@ class ReviewController extends Controller
                      ->select('reviews.*', 'users.username')
                      ->get();
     }
+
     public function featureReview($reviewid){
         $review = Review::find($reviewid);
         $review->featured=true;
         $review->save();
         return "success";
+    }
+    public function getFeaturedReviews(){
+        $reviews = Review::where('featured','=',1)->get();
+        return $reviews;
     }
 }

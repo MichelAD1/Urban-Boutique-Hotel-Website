@@ -311,9 +311,9 @@ Route::group(["prefix"=>"v0.1"], function(){
         });
         Route::middleware(['auth', 'check.contentmanager'])->group(function(){
             Route::get('feature/{reviewid}',[ReviewController::class,'featureReview']);
-
+            Route::get('getAll',[ReviewController::class,'getReviews']);
         });
-        Route::get('get',[ReviewController::class,'getReviews']);
+
     });
 
 

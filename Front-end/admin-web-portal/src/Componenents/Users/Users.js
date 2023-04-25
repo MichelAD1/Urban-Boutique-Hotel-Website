@@ -9,7 +9,7 @@ import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
 import search_icon from "../../assets/icons/search.svg";
 
 // API
-import FetchData from "../../api-client/Clients/FetchData";
+import FetchData from "../../api-client/FetchData";
 
 export default function Users() {
 	const [data, setData] = useState([]);

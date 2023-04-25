@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // API
-import FetchData from "../../../api-client/Clients/FetchData";
+import FetchData from "../../../api-client/FetchData";
 
 const Table = ({ reqData, columns, redirect, err }) => {
 	const [data, setData] = useState([]);

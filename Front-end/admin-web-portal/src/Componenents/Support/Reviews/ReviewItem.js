@@ -5,6 +5,9 @@ import { useLocation } from "react-router-dom";
 import Rating from "../../../Global/Components/Rating";
 import ReactModal from "react-modal";
 
+// API
+import FeatureReview from "../../../api-client/Support/FeatureReview";
+
 const ReviewItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
@@ -13,21 +16,20 @@ const ReviewItem = () => {
 	const [review, setReview] = useState("");
 	const [rating, setRating] = useState("");
 	const [date, setDate] = useState("");
-	const [reply, setReply] = useState("");
-	const [replied, setReplied] = useState(false);
+	const [show, setShow] = useState("");
 
 	useEffect(() => {
-		setUsername(data.username);
-		setReview(data.review);
+		setUsername(data.email);
+		setReview(data.comment);
 		setRating(data.rating);
-		setDate(data.date);
-		setReply(data.reply);
-		setReplied(data.reply !== "");
-	}, []);
+		setDate(data.created_at);
 
-	const handleAddReply = () => {
-		setReplied(true);
-	};
+		if (data.featured) {
+			setShow("Hide");
+		} else {
+			setShow("Show");
+		}
+	}, []);
 
 	// Modal
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,6 +42,18 @@ const ReviewItem = () => {
 	};
 
 	const handleConfirmAdd = () => {
+		const feature = FeatureReview(data.id);
+		feature.then((res) => {
+			if (res.status === 200) {
+				if (res.data.featured) {
+					setShow("Hide");
+				} else {
+					setShow("Show");
+				}
+				const new_data = res.user;
+				loc.state = { data: new_data };
+			}
+		});
 		closeModal();
 	};
 
@@ -52,19 +66,14 @@ const ReviewItem = () => {
 			<div className='edit-container'>
 				<div className='edit-item'>
 					<h2>Review #{data.id}</h2>
-					{!replied && (
-						<button className='save-button' onClick={handleAddReply}>
-							Save
-						</button>
-					)}
 					<button className='button' onClick={handleAdd}>
-						Show
+						{show}
 					</button>
 				</div>
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div>
-							<label>Username</label>
+							<label>Customer email</label>
 						</div>
 						<div>
 							<p>{username}</p>
@@ -98,23 +107,6 @@ const ReviewItem = () => {
 						</div>
 						<div>
 							<p>{date}</p>
-						</div>
-					</div>
-				</div>
-				<div className='edit-item'>
-					<div className='edit-info info-large'>
-						<div style={{ alignSelf: "flex-start" }}>
-							<label>Reply</label>
-						</div>
-						<div>
-							{replied && <p>{reply}</p>}
-							{!replied && (
-								<textarea
-									value={reply}
-									onChange={(e) => setReply(e.target.value)}
-									className='input-box bio-input'
-								/>
-							)}
 						</div>
 					</div>
 				</div>

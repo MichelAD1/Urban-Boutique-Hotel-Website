@@ -1,10 +1,19 @@
 import { useState, useEffect, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 
+import base_url from "../../../api-client/BaseUrl";
+
+// Components
 import BasicTable from "../../../Global/Components/Tables/BasicTablePagination";
+
+// API
+import FetchData from "../../../api-client/FetchData";
 
 const Reviews = () => {
 	const [data, setData] = useState([]);
 	const [err, setErr] = useState("");
+
+	const [loading, setLoading] = useState(true);
 
 	const columns = useMemo(
 		() => [
@@ -13,12 +22,12 @@ const Reviews = () => {
 				accessor: "id",
 			},
 			{
-				Header: "Username",
-				accessor: "username",
+				Header: "Customer Email",
+				accessor: "email",
 			},
 			{
 				Header: "Review",
-				accessor: "review",
+				accessor: "comment",
 			},
 			{
 				Header: "Rating",
@@ -26,56 +35,50 @@ const Reviews = () => {
 			},
 			{
 				Header: "Date",
-				accessor: "date",
+				accessor: "created_at",
 			},
 		],
 		[],
 	);
 
+	function formatDate(dateString) {
+		const date = new Date(dateString);
+		const year = date.getFullYear();
+		const month = ("0" + (date.getMonth() + 1)).slice(-2);
+		const day = ("0" + date.getDate()).slice(-2);
+		const hours = ("0" + date.getHours()).slice(-2);
+		const minutes = ("0" + date.getMinutes()).slice(-2);
+		return `${year}-${month}-${day} ${hours}:${minutes}`;
+	}
+
+	const {
+		status,
+		error,
+		data: reviewData,
+	} = useQuery(["review_data", `${base_url}review/getAll`], FetchData, {
+		staleTime: 300000, // 5 minutes
+	});
 	useEffect(() => {
-		setData([
-			{
-				id: 1,
-				username: "jdoe",
-				rating: "5",
-				review: "This is a review",
-				date: "2021-01-01",
-				reply: "",
-			},
-			{
-				id: 2,
-				username: "asmith",
-				rating: "4",
-				review: "This is a review",
-				date: "2021-01-01",
-				reply: "",
-			},
-			{
-				id: 3,
-				username: "bbrown",
-				rating: "3",
-				review: "This is a review",
-				date: "2021-01-01",
-				reply: "This is a reply",
-			},
-			{
-				id: 4,
-				username: "clee",
-				rating: "2",
-				review: "This is a review",
-				date: "2021-01-01",
-				reply: "This is a reply",
-			},
-			{
-				id: 5,
-				username: "drodriguez",
-				rating: "1",
-				review: "This is a review",
-				date: "2021-01-01",
-				reply: "This is a reply",
-			},
-		]);
-	}, []);
+		if (reviewData) {
+			if (reviewData.data.length > 0) {
+				reviewData.data.forEach((review) => {
+					review.created_at = formatDate(review.created_at);
+				});
+				setData(reviewData);
+			} else {
+				setErr("No feedbacks found");
+			}
+			setLoading(false);
+		}
+	}, [reviewData, status]);
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
 
 	return (
 		<div className='container'>

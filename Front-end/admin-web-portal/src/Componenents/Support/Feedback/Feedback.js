@@ -7,7 +7,7 @@ import base_url from "../../../api-client/BaseUrl";
 import BasicTable from "../../../Global/Components/Tables/BasicTablePagination";
 
 // API
-import FetchData from "../../../api-client/Support/FetchFeedback";
+import FetchData from "../../../api-client/FetchData";
 
 const Feedback = () => {
 	const [data, setData] = useState([]);
@@ -56,16 +56,13 @@ const Feedback = () => {
 	});
 	useEffect(() => {
 		if (feedbackData) {
-			if (feedbackData.status === 200) {
-				feedbackData.data[0].data.forEach((feedback) => {
+			if (feedbackData[0].data.length > 0) {
+				feedbackData[0].data.forEach((feedback) => {
 					feedback.created_at = formatDate(feedback.created_at);
 				});
-				setData(feedbackData.data[0]);
-				if (feedbackData.data[0].data.length === 0) {
-					setTableErr("No feedbacks found");
-				}
+				setData(feedbackData[0]);
 			} else {
-				setErr("Something went wrong");
+				setTableErr("No feedbacks found");
 			}
 			setLoading(false);
 		}

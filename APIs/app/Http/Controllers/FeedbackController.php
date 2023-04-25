@@ -15,7 +15,8 @@ class FeedbackController extends Controller
 
         if($feedback->save()){
             return response()->json([
-                'message'=>"successful"
+                'message'=>"successful",
+                'feedback'=>$feedback
             ],200);
         }
 

@@ -37,10 +37,12 @@ class RoomController extends Controller
             $images = $request->images;
             $storage = new StorageClient([
                 'projectId' => 'meno-a6fd9',
-                'keyFilePath' => 'C:\Users\marc issa\Desktop\Meno\MENO\APIs\meno-a6fd9-firebase-adminsdk-dv2i6-bbf9790bcf.json'
+                'keyFilePath' => 'urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
             ]);
             $bucket = $storage->bucket('your-bucket-name');
+            $imagearray=array();
             if(!empty($images)){
+                ;
                 for($i=0;$i<sizeof($images);$i++){
                     $base64image = $images[$i];
                     $image = new Image();
@@ -54,10 +56,14 @@ class RoomController extends Controller
                     $url = $object->signedUrl(new \DateTime('+100 years'));
                     $image->image_url = $url;
                     $image->save();
+                    array_push($imagearray,$image);
                 }
             }
             return response()->json([
-                'message'=>'room added successfully'
+                'message'=>'room added successfully',
+                'room'=>$room,
+                'images'=>$imagearray
+
             ]);
         }
     }
@@ -135,7 +141,8 @@ class RoomController extends Controller
 
         if($room->save()){
             return response()->json([
-                'message'=>'room added successfully'
+                'message'=>'room added successfully',
+                'room'=>$room
             ]);
         }
     }
@@ -212,7 +219,7 @@ class RoomController extends Controller
     public function getReservationsCount(){
         $count = DB::table('customer_reserves_room')->count();
         return response()->json([
-            'room_count'=>$count
+            'reservation_count'=>$count
         ]);
     }
     public function searchReservation($reservationid){

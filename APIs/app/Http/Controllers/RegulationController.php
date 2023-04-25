@@ -11,6 +11,7 @@ class RegulationController extends Controller
         //admin function
         $regulation = new Regulation();
         $regulation->text = $request->text;
+        $regulation->title = $request->title;
         if($regulation->save()){
             return response()->json([
                 'message'=>"successful"
@@ -21,7 +22,13 @@ class RegulationController extends Controller
     public function editRegulation(Request $request){
         //admin function
         $regulation = Regulation::find($request->regulationid);
-        $regulation->text = $request->text;
+
+        if($request->has("text")){
+            $regulation->text = $request->text;
+        }
+        if($request->has("title")){
+            $regulation->title = $request->title;
+        }
         if($regulation->save()){
             return response()->json([
                 'message'=>"regulation editted successfuly"

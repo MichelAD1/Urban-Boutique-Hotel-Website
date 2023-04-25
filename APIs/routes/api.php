@@ -17,6 +17,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\RegulationController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\TaskController;
 use App\Models\EmailSender;
@@ -189,7 +190,8 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.usermanager'])->group(function(){
             Route::get('complete/{requestid}',[MaintenanceRequestController::class,'completeRequest']);
             Route::get('get',[MaintenanceRequestController::class,'getPendingRequests']);
-            Route::get('getall',[MaintenanceRequestController::class,'getAllRequests']);
+            Route::get('getcompleted',[MaintenanceRequestController::class,'getCompletedRequests']);
+            Route::post('assign',[MaintenanceRequestController::class,'assignEmployee']);
         });
         Route::middleware(['auth', 'check.customer'])->group(function(){
             Route::post('add',[MaintenanceRequestController::class,'addRequest']);

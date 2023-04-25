@@ -27,7 +27,6 @@ const Payment = () => {
   };
   const handleSubmitOffline = () => {
     delete data.total_price;
-    data.status = "notpaid";
     let response = ReserveRoom(data);
     response.then((res) => {
       if (res) {

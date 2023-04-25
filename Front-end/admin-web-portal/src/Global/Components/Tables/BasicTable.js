@@ -1,7 +1,9 @@
 import { useTable } from "react-table";
 import ReactModal from "react-modal";
 import { useEffect, useState } from "react";
-import DeleteOptions from "../../../api-client/Options/DeleteOptions";
+
+// API
+import RemoveBudget from "../../../api-client/Finance/RemoveBudget";
 
 const Table = ({ reqData, columns, type, err }) => {
 	const [option_type] = useState(type);
@@ -31,15 +33,12 @@ const Table = ({ reqData, columns, type, err }) => {
 	};
 
 	const handleConfirmDelete = () => {
-		const resp = DeleteOptions(option_type, option_id);
-		resp.then((res) => {
-			if (res.status === "success") {
-				setData(data.filter((item) => item.id !== option_id));
-			} else {
+		RemoveBudget(option_id).then((res) => {
+			if (res.message === "budget removed successfuly") {
 				console.log(res);
+				closeModal();
 			}
 		});
-		closeModal();
 	};
 
 	const closeModal = () => {

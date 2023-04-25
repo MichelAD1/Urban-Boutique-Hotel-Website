@@ -9,7 +9,7 @@ import ReactModal from "react-modal";
 import { AiOutlinePlus } from "react-icons/ai";
 
 // API
-import addBudget from "../../api-client/Finance/addBudget";
+import AddBudget from "../../api-client/Finance/AddBudget";
 import FetchFinance from "../../api-client/Finance/FetchFinance";
 
 const Finance = () => {
@@ -56,7 +56,7 @@ const Finance = () => {
 			amount: amount,
 		};
 
-		addBudget(reqData).then((res) => {
+		AddBudget(reqData).then((res) => {
 			if (res.status === "success") {
 				setBudgets([...budgets, res.budget]);
 				closeBudgetModal();
@@ -83,7 +83,7 @@ const Finance = () => {
 			},
 			{
 				Header: "name",
-				accessor: "budget_name",
+				accessor: "name",
 			},
 			{
 				Header: "amount",

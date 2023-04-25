@@ -190,7 +190,8 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.usermanager'])->group(function(){
             Route::get('complete/{requestid}',[MaintenanceRequestController::class,'completeRequest']);
             Route::get('get',[MaintenanceRequestController::class,'getPendingRequests']);
-            Route::get('getall',[MaintenanceRequestController::class,'getCompletedRequests']);
+            Route::get('getcompleted',[MaintenanceRequestController::class,'getCompletedRequests']);
+            Route::post('assign',[MaintenanceRequestController::class,'assignEmployee']);
         });
         Route::middleware(['auth', 'check.customer'])->group(function(){
             Route::post('add',[MaintenanceRequestController::class,'addRequest']);

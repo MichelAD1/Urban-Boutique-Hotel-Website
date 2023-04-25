@@ -28,7 +28,7 @@ class MaintenanceRequestController extends Controller
                                     ->where('users.id','=',$maintenancereq->customer_id)->get(),
             'reservation_object'=> DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$maintenancereq->reservation_id)->get(),
             'room_object'=>Room::find($maintenancereq->room_id)
-            ->where('users.id','=',$maintenancereq->customer_id)->get()
+
 
 
         ]);
@@ -73,8 +73,8 @@ class MaintenanceRequestController extends Controller
         $maintenanceRequests = Maintenance_Request::where('status', '=', 'pending')->paginate(10);
         foreach($maintenanceRequests as $mainreq){
             $mainreq['customer_object']=User::join('customers','customers.user_id','=','users.id')
-            ->where('users.id','=',$mainreq->customer_id)->get();
-            $mainreq['reservation_object'] =DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$mainreq->reservation_id)->get();
+            ->where('users.id','=',$mainreq->customer_id)->first();
+            $mainreq['reservation_object'] =DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$mainreq->reservation_id)->first();
             $mainreq['room_object']=Room::find($mainreq->room_id);
         }
         return $maintenanceRequests;
@@ -83,11 +83,11 @@ class MaintenanceRequestController extends Controller
         $maintenanceRequests=Maintenance_Request::where('status','=','completed')->get();
         foreach($maintenanceRequests as $mainreq){
             $mainreq['customer_object']=User::join('customers','customers.user_id','=','users.id')
-            ->where('users.id','=',$mainreq->customer_id)->get();
-            $mainreq['reservation_object'] =DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$mainreq->reservation_id)->get();
+            ->where('users.id','=',$mainreq->customer_id)->gfirstet();
+            $mainreq['reservation_object'] =DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$mainreq->reservation_id)->first();
             $mainreq['room_object']=Room::find($mainreq->room_id);
             $mainreq['employee_object']=User::join('staff','staff.user_id','=','users.id')
-                                        ->where('users.id','=',$mainreq->employee_id)->get();
+                                        ->where('users.id','=',$mainreq->employee_id)->first();
         }
         return $maintenanceRequests;
     }

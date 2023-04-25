@@ -10,9 +10,9 @@ import GetCounts from "../../api-client/Home/GetCounts";
 
 export default function Home() {
 	const [revenueCount, setRevenueCount] = useState([]);
-	const [reservationsCount, setReservationsCount] = useState([]);
-	const [customersCount, setCustomersCount] = useState([]);
-	const [roomsCount, setRoomsCount] = useState([]);
+	const [reservationsCount, setReservationsCount] = useState(0);
+	const [customersCount, setCustomersCount] = useState(0);
+	const [roomsCount, setRoomsCount] = useState(0);
 
 	const [data, setData] = useState([]);
 
@@ -33,9 +33,7 @@ export default function Home() {
 				setRoomsCount(results[2].room_count);
 				setData(results[3]);
 			});
-			setTimeout(() => {
-				setLoading(false);
-			}, 2000);
+			setLoading(false);
 		}
 	}, [homeData, status]);
 

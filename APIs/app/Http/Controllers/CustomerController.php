@@ -72,7 +72,9 @@ class CustomerController extends Controller
             'customer_id' => $user->id,
             'room_id'=>$request->room_id,
             'reservation_date'=> $request->reservation_date,
-            'reservation_end'=>$request->reservation_end
+            'reservation_end'=>$request->reservation_end,
+            'status'=>'pending',
+            'requests'=>$request->requests
         ]);
         return 'success';
     }

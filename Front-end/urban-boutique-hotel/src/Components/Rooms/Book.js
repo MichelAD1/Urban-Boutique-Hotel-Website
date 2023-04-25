@@ -45,7 +45,6 @@ const Book = () => {
       setCheckOutDate("");
     }
   }, [checkInDate]);
-
   //Validators
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -122,7 +121,13 @@ const Book = () => {
         : parsedDate1.getDate();
     const reservation_end = `${year}-${month}-${day}`;
     const requests = special_request;
-    const data = { room_id, reservation_date, reservation_end, requests };
+    const data = {
+      room_id,
+      reservation_date,
+      reservation_end,
+      requests,
+      total_price,
+    };
     navigation(`/rooms/payment`, { state: { data: data } });
   };
 

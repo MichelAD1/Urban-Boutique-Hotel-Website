@@ -69,7 +69,7 @@ class MaintenanceRequestController extends Controller
         }
         return $maintenanceRequests;
     }
-    public function getCompletedRequest(){
+    public function getCompletedRequests(){
         $maintenanceRequests=Maintenance_Request::where('status','=','completed')->get();
         foreach($maintenanceRequests as $mainreq){
             $mainreq['customer_object']=User::join('customers','customers.user_id','=','users.id')

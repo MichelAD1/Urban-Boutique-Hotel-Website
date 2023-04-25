@@ -1,17 +1,17 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { IoIosArrowBack } from "react-icons/io";
 import galleryImage1 from "../../assets/images/gallery-image1.jpg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import Footer from "../../Global/Components/Footer";
 
 const Book = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const room = location.state.data;
+  const navigation = useNavigate();
+  const [err, setErr] = useState("");
 
+  const room = location.state.data;
+  const [room_id, setRoonID] = useState(room.room.id);
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,10 +20,10 @@ const Book = () => {
   const [special_request, setSpecialRequest] = useState("");
   const [checkInDate, setCheckInDate] = useState(null);
   const [checkOutDate, setCheckOutDate] = useState(null);
+  const lastFreeDate = room.free_dates[room.free_dates.length - 1];
   const [total_price, setTotalPrice] = useState(
     room.room.rent * 0.1 + room.room.rent
   );
-
   const countries = [
     "USA",
     "Canada",
@@ -39,6 +39,26 @@ const Book = () => {
     "Uruguay",
     "Lebanon",
   ];
+  //useEffect
+  useEffect(() => {
+    if (!checkInDate) {
+      setCheckOutDate("");
+    }
+  }, [checkInDate]);
+
+  //Validators
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberPattern = /^\d{7,15}$/;
+    return phoneNumberPattern.test(phoneNumber);
+  };
+
+  const validateRequest = (request) => {
+    return request.length <= 255;
+  };
 
   const handleSelectChange = (event) => {
     setCountry(event.target.value);
@@ -62,6 +82,51 @@ const Book = () => {
   const handleSpecialRequestChange = (event) => {
     setSpecialRequest(event.target.value);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErr("");
+    if (!validateEmail(email)) {
+      setErr("Please enter a valid email address");
+      return;
+    }
+    if (!validatePhoneNumber(phone)) {
+      setErr("Please enter a valid phone number");
+      return;
+    }
+    if (!validateRequest(special_request)) {
+      setErr("Special request message too long");
+      return;
+    }
+
+    let parsedDate1 = checkInDate;
+    let year = parsedDate1.getFullYear();
+    let month =
+      parsedDate1.getMonth() + 1 < 10
+        ? `0${parsedDate1.getMonth() + 1}`
+        : parsedDate1.getMonth() + 1;
+    let day =
+      parsedDate1.getDate() < 10
+        ? `0${parsedDate1.getDate()}`
+        : parsedDate1.getDate();
+    const reservation_date = `${year}-${month}-${day}`;
+    parsedDate1 = checkOutDate;
+    year = parsedDate1.getFullYear();
+    month =
+      parsedDate1.getMonth() + 1 < 10
+        ? `0${parsedDate1.getMonth() + 1}`
+        : parsedDate1.getMonth() + 1;
+    day =
+      parsedDate1.getDate() < 10
+        ? `0${parsedDate1.getDate()}`
+        : parsedDate1.getDate();
+    const reservation_end = `${year}-${month}-${day}`;
+    const requests = special_request;
+    const data = { room_id, reservation_date, reservation_end, requests };
+    console.log(data);
+    navigation(`/rooms/payment`, { state: { data: data } });
+  };
+
   return (
     <>
       <div className="contact-section book">
@@ -72,13 +137,17 @@ const Book = () => {
             </div>
           </div>
 
-          <form className="message-inputs book">
+          <form className="message-inputs book" onSubmit={handleSubmit}>
             <div className="message-name-email">
               <div className="message-input">
                 <DatePicker
                   selected={checkInDate}
                   onChange={(date) => setCheckInDate(date)}
                   minDate={new Date()}
+                  maxDate={new Date(lastFreeDate)}
+                  excludeDates={room.occupied_dates.map(
+                    (date) => new Date(date)
+                  )}
                   placeholderText="Check In"
                   className="react-datepicker"
                   dateFormat="yyyy/MM/dd"
@@ -92,6 +161,11 @@ const Book = () => {
                 <DatePicker
                   selected={checkOutDate}
                   onChange={(date) => setCheckOutDate(date)}
+                  minDate={checkInDate}
+                  maxDate={new Date(lastFreeDate)}
+                  excludeDates={room.occupied_dates.map(
+                    (date) => new Date(date)
+                  )}
                   placeholderText="Check Out"
                   className="react-datepicker"
                   dateFormat="yyyy/MM/dd"
@@ -99,6 +173,7 @@ const Book = () => {
                   showMonthDropdown
                   showYearDropdown
                   dropdownMode="select"
+                  disabled={!checkInDate}
                 />
               </div>
             </div>
@@ -126,7 +201,7 @@ const Book = () => {
             <div className="message-name-email">
               <div className="message-input">
                 <input
-                  type="email"
+                  type="text"
                   id="email"
                   placeholder="Email"
                   value={email}
@@ -171,10 +246,11 @@ const Book = () => {
               <p>
                 {" "}
                 By completing this booking I acknowledge I have read and
-                accepted the <a href="">Property Policies</a>.
+                accepted the <a href="">Privacy Policies</a>.
               </p>
             </div>
             <div className="booking-nav">
+              <div className="login-error book">{err}</div>
               <button
                 disabled={
                   !first_name ||
@@ -186,6 +262,17 @@ const Book = () => {
                   !checkOutDate
                 }
                 type="submit"
+                className={
+                  !first_name ||
+                  !last_name ||
+                  !email ||
+                  !phone ||
+                  !country ||
+                  !checkInDate ||
+                  !checkOutDate
+                    ? "disabled-button"
+                    : ""
+                }
               >
                 Continue to Check-out
               </button>

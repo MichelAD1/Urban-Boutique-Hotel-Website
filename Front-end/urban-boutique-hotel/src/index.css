@@ -257,6 +257,16 @@ h6 {
   padding: 3%;
   color: red;
 }
+.disabled-button {
+  opacity: 0.5;
+  cursor: default !important;
+}
+.login-error.book {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: red;
+}
 .edit-error {
   display: flex;
   justify-content: flex-start;

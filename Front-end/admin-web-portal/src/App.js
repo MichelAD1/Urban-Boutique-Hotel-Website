@@ -1,6 +1,9 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ReactModal from "react-modal";
 
+// Context
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 // Componenents
 import Navbar from "./Componenents/NavBar/Navbar";
 
@@ -59,311 +62,314 @@ import Scheduler from "./Global/Scheduler/Scheduler";
 import PrivateRoute from "./Routes/PrivateRoutes";
 
 ReactModal.setAppElement("#root");
+const queryClient = new QueryClient();
 function App() {
 	return (
 		<BrowserRouter>
-			<div className='App'>
-				<Routes>
-					<Route path='/login' element={<Login />} />
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/'
-							element={
-								<>
-									<Navbar />
-									<Home />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/options'
-							element={
-								<>
-									<Navbar />
-									<Options />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/options/preferences'
-							element={
-								<>
-									<Navbar />
-									<Preferences />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/options/gallery'
-							element={
-								<>
-									<Navbar />
-									<PhotoGallery />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/options/faqs_policies'
-							element={
-								<>
-									<Navbar />
-									<FaqPolicyList />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/options/faqs_policies/info'
-							element={
-								<>
-									<Navbar />
-									<FaqPolicyItem />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/options/regulation_disaster'
-							element={
-								<>
-									<Navbar />
-									<RegulationDisasterList />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/options/regulation_disaster/info'
-							element={
-								<>
-									<Navbar />
-									<RegulationDisasterItem />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/calendar'
-							element={
-								<>
-									<Navbar />
-									<Scheduler />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/rooms'
-							element={
-								<>
-									<Navbar />
-									<Rooms />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/reservations'
-							element={
-								<>
-									<Navbar />
-									<Reservations />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/reservations/info'
-							element={
-								<>
-									<Navbar />
-									<ReservationItem />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/support'
-							element={
-								<>
-									<Navbar />
-									<Support />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/support/reviews'
-							element={
-								<>
-									<Navbar />
-									<Reviews />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/support/reviews/info'
-							element={
-								<>
-									<Navbar />
-									<ReviewItem />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/support/feedback'
-							element={
-								<>
-									<Navbar />
-									<Feedback />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/support/feedback/info'
-							element={
-								<>
-									<Navbar />
-									<FeedbackItem />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/support/livechat'
-							element={
-								<>
-									<Navbar />
-									<LiveChat />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/room/profile'
-							element={
-								<>
-									<Navbar />
-									<RoomItem />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/maintenance/requests'
-							element={
-								<>
-									<Navbar />
-									<MaintenanceRequest />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/maintenance/requests/info'
-							element={
-								<>
-									<Navbar />
-									<RequestItem />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/users'
-							element={
-								<>
-									<Navbar />
-									<Users />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/user/profile'
-							element={
-								<>
-									<Navbar />
-									<UserItem />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/employees'
-							element={
-								<>
-									<Navbar />
-									<Employees />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/employee/profile'
-							element={
-								<>
-									<Navbar />
-									<EmployeeItem />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/finance' element={<PrivateRoute />}>
-						<Route
-							path='/finance'
-							element={
-								<>
-									<Navbar />
-									<Finance />
-								</>
-							}
-						/>
-					</Route>
-					<Route exact path='/' element={<PrivateRoute />}>
-						<Route
-							path='/finance/transactions'
-							element={
-								<>
-									<Navbar />
-									<Transactions />
-								</>
-							}
-						/>
-					</Route>
-				</Routes>
-			</div>
+			<QueryClientProvider client={queryClient}>
+				<div className='App'>
+					<Routes>
+						<Route path='/login' element={<Login />} />
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/'
+								element={
+									<>
+										<Navbar />
+										<Home />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/options'
+								element={
+									<>
+										<Navbar />
+										<Options />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/options/preferences'
+								element={
+									<>
+										<Navbar />
+										<Preferences />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/options/gallery'
+								element={
+									<>
+										<Navbar />
+										<PhotoGallery />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/options/faqs_policies'
+								element={
+									<>
+										<Navbar />
+										<FaqPolicyList />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/options/faqs_policies/info'
+								element={
+									<>
+										<Navbar />
+										<FaqPolicyItem />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/options/regulation_disaster'
+								element={
+									<>
+										<Navbar />
+										<RegulationDisasterList />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/options/regulation_disaster/info'
+								element={
+									<>
+										<Navbar />
+										<RegulationDisasterItem />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/calendar'
+								element={
+									<>
+										<Navbar />
+										<Scheduler />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/rooms'
+								element={
+									<>
+										<Navbar />
+										<Rooms />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/reservations'
+								element={
+									<>
+										<Navbar />
+										<Reservations />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/reservations/info'
+								element={
+									<>
+										<Navbar />
+										<ReservationItem />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/support'
+								element={
+									<>
+										<Navbar />
+										<Support />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/support/reviews'
+								element={
+									<>
+										<Navbar />
+										<Reviews />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/support/reviews/info'
+								element={
+									<>
+										<Navbar />
+										<ReviewItem />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/support/feedback'
+								element={
+									<>
+										<Navbar />
+										<Feedback />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/support/feedback/info'
+								element={
+									<>
+										<Navbar />
+										<FeedbackItem />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/support/livechat'
+								element={
+									<>
+										<Navbar />
+										<LiveChat />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/room/profile'
+								element={
+									<>
+										<Navbar />
+										<RoomItem />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/maintenance/requests'
+								element={
+									<>
+										<Navbar />
+										<MaintenanceRequest />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/maintenance/requests/info'
+								element={
+									<>
+										<Navbar />
+										<RequestItem />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/users'
+								element={
+									<>
+										<Navbar />
+										<Users />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/user/profile'
+								element={
+									<>
+										<Navbar />
+										<UserItem />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/employees'
+								element={
+									<>
+										<Navbar />
+										<Employees />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/employee/profile'
+								element={
+									<>
+										<Navbar />
+										<EmployeeItem />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/finance' element={<PrivateRoute />}>
+							<Route
+								path='/finance'
+								element={
+									<>
+										<Navbar />
+										<Finance />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/finance/transactions'
+								element={
+									<>
+										<Navbar />
+										<Transactions />
+									</>
+								}
+							/>
+						</Route>
+					</Routes>
+				</div>
+			</QueryClientProvider>
 		</BrowserRouter>
 	);
 }

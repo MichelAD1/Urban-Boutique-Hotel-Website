@@ -1,57 +1,80 @@
-import GetCounts from "../../api-client/Home/GetCounts";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 // used components
 import MaintenanceRequest from "../../Global/Components/Maintenance Request/PendingRequests";
 
-export default function Home() {
-	const [client_count, setClientsCount] = useState("");
-	const [business_count, setBusinessesCount] = useState("");
-	const [deal_count, setDealsCount] = useState("");
+// API
+import GetCounts from "../../api-client/Home/GetCounts";
 
+export default function Home() {
+	const [revenueCount, setRevenueCount] = useState([]);
+	const [reservationsCount, setReservationsCount] = useState([]);
+	const [customersCount, setCustomersCount] = useState([]);
+	const [roomsCount, setRoomsCount] = useState([]);
+
+	const [data, setData] = useState([]);
+
+	const [loading, setLoading] = useState(true);
+
+	const {
+		status,
+		error,
+		data: homeData,
+	} = useQuery(["home_data"], GetCounts, {
+		staleTime: 300000, // 5 minutes
+	});
 	useEffect(() => {
-		let counts = GetCounts();
-		counts
-			.then((res) => {
-				Promise.all(res).then((results) => {
-					setDealsCount(results[0].count);
-					setClientsCount(results[1].count);
-					setBusinessesCount(results[2].count);
-				});
-			})
-			.catch((err) => {
-				return err;
+		if (homeData) {
+			Promise.all(homeData).then((results) => {
+				setReservationsCount(results[0].room_count);
+				setCustomersCount(results[1].customer_count);
+				setRoomsCount(results[2].room_count);
+				setData(results[3]);
 			});
-	}, []);
+			setTimeout(() => {
+				setLoading(false);
+			}, 2000);
+		}
+	}, [homeData, status]);
 
 	return (
-		<div className='container'>
-			<div className='headerStats'>
-				<Link className='smallStats'>
-					<p className='statsTitle'>Monthly Revenue</p>
-					<p className='statsAmount'>USD 20K</p>
-					<p className='statsLink'>View entire list</p>
-				</Link>
-				<Link className='smallStats'>
-					<p className='statsTitle'>Total reservations</p>
-					<p className='statsAmount'>1000</p>
-					<p className='statsLink'>View entire list</p>
-				</Link>
-				<Link to='/users' className='smallStats'>
-					<p className='statsTitle'>Total Customers</p>
-					<p className='statsAmount'>2000</p>
-					<p className='statsLink'>View entire list</p>
-				</Link>
-				<Link to='/rooms' className='smallStats'>
-					<p className='statsTitle'>Total Rooms</p>
-					<p className='statsAmount'>500</p>
-					<p className='statsLink'>View entire list</p>
-				</Link>
-			</div>
-			<div className='bottomStats'>
-				<MaintenanceRequest />
-			</div>
-		</div>
+		<>
+			{loading ? (
+				<div className='container-buffer'>
+					<div className='buffer-loader home'></div>
+				</div>
+			) : (
+				<div className='container'>
+					<div className='headerStats'>
+						<Link className='smallStats'>
+							<p className='statsTitle'>Monthly Revenue</p>
+							<p className='statsAmount'>USD 20K</p>
+							<p className='statsLink'>View entire list</p>
+						</Link>
+
+						<Link className='smallStats'>
+							<p className='statsTitle'>Total reservations</p>
+							<p className='statsAmount'>{reservationsCount}</p>
+							<p className='statsLink'>View entire list</p>
+						</Link>
+						<Link to='/users' className='smallStats'>
+							<p className='statsTitle'>Total Customers</p>
+							<p className='statsAmount'>{customersCount}</p>
+							<p className='statsLink'>View entire list</p>
+						</Link>
+						<Link to='/rooms' className='smallStats'>
+							<p className='statsTitle'>Total Rooms</p>
+							<p className='statsAmount'>{roomsCount}</p>
+							<p className='statsLink'>View entire list</p>
+						</Link>
+					</div>
+					<div className='bottomStats'>
+						<MaintenanceRequest reqData={data} />
+					</div>
+				</div>
+			)}
+		</>
 	);
 }

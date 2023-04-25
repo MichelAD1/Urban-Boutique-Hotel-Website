@@ -5,13 +5,9 @@ const RequestItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
 
-	const [reqData, setReqData] = useState([]);
+	const [room, setRoom] = useState({});
 
-	const [name, setName] = useState(data.name);
-	const [res, setRes] = useState(data.res);
-	const [room, setRoom] = useState(data.room);
-	const [status, setStatus] = useState(data.status);
-	const [employee, setEmployee] = useState(data.employee);
+	const [reqData, setReqData] = useState([]);
 
 	const [edit, setEdit] = useState(false);
 	const [selected, setSelected] = useState(false);
@@ -19,8 +15,30 @@ const RequestItem = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		setData(data);
-	}, []);
+		console.log(data);
+		setRoom({
+			title: data.title,
+			description: data.description,
+			rent: data.rent,
+			size: data.size,
+			guests: data.guests,
+			floor: data.floor,
+			beds: data.beds,
+			wifi: data.wifi,
+			tv: data.tv,
+			shower: data.shower,
+			towels: data.towels,
+			mini_bar: data.mini_bar,
+			desk: data.desk,
+			featured: data.featured,
+			breakfast: data.breakfast,
+			pets: data.pets,
+			discount: data.discount,
+		});
+		setReservation({
+			check_in: data.check_in,
+		});
+	}, [data]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

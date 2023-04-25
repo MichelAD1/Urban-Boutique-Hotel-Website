@@ -12,6 +12,8 @@ import Book from "./Components/Rooms/Book";
 import Payment from "./Components/Rooms/Payment";
 import Services from "./Components/Services/Services";
 import FindUs from "./Components/FindUs/FindUs";
+import FAQ from "./Components/Policies/FAQ";
+import Policy from "./Components/Policies/Policy";
 import Discover from "./Components/Discover/Discover";
 import Contact from "./Components/Contact/Contact";
 import Navbar from "./Components/Navbar/Navbar";
@@ -64,6 +66,24 @@ function App() {
                 <>
                   <ScrollToTop />
                   <RoomsItem />
+                </>
+              }
+            />
+            <Route
+              path="/FAQ"
+              element={
+                <>
+                  <ScrollToTop />
+                  <FAQ />
+                </>
+              }
+            />
+            <Route
+              path="/privacypolicies"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Policy />
                 </>
               }
             />

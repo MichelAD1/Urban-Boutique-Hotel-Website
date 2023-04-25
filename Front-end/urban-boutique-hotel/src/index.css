@@ -2695,3 +2695,51 @@ h6 {
   width: 100%;
 }
 /* End of Payment */
+/* Policies */
+.policies-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1% 13% 3% 13%;
+}
+.policies-container > h1 {
+  font-size: 40px;
+  text-transform: uppercase;
+}
+.policies-container p {
+  margin-top: 1%;
+  font-weight: 100;
+  color: rgb(74, 74, 74);
+}
+.policies-title {
+  margin-top: 5%;
+  text-transform: uppercase;
+}
+/* End of policies */
+/* FAQS */
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1% 13% 3% 13%;
+}
+.faq-container > h1 {
+  margin: 0 auto;
+  font-size: 40px;
+  text-transform: uppercase;
+  padding-bottom: 3%;
+}
+.faq-question {
+  font-weight: bolder;
+  color: var(--primaryColor);
+}
+.faq-response {
+  font-weight: lighter;
+  color: var(--primaryColor);
+}
+.faq {
+  margin-top: 3%;
+}
+/* End of FAQS */

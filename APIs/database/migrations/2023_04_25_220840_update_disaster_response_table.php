@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('regulations', function (Blueprint $table) {
-            $table->id();
-
-            $table->string("text");
-            $table->timestamps();
+        Schema::table('disaster__responses', function (Blueprint $table) {
+            $table->string('title')->after('text');
         });
     }
 
@@ -24,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('regulations');
+        //
     }
 };

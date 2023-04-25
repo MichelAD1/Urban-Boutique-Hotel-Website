@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('disaster__responses', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
+
             $table->string("text");
             $table->timestamps();
         });

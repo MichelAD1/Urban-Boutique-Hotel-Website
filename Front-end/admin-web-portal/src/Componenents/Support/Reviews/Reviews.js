@@ -64,7 +64,6 @@ const Reviews = () => {
 				reviewData.data.forEach((review) => {
 					review.created_at = formatDate(review.created_at);
 				});
-				console.log(reviewData);
 				setData(reviewData);
 			} else {
 				setErr("No feedbacks found");

@@ -5,6 +5,9 @@ import { useLocation } from "react-router-dom";
 import Rating from "../../../Global/Components/Rating";
 import ReactModal from "react-modal";
 
+// API
+import FeatureReview from "../../../api-client/Support/FeatureReview";
+
 const ReviewItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
@@ -13,19 +16,20 @@ const ReviewItem = () => {
 	const [review, setReview] = useState("");
 	const [rating, setRating] = useState("");
 	const [date, setDate] = useState("");
-	const [reply, setReply] = useState("");
-	const [replied, setReplied] = useState(false);
+	const [show, setShow] = useState("");
 
 	useEffect(() => {
 		setUsername(data.email);
 		setReview(data.comment);
 		setRating(data.rating);
 		setDate(data.created_at);
-	}, []);
 
-	const handleAddReply = () => {
-		setReplied(true);
-	};
+		if (data.featured) {
+			setShow("Hide");
+		} else {
+			setShow("Show");
+		}
+	}, []);
 
 	// Modal
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,6 +42,18 @@ const ReviewItem = () => {
 	};
 
 	const handleConfirmAdd = () => {
+		const feature = FeatureReview(data.id);
+		feature.then((res) => {
+			if (res.status === 200) {
+				if (res.data.featured) {
+					setShow("Hide");
+				} else {
+					setShow("Show");
+				}
+				const new_data = res.user;
+				loc.state = { data: new_data };
+			}
+		});
 		closeModal();
 	};
 
@@ -51,7 +67,7 @@ const ReviewItem = () => {
 				<div className='edit-item'>
 					<h2>Review #{data.id}</h2>
 					<button className='button' onClick={handleAdd}>
-						Show
+						{show}
 					</button>
 				</div>
 				<div className='edit-item'>

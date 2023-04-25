@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 // used components
@@ -10,9 +10,9 @@ import GetCounts from "../../api-client/Home/GetCounts";
 
 export default function Home() {
 	const [revenueCount, setRevenueCount] = useState([]);
-	const [reservationsCount, setReservationsCount] = useState([]);
-	const [customersCount, setCustomersCount] = useState([]);
-	const [roomsCount, setRoomsCount] = useState([]);
+	const [reservationsCount, setReservationsCount] = useState(0);
+	const [customersCount, setCustomersCount] = useState(0);
+	const [roomsCount, setRoomsCount] = useState(0);
 
 	const [data, setData] = useState([]);
 
@@ -36,8 +36,6 @@ export default function Home() {
 			setLoading(false);
 		}
 	}, [homeData, status]);
-
-	const navigate = useNavigate();
 
 	return (
 		<>

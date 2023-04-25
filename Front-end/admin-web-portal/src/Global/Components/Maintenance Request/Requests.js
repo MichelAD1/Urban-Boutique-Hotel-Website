@@ -1,176 +1,26 @@
 import "../../Styles/styles.css";
 import { useMemo, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // Components
 import BasicTable from "../Tables/BasicTablePagination";
 
-// Icons
-import add_box from "../../../assets/icons/add-nf.svg";
-import search_icon from "../../../assets/icons/search.svg";
+// API
+import fetchMaintenance from "../../../api-client/Maintenance/fetchMaintenance";
 
 const Requests = () => {
-	const [data, setData] = useState([]);
+	const location = useLocation();
+	const [data, setData] = useState(location.state.data);
 	const [query, setQuery] = useState("");
 	const [filter, setFilter] = useState("");
+
+	const [err, setErr] = useState("");
 
 	let counter_key = 1;
 
 	useEffect(() => {
-		setData([
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: 1,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-			{
-				id: 1,
-				name: "John Doe",
-				res: "11254",
-				room: "1578",
-				status: "pending",
-				employee: null,
-			},
-		]);
-	}, []);
+		if (data.length === 0) setErr("No pending requests");
+	}, [data]);
 
 	const columns = useMemo(
 		() => [
@@ -197,6 +47,7 @@ const Requests = () => {
 		],
 		[],
 	);
+
 	const search_parameters = Object.keys(Object.assign({}, ...data));
 	const filter_items = [...new Set(data.map((item) => item.status))].map(
 		(status) => {
@@ -224,6 +75,7 @@ const Requests = () => {
 					reqData={search(data)}
 					columns={columns}
 					redirect={"request"}
+					err={err}
 				/>
 			</div>
 		</div>

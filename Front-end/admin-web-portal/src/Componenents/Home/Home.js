@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 // used components
@@ -33,11 +33,11 @@ export default function Home() {
 				setRoomsCount(results[2].room_count);
 				setData(results[3]);
 			});
-			setTimeout(() => {
-				setLoading(false);
-			}, 2000);
+			setLoading(false);
 		}
 	}, [homeData, status]);
+
+	const navigate = useNavigate();
 
 	return (
 		<>

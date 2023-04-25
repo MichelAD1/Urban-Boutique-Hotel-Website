@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import BasicTable from "../Tables/BasicTable";
@@ -39,13 +39,18 @@ export default function PendingRequests({ reqData }) {
 		[],
 	);
 
+	const navigate = useNavigate();
+	const maintenanceRedirect = () => {
+		navigate("/maintenance/requests", { state: { data: data } });
+	};
+
 	return (
 		<div className='request-box'>
 			<div className='request-header'>
 				<div className='title'>Pending room maintanance requests</div>
-				<Link to='/maintenance/requests' className='item-redirect'>
+				<div className='item-redirect' onClick={maintenanceRedirect}>
 					View All
-				</Link>
+				</div>
 			</div>
 
 			<BasicTable reqData={data} columns={columns} err={err} />

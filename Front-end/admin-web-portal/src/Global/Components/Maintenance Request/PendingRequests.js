@@ -42,7 +42,7 @@ export default function PendingRequests({ reqData }) {
 
 	const navigate = useNavigate();
 	const maintenanceRedirect = () => {
-		navigate("/maintenance/requests", { state: { data: data } });
+		navigate("/maintenance/requests", { state: { data: reqData } });
 	};
 
 	return (

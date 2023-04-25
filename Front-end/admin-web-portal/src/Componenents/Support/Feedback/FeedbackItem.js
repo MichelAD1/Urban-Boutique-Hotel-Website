@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-// Components
-import Rating from "../../../Global/Components/Rating";
-
 const FeedbackItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
@@ -13,9 +10,9 @@ const FeedbackItem = () => {
 	const [date, setDate] = useState("");
 
 	useEffect(() => {
-		setUsername(data.username);
-		setFeedback(data.feedback);
-		setDate(data.date);
+		setUsername(data.customer_id);
+		setFeedback(data.text);
+		setDate(data.created_at);
 	}, []);
 
 	return (
@@ -27,7 +24,7 @@ const FeedbackItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div>
-							<label>Username</label>
+							<label>Customer ID</label>
 						</div>
 						<div>
 							<p>{username}</p>

@@ -15,7 +15,8 @@ class BudgetController extends Controller
 
         if($budget->save()){
             return response()->json([
-                'message'=>"successful"
+                'message'=>"successful",
+                'budget'=>$budget
             ],200);
         }
 

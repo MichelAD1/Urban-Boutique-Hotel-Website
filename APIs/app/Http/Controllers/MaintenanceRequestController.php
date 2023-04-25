@@ -91,4 +91,10 @@ class MaintenanceRequestController extends Controller
         }
         return $maintenanceRequests;
     }
+    public function getEmployeeRequests(){
+        $user = Auth::user();
+        $requests = Maintenance_Request::where('employee_id','=',$user->id)->get();
+        return $requests;
+
+    }
 }

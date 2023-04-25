@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Staff;
 use App\Models\Customer;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,13 +63,15 @@ class CustomerController extends Controller
         }
         if($customer->save() && $userinfo->save()){
             return response()->json([
-                'message'=>"Editted successfuly"
+                'message'=>"Editted successfuly",
+                'customer'=>$customer,
+                'user'=>$user
             ]);
         }
     }
     public function reserveRoom(Request $request){
         $user = Auth::user();
-        DB::table("customer_reserves_room")->insert([
+        $reservation=DB::table("customer_reserves_room")->insert([
             'customer_id' => $user->id,
             'room_id'=>$request->room_id,
             'reservation_date'=> $request->reservation_date,
@@ -76,7 +79,14 @@ class CustomerController extends Controller
             'status'=>'pending',
             'requests'=>$request->requests
         ]);
-        return 'success';
+        return response()->json([
+            'message'=>"Editted successfuly",
+            'reservation'=>$reservation,
+            'room' => Room::find($request->room_id),
+            'customer' => Customer::join('user','users.id','=','customers.user_id')
+                                ->where('users.id',$user->id)
+
+        ]);
     }
 
     public function cancelReservation($reservationid){
@@ -88,7 +98,7 @@ class CustomerController extends Controller
             'reservation_date'=> $request->reservation_date,
             'reservation_end'=>$request->reservation_end
         ]);
-        return "success";
+        return DB::table("customer_reserves_room")->where("id",$request->reservation_id)->first();
     }
     public function banCustomer($customerid){
         $user=Auth::user();
@@ -97,7 +107,7 @@ class CustomerController extends Controller
             $target=User::find($customerid);
             $target->banned=1;
             $target->save();
-            return "sucess";
+            return "success";
         }
         return "Failed";
     }

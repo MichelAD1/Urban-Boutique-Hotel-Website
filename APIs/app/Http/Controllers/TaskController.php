@@ -16,7 +16,8 @@ class TaskController extends Controller
         $task->due_date = $request->due_date;
         if($task->save()){
             return response()->json([
-                'message'=>"successful"
+                'message'=>"successful",
+                'task'=>$task
             ],200);
         }
 
@@ -35,7 +36,8 @@ class TaskController extends Controller
         }
         if($task->save()){
             return response()->json([
-                'message'=>"task editted successfuly"
+                'message'=>"task editted successfuly",
+                'task'=>$task
             ],200);
         }
     }

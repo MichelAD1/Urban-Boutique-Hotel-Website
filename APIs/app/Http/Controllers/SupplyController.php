@@ -14,7 +14,8 @@ class SupplyController extends Controller
         $supply->item_amount = $request->item_amount;
         if($supply->save()){
             return response()->json([
-                'message'=>`$request->item_amount of $request->item_name has been added to stock`
+                'message'=>`$request->item_amount of $request->item_name has been added to stock`,
+                'supply'=>$supply
             ]);
         }
     }
@@ -24,7 +25,8 @@ class SupplyController extends Controller
         $supply->item_amount = $supply->item_amount + $request->amount;
         if($supply->save()){
             return response()->json([
-                'message'=>`$supply->item_amount of $request->item_name has been added to stock`
+                'message'=>`$supply->item_amount of $request->item_name has been added to stock`,
+                'supply'=>$supply
             ]);
         }
     }
@@ -34,7 +36,8 @@ class SupplyController extends Controller
         $supply->item_name = $request->item_name;
         if($supply->save()){
             return response()->json([
-                'message'=>`$supply->item_amount of $request->item_name has been added to stock`
+                'message'=>`$supply->item_amount of $request->item_name has been added to stock`,
+                'supply'=>$supply
             ]);
         }
     }

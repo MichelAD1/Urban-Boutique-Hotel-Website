@@ -9,7 +9,8 @@ export default function PendingRequests({ reqData }) {
 	const [err, setErr] = useState("");
 
 	useEffect(() => {
-		if (reqData > 0) setData(reqData);
+		console.log(reqData);
+		if (reqData.length > 0) setData(reqData);
 		else setErr("No pending requests");
 	}, [reqData]);
 
@@ -21,15 +22,15 @@ export default function PendingRequests({ reqData }) {
 			},
 			{
 				Header: "customer",
-				accessor: "name",
+				accessor: "customer_id",
 			},
 			{
 				Header: "reservation number",
-				accessor: "res",
+				accessor: "reservation_id",
 			},
 			{
 				Header: "room number",
-				accessor: "room",
+				accessor: "room_id",
 			},
 			{
 				Header: "status",
@@ -53,7 +54,11 @@ export default function PendingRequests({ reqData }) {
 				</div>
 			</div>
 
-			<BasicTable reqData={data} columns={columns} err={err} />
+			<BasicTable
+				reqData={data}
+				columns={columns}
+				err={err === "" ? null : err}
+			/>
 		</div>
 	);
 }

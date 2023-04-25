@@ -24,10 +24,21 @@ class MaintenanceRequestController extends Controller
         return "success";
     }
     public function completeRequest($requestid){
-        $maintenance=Maintenance_Request::find($requestid);
-        $maintenance->status="completed";
-        $maintenance->save();
-        return "Success";
+        $maintenancereq=Maintenance_Request::find($requestid);
+        $maintenancereq->status="completed";
+        $maintenancereq->save();
+        return response()->json([
+            'message'=>'success',
+            'maintenance_object'=>$maintenancereq,
+            'customer_object'=> User::join('customers','customers.user_id','=','users.id')
+                                    ->where('users.id','=',$maintenancereq->customer_id)->get(),
+            'reservation_object'=> DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$maintenancereq->reservation_id)->get(),
+            'room_object'=>Room::find($maintenancereq->room_id),
+            'employee_object'=>User::join('staff','staff.user_id','=','users.id')
+            ->where('users.id','=',$maintenancereq->customer_id)->get()
+
+
+        ]);
     }
     public function assignEmployee(Request $request){
         $maintenancereq = Maintenance_Request::find($request->requestid);

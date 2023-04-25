@@ -8,12 +8,12 @@ const UserItem = () => {
 	const [data, setData] = useState(loc.state.data);
 
 	const [ban, setBan] = useState("");
-	const [username, setUsername] = useState(data.username);
-	const [name, setName] = useState(data.full_name);
-	const [email, setEmail] = useState(data.email);
-	const [phoneNumber, setPhoneNumber] = useState(data.number);
-	const [dob, setDob] = useState(data.dob);
-	const [gender, setGender] = useState(data.gender);
+	const [username, setUsername] = useState("");
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [dob, setDob] = useState("");
+	const [gender, setGender] = useState("");
 
 	useEffect(() => {
 		if (data.banned) {
@@ -22,9 +22,9 @@ const UserItem = () => {
 			setBan("Ban");
 		}
 		setUsername(data.username);
-		setName(data.full_name);
+		setName(data.name);
 		setEmail(data.email);
-		setPhoneNumber(data.number);
+		setPhoneNumber(data.phone_number);
 		setDob(data.dob);
 		setGender(data.gender);
 	}, []);

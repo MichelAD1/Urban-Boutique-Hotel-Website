@@ -25,7 +25,16 @@ const Payment = () => {
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
   };
-  const handleSubmitOffline = () => {};
+  const handleSubmitOffline = () => {
+    delete data.total_price;
+    data.status = "notpaid";
+    let response = ReserveRoom(data);
+    response.then((res) => {
+      if (res) {
+        console.log(res);
+      }
+    });
+  };
 
   return (
     <div className="contact-section payment">

@@ -15,6 +15,7 @@ class MaintenanceRequestController extends Controller
             'customer_id'=>$user->id,
             'reservation_id'=>$request->reservation_id,
             'room_id'=>$request->room_id,
+            'employee_id'=>$request->0,
             'status'=>'pending'
         ]);
         return "success";
@@ -31,7 +32,7 @@ class MaintenanceRequestController extends Controller
         ->join('users', 'users.id', '=', 'maintenance__requests.customer_id')
         ->join('customers', 'customers.user_id', '=', 'maintenance__requests.customer_id')
         ->join('rooms', 'rooms.id', '=', 'maintenance__requests.room_id')
-        ->select('maintenance__requests.*', 'users.*', 'rooms.*')
+        // ->join('customer_reserves_room', 'customer_reserves_room.id', '=', 'maintenance__requests.reservation_id')
         ->get();
 
         return $maintenanceRequests;

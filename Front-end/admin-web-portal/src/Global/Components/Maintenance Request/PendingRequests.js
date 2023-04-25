@@ -25,7 +25,7 @@ export default function PendingRequests({ reqData }) {
 				accessor: "reservation_id",
 			},
 			{
-				Header: "Customer",
+				Header: "Customer Email",
 				accessor: "email",
 			},
 

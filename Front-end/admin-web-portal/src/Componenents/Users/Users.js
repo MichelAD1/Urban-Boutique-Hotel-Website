@@ -29,7 +29,6 @@ export default function Users() {
 		if (usersData) {
 			if (usersData.data.length > 0) {
 				setData(usersData);
-				console.log(usersData);
 			} else {
 				setErr("No users found");
 			}

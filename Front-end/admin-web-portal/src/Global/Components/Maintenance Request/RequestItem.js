@@ -5,13 +5,12 @@ const RequestItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
 
-	const [reqData, setReqData] = useState([]);
+	const [room, setRoom] = useState({});
+	const [reservation, setReservation] = useState({});
+	const [guest, setGuest] = useState({});
+	const [employee, setEmployee] = useState({});
 
-	const [name, setName] = useState(data.name);
-	const [res, setRes] = useState(data.res);
-	const [room, setRoom] = useState(data.room);
-	const [status, setStatus] = useState(data.status);
-	const [employee, setEmployee] = useState(data.employee);
+	const [reqData, setReqData] = useState([]);
 
 	const [edit, setEdit] = useState(false);
 	const [selected, setSelected] = useState(false);
@@ -19,8 +18,32 @@ const RequestItem = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		setData(data);
-	}, []);
+		console.log(data);
+		setRoom({
+			title: data.title,
+			description: data.description,
+			rent: data.rent,
+			size: data.size,
+			guests: data.guests,
+			floor: data.floor,
+			beds: data.beds,
+			wifi: data.wifi,
+			tv: data.tv,
+			shower: data.shower,
+			towels: data.towels,
+			mini_bar: data.mini_bar,
+			desk: data.desk,
+			featured: data.featured,
+			breakfast: data.breakfast,
+			pets: data.pets,
+			discount: data.discount,
+		});
+		setReservation({
+			check_in: data.reservation_date,
+			check_out: data.reservation_end,
+			status: data.status,
+		});
+	}, [data]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -60,10 +83,10 @@ const RequestItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info'>
 						<div>
-							<label>Name</label>
+							<label>Customer Email</label>
 						</div>
 						<div>
-							<p>{name}</p>
+							<p>{data.email}</p>
 						</div>
 					</div>
 				</div>
@@ -73,7 +96,7 @@ const RequestItem = () => {
 							<label>Reservation</label>
 						</div>
 						<div>
-							<p>#{res}</p>
+							<p>#{}</p>
 						</div>
 					</div>
 				</div>
@@ -83,7 +106,7 @@ const RequestItem = () => {
 							<label>Room</label>
 						</div>
 						<div>
-							<p>#{room}</p>
+							<p>#{}</p>
 						</div>
 					</div>
 				</div>
@@ -93,7 +116,7 @@ const RequestItem = () => {
 							<label>Status</label>
 						</div>
 						<div>
-							<p>{status}</p>
+							<p>{}</p>
 						</div>
 					</div>
 				</div>
@@ -102,12 +125,12 @@ const RequestItem = () => {
 						<div>
 							<label>Employee</label>
 						</div>
-						{data.employee && !edit && (
+						{data && !edit && (
 							<div>
-								<p>{employee}</p>
+								<p>{}</p>
 							</div>
 						)}
-						{(!data.employee || edit) && (
+						{(!data || edit) && (
 							<div>
 								<select
 									className='input-dropdown'

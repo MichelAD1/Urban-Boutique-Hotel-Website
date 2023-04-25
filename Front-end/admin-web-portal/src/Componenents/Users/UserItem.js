@@ -1,5 +1,5 @@
 import ReactModal from "react-modal";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import BanUser from "../../api-client/Clients/BanUser";
 
@@ -8,23 +8,24 @@ const UserItem = () => {
 	const [data, setData] = useState(loc.state.data);
 
 	const [ban, setBan] = useState("");
-	const [username, setUsername] = useState(data.username);
-	const [name, setName] = useState(data.full_name);
-	const [email, setEmail] = useState(data.email);
-	const [phoneNumber, setPhoneNumber] = useState(data.number);
-	const [dob, setDob] = useState(data.dob);
-	const [gender, setGender] = useState(data.gender);
+	const [username, setUsername] = useState("");
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [dob, setDob] = useState("");
+	const [gender, setGender] = useState("");
 
 	useEffect(() => {
+		console.log(data.banned);
 		if (data.banned) {
 			setBan("Unban");
 		} else {
 			setBan("Ban");
 		}
 		setUsername(data.username);
-		setName(data.full_name);
+		setName(data.name);
 		setEmail(data.email);
-		setPhoneNumber(data.number);
+		setPhoneNumber(data.phone_number);
 		setDob(data.dob);
 		setGender(data.gender);
 	}, []);
@@ -43,15 +44,21 @@ const UserItem = () => {
 		openModal();
 	};
 
+	const navigate = useNavigate();
 	const handleConfirmBan = () => {
 		let user_id = data.id;
 		const response = BanUser(user_id);
 		response.then((res) => {
-			if (res.banned) {
-				setBan("Unban");
-			} else {
-				setBan("Ban");
+			if (res !== "error") {
+				if (res.banned === 1) {
+					setBan("Unban");
+				} else {
+					setBan("Ban");
+				}
+				const new_data = res.user;
+				loc.state = { data: new_data };
 			}
+			console.log(res);
 		});
 		closeModal();
 	};
@@ -66,7 +73,7 @@ const UserItem = () => {
 				<div className='edit-item'>
 					<h2>User #{data.id}</h2>
 					<button className='button' onClick={() => handleBan()}>
-						Ban
+						{ban}
 					</button>
 				</div>
 				<div className='edit-item'>
@@ -130,6 +137,30 @@ const UserItem = () => {
 					</div>
 				</div>
 			</div>
+			<ReactModal
+				className='custom-modal'
+				isOpen={isModalOpen}
+				style={{
+					overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+					content: {
+						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						border: "none",
+						width: "100%",
+						height: "100%",
+						margin: "auto",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						zIndex: "100",
+					},
+				}}>
+				<div>
+					<h1>Confirm Delete</h1>
+					<p>Are you sure you want to ban this user?</p>
+					<button onClick={handleConfirmBan}>Yes</button>
+					<button onClick={closeModal}>No</button>
+				</div>
+			</ReactModal>
 		</div>
 	);
 };

@@ -1,16 +1,16 @@
 import axios from "axios";
+import base_url from "../BaseUrl";
 
-export default async function getClients(queryKey) {
-	const url = queryKey.queryKey[1];
-	return axios({
+export default async function fetchMaintenance() {
+	return await axios({
 		method: "get",
-		url: url,
+		url: `${base_url}maintenance/get`,
 		headers: { Authorization: localStorage.getItem("token") },
 	})
 		.then((res) => {
 			return res.data;
 		})
 		.catch((err) => {
-			return err;
+			return err.response;
 		});
 }

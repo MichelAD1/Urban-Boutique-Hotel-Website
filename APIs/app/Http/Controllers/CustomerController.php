@@ -75,6 +75,7 @@ class CustomerController extends Controller
             'reservation_end'=>$request->reservation_end,
             'requests'=>$request->requests,
             'status'=>"pending"
+
         ]);
         return 'success';
     }
@@ -91,15 +92,19 @@ class CustomerController extends Controller
         return "success";
     }
     public function banCustomer($customerid){
-        $user=Auth::user();
-        $employee = Staff::where("user_id",$user->id)->first();
-        if($employee->position=="admin"){
-            $target=User::find($customerid);
+        $target=User::find($customerid);
+        if($target->banned == 1){
+            $target->banned=0;
+            if($target->save()){
+              return $target;
+            }
+        }else{
             $target->banned=1;
-            $target->save();
-            return "sucess";
+            if($target->save()){
+                return $target;
+            }
         }
-        return "Failed";
+        return "error";
     }
 
     public function getCustomerCount(){
@@ -130,7 +135,7 @@ class CustomerController extends Controller
         ]);
     }
     public function getCustomers(){
-        $customers = Customer::join('users','users.id','=','customers.user_id')->get();
+        $customers = Customer::join('users','users.id','=','customers.user_id')->paginate(14);
         return $customers;
     }
 

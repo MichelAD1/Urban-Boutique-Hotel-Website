@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import BasicTable from "../Tables/BasicTable";
@@ -9,46 +9,57 @@ export default function PendingRequests({ reqData }) {
 	const [err, setErr] = useState("");
 
 	useEffect(() => {
-		if (reqData > 0) setData(reqData);
+		console.log(reqData);
+		if (reqData.length > 0) setData(reqData);
 		else setErr("No pending requests");
 	}, [reqData]);
 
 	const columns = useMemo(
 		() => [
 			{
-				Header: "id",
+				Header: "ID",
 				accessor: "id",
 			},
 			{
-				Header: "customer",
-				accessor: "name",
+				Header: "Reservation Number",
+				accessor: "reservation_id",
 			},
 			{
-				Header: "reservation number",
-				accessor: "res",
+				Header: "Customer Email",
+				accessor: "email",
+			},
+
+			{
+				Header: "Room",
+				accessor: "title",
 			},
 			{
-				Header: "room number",
-				accessor: "room",
-			},
-			{
-				Header: "status",
+				Header: "Status",
 				accessor: "status",
 			},
 		],
 		[],
 	);
 
+	const navigate = useNavigate();
+	const maintenanceRedirect = () => {
+		navigate("/maintenance/requests", { state: { data: data } });
+	};
+
 	return (
 		<div className='request-box'>
 			<div className='request-header'>
 				<div className='title'>Pending room maintanance requests</div>
-				<Link to='/maintenance/requests' className='item-redirect'>
+				<div className='item-redirect' onClick={maintenanceRedirect}>
 					View All
-				</Link>
+				</div>
 			</div>
 
-			<BasicTable reqData={data} columns={columns} err={err} />
+			<BasicTable
+				reqData={data}
+				columns={columns}
+				err={err === "" ? err : null}
+			/>
 		</div>
 	);
 }

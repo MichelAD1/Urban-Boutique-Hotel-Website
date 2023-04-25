@@ -16,6 +16,7 @@ const UserItem = () => {
 	const [gender, setGender] = useState("");
 
 	useEffect(() => {
+		console.log(data.banned);
 		if (data.banned) {
 			setBan("Unban");
 		} else {
@@ -48,6 +49,7 @@ const UserItem = () => {
 		const response = BanUser(user_id);
 		response.then((res) => {
 			if (res.banned) {
+				console.log(res);
 				setBan("Unban");
 			} else {
 				setBan("Ban");
@@ -130,6 +132,30 @@ const UserItem = () => {
 					</div>
 				</div>
 			</div>
+			<ReactModal
+				className='custom-modal'
+				isOpen={isModalOpen}
+				style={{
+					overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+					content: {
+						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						border: "none",
+						width: "100%",
+						height: "100%",
+						margin: "auto",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						zIndex: "100",
+					},
+				}}>
+				<div>
+					<h1>Confirm Delete</h1>
+					<p>Are you sure you want to ban this user?</p>
+					<button onClick={handleConfirmBan}>Yes</button>
+					<button onClick={closeModal}>No</button>
+				</div>
+			</ReactModal>
 		</div>
 	);
 };

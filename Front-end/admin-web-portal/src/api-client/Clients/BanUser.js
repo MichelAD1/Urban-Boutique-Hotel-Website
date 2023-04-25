@@ -1,9 +1,10 @@
 import axios from "axios";
+import base_url from "../BaseUrl";
 
 export default async function banUser(user_id) {
 	return axios({
 		method: "get",
-		url: `http://127.0.0.1:8000/api/v0.1/ban/${user_id}`,
+		url: `${base_url}customer/ban/${user_id}`,
 		headers: { Authorization: localStorage.getItem("token") },
 	})
 		.then((res) => {

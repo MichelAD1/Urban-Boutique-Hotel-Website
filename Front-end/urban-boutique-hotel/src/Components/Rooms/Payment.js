@@ -29,9 +29,9 @@ const Payment = () => {
     delete data.total_price;
     let response = ReserveRoom(data);
     response.then((res) => {
-      console.log(res);
-      if (res.data === "success") {
-        navigation("/");
+      if (res.data.status === "success") {
+        localStorage.setItem("shouldReload", "true");
+        navigation("/rooms");
       }
     });
   };

@@ -35,7 +35,8 @@ const Home = () => {
   if (token) {
     const decoded = jwt_decode(token);
     const currentTime = Date.now() / 1000; // Convert to seconds
-    if (decoded.exp < currentTime) {
+    const bufferTime = 300; // 5 minutes buffer time
+    if (decoded.exp - bufferTime < currentTime) {
       let response = Refresh();
       response.then((res) => {
         if (res) {

@@ -1,5 +1,5 @@
 import ReactModal from "react-modal";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import BanUser from "../../api-client/Clients/BanUser";
 
@@ -44,16 +44,21 @@ const UserItem = () => {
 		openModal();
 	};
 
+	const navigate = useNavigate();
 	const handleConfirmBan = () => {
 		let user_id = data.id;
 		const response = BanUser(user_id);
 		response.then((res) => {
-			if (res.banned) {
-				console.log(res);
-				setBan("Unban");
-			} else {
-				setBan("Ban");
+			if (res !== "error") {
+				if (res.banned === 1) {
+					setBan("Unban");
+				} else {
+					setBan("Ban");
+				}
+				const new_data = res.user;
+				loc.state = { data: new_data };
 			}
+			console.log(res);
 		});
 		closeModal();
 	};
@@ -68,7 +73,7 @@ const UserItem = () => {
 				<div className='edit-item'>
 					<h2>User #{data.id}</h2>
 					<button className='button' onClick={() => handleBan()}>
-						Ban
+						{ban}
 					</button>
 				</div>
 				<div className='edit-item'>

@@ -91,18 +91,16 @@ class CustomerController extends Controller
         return "success";
     }
     public function banCustomer($customerid){
-        $user=Auth::user();
-        $employee = Staff::where("user_id",$user->id)->first();
         $target=User::find($customerid);
         if($target->banned == 1){
             $target->banned=0;
             if($target->save()){
-                return "success";
+              return $target;
             }
         }else{
             $target->banned=1;
             if($target->save()){
-                return "success";
+                return $target;
             }
         }
         return "error";

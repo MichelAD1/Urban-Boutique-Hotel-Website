@@ -11,6 +11,7 @@ class DisasterResponseController extends Controller
         //admin function
         $disasterresponse = new Disaster_Response();
         $disasterresponse->text = $request->text;
+        $disasterresponse->title = $request->title;
         if($disasterresponse->save()){
             return response()->json([
                 'message'=>"successful"
@@ -21,7 +22,13 @@ class DisasterResponseController extends Controller
     public function editDisasterResponse(Request $request){
         //admin function
         $disasterresponse = Disaster_Response::find($request->responseid);
-        $disasterresponse->text = $request->text;
+
+        if($request->has("text")){
+            $disasterresponse->text = $request->text;
+        }
+        if($request->has("title")){
+            $disasterresponse->title = $request->title;
+        }
         if($disasterresponse->save()){
             return response()->json([
                 'message'=>"disaster response editted successfuly"

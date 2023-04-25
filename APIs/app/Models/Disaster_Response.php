@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Disaster_Response extends Model
 {
     use HasFactory;
-    protected $fillable =['text'];
+    protected $fillable =['text','title'];
 }

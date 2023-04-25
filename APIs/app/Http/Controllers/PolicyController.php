@@ -11,6 +11,7 @@ class PolicyController extends Controller
         //admin function
         $policy = new Policy();
         $policy->text = $request->text;
+        $policy->title = $request->title;
         if($policy->save()){
             return response()->json([
                 'message'=>"successful"
@@ -22,6 +23,12 @@ class PolicyController extends Controller
         //admin function
         $policy = Policy::find($request->policy_id);
         $policy->text = $request->text;
+        if($request->has("text")){
+            $policy->text = $request->text;
+        }
+        if($request->has("title")){
+            $policy->title = $request->title;
+        }
         if($policy->save()){
             return response()->json([
                 'message'=>"policy editted successfuly"

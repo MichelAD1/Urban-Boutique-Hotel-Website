@@ -11,8 +11,9 @@ const Table = ({ reqData, columns, redirect, err }) => {
 	const [lastNum, setLastNum] = useState(0);
 
 	useEffect(() => {
-		if (reqData) {
-			setData(reqData);
+		if (reqData.data) {
+			console.log(reqData.next_page_url);
+			setData(reqData.data);
 			setNext(reqData.next_page_url);
 			setPrev(reqData.prev_page_url);
 			setLastNum(reqData.last_page);

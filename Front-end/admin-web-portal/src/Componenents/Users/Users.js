@@ -14,18 +14,18 @@ export default function Users() {
 	const [err, setErr] = useState("");
 
 	useEffect(() => {
-		// let clients = GetClients("http://127.0.0.1:8000/api/v0.1/client/");
-		// clients
-		// 	.then((res) => {
-		// 		if (res.data.length > 0) {
-		// 			setData(res);
-		// 		} else {
-		// 			setErr("No clients found");
-		// 		}
-		// 	})
-		// 	.catch((err) => {
-		// 		return err;
-		// 	});
+		let clients = GetClients("");
+		clients
+			.then((res) => {
+				if (res.data.length > 0) {
+					setData(res);
+				} else {
+					setErr("No clients found");
+				}
+			})
+			.catch((err) => {
+				return err;
+			});
 		setData([
 			{
 				id: 1,

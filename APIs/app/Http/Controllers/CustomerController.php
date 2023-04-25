@@ -130,7 +130,7 @@ class CustomerController extends Controller
         ]);
     }
     public function getCustomers(){
-        $customers = Customer::join('users','users.id','=','customers.user_id')->get();
+        $customers = Customer::join('users','users.id','=','customers.user_id')->paginate(14);
         return $customers;
     }
 

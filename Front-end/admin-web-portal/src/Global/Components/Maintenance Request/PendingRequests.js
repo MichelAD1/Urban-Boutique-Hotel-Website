@@ -9,8 +9,7 @@ export default function PendingRequests({ reqData }) {
 	const [err, setErr] = useState("");
 
 	useEffect(() => {
-		console.log(reqData);
-		if (reqData.length > 0) setData(reqData);
+		if (reqData.data.length > 0) setData(reqData.data);
 		else setErr("No pending requests");
 	}, [reqData]);
 
@@ -26,12 +25,12 @@ export default function PendingRequests({ reqData }) {
 			},
 			{
 				Header: "Customer Email",
-				accessor: "email",
+				accessor: "customer_object.email",
 			},
 
 			{
 				Header: "Room",
-				accessor: "title",
+				accessor: "room_object.title",
 			},
 			{
 				Header: "Status",

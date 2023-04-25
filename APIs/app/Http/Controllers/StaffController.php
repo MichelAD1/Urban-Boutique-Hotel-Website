@@ -45,7 +45,7 @@ class StaffController extends Controller
     }
     public function getRevenue(){
         $revenue = DB::table('customer_reserves_room')->join("rooms",'rooms.id','=','customer_reserves_room.room_id')
-                    ->sum("rooms.price");
+                    ->sum("rooms.rent");
         return $revenue;
     }
 

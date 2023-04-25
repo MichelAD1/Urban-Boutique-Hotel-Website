@@ -35,7 +35,6 @@ const Table = ({ reqData, columns, type, err }) => {
 	const handleConfirmDelete = () => {
 		RemoveBudget(option_id).then((res) => {
 			if (res.message === "budget removed successfuly") {
-				console.log(res);
 				closeModal();
 			}
 		});

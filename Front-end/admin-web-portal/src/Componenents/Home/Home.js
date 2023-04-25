@@ -28,11 +28,11 @@ export default function Home() {
 	useEffect(() => {
 		if (homeData) {
 			Promise.all(homeData).then((results) => {
-				setReservationsCount(results[0].room_count);
+				setReservationsCount(results[0].reservation_count);
 				setCustomersCount(results[1].customer_count);
 				setRoomsCount(results[2].room_count);
 				setData(results[3]);
-				setRevenueCount(results[4].revenue);
+				setRevenueCount(results[4]);
 				setLoading(false);
 			});
 		}
@@ -51,7 +51,7 @@ export default function Home() {
 			<div className='headerStats'>
 				<Link className='smallStats'>
 					<p className='statsTitle'>Monthly Revenue</p>
-					<p className='statsAmount'>USD 20K</p>
+					<p className='statsAmount'>USD {revenueCount}</p>
 					<p className='statsLink'>View entire list</p>
 				</Link>
 

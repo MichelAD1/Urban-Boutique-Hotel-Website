@@ -20,6 +20,12 @@ const Book = () => {
   const [special_request, setSpecialRequest] = useState("");
   const [checkInDate, setCheckInDate] = useState(null);
   const [checkOutDate, setCheckOutDate] = useState(null);
+  const [total_price, setTotalPrice] = useState(
+    room.room.rent * 0.1 + room.room.rent
+  );
+
+  // console.log(checkInDate);
+  // console.log(checkOutDate);
   const countries = [
     "USA",
     "Canada",
@@ -60,7 +66,6 @@ const Book = () => {
   const handleSpecialRequestChange = (event) => {
     setSpecialRequest(event.target.value);
   };
-
   return (
     <>
       <div className="contact-section book">
@@ -91,7 +96,6 @@ const Book = () => {
                 <DatePicker
                   selected={checkOutDate}
                   onChange={(date) => setCheckOutDate(date)}
-                  minDate={checkInDate}
                   placeholderText="Check Out"
                   className="react-datepicker"
                   dateFormat="yyyy/MM/dd"
@@ -197,28 +201,30 @@ const Book = () => {
             </div>
             <div className="order-infos">
               <div className="order-info">
-                <p className="order-label">Room Type</p>
-                <p className="order-desc">
-                  Double Bedroom shared external Bathroom
-                </p>
-              </div>{" "}
+                <p className="order-label">Name</p>
+                <p className="order-desc">{room.room.title}</p>
+              </div>
+              <div className="order-info">
+                <p className="order-label">Beds</p>
+                <p className="order-desc">{room.room.beds}</p>
+              </div>
               <div className="order-info">
                 <p className="order-label">Guests</p>
-                <p className="order-desc">1 Adult</p>
+                <p className="order-desc">{room.room.guests + " Adults"}</p>
               </div>
               <div className="underline"></div>
               <div className="order-info price">
                 <p className="order-label price">Subtotal</p>
-                <p className="order-desc price">€89</p>
+                <p className="order-desc price">€{room.room.rent}</p>
               </div>
               <div className="order-info">
                 <p className="order-label price">Tax (10%) </p>
-                <p className="order-desc price">€8.90</p>
+                <p className="order-desc price">€{room.room.rent * 0.1}</p>
               </div>
               <div className="underline"></div>
               <div className="order-info">
                 <p className="order-label total">Total </p>
-                <p className="order-desc total">€97.90</p>
+                <p className="order-desc total">€{total_price}</p>
               </div>
             </div>
           </div>

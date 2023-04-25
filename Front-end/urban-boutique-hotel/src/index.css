@@ -854,20 +854,23 @@ h6 {
   width: 100%;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: flex-end;
 }
 
 .order-label {
   font-size: 15px;
-  width: 35%;
+  width: 15%;
   color: var(--secondaryColor);
 }
 .order-desc {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   font-size: 13px;
   font-weight: bold;
-  width: 65%;
   color: var(--primaryColor);
+  width: 85%;
 }
+
 .order-label.price {
   font-size: 15px;
   width: 90%;
@@ -1068,7 +1071,7 @@ h6 {
     height: auto;
   }
   .message-form.order {
-    height: auto;
+    height: auto !important;
   }
 }
 @media only screen and (max-width: 768px) {
@@ -1254,13 +1257,11 @@ h6 {
     height: auto;
   }
   .message-form.order {
+    height: 50em;
     width: 100%;
   }
   .message-form.book {
     width: 100%;
-  }
-  .message-form.order {
-    height: auto;
   }
 
   @media (max-width: 768px) {

@@ -41,7 +41,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::post('login',[AuthController::class, 'login']);
         Route::post('register',[AuthController::class, 'register']);
         Route::get('logout',[AuthController::class, 'logout']);
-        Route::post('refresh',[AuthController::class, 'refresh']);
+        Route::get('refresh',[AuthController::class, 'refresh']);
     });
 
 

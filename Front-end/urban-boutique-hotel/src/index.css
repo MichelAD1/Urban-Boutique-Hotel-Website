@@ -1073,6 +1073,7 @@ h6 {
   justify-content: center;
   align-content: center;
 }
+
 @media only screen and (max-width: 1008px) {
   .message-inputs.book button {
     width: 40%;
@@ -2577,3 +2578,82 @@ h6 {
   }
 }
 /* End of Buffer */
+/* Payment */
+.contact-section.payment {
+  margin-top: 0% !important;
+  margin-bottom: 0% !important;
+  display: flex;
+  width: 55%;
+  height: 100%;
+  justify-content: center;
+  align-content: center;
+}
+.message-form.payment {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.room-display.payment {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+}
+.payment-options {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-bottom: 5%;
+}
+
+.payment-label {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  width: 90%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 15px;
+  color: var(--primaryColor);
+  font-weight: bold;
+}
+
+.payment-label:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.payment-label input[type="radio"] {
+  margin-right: 10px;
+  opacity: 0;
+  position: absolute;
+}
+
+.payment-label span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.payment-label input[type="radio"]:checked + span {
+  color: #1e90ff;
+}
+.credit-cards {
+  width: 40px;
+  height: 30px;
+  margin-right: 10px;
+}
+.credit-cards.offline {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+/* End of Payment */

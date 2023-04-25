@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import BasicTable from "../../Global/Components/Tables/BasicTable";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import ReactModal from "react-modal";
 
@@ -9,64 +10,44 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 // API
 import addBudget from "../../api-client/Finance/addBudget";
+import FetchFinance from "../../api-client/Finance/FetchFinance";
 
 const Finance = () => {
+	const [loading, setLoading] = useState(true);
 	// State for storing budget information
-	const [err, setErr] = useState("");
 	const [budgetErr, setBudgetErr] = useState("");
-	const budget_type = "Budget";
-
 	const [isBudgetModalOpen, setBudgetModalOpen] = useState(false);
-
 	const [budgets, setBudgets] = useState([]);
 	const [budget_name, setBudgetName] = useState("");
 	const [amount, setAmount] = useState("");
 
+	// State for storing transaction information
 	const [transactions, setTransactions] = useState([]);
+	const [transactionsErr, setTransactionsErr] = useState("");
 
+	const {
+		status,
+		error,
+		data: financeData,
+	} = useQuery(["finance_data"], FetchFinance, {
+		staleTime: 300000, // 5 minutes
+	});
 	useEffect(() => {
-		// setBudgets([
-		// 	{ id: 1, budget_name: "Marketing", amount: 5000 },
-		// 	{ id: 2, budget_name: "Employee Salaries", amount: 10000 },
-		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
-		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
-		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
-		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
-		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
-		// ]);
-		// setTransactions([
-		// 	{
-		// 		id: 1234,
-		// 		customer_name: "John Smith",
-		// 		amount: 1000.5,
-		// 		date: "2023-04-22",
-		// 	},
-		// 	{
-		// 		id: 5678,
-		// 		customer_name: "Jane Doe",
-		// 		amount: 750.2,
-		// 		date: "2023-05-10",
-		// 	},
-		// 	{
-		// 		id: 9101,
-		// 		customer_name: "Bob Johnson",
-		// 		amount: 2500.0,
-		// 		date: "2023-06-15",
-		// 	},
-		// 	{
-		// 		id: 1121,
-		// 		customer_name: "Alice Lee",
-		// 		amount: 500.0,
-		// 		date: "2023-07-01",
-		// 	},
-		// 	{
-		// 		id: 3141,
-		// 		customer_name: "Charlie Brown",
-		// 		amount: 1500.75,
-		// 		date: "2023-08-20",
-		// 	},
-		// ]);
-	}, []);
+		if (financeData) {
+			Promise.all(financeData).then((results) => {
+				if (results[0].length === 0) {
+					setBudgetErr("No budgets found");
+				}
+				if (results[1].length === 0) {
+					setTransactionsErr("No transactions found");
+				}
+				setBudgets(results[0]);
+				setTransactions(results[1]);
+
+				setLoading(false);
+			});
+		}
+	}, [financeData, status]);
 
 	const handleAddBudget = (e) => {
 		e.preventDefault();
@@ -76,9 +57,7 @@ const Finance = () => {
 		};
 
 		addBudget(reqData).then((res) => {
-			console.log(res);
 			if (res.status === "success") {
-				console.log(res);
 				setBudgets([...budgets, res.budget]);
 				closeBudgetModal();
 			} else {
@@ -91,7 +70,7 @@ const Finance = () => {
 	};
 	const closeBudgetModal = () => {
 		setBudgetModalOpen(false);
-		setErr("");
+		setBudgetErr("");
 		setBudgetName("");
 		setAmount("");
 	};
@@ -138,6 +117,14 @@ const Finance = () => {
 		[],
 	);
 
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
+
 	return (
 		<div className='container'>
 			<div className='budget-container'>
@@ -151,6 +138,7 @@ const Finance = () => {
 						reqData={budgets}
 						columns={budget_columns}
 						type={"budget"}
+						err={budgetErr}
 					/>
 				</div>
 				<div className='request-box' style={{ maxHeight: "24em" }}>
@@ -164,7 +152,8 @@ const Finance = () => {
 					<BasicTable
 						reqData={transactions}
 						columns={columns}
-						type={"budget"}
+						type={"transaction"}
+						err={transactionsErr}
 					/>
 				</div>
 			</div>

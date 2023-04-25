@@ -1,9 +1,9 @@
 import axios from "axios";
-import base_url from "../base_url";
+import base_url from "../BaseUrl";
 
 export default async function Finance() {
 	const budgets = await axios
-		.get(`${base_url}/budget/get`, {
+		.get(`${base_url}budget/get`, {
 			headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 		})
 		.then((res) => {
@@ -14,7 +14,7 @@ export default async function Finance() {
 		});
 
 	const transactions = await axios
-		.get(`${base_url}/transaction/get`, {
+		.get(`${base_url}payment/getall`, {
 			headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 		})
 		.then((res) => {
@@ -23,4 +23,5 @@ export default async function Finance() {
 		.catch((err) => {
 			return err;
 		});
+	return [budgets, transactions];
 }

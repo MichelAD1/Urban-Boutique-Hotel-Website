@@ -9,7 +9,7 @@ import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
 import search_icon from "../../assets/icons/search.svg";
 
 // API
-import GetClients from "../../api-client/Clients/GetClients";
+import FetchData from "../../api-client/Clients/FetchData";
 
 export default function Users() {
 	const [data, setData] = useState([]);
@@ -22,7 +22,7 @@ export default function Users() {
 		status,
 		error,
 		data: usersData,
-	} = useQuery(["users_data", `${base_url}customer/get`], GetClients, {
+	} = useQuery(["users_data", `${base_url}customer/get`], FetchData, {
 		staleTime: 300000, // 5 minutes
 	});
 	useEffect(() => {

@@ -1,8 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import mastercard from "../../assets/images/mastercard.jpg";
+import mastercard from "../../assets/images/mastercard.png";
 import paypal from "../../assets/images/paypal.jpg";
 import offline from "../../assets/images/offline.jpg";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+
+//APIS
+import ReserveRoom from "../../api-client/Rooms/ReserveRoom";
 
 const Payment = () => {
   const location = useLocation();
@@ -12,15 +16,16 @@ const Payment = () => {
 
   const [paymentMethod, setPaymentMethod] = useState("");
 
-  const handlePaymentMethodChange = (event) => {
-    setPaymentMethod(event.target.value);
-  };
-
   useEffect(() => {
     if (!location.state || !location.state.data) {
       navigation("/");
     }
   }, [location.state, navigation]);
+
+  const handlePaymentMethodChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
+  const handleSubmitOffline = () => {};
 
   return (
     <div className="contact-section payment">
@@ -40,7 +45,7 @@ const Payment = () => {
               />
               Pay with Credit Card
               <img
-                className="credit-cards "
+                className="credit-cards"
                 src={mastercard}
                 alt="Credit Card"
               />
@@ -65,33 +70,75 @@ const Payment = () => {
                 onChange={handlePaymentMethodChange}
               />
               Pay Offline
-              <img
-                className="credit-cards offline"
-                src={offline}
-                alt="Credit Card"
-              />
+              <img className="credit-cards" src={offline} alt="Credit Card" />
             </label>
           </div>
           {paymentMethod === "creditCard" && (
-            <div>
-              <p>Please enter your credit card details:</p>
-              <input type="text" placeholder="Card Number" />
-              <input type="text" placeholder="Expiration Date" />
-              <input type="text" placeholder="CVV" />
+            <div className="payment-selected">
+              <div className="message-input card">
+                <input
+                  type="number"
+                  id="card number"
+                  placeholder="Card Number *"
+                />
+              </div>
+
+              <div className="message-name-email">
+                <div className="message-input">
+                  <input
+                    type="month"
+                    id="expiryDate"
+                    name="expiryDate"
+                    placeholder="Expiration Date *"
+                    min={new Date().toISOString().slice(0, 7)}
+                    required
+                  />
+                </div>
+                <div className="message-input">
+                  <input
+                    type="number"
+                    id="security code"
+                    placeholder="Security code (CVV) *"
+                  />
+                </div>
+              </div>
+              <div className="message-input card">
+                <input
+                  type="text"
+                  id="card name"
+                  placeholder="Cardholder Name *"
+                />
+              </div>
+              <div className="button-payment">
+                <button>Complete Checkout</button>
+              </div>
             </div>
           )}
           {paymentMethod === "paypal" && (
-            <div>
-              <p>
-                Please log in to your Paypal account to complete the payment.
-              </p>
-              <button>Log In</button>
+            <div className="payment-selected">
+              <div className="payment-info">
+                <AiOutlineInfoCircle />
+                <p>
+                  Once you click to proceed, you will be redirected to PayPal.
+                </p>
+              </div>
+              <div className="button-payment">
+                <button>Select</button>
+              </div>
             </div>
           )}
           {paymentMethod === "offline" && (
-            <div>
-              <p>Please contact us to arrange payment offline.</p>
-              <button>Contact Us</button>
+            <div className="payment-selected">
+              <div className="payment-info">
+                <AiOutlineInfoCircle />
+                <p>
+                  Selecting this payment method means you will arrange the
+                  payment with the host offline, after you book.
+                </p>
+              </div>
+              <div className="button-payment">
+                <button onClick={handleSubmitOffline}>Select</button>
+              </div>
             </div>
           )}
         </div>

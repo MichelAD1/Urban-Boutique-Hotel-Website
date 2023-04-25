@@ -2647,13 +2647,51 @@ h6 {
 }
 .credit-cards {
   width: 40px;
-  height: 30px;
-  margin-right: 10px;
-}
-.credit-cards.offline {
-  width: 40px;
   height: 40px;
   margin-right: 10px;
 }
-
+.payment-selected {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3%;
+}
+.payment-info {
+  padding: 3%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+.payment-info p {
+  margin-top: -0.5%;
+  font-size: 14px;
+  padding-right: 10%;
+  padding-left: 1%;
+  color: var(--primaryColor);
+  width: 100%;
+}
+.payment svg {
+  color: var(--primaryColor);
+}
+.payment-selected button {
+  width: 35%;
+  height: 3em;
+  border-radius: 3px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.button-payment {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-right: 7%;
+  padding-top: 5%;
+}
+.message-input.card {
+  width: 100%;
+}
 /* End of Payment */

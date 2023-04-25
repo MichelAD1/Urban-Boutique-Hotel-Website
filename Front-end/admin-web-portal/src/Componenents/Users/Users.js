@@ -19,6 +19,7 @@ export default function Users() {
 			.then((res) => {
 				if (res.data.length > 0) {
 					setData(res);
+					console.log(res);
 				} else {
 					setErr("No clients found");
 				}

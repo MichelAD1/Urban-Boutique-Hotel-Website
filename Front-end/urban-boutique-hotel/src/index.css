@@ -223,6 +223,9 @@ h6 {
   text-decoration: none;
   letter-spacing: 0.5;
 }
+.footer-link {
+  color: white;
+}
 .links-section .nav-link::after {
   content: "";
   position: absolute;
@@ -284,6 +287,10 @@ h6 {
   max-width: 200px;
   max-height: 50px;
   position: fixed;
+}
+.nav-image.urban {
+  margin-top: -2%;
+  margin-left: -5%;
 }
 .nav-image:hover {
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -397,7 +404,9 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  height: 10%;
+  padding: 0.05rem 1.8rem;
+  padding-top: 0.5%;
   position: fixed;
   top: 0;
   left: 0;
@@ -1349,6 +1358,10 @@ h6 {
 .services {
   padding: 5rem 0;
 }
+.services-section {
+  margin-top: 5%;
+  padding-top: 1rem;
+}
 
 .services {
   background: var(--darkGrey);
@@ -1589,7 +1602,7 @@ h6 {
 .room-display.amenities {
   display: flex;
   position: relative;
-  padding-top: 3%;
+  padding-top: 2%;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
@@ -1622,7 +1635,8 @@ h6 {
   font-size: 12px;
 }
 .room-tag {
-  font-size: 30px;
+  font-size: 20px;
+  max-width: 50%;
   font-weight: 600;
 }
 .room-tag.pricing {

@@ -17,11 +17,11 @@ const AccountNav = () => {
   return (
     <nav className="account-navbar" id="navbar">
       <Link to="/">
-        <img className="nav-image" src={logo} />
+        <img className="nav-image urban" src={logo} />
       </Link>
       <div className="nav-link" onClick={handleLogout}>
         <div className="login-img">
-          <HiUserCircle className="account-image" />
+          <HiUserCircle className="nav-image" />
         </div>
         <div className="routes">Log out</div>
       </div>

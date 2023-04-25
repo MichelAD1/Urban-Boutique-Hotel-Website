@@ -88,7 +88,7 @@ const Navbar = () => {
   return (
     <nav className="navbar" id="navbar">
       <Link to="/">
-        <img className="nav-image" src={logo} />
+        <img className="nav-image urban" src={logo} />
       </Link>
       <ul
         className={active ? "links-section" : "links-section show-nav"}

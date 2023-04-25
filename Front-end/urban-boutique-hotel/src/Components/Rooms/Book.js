@@ -36,7 +36,7 @@ const Book = () => {
     "Lebanon",
   ];
   const handleGoBack = () => {
-    navigate(`/rooms`);
+    navigate(-1);
   };
   const handleSelectChange = (event) => {
     setCountry(event.target.value);
@@ -60,7 +60,6 @@ const Book = () => {
   const handleSpecialRequestChange = (event) => {
     setSpecialRequest(event.target.value);
   };
-  console.log(country);
 
   return (
     <>

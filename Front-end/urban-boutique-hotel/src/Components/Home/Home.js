@@ -39,16 +39,23 @@ const Home = () => {
   }
 
   //Api handler
-  const { status, error, data: responsedata } = useQuery(["data"], GetHomePage);
+  const {
+    status,
+    error,
+    data: homeData,
+  } = useQuery(["homedata"], GetHomePage, {
+    staleTime: 300000, // 5 minutes
+  });
   useEffect(() => {
-    if (responsedata) {
-      Promise.all(responsedata).then((results) => {
+    if (status === "success" && homeData) {
+      const promises = Object.values(homeData);
+      Promise.all(promises).then((results) => {
         setRooms(results[0]);
         setReviews(results[1]);
         setLoading(false);
       });
     }
-  }, [responsedata, error]);
+  }, [homeData, status]);
 
   const services = [
     {
@@ -102,12 +109,13 @@ const Home = () => {
           ))}
         </div>
       )}
-
-      <div className="services">
+      <div className="services-section">
         <div className="section-title">
           <h4>Services</h4>
           <div />
         </div>
+      </div>
+      <div className="services">
         <div className="services-center">
           {services.map((item, index) => {
             return (
@@ -120,8 +128,16 @@ const Home = () => {
           })}
         </div>
       </div>
-      <Reviews data={reviews} />
-      <Footer />
+      {loading ? (
+        <div className="buffer-space">
+          <div className="buffer-loader home"></div>
+        </div>
+      ) : (
+        <div>
+          <Reviews data={reviews} />
+          <Footer />
+        </div>
+      )}
     </>
   );
 };

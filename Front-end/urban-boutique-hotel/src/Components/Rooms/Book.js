@@ -22,7 +22,14 @@ const Book = () => {
   const [checkOutDate, setCheckOutDate] = useState(null);
   const lastFreeDate = room.free_dates[room.free_dates.length - 1];
   const firstFreeDate = room.free_dates[0];
+  const firstOccupiedDate = room.occupied_dates[0];
+  const lastOccupiedDate = room.occupied_dates[room.occupied_dates.length - 1];
 
+  const startIndex = room.free_dates.findIndex(
+    (date) => new Date(date) >= new Date(firstOccupiedDate)
+  );
+  const endIndex = startIndex >= 0 ? startIndex : room.free_dates.length;
+  const freeDatesInRange = room.free_dates.slice(0, endIndex);
   const [total_price, setTotalPrice] = useState(
     room.room.rent * 0.1 + room.room.rent
   );
@@ -43,9 +50,7 @@ const Book = () => {
   ];
   //useEffect
   useEffect(() => {
-    if (!checkInDate) {
-      setCheckOutDate("");
-    }
+    setCheckOutDate("");
   }, [checkInDate]);
   //Validators
   const validateEmail = (email) => {
@@ -170,10 +175,11 @@ const Book = () => {
                   selected={checkOutDate}
                   onChange={(date) => setCheckOutDate(date)}
                   minDate={checkInDate}
-                  maxDate={new Date(lastFreeDate)}
-                  excludeDates={room.occupied_dates.map(
-                    (date) => new Date(date)
-                  )}
+                  maxDate={
+                    checkInDate < new Date(firstOccupiedDate)
+                      ? new Date(freeDatesInRange[freeDatesInRange.length - 1])
+                      : new Date(lastFreeDate)
+                  }
                   placeholderText="Check Out"
                   className="react-datepicker"
                   dateFormat="yyyy/MM/dd"

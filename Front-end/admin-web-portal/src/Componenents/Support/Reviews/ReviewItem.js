@@ -17,12 +17,10 @@ const ReviewItem = () => {
 	const [replied, setReplied] = useState(false);
 
 	useEffect(() => {
-		setUsername(data.username);
-		setReview(data.review);
+		setUsername(data.email);
+		setReview(data.comment);
 		setRating(data.rating);
-		setDate(data.date);
-		setReply(data.reply);
-		setReplied(data.reply !== "");
+		setDate(data.created_at);
 	}, []);
 
 	const handleAddReply = () => {
@@ -52,11 +50,6 @@ const ReviewItem = () => {
 			<div className='edit-container'>
 				<div className='edit-item'>
 					<h2>Review #{data.id}</h2>
-					{!replied && (
-						<button className='save-button' onClick={handleAddReply}>
-							Save
-						</button>
-					)}
 					<button className='button' onClick={handleAdd}>
 						Show
 					</button>
@@ -64,7 +57,7 @@ const ReviewItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div>
-							<label>Username</label>
+							<label>Customer email</label>
 						</div>
 						<div>
 							<p>{username}</p>
@@ -98,23 +91,6 @@ const ReviewItem = () => {
 						</div>
 						<div>
 							<p>{date}</p>
-						</div>
-					</div>
-				</div>
-				<div className='edit-item'>
-					<div className='edit-info info-large'>
-						<div style={{ alignSelf: "flex-start" }}>
-							<label>Reply</label>
-						</div>
-						<div>
-							{replied && <p>{reply}</p>}
-							{!replied && (
-								<textarea
-									value={reply}
-									onChange={(e) => setReply(e.target.value)}
-									className='input-box bio-input'
-								/>
-							)}
 						</div>
 					</div>
 				</div>

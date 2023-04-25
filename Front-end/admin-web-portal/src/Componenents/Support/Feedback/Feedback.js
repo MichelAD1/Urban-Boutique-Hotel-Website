@@ -56,17 +56,6 @@ const Feedback = () => {
 	});
 	useEffect(() => {
 		if (feedbackData) {
-			// if (feedbackData.status === 200) {
-			// 	feedbackData.data[0].data.forEach((feedback) => {
-			// 		feedback.created_at = formatDate(feedback.created_at);
-			// 	});
-			// 	setData(feedbackData.data[0]);
-			// 	if (feedbackData.data[0].data.length === 0) {
-			// 		setTableErr("No feedbacks found");
-			// 	}
-			// } else {
-			// 	setErr("Something went wrong");
-			// }
 			if (feedbackData[0].data.length > 0) {
 				feedbackData[0].data.forEach((feedback) => {
 					feedback.created_at = formatDate(feedback.created_at);

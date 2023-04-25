@@ -1,16 +1,11 @@
 import axios from "axios";
-import FormData from "form-data";
+import base_url from "../BaseUrl";
 
-export default async function FetchCred(email, password) {
-	let args = new FormData();
-	args.append("email", email);
-	args.append("password", password);
-	args.append("type", 2);
-
+export default async function FetchCred(reqData) {
 	return axios({
 		method: "post",
-		url: "http://127.0.0.1:8000/api/v0.1/auth/login",
-		data: args,
+		url: `${base_url}auth/login`,
+		data: reqData,
 	})
 		.then((res) => {
 			if (res.data.message) {

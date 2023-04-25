@@ -1,9 +1,22 @@
 import axios from "axios";
+import base_url from "../BaseUrl";
 
-export default async function getDealsCount() {
-	const deal_count = axios({
+export default async function GetCounts() {
+	// const revenue = axios({
+	// 	method: "get",
+	// 	url: `${base_url}room/reservation/getrevenue`,
+	// 	headers: { Authorization: localStorage.getItem("token") },
+	// })
+	// 	.then((res) => {
+	// 		return res.data;
+	// 	})
+	// 	.catch((err) => {
+	// 		return err.response;
+	// 	});
+
+	const reservations = axios({
 		method: "get",
-		url: "http://127.0.0.1:8000/api/v0.1/deal/count",
+		url: `${base_url}room/reservation/getcount`,
 		headers: { Authorization: localStorage.getItem("token") },
 	})
 		.then((res) => {
@@ -13,9 +26,9 @@ export default async function getDealsCount() {
 			return err.response;
 		});
 
-	const client_count = axios({
+	const customers = axios({
 		method: "get",
-		url: "http://127.0.0.1:8000/api/v0.1/client/count",
+		url: `${base_url}customer/getcount`,
 		headers: { Authorization: localStorage.getItem("token") },
 	})
 		.then((res) => {
@@ -24,9 +37,10 @@ export default async function getDealsCount() {
 		.catch((err) => {
 			return err.response;
 		});
-	const business_count = axios({
+
+	const rooms = axios({
 		method: "get",
-		url: "http://127.0.0.1:8000/api/v0.1/business/count",
+		url: `${base_url}room/getcount`,
 		headers: { Authorization: localStorage.getItem("token") },
 	})
 		.then((res) => {
@@ -35,5 +49,18 @@ export default async function getDealsCount() {
 		.catch((err) => {
 			return err.response;
 		});
-	return [deal_count, client_count, business_count];
+
+	const pending_maintenance = axios({
+		method: "get",
+		url: `${base_url}maintenance/get`,
+		headers: { Authorization: localStorage.getItem("token") },
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			return err.response;
+		});
+
+	return [reservations, customers, rooms, pending_maintenance];
 }

@@ -1,8 +1,9 @@
 import axios from "axios";
+import base_url from "../BaseUrl";
 
 export default async function Logout() {
 	return axios
-		.get("http://127.0.0.1:8000/api/v0.1/auth/logout", {
+		.get(`${base_url}auth/logout`, {
 			headers: { Authorization: localStorage.getItem("token") },
 		})
 		.then((res) => {

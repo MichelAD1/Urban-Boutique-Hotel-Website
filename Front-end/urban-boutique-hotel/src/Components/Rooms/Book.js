@@ -24,8 +24,6 @@ const Book = () => {
     room.room.rent * 0.1 + room.room.rent
   );
 
-  // console.log(checkInDate);
-  // console.log(checkOutDate);
   const countries = [
     "USA",
     "Canada",
@@ -41,9 +39,7 @@ const Book = () => {
     "Uruguay",
     "Lebanon",
   ];
-  const handleGoBack = () => {
-    navigate(-1);
-  };
+
   const handleSelectChange = (event) => {
     setCountry(event.target.value);
   };
@@ -179,13 +175,20 @@ const Book = () => {
               </p>
             </div>
             <div className="booking-nav">
-              <div className="goback">
-                <button className="goback-button" onClick={handleGoBack}>
-                  <IoIosArrowBack />
-                  Go Back
-                </button>
-              </div>
-              <button type="submit">Continue to Check-out</button>
+              <button
+                disabled={
+                  !first_name ||
+                  !last_name ||
+                  !email ||
+                  !phone ||
+                  !country ||
+                  !checkInDate ||
+                  !checkOutDate
+                }
+                type="submit"
+              >
+                Continue to Check-out
+              </button>
             </div>
           </form>
         </div>

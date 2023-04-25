@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import galleryImage1 from "../../assets/images/gallery-image1.jpg";
 import DatePicker from "react-datepicker";
@@ -254,7 +254,8 @@ const Book = () => {
               <p>
                 {" "}
                 By completing this booking I acknowledge I have read and
-                accepted the <a href="">Privacy Policies</a>.
+                accepted the <Link to="/privacypolicies">Privacy Policies</Link>
+                .
               </p>
             </div>
             <div className="booking-nav">

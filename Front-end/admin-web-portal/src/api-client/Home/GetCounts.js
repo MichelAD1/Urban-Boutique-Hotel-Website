@@ -2,17 +2,18 @@ import axios from "axios";
 import base_url from "../BaseUrl";
 
 export default async function GetCounts() {
-	// const revenue = axios({
-	// 	method: "get",
-	// 	url: `${base_url}room/reservation/getrevenue`,
-	// 	headers: { Authorization: localStorage.getItem("token") },
-	// })
-	// 	.then((res) => {
-	// 		return res.data;
-	// 	})
-	// 	.catch((err) => {
-	// 		return err.response;
-	// 	});
+	const revenue = axios({
+		method: "get",
+		url: `${base_url}room/reservation/getrevenue`,
+		headers: { Authorization: localStorage.getItem("token") },
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			console.log(err);
+			return err.response;
+		});
 
 	const reservations = axios({
 		method: "get",
@@ -62,5 +63,5 @@ export default async function GetCounts() {
 			return err.response;
 		});
 
-	return [reservations, customers, rooms, pending_maintenance];
+	return [reservations, customers, rooms, pending_maintenance, revenue];
 }

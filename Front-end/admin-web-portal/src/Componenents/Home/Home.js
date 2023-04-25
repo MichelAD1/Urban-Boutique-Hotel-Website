@@ -32,6 +32,7 @@ export default function Home() {
 				setCustomersCount(results[1].customer_count);
 				setRoomsCount(results[2].room_count);
 				setData(results[3]);
+				setRevenueCount(results[4].revenue);
 			});
 			setLoading(false);
 		}

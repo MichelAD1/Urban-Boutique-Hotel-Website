@@ -37,6 +37,9 @@ class CustomerController extends Controller
         if($request->has("username")){
             $userinfo->username = $request->username;
         }
+        if($request->has("name")){
+            $userinfo->name = $request->name;
+        }
         if($request->has("email")){
             // check if the new email already exists in the database
             $existingUser = User::where('email', $request->email)->first();

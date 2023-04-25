@@ -9,6 +9,7 @@ import Home from "./Components/Home/Home";
 import Rooms from "./Components/Rooms/Rooms";
 import RoomsItem from "./Components/Rooms/RoomsItem";
 import Book from "./Components/Rooms/Book";
+import Payment from "./Components/Rooms/Payment";
 import Services from "./Components/Services/Services";
 import FindUs from "./Components/FindUs/FindUs";
 import Discover from "./Components/Discover/Discover";
@@ -73,6 +74,17 @@ function App() {
                   <>
                     <ScrollToTop />
                     <Book />
+                  </>
+                }
+              />
+            </Route>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/rooms/payment"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <Payment />
                   </>
                 }
               />

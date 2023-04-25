@@ -9,8 +9,11 @@ import Home from "./Components/Home/Home";
 import Rooms from "./Components/Rooms/Rooms";
 import RoomsItem from "./Components/Rooms/RoomsItem";
 import Book from "./Components/Rooms/Book";
+import Payment from "./Components/Rooms/Payment";
 import Services from "./Components/Services/Services";
 import FindUs from "./Components/FindUs/FindUs";
+import FAQ from "./Components/Policies/FAQ";
+import Policy from "./Components/Policies/Policy";
 import Discover from "./Components/Discover/Discover";
 import Contact from "./Components/Contact/Contact";
 import Navbar from "./Components/Navbar/Navbar";
@@ -66,6 +69,24 @@ function App() {
                 </>
               }
             />
+            <Route
+              path="/FAQ"
+              element={
+                <>
+                  <ScrollToTop />
+                  <FAQ />
+                </>
+              }
+            />
+            <Route
+              path="/privacypolicies"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Policy />
+                </>
+              }
+            />
             <Route exact path="/" element={<PrivateRoute />}>
               <Route
                 path="/rooms/booking"
@@ -73,6 +94,17 @@ function App() {
                   <>
                     <ScrollToTop />
                     <Book />
+                  </>
+                }
+              />
+            </Route>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/rooms/payment"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <Payment />
                   </>
                 }
               />

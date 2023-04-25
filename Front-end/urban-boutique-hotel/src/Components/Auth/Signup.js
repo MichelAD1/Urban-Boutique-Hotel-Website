@@ -28,6 +28,7 @@ const Signup = () => {
   const navigation = useNavigate();
 
   const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [countryCode, setCountryCode] = useState("+1");
@@ -46,6 +47,9 @@ const Signup = () => {
   };
   const validateUsername = (username) => {
     return username.length <= 25 && username.length > 0;
+  };
+  const validateName = (name) => {
+    return name.length > 0;
   };
 
   const validateDate = (dob) => {
@@ -102,6 +106,10 @@ const Signup = () => {
       }
       return;
     }
+    if (!validateName(name)) {
+      setErr("Name field required");
+      return;
+    }
     if (!validateEmail(email)) {
       setErr("Please enter a valid email address");
       return;
@@ -126,6 +134,7 @@ const Signup = () => {
     const type = 0;
     const data = {
       username,
+      name,
       email,
       password,
       gender,
@@ -161,11 +170,22 @@ const Signup = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            marginTop: "-2em",
           }}
         >
           {/* Add hotel logo here */}
           <h1 className="no-cursor">Sign up</h1>
           <form onSubmit={handleSubmit}>
+            <TextField
+              margin="normal"
+              fullWidth
+              id="name"
+              label="Name"
+              autoComplete="name"
+              autoFocus
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+            />
             <TextField
               margin="normal"
               fullWidth

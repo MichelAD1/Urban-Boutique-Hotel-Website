@@ -38,6 +38,9 @@ class CustomerController extends Controller
         if($request->has("username")){
             $userinfo->username = $request->username;
         }
+        if($request->has("name")){
+            $userinfo->name = $request->name;
+        }
         if($request->has("email")){
             // check if the new email already exists in the database
             $existingUser = User::where('email', $request->email)->first();
@@ -76,8 +79,9 @@ class CustomerController extends Controller
             'room_id'=>$request->room_id,
             'reservation_date'=> $request->reservation_date,
             'reservation_end'=>$request->reservation_end,
-            'status'=>'pending',
-            'requests'=>$request->requests
+            'requests'=>$request->requests,
+            'status'=>"pending"
+
         ]);
         return response()->json([
             'message'=>"Editted successfuly",
@@ -101,15 +105,19 @@ class CustomerController extends Controller
         return DB::table("customer_reserves_room")->where("id",$request->reservation_id)->first();
     }
     public function banCustomer($customerid){
-        $user=Auth::user();
-        $employee = Staff::where("user_id",$user->id)->first();
-        if($employee->position=="admin"){
-            $target=User::find($customerid);
+        $target=User::find($customerid);
+        if($target->banned == 1){
+            $target->banned=0;
+            if($target->save()){
+              return $target;
+            }
+        }else{
             $target->banned=1;
-            $target->save();
-            return "success";
+            if($target->save()){
+                return $target;
+            }
         }
-        return "Failed";
+        return "error";
     }
 
     public function getCustomerCount(){
@@ -140,7 +148,7 @@ class CustomerController extends Controller
         ]);
     }
     public function getCustomers(){
-        $customers = Customer::join('users','users.id','=','customers.user_id')->get();
+        $customers = Customer::join('users','users.id','=','customers.user_id')->paginate(14);
         return $customers;
     }
 

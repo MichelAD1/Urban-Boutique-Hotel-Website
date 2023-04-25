@@ -1,17 +1,17 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { IoIosArrowBack } from "react-icons/io";
 import galleryImage1 from "../../assets/images/gallery-image1.jpg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import Footer from "../../Global/Components/Footer";
 
 const Book = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const room = location.state.data;
+  const navigation = useNavigate();
+  const [err, setErr] = useState("");
 
+  const room = location.state.data;
+  const [room_id, setRoonID] = useState(room.room.id);
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,6 +20,12 @@ const Book = () => {
   const [special_request, setSpecialRequest] = useState("");
   const [checkInDate, setCheckInDate] = useState(null);
   const [checkOutDate, setCheckOutDate] = useState(null);
+  const lastFreeDate = room.free_dates[room.free_dates.length - 1];
+  const firstFreeDate = room.free_dates[0];
+
+  const [total_price, setTotalPrice] = useState(
+    room.room.rent * 0.1 + room.room.rent
+  );
   const countries = [
     "USA",
     "Canada",
@@ -35,9 +41,26 @@ const Book = () => {
     "Uruguay",
     "Lebanon",
   ];
-  const handleGoBack = () => {
-    navigate(-1);
+  //useEffect
+  useEffect(() => {
+    if (!checkInDate) {
+      setCheckOutDate("");
+    }
+  }, [checkInDate]);
+  //Validators
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
   };
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberPattern = /^\d{7,15}$/;
+    return phoneNumberPattern.test(phoneNumber);
+  };
+
+  const validateRequest = (request) => {
+    return request.length <= 255;
+  };
+
   const handleSelectChange = (event) => {
     setCountry(event.target.value);
   };
@@ -61,6 +84,57 @@ const Book = () => {
     setSpecialRequest(event.target.value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErr("");
+    if (!validateEmail(email)) {
+      setErr("Please enter a valid email address");
+      return;
+    }
+    if (!validatePhoneNumber(phone)) {
+      setErr("Please enter a valid phone number");
+      return;
+    }
+    if (!validateRequest(special_request)) {
+      setErr("Special request message too long");
+      return;
+    }
+
+    let parsedDate1 = checkInDate;
+    let year = parsedDate1.getFullYear();
+    let month =
+      parsedDate1.getMonth() + 1 < 10
+        ? `0${parsedDate1.getMonth() + 1}`
+        : parsedDate1.getMonth() + 1;
+    let day =
+      parsedDate1.getDate() < 10
+        ? `0${parsedDate1.getDate()}`
+        : parsedDate1.getDate();
+    const reservation_date = `${year}-${month}-${day}`;
+    parsedDate1 = checkOutDate;
+    year = parsedDate1.getFullYear();
+    month =
+      parsedDate1.getMonth() + 1 < 10
+        ? `0${parsedDate1.getMonth() + 1}`
+        : parsedDate1.getMonth() + 1;
+    day =
+      parsedDate1.getDate() < 10
+        ? `0${parsedDate1.getDate()}`
+        : parsedDate1.getDate();
+    const reservation_end = `${year}-${month}-${day}`;
+    let requests = special_request;
+    if (!special_request) {
+      requests = "_";
+    }
+    const data = {
+      room_id,
+      reservation_date,
+      reservation_end,
+      requests,
+      total_price,
+    };
+    navigation(`/rooms/payment`, { state: { data: data } });
+  };
   return (
     <>
       <div className="contact-section book">
@@ -71,13 +145,17 @@ const Book = () => {
             </div>
           </div>
 
-          <form className="message-inputs book">
+          <form className="message-inputs book" onSubmit={handleSubmit}>
             <div className="message-name-email">
               <div className="message-input">
                 <DatePicker
                   selected={checkInDate}
                   onChange={(date) => setCheckInDate(date)}
-                  minDate={new Date()}
+                  minDate={new Date(firstFreeDate)}
+                  maxDate={new Date(lastFreeDate)}
+                  excludeDates={room.occupied_dates.map(
+                    (date) => new Date(date)
+                  )}
                   placeholderText="Check In"
                   className="react-datepicker"
                   dateFormat="yyyy/MM/dd"
@@ -92,6 +170,10 @@ const Book = () => {
                   selected={checkOutDate}
                   onChange={(date) => setCheckOutDate(date)}
                   minDate={checkInDate}
+                  maxDate={new Date(lastFreeDate)}
+                  excludeDates={room.occupied_dates.map(
+                    (date) => new Date(date)
+                  )}
                   placeholderText="Check Out"
                   className="react-datepicker"
                   dateFormat="yyyy/MM/dd"
@@ -99,6 +181,7 @@ const Book = () => {
                   showMonthDropdown
                   showYearDropdown
                   dropdownMode="select"
+                  disabled={!checkInDate}
                 />
               </div>
             </div>
@@ -126,7 +209,7 @@ const Book = () => {
             <div className="message-name-email">
               <div className="message-input">
                 <input
-                  type="email"
+                  type="text"
                   id="email"
                   placeholder="Email"
                   value={email}
@@ -171,17 +254,37 @@ const Book = () => {
               <p>
                 {" "}
                 By completing this booking I acknowledge I have read and
-                accepted the <a href="">Property Policies</a>.
+                accepted the <Link to="/privacypolicies">Privacy Policies</Link>
+                .
               </p>
             </div>
             <div className="booking-nav">
-              <div className="goback">
-                <button className="goback-button" onClick={handleGoBack}>
-                  <IoIosArrowBack />
-                  Go Back
-                </button>
-              </div>
-              <button type="submit">Continue to Check-out</button>
+              <div className="login-error book">{err}</div>
+              <button
+                disabled={
+                  !first_name ||
+                  !last_name ||
+                  !email ||
+                  !phone ||
+                  !country ||
+                  !checkInDate ||
+                  !checkOutDate
+                }
+                type="submit"
+                className={
+                  !first_name ||
+                  !last_name ||
+                  !email ||
+                  !phone ||
+                  !country ||
+                  !checkInDate ||
+                  !checkOutDate
+                    ? "disabled-button"
+                    : ""
+                }
+              >
+                Continue to Check-out
+              </button>
             </div>
           </form>
         </div>
@@ -197,28 +300,30 @@ const Book = () => {
             </div>
             <div className="order-infos">
               <div className="order-info">
-                <p className="order-label">Room Type</p>
-                <p className="order-desc">
-                  Double Bedroom shared external Bathroom
-                </p>
-              </div>{" "}
+                <p className="order-label">Name</p>
+                <p className="order-desc">{room.room.title}</p>
+              </div>
+              <div className="order-info">
+                <p className="order-label">Beds</p>
+                <p className="order-desc">{room.room.beds}</p>
+              </div>
               <div className="order-info">
                 <p className="order-label">Guests</p>
-                <p className="order-desc">1 Adult</p>
+                <p className="order-desc">{room.room.guests + " Adults"}</p>
               </div>
               <div className="underline"></div>
               <div className="order-info price">
                 <p className="order-label price">Subtotal</p>
-                <p className="order-desc price">€89</p>
+                <p className="order-desc price">€{room.room.rent}</p>
               </div>
               <div className="order-info">
                 <p className="order-label price">Tax (10%) </p>
-                <p className="order-desc price">€8.90</p>
+                <p className="order-desc price">€{room.room.rent * 0.1}</p>
               </div>
               <div className="underline"></div>
               <div className="order-info">
                 <p className="order-label total">Total </p>
-                <p className="order-desc total">€97.90</p>
+                <p className="order-desc total">€{total_price}</p>
               </div>
             </div>
           </div>

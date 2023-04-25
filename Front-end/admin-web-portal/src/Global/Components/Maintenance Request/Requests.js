@@ -33,7 +33,7 @@ const Requests = () => {
 				accessor: "reservation_id",
 			},
 			{
-				Header: "Customer",
+				Header: "Customer Email",
 				accessor: "email",
 			},
 

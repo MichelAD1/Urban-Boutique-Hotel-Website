@@ -1,6 +1,6 @@
-import "../../Global/Styles/styles.css";
-import GetClients from "../../api-client/Clients/GetClients";
 import { useMemo, useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import base_url from "../../api-client/BaseUrl";
 
 // Components
 import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
@@ -8,72 +8,33 @@ import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
 // Icons
 import search_icon from "../../assets/icons/search.svg";
 
+// API
+import GetClients from "../../api-client/Clients/GetClients";
+
 export default function Users() {
 	const [data, setData] = useState([]);
 	const [query, setQuery] = useState("");
-	const [err, setErr] = useState("");
 
+	const [err, setErr] = useState("");
+	const [loading, setLoading] = useState(true);
+
+	const {
+		status,
+		error,
+		data: usersData,
+	} = useQuery(["users_data", `${base_url}customer/get`], GetClients, {
+		staleTime: 300000, // 5 minutes
+	});
 	useEffect(() => {
-		// let clients = GetClients("http://127.0.0.1:8000/api/v0.1/client/");
-		// clients
-		// 	.then((res) => {
-		// 		if (res.data.length > 0) {
-		// 			setData(res);
-		// 		} else {
-		// 			setErr("No clients found");
-		// 		}
-		// 	})
-		// 	.catch((err) => {
-		// 		return err;
-		// 	});
-		setData([
-			{
-				id: 1,
-				username: "jdoe",
-				full_name: "John Doe",
-				email: "jdoe@example.com",
-				dob: "1985-01-01",
-				gender: "male",
-				number: "555-87521",
-			},
-			{
-				id: 2,
-				username: "asmith",
-				full_name: "Alice Smith",
-				email: "asmith@example.com",
-				dob: "1990-02-15",
-				gender: "female",
-				number: "555-87521",
-			},
-			{
-				id: 3,
-				username: "bbrown",
-				full_name: "Bob Brown",
-				email: "bbrown@example.com",
-				dob: "1988-07-22",
-				gender: "male",
-				number: "555-87521",
-			},
-			{
-				id: 4,
-				username: "clee",
-				full_name: "Carla Lee",
-				email: "clee@example.com",
-				dob: "1992-05-09",
-				gender: "female",
-				number: "555-87521",
-			},
-			{
-				id: 5,
-				username: "drodriguez",
-				full_name: "David Rodriguez",
-				email: "drodriguez@example.com",
-				dob: "1986-11-30",
-				gender: "male",
-				number: "555-87521",
-			},
-		]);
-	}, []);
+		if (usersData) {
+			if (usersData.data.length > 0) {
+				setData(usersData);
+			} else {
+				setErr("No users found");
+			}
+			setLoading(false);
+		}
+	}, [usersData, status]);
 
 	const columns = useMemo(
 		() => [
@@ -87,7 +48,7 @@ export default function Users() {
 			},
 			{
 				Header: "Full name",
-				accessor: "full_name",
+				accessor: "name",
 			},
 			{
 				Header: "Email",
@@ -95,7 +56,7 @@ export default function Users() {
 			},
 			{
 				Header: "Phone Number",
-				accessor: "number",
+				accessor: "phone_number",
 			},
 			{
 				Header: "Date of Birth",
@@ -110,26 +71,34 @@ export default function Users() {
 	);
 
 	return (
-		<div className='container'>
-			<div className='searchAndFilter'>
-				<div className='search-bar full'>
-					<img src={search_icon} alt='' className='search-icon' />
-					<input
-						className='search-input'
-						type='text'
-						placeholder='Search'
-						onChange={(e) => setQuery(e.target.value)}
-					/>
+		<>
+			{loading ? (
+				<div className='container-buffer'>
+					<div className='buffer-loader home'></div>
 				</div>
-			</div>
-			<div className='users-container'>
-				<BasicTable
-					reqData={data}
-					columns={columns}
-					redirect={"user"}
-					err={err}
-				/>
-			</div>
-		</div>
+			) : (
+				<div className='container'>
+					<div className='searchAndFilter'>
+						<div className='search-bar full'>
+							<img src={search_icon} alt='' className='search-icon' />
+							<input
+								className='search-input'
+								type='text'
+								placeholder='Search'
+								onChange={(e) => setQuery(e.target.value)}
+							/>
+						</div>
+					</div>
+					<div className='users-container'>
+						<BasicTable
+							reqData={data}
+							columns={columns}
+							redirect={"user"}
+							err={err}
+						/>
+					</div>
+				</div>
+			)}
+		</>
 	);
 }

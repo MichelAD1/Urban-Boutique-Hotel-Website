@@ -7,6 +7,7 @@ const RequestItem = () => {
 
 	const [room, setRoom] = useState({});
 	const [reservation, setReservation] = useState({});
+	const [guest, setGuest] = useState({});
 	const [employee, setEmployee] = useState({});
 
 	const [reqData, setReqData] = useState([]);
@@ -40,6 +41,7 @@ const RequestItem = () => {
 		setReservation({
 			check_in: data.reservation_date,
 			check_out: data.reservation_end,
+			status: data.status,
 		});
 	}, [data]);
 

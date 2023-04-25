@@ -9,7 +9,6 @@ import att_5 from "../../assets/images/att-5.jpg";
 const RoomsItem = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const room = location.state.data;
 
   const [title, setName] = useState(room.room.title);

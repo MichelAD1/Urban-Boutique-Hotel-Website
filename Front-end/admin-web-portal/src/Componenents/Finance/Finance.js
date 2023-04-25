@@ -1,84 +1,78 @@
 import { useMemo, useState, useEffect } from "react";
-import add_cp from "../../assets/icons/add-cp.svg";
-import close_cp from "../../assets/icons/close-option.svg";
 import BasicTable from "../../Global/Components/Tables/BasicTable";
-import BasicTablePagination from "../../Global/Components/Tables/BasicTablePagination";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import ReactModal from "react-modal";
 
 // Icons
 import { AiOutlinePlus } from "react-icons/ai";
 
+// API
+import AddBudget from "../../api-client/Finance/AddBudget";
+import FetchFinance from "../../api-client/Finance/FetchFinance";
+
 const Finance = () => {
+	const [loading, setLoading] = useState(true);
 	// State for storing budget information
-	const [err, setErr] = useState("");
 	const [budgetErr, setBudgetErr] = useState("");
-	const budget_type = "Budget";
-
 	const [isBudgetModalOpen, setBudgetModalOpen] = useState(false);
-
 	const [budgets, setBudgets] = useState([]);
 	const [budget_name, setBudgetName] = useState("");
 	const [amount, setAmount] = useState("");
 
+	// State for storing transaction information
 	const [transactions, setTransactions] = useState([]);
+	const [transactionsErr, setTransactionsErr] = useState("");
 
+	const {
+		status,
+		error,
+		data: financeData,
+	} = useQuery(["finance_data"], FetchFinance, {
+		staleTime: 300000, // 5 minutes
+	});
 	useEffect(() => {
-		setBudgets([
-			{ id: 1, budget_name: "Marketing", amount: 5000 },
-			{ id: 2, budget_name: "Employee Salaries", amount: 10000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-		]);
-		setTransactions([
-			{
-				id: 1234,
-				customer_name: "John Smith",
-				amount: 1000.5,
-				date: "2023-04-22",
-			},
-			{
-				id: 5678,
-				customer_name: "Jane Doe",
-				amount: 750.2,
-				date: "2023-05-10",
-			},
-			{
-				id: 9101,
-				customer_name: "Bob Johnson",
-				amount: 2500.0,
-				date: "2023-06-15",
-			},
-			{
-				id: 1121,
-				customer_name: "Alice Lee",
-				amount: 500.0,
-				date: "2023-07-01",
-			},
-			{
-				id: 3141,
-				customer_name: "Charlie Brown",
-				amount: 1500.75,
-				date: "2023-08-20",
-			},
-		]);
-	}, []);
+		if (financeData) {
+			Promise.all(financeData).then((results) => {
+				if (results[0].length === 0) {
+					setBudgetErr("No budgets found");
+				}
+				if (results[1].length === 0) {
+					setTransactionsErr("No transactions found");
+				}
+				setBudgets(results[0]);
+				setTransactions(results[1]);
 
-	const handleAddBudget = () => {
-		setErr("");
-		setBudgetName("");
-		setAmount("");
-		openBudgetModal();
+				setLoading(false);
+			});
+		}
+	}, [financeData, status]);
+
+	const handleAddBudget = (e) => {
+		e.preventDefault();
+		const reqData = {
+			name: budget_name,
+			amount: amount,
+		};
+
+		AddBudget(reqData).then((res) => {
+			if (res.status === "success") {
+				setBudgets([...budgets, res.budget]);
+				closeBudgetModal();
+			} else {
+				setBudgetErr(res.data);
+			}
+		});
 	};
 	const openBudgetModal = () => {
 		setBudgetModalOpen(true);
 	};
 	const closeBudgetModal = () => {
 		setBudgetModalOpen(false);
+		setBudgetErr("");
+		setBudgetName("");
+		setAmount("");
 	};
 
 	const budget_columns = useMemo(
@@ -89,7 +83,7 @@ const Finance = () => {
 			},
 			{
 				Header: "name",
-				accessor: "budget_name",
+				accessor: "name",
 			},
 			{
 				Header: "amount",
@@ -123,19 +117,28 @@ const Finance = () => {
 		[],
 	);
 
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
+
 	return (
 		<div className='container'>
 			<div className='budget-container'>
 				<div className='request-box' style={{ maxHeight: "24em" }}>
 					<div className='request-header'>
 						<div className='title'>Budgets</div>
-						<AiOutlinePlus className='add-button' onClick={handleAddBudget} />
+						<AiOutlinePlus className='add-button' onClick={openBudgetModal} />
 					</div>
 
 					<BasicTable
 						reqData={budgets}
 						columns={budget_columns}
 						type={"budget"}
+						err={budgetErr}
 					/>
 				</div>
 				<div className='request-box' style={{ maxHeight: "24em" }}>
@@ -149,7 +152,8 @@ const Finance = () => {
 					<BasicTable
 						reqData={transactions}
 						columns={columns}
-						type={"budget"}
+						type={"transaction"}
+						err={transactionsErr}
 					/>
 				</div>
 			</div>
@@ -219,7 +223,7 @@ const Finance = () => {
 								</div>
 							</div>
 						</div>
-						<button onClick={handleAddBudget}>Add</button>
+						<button onClick={(e) => handleAddBudget(e)}>Add</button>
 						<button onClick={closeBudgetModal}>Cancel</button>
 					</form>
 				</div>

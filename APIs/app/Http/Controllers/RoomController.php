@@ -212,7 +212,7 @@ class RoomController extends Controller
     public function getReservationsCount(){
         $count = DB::table('customer_reserves_room')->count();
         return response()->json([
-            'room_count'=>$count
+            'reservation_count'=>$count
         ]);
     }
     public function searchReservation($reservationid){

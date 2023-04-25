@@ -17,6 +17,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\RegulationController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\TaskController;
 use App\Models\EmailSender;

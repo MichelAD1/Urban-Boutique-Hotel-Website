@@ -1,14 +1,14 @@
 import { useMemo, useState, useEffect } from "react";
-import add_cp from "../../assets/icons/add-cp.svg";
-import close_cp from "../../assets/icons/close-option.svg";
 import BasicTable from "../../Global/Components/Tables/BasicTable";
-import BasicTablePagination from "../../Global/Components/Tables/BasicTablePagination";
 import { Link } from "react-router-dom";
 
 import ReactModal from "react-modal";
 
 // Icons
 import { AiOutlinePlus } from "react-icons/ai";
+
+// API
+import addBudget from "../../api-client/Finance/addBudget";
 
 const Finance = () => {
 	// State for storing budget information
@@ -25,53 +25,57 @@ const Finance = () => {
 	const [transactions, setTransactions] = useState([]);
 
 	useEffect(() => {
-		setBudgets([
-			{ id: 1, budget_name: "Marketing", amount: 5000 },
-			{ id: 2, budget_name: "Employee Salaries", amount: 10000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-			{ id: 3, budget_name: "Maintenance", amount: 3000 },
-		]);
-		setTransactions([
-			{
-				id: 1234,
-				customer_name: "John Smith",
-				amount: 1000.5,
-				date: "2023-04-22",
-			},
-			{
-				id: 5678,
-				customer_name: "Jane Doe",
-				amount: 750.2,
-				date: "2023-05-10",
-			},
-			{
-				id: 9101,
-				customer_name: "Bob Johnson",
-				amount: 2500.0,
-				date: "2023-06-15",
-			},
-			{
-				id: 1121,
-				customer_name: "Alice Lee",
-				amount: 500.0,
-				date: "2023-07-01",
-			},
-			{
-				id: 3141,
-				customer_name: "Charlie Brown",
-				amount: 1500.75,
-				date: "2023-08-20",
-			},
-		]);
+		// setBudgets([
+		// 	{ id: 1, budget_name: "Marketing", amount: 5000 },
+		// 	{ id: 2, budget_name: "Employee Salaries", amount: 10000 },
+		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
+		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
+		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
+		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
+		// 	{ id: 3, budget_name: "Maintenance", amount: 3000 },
+		// ]);
+		// setTransactions([
+		// 	{
+		// 		id: 1234,
+		// 		customer_name: "John Smith",
+		// 		amount: 1000.5,
+		// 		date: "2023-04-22",
+		// 	},
+		// 	{
+		// 		id: 5678,
+		// 		customer_name: "Jane Doe",
+		// 		amount: 750.2,
+		// 		date: "2023-05-10",
+		// 	},
+		// 	{
+		// 		id: 9101,
+		// 		customer_name: "Bob Johnson",
+		// 		amount: 2500.0,
+		// 		date: "2023-06-15",
+		// 	},
+		// 	{
+		// 		id: 1121,
+		// 		customer_name: "Alice Lee",
+		// 		amount: 500.0,
+		// 		date: "2023-07-01",
+		// 	},
+		// 	{
+		// 		id: 3141,
+		// 		customer_name: "Charlie Brown",
+		// 		amount: 1500.75,
+		// 		date: "2023-08-20",
+		// 	},
+		// ]);
 	}, []);
 
-	const handleAddBudget = () => {
-		setErr("");
-		setBudgetName("");
-		setAmount("");
+	const handleAddBudget = (e) => {
+		e.preventDefault();
+		const reqData = {
+			name: budget_name,
+			amount: amount,
+		};
+
+		addBudget(reqData);
 		openBudgetModal();
 	};
 	const openBudgetModal = () => {
@@ -79,6 +83,9 @@ const Finance = () => {
 	};
 	const closeBudgetModal = () => {
 		setBudgetModalOpen(false);
+		setErr("");
+		setBudgetName("");
+		setAmount("");
 	};
 
 	const budget_columns = useMemo(
@@ -129,7 +136,7 @@ const Finance = () => {
 				<div className='request-box' style={{ maxHeight: "24em" }}>
 					<div className='request-header'>
 						<div className='title'>Budgets</div>
-						<AiOutlinePlus className='add-button' onClick={handleAddBudget} />
+						<AiOutlinePlus className='add-button' onClick={openBudgetModal} />
 					</div>
 
 					<BasicTable
@@ -219,7 +226,7 @@ const Finance = () => {
 								</div>
 							</div>
 						</div>
-						<button onClick={handleAddBudget}>Add</button>
+						<button onClick={(e) => handleAddBudget(e)}>Add</button>
 						<button onClick={closeBudgetModal}>Cancel</button>
 					</form>
 				</div>

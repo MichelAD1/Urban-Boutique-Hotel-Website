@@ -11,7 +11,7 @@ const Table = ({ reqData, columns, redirect, err }) => {
 	const [lastNum, setLastNum] = useState(0);
 
 	useEffect(() => {
-		if (reqData.data) {
+		if (reqData) {
 			setData(reqData.data);
 			setNext(reqData.next_page_url);
 			setPrev(reqData.prev_page_url);
@@ -50,7 +50,10 @@ const Table = ({ reqData, columns, redirect, err }) => {
 
 	const handleNextPage = () => {
 		if (next) {
-			GetClients(next).then((res) => {
+			const param = {
+				queryKey: ["users_data", next],
+			};
+			GetClients(param).then((res) => {
 				setData(res.data);
 				setNext(res.next_page_url);
 				setPrev(res.prev_page_url);
@@ -61,7 +64,10 @@ const Table = ({ reqData, columns, redirect, err }) => {
 
 	const handlePreviosPage = () => {
 		if (prev) {
-			GetClients(prev).then((res) => {
+			const param = {
+				queryKey: ["users_data", prev],
+			};
+			GetClients(param).then((res) => {
 				setData(res.data);
 				setNext(res.next_page_url);
 				setPrev(res.prev_page_url);

@@ -1,14 +1,10 @@
 import axios from "axios";
-import base_url from "../BaseUrl";
 
-export default async function getClients(url) {
-	let path = `${base_url}customer/get`;
-	if (url !== "") {
-		path = url;
-	}
+export default async function getClients(queryKey) {
+	const url = queryKey.queryKey[1];
 	return axios({
 		method: "get",
-		url: path,
+		url: url,
 		headers: { Authorization: localStorage.getItem("token") },
 	})
 		.then((res) => {

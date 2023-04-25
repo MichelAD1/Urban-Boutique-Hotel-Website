@@ -1,10 +1,19 @@
 import { useState, useEffect, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 
+import base_url from "../../../api-client/BaseUrl";
+
+// Components
 import BasicTable from "../../../Global/Components/Tables/BasicTablePagination";
+
+// API
+import FetchData from "../../../api-client/Support/FetchFeedback";
 
 const Feedback = () => {
 	const [data, setData] = useState([]);
 	const [err, setErr] = useState("");
+	const [loading, setLoading] = useState(true);
+	const [tableErr, setTableErr] = useState("");
 
 	const columns = useMemo(
 		() => [
@@ -13,55 +22,62 @@ const Feedback = () => {
 				accessor: "id",
 			},
 			{
-				Header: "Username",
-				accessor: "username",
+				Header: "Customer ID",
+				accessor: "customer_id",
 			},
 			{
 				Header: "Feedback",
-				accessor: "feedback",
+				accessor: "text",
 			},
 			{
 				Header: "Date",
-				accessor: "date",
+				accessor: "created_at",
 			},
 		],
 		[],
 	);
 
+	function formatDate(dateString) {
+		const date = new Date(dateString);
+		const year = date.getFullYear();
+		const month = ("0" + (date.getMonth() + 1)).slice(-2);
+		const day = ("0" + date.getDate()).slice(-2);
+		const hours = ("0" + date.getHours()).slice(-2);
+		const minutes = ("0" + date.getMinutes()).slice(-2);
+		return `${year}-${month}-${day} ${hours}:${minutes}`;
+	}
+
+	const {
+		status,
+		error,
+		data: feedbackData,
+	} = useQuery(["feedback_data", `${base_url}feedback/get`], FetchData, {
+		staleTime: 300000, // 5 minutes
+	});
 	useEffect(() => {
-		setData([
-			{
-				id: 1,
-				username: "jdoe",
-				feedback: "This is a review",
-				date: "2021-01-01",
-			},
-			{
-				id: 2,
-				username: "asmith",
-				feedback: "This is a review",
-				date: "2021-01-01",
-			},
-			{
-				id: 3,
-				username: "bbrown",
-				feedback: "This is a review",
-				date: "2021-01-01",
-			},
-			{
-				id: 4,
-				username: "clee",
-				feedback: "This is a review",
-				date: "2021-01-01",
-			},
-			{
-				id: 5,
-				username: "drodriguez",
-				feedback: "This is a review",
-				date: "2021-01-01",
-			},
-		]);
-	}, []);
+		if (feedbackData) {
+			if (feedbackData.status === 200) {
+				feedbackData.data[0].data.forEach((feedback) => {
+					feedback.created_at = formatDate(feedback.created_at);
+				});
+				setData(feedbackData.data[0]);
+				if (feedbackData.data[0].data.length === 0) {
+					setTableErr("No feedbacks found");
+				}
+			} else {
+				setErr("Something went wrong");
+			}
+			setLoading(false);
+		}
+	}, [feedbackData, status]);
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
 
 	return (
 		<div className='container'>
@@ -72,7 +88,7 @@ const Feedback = () => {
 						reqData={data}
 						columns={columns}
 						redirect={"feedback"}
-						err={err}
+						err={tableErr}
 					/>
 				</div>
 			</div>

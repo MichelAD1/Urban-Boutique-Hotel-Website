@@ -21,6 +21,8 @@ const Book = () => {
   const [checkInDate, setCheckInDate] = useState(null);
   const [checkOutDate, setCheckOutDate] = useState(null);
   const lastFreeDate = room.free_dates[room.free_dates.length - 1];
+  const firstFreeDate = room.free_dates[0];
+
   const [total_price, setTotalPrice] = useState(
     room.room.rent * 0.1 + room.room.rent
   );
@@ -120,7 +122,10 @@ const Book = () => {
         ? `0${parsedDate1.getDate()}`
         : parsedDate1.getDate();
     const reservation_end = `${year}-${month}-${day}`;
-    const requests = special_request;
+    let requests = special_request;
+    if (!special_request) {
+      requests = "_";
+    }
     const data = {
       room_id,
       reservation_date,
@@ -130,7 +135,6 @@ const Book = () => {
     };
     navigation(`/rooms/payment`, { state: { data: data } });
   };
-
   return (
     <>
       <div className="contact-section book">
@@ -147,7 +151,7 @@ const Book = () => {
                 <DatePicker
                   selected={checkInDate}
                   onChange={(date) => setCheckInDate(date)}
-                  minDate={new Date()}
+                  minDate={new Date(firstFreeDate)}
                   maxDate={new Date(lastFreeDate)}
                   excludeDates={room.occupied_dates.map(
                     (date) => new Date(date)

@@ -29,8 +29,8 @@ const Payment = () => {
     delete data.total_price;
     let response = ReserveRoom(data);
     response.then((res) => {
-      if (res) {
-        console.log(res);
+      if (res.data === "success") {
+        navigation("/");
       }
     });
   };

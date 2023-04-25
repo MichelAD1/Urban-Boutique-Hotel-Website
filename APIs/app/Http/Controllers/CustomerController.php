@@ -74,7 +74,7 @@ class CustomerController extends Controller
             'reservation_date'=> $request->reservation_date,
             'reservation_end'=>$request->reservation_end,
             'requests'=>$request->requests,
-            'status'=>$request->status
+            'status'=>"pending"
         ]);
         return 'success';
     }

@@ -5,12 +5,12 @@ const RequestItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
 
+	const [assigned, setAssigned] = useState(false);
+
 	const [room, setRoom] = useState({});
 	const [reservation, setReservation] = useState({});
-	const [guest, setGuest] = useState({});
+	const [customer, setCustomer] = useState({});
 	const [employee, setEmployee] = useState({});
-
-	const [reqData, setReqData] = useState([]);
 
 	const [edit, setEdit] = useState(false);
 	const [selected, setSelected] = useState(false);
@@ -18,31 +18,13 @@ const RequestItem = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log(data);
-		setRoom({
-			title: data.title,
-			description: data.description,
-			rent: data.rent,
-			size: data.size,
-			guests: data.guests,
-			floor: data.floor,
-			beds: data.beds,
-			wifi: data.wifi,
-			tv: data.tv,
-			shower: data.shower,
-			towels: data.towels,
-			mini_bar: data.mini_bar,
-			desk: data.desk,
-			featured: data.featured,
-			breakfast: data.breakfast,
-			pets: data.pets,
-			discount: data.discount,
-		});
-		setReservation({
-			check_in: data.reservation_date,
-			check_out: data.reservation_end,
-			status: data.status,
-		});
+		setRoom(data.room_object);
+		setReservation(data.reservation_object);
+		setCustomer(data.customer_object);
+
+		if (data.status !== "pending") {
+			setAssigned(true);
+		}
 	}, [data]);
 
 	const handleSubmit = (e) => {
@@ -52,11 +34,18 @@ const RequestItem = () => {
 
 	const handleCancel = () => {
 		setEdit(false);
-		setSelected(false);
+
+		if (!assigned) {
+			navigate(-1);
+		}
 	};
 
 	const openEdit = () => {
 		setEdit(true);
+	};
+
+	const handleRedirect = (path, state) => () => {
+		navigate(path, state);
 	};
 
 	return (
@@ -64,12 +53,12 @@ const RequestItem = () => {
 			<form className='edit-container' onSubmit={handleSubmit}>
 				<div className='edit-item'>
 					<h2>Request #{data.id}</h2>
-					{data.employee !== null && !edit && (
+					{assigned && !edit && (
 						<button type='button' className='button' onClick={openEdit}>
 							Edit
 						</button>
 					)}
-					{(selected || edit) && (
+					{(!assigned || edit) && (
 						<>
 							<button type='submit' className='save-button'>
 								Save
@@ -86,7 +75,13 @@ const RequestItem = () => {
 							<label>Customer Email</label>
 						</div>
 						<div>
-							<p>{data.email}</p>
+							<p
+								style={{ cursor: "pointer" }}
+								onClick={handleRedirect("/user/profile", {
+									state: { data: customer },
+								})}>
+								{customer.email}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -96,7 +91,7 @@ const RequestItem = () => {
 							<label>Reservation</label>
 						</div>
 						<div>
-							<p>#{}</p>
+							<p>#{reservation.id}</p>
 						</div>
 					</div>
 				</div>
@@ -106,7 +101,7 @@ const RequestItem = () => {
 							<label>Room</label>
 						</div>
 						<div>
-							<p>#{}</p>
+							<p>{room.title}</p>
 						</div>
 					</div>
 				</div>
@@ -116,7 +111,7 @@ const RequestItem = () => {
 							<label>Status</label>
 						</div>
 						<div>
-							<p>{}</p>
+							<p>{data.status}</p>
 						</div>
 					</div>
 				</div>
@@ -125,12 +120,12 @@ const RequestItem = () => {
 						<div>
 							<label>Employee</label>
 						</div>
-						{data && !edit && (
+						{assigned && !edit && (
 							<div>
 								<p>{}</p>
 							</div>
 						)}
-						{(!data || edit) && (
+						{(!assigned || edit) && (
 							<div>
 								<select
 									className='input-dropdown'

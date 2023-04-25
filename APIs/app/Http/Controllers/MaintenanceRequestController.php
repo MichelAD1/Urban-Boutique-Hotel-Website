@@ -14,14 +14,24 @@ class MaintenanceRequestController extends Controller
 {
     public function addRequest(Request $request){
         $user = Auth::user();
-        Maintenance_Request::create([
+        $maintenancereq=Maintenance_Request::create([
             'customer_id'=>$user->id,
             'reservation_id'=>$request->reservation_id,
             'room_id'=>$request->room_id,
             'employee_id'=> 0,
             'status'=>'pending',
         ]);
-        return "success";
+        return response()->json([
+            'message'=>'success',
+            'maintenance_object'=>$maintenancereq,
+            'customer_object'=> User::join('customers','customers.user_id','=','users.id')
+                                    ->where('users.id','=',$maintenancereq->customer_id)->get(),
+            'reservation_object'=> DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$maintenancereq->reservation_id)->get(),
+            'room_object'=>Room::find($maintenancereq->room_id)
+            ->where('users.id','=',$maintenancereq->customer_id)->get()
+
+
+        ]);
     }
     public function completeRequest($requestid){
         $maintenancereq=Maintenance_Request::find($requestid);
@@ -76,6 +86,8 @@ class MaintenanceRequestController extends Controller
             ->where('users.id','=',$mainreq->customer_id)->get();
             $mainreq['reservation_object'] =DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$mainreq->reservation_id)->get();
             $mainreq['room_object']=Room::find($mainreq->room_id);
+            $mainreq['employee_object']=User::join('staff','staff.user_id','=','users.id')
+                                        ->where('users.id','=',$mainreq->employee_id)->get();
         }
         return $maintenanceRequests;
     }

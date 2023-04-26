@@ -29,7 +29,7 @@ class EmailController extends Controller
         Mail::to($employee->email)->send(new ContactFormSender($request->name,$request->email,$request->subject,$request->body));
 
 
-        return response()->json(['message' => 'Emails sent successfully']);
+        return response()->json(['message' => 'Email sent successfully']);
     }
 
     public function sendForgottenPassword(Request $request)

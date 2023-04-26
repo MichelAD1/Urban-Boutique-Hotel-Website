@@ -56,6 +56,7 @@ class ReviewController extends Controller
         }
 
     }
+
     public function getFeaturedReviews()
     {
         $reviews = Review::join('customers', 'customers.user_id', '=', 'reviews.customer_id')

@@ -26,8 +26,8 @@ const Profile = () => {
   const [edit, setEdit] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
   const [loading, setLoading] = useState(true);
-  //useEffects
 
+  //useEffects
   const {
     status,
     error,

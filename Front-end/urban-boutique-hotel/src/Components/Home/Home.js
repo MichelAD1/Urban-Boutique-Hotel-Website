@@ -4,18 +4,14 @@ import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 // Componenets
 import Footer from "../../Global/Components/Footer";
 import SingleRoom from "../Rooms/SingleRoom";
 import Reviews from "../../Global/Components/Reviews";
 
 //APIS
-import Refresh from "../../api-client/Auth/Refresh";
 import GetHomePage from "../../api-client/Home/GetHomePage";
 // Images
-import room1 from "../../assets/images/room-1.jpeg";
-import room2 from "../../assets/images/room-2.jpeg";
 
 const Home = () => {
   const navigation = useNavigate();
@@ -35,21 +31,11 @@ const Home = () => {
   if (token) {
     const decoded = jwt_decode(token);
     const currentTime = Date.now() / 1000; // Convert to seconds
-    const bufferTime = 300; // 5 minutes buffer time
-    if (decoded.exp - bufferTime < currentTime) {
-      let response = Refresh();
-      response.then((res) => {
-        if (res) {
-          let token = res.data.authorisation.token;
-          localStorage.setItem("token", "Bearer " + token);
-          localStorage.setItem(
-            "username",
-            JSON.stringify(res.data.user.username)
-          );
-          axios.defaults.headers.common["Authorization"] = "Bearer" + token;
-          console.log(res);
-        }
-      });
+
+    if (decoded.exp < currentTime) {
+      localStorage.removeItem("username");
+      localStorage.removeItem("token");
+      localStorage.setItem("shouldReload", "true");
     }
   }
 
@@ -149,7 +135,7 @@ const Home = () => {
         </div>
       ) : (
         <div>
-          <Reviews data={reviews} />
+          {/* <Reviews data={reviews} /> */}
           <Footer />
         </div>
       )}

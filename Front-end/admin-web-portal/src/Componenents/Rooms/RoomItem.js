@@ -117,17 +117,41 @@ const RoomItem = () => {
 			images: reqImages,
 		};
 
-		AddRoom(data).then((res) => {
+		const validData = checkAddValid(data);
+
+		if (!validData && !imagesChanged) {
+			alert("Please fill all the fields");
+			return;
+		}
+		const response = AddRoom(data);
+
+		response.then((res) => {
 			if (res.message === "Room added successfully") {
 				const new_data = mergeJson(res.room, res.images);
 				loc.state = { data: new_data };
 				setIsValid(loc.state);
 			} else {
-				setErr("Something went wrong");
+				alert("Something went wrong");
 			}
 		});
 
 		setEdit(false);
+	};
+
+	const checkAddValid = (data) => {
+		console.log(data);
+		for (let prop in data) {
+			if (
+				data[prop] === "" ||
+				data[prop] === null ||
+				data[prop] === undefined ||
+				isNaN(data[prop])
+			) {
+				return false;
+			}
+			console.log(prop, data[prop]);
+		}
+		return true;
 	};
 
 	const handleEdit = (e) => {

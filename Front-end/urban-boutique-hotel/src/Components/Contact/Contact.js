@@ -5,6 +5,9 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationPin } from "react-icons/md";
 import { FaFax } from "react-icons/fa";
 
+//Apis
+import SendMessage from "../../api-client/Contact/SendMessage";
+
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -39,6 +42,19 @@ const Contact = () => {
       setErr("Message too long");
       return;
     }
+    const body = message;
+    const data = {
+      name,
+      subject,
+      email,
+      body,
+    };
+    let response = SendMessage(data);
+    response.then((res) => {
+      if (res) {
+        console.log(res);
+      }
+    });
   };
 
   return (

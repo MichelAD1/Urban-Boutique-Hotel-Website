@@ -2752,3 +2752,21 @@ h6 {
   margin-top: 3%;
 }
 /* End of FAQS */
+/* Reservations */
+.table-button button {
+  width: 6em;
+  height: 2em;
+  padding: 0.2rem 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.table-button button:hover {
+  background-color: #2a32499a;
+}
+/* End of reservations */

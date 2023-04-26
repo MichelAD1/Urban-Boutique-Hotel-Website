@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('regulations', function (Blueprint $table) {
-            $table->string('title')->after('text');
+        Schema::table('currencies', function (Blueprint $table) {
+            $table->boolean('isdefault')->after('name');
+            $table->boolean('isavailable')->after('name');
+            $table->string('symbol')->after('name');
+            $table->string('code')->after('name');
         });
     }
 

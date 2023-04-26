@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('regulations', function (Blueprint $table) {
-            $table->string('title')->after('text');
+        Schema::table('payment__options', function (Blueprint $table) {
+            $table->boolean('isdeafult')->after('isavailable');
         });
     }
 

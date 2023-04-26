@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('regulations', function (Blueprint $table) {
-            $table->string('title')->after('text');
+        Schema::table('employee_has_task', function (Blueprint $table) {
+            $table->integer("employeeid");
+            $table->integer("taskid");
+
         });
     }
 

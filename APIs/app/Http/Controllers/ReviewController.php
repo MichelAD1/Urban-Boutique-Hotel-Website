@@ -41,6 +41,7 @@ class ReviewController extends Controller
                      ->select('reviews.*', 'users.email')
                      ->paginate(14);
     }
+
     public function featureReview($reviewid){
         $review = Review::find($reviewid);
         if($review->featured){
@@ -54,5 +55,9 @@ class ReviewController extends Controller
             return "failed";
         }
 
+    }
+    public function getFeaturedReviews(){
+        $reviews = Review::where('featured','=',1)->get();
+        return $reviews;
     }
 }

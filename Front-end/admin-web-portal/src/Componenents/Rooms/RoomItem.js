@@ -55,6 +55,32 @@ const RoomItem = () => {
 		}
 	}, []);
 
+	// Check data
+	const checkAddValid = (data) => {
+		for (let prop in data) {
+			if (
+				data[prop] === "" ||
+				data[prop] === null ||
+				data[prop] === undefined ||
+				(typeof data[prop] === "number" && isNaN(data[prop]))
+			) {
+				return false;
+			}
+		}
+		return true;
+	};
+
+	const checkEditValid = (data) => {
+		for (let prop in data) {
+			if (data[prop] !== "id") {
+				if (data[prop] === isValid.data.room[prop]) {
+					delete data[prop];
+				}
+			}
+		}
+		return data;
+	};
+
 	const handleCancel = () => {
 		if (isValid) {
 			setEdit(false);
@@ -64,7 +90,7 @@ const RoomItem = () => {
 			setPrice(isValid.data.room.rent);
 			setDiscount(isValid.data.room.discount);
 			setSize(isValid.data.room.size);
-			setMinibar(isValid.data.room.minibar);
+			setMinibar(isValid.data.room.mini_bar);
 			setGuests(isValid.data.room.guests);
 			setType(isValid.data.room.beds);
 			setShower(isValid.data.room.shower);
@@ -138,28 +164,37 @@ const RoomItem = () => {
 		setEdit(false);
 	};
 
-	// Check data
-	const checkAddValid = (data) => {
-		console.log(data);
-		for (let prop in data) {
-			if (
-				data[prop] === "" ||
-				data[prop] === null ||
-				data[prop] === undefined ||
-				isNaN(data[prop])
-			) {
-				return false;
-			}
-			console.log(prop, data[prop]);
-		}
-		return true;
-	};
-
-	const checkEditValid = (data) => {};
-
 	const handleEdit = (e) => {
 		e.preventDefault();
-		console.log("Edit");
+
+		const data = {
+			room_id: isValid.data.room.id,
+			title: name,
+			description: description,
+			rent: parseInt(price),
+			discount: parseInt(discount),
+			size: parseInt(size),
+			guests: parseInt(guests),
+			beds: type,
+			mini_bar: minibar,
+			shower: shower,
+			towels: towels,
+			tv: tv,
+			wifi: wifi,
+			desk: desk,
+			breakfast: breakfast,
+			pets: pets,
+			floor: floor,
+		};
+
+		if (checkAddValid(data)) {
+			const reqData = checkEditValid(data);
+			console.log(reqData);
+		} else {
+			alert("Please fill all the fields");
+			return;
+		}
+
 		setEdit(false);
 	};
 
@@ -213,7 +248,6 @@ const RoomItem = () => {
 		setImages([...images, ...base64Images]);
 		setAddedImages([...addedImages, ...base64Images]);
 		setImagesChanged(true);
-		console.log(images);
 	};
 
 	const handleImageDelete = (index) => {

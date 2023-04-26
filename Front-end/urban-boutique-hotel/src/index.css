@@ -261,6 +261,7 @@ h6 {
   opacity: 0.5;
   cursor: default !important;
 }
+
 .login-error.book {
   display: flex;
   justify-content: center;

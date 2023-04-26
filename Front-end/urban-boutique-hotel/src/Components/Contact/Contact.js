@@ -11,6 +11,11 @@ const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
+  //validators
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // Code to handle form submission
@@ -125,7 +130,15 @@ const Contact = () => {
                 onChange={(event) => setMessage(event.target.value)}
               ></textarea>
             </div>
-            <button type="submit">Send Message</button>
+            <button
+              disabled={!name || !email || !subject || !message}
+              type="submit"
+              className={
+                !name || !email || !subject || !message ? "disabled-button" : ""
+              }
+            >
+              Send Message
+            </button>
           </form>
         </div>
       </div>

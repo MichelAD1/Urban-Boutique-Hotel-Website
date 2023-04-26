@@ -11,22 +11,6 @@ const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleSubjectChange = (event) => {
-    setSubject(event.target.value);
-  };
-
-  const handleMessageChange = (event) => {
-    setMessage(event.target.value);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     // Code to handle form submission
@@ -96,7 +80,7 @@ const Contact = () => {
           <div className="message-paragraph">
             <p>
               We're excited to welcome you to our hotel! Reach out to us to
-              learn more about our accommodations and book your stay.
+              learn more about our accommodations and bookings.
             </p>
           </div>
           <form className="message-inputs contact" onSubmit={handleSubmit}>
@@ -108,7 +92,7 @@ const Contact = () => {
                   name="name"
                   placeholder="Name"
                   value={name}
-                  onChange={handleNameChange}
+                  onChange={(event) => setName(event.target.value)}
                 />
               </div>
               <div className="message-input">
@@ -118,7 +102,7 @@ const Contact = () => {
                   name="email"
                   placeholder="Email"
                   value={email}
-                  onChange={handleEmailChange}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
             </div>
@@ -129,7 +113,7 @@ const Contact = () => {
                 name="subject"
                 placeholder="Subject"
                 value={subject}
-                onChange={handleSubjectChange}
+                onChange={(event) => setSubject(event.target.value)}
               />
             </div>
             <div className="message-textarea">
@@ -138,7 +122,7 @@ const Contact = () => {
                 name="message"
                 placeholder="Message"
                 value={message}
-                onChange={handleMessageChange}
+                onChange={(event) => setMessage(event.target.value)}
               ></textarea>
             </div>
             <button type="submit">Send Message</button>

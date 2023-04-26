@@ -138,6 +138,7 @@ const RoomItem = () => {
 		setEdit(false);
 	};
 
+	// Check data
 	const checkAddValid = (data) => {
 		console.log(data);
 		for (let prop in data) {
@@ -153,6 +154,8 @@ const RoomItem = () => {
 		}
 		return true;
 	};
+
+	const checkEditValid = (data) => {};
 
 	const handleEdit = (e) => {
 		e.preventDefault();
@@ -214,13 +217,9 @@ const RoomItem = () => {
 	};
 
 	const handleImageDelete = (index) => {
-		const newImages = [...images];
-		newImages.splice(index, 1);
+		const newImages = images.filter((image) => image.id !== index);
 		setImages(newImages);
 		setImagesChanged(true);
-		if (index < isValid.data.images.length) {
-			setDeletedImages([...deletedImages, isValid.data.images[index].id]);
-		}
 	};
 
 	return (
@@ -542,7 +541,7 @@ const RoomItem = () => {
 										{edit && (
 											<RiDeleteBin2Fill
 												className='delete-icon'
-												onClick={handleImageDelete}
+												onClick={() => handleImageDelete(image.id)}
 											/>
 										)}
 									</div>

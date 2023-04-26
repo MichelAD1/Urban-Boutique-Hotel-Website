@@ -231,7 +231,7 @@ class RoomController extends Controller
         $user = Auth::user();
         $reservations=DB::table('customer_reserves_room')->join('rooms','rooms.id','=','customer_reserves_room.room_id')->get();
         return $reservations;
-
     }
-
+    
+    
 }

@@ -5,32 +5,58 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationPin } from "react-icons/md";
 import { FaFax } from "react-icons/fa";
 
+//Apis
+import SendMessage from "../../api-client/Contact/SendMessage";
+
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [err, setErr] = useState("");
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  //validators
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
   };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const validateMessage = (message) => {
+    return message.length <= 255;
   };
-
-  const handleSubjectChange = (event) => {
-    setSubject(event.target.value);
+  const validateSubject = (subject) => {
+    return subject.length <= 35;
   };
-
-  const handleMessageChange = (event) => {
-    setMessage(event.target.value);
-  };
-
+  //API handler
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Code to handle form submission
+    setErr("");
+    if (!validateEmail(email)) {
+      setErr("Please enter a valid email address");
+      return;
+    }
+    if (!validateSubject(subject)) {
+      setErr("Subject too long");
+      return;
+    }
+    if (!validateMessage(message)) {
+      setErr("Message too long");
+      return;
+    }
+    const body = message;
+    const data = {
+      name,
+      subject,
+      email,
+      body,
+    };
+    let response = SendMessage(data);
+    response.then((res) => {
+      if (res) {
+        console.log(res);
+      }
+    });
   };
+
   return (
     <>
       <div className="contactHero">
@@ -96,7 +122,7 @@ const Contact = () => {
           <div className="message-paragraph">
             <p>
               We're excited to welcome you to our hotel! Reach out to us to
-              learn more about our accommodations and book your stay.
+              learn more about our accommodations and bookings.
             </p>
           </div>
           <form className="message-inputs contact" onSubmit={handleSubmit}>
@@ -108,17 +134,17 @@ const Contact = () => {
                   name="name"
                   placeholder="Name"
                   value={name}
-                  onChange={handleNameChange}
+                  onChange={(event) => setName(event.target.value)}
                 />
               </div>
               <div className="message-input">
                 <input
-                  type="email"
+                  type="text"
                   id="email"
                   name="email"
                   placeholder="Email"
                   value={email}
-                  onChange={handleEmailChange}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
             </div>
@@ -129,7 +155,7 @@ const Contact = () => {
                 name="subject"
                 placeholder="Subject"
                 value={subject}
-                onChange={handleSubjectChange}
+                onChange={(event) => setSubject(event.target.value)}
               />
             </div>
             <div className="message-textarea">
@@ -138,10 +164,20 @@ const Contact = () => {
                 name="message"
                 placeholder="Message"
                 value={message}
-                onChange={handleMessageChange}
+                onChange={(event) => setMessage(event.target.value)}
               ></textarea>
             </div>
-            <button type="submit">Send Message</button>
+            <div className="login-error contact">{err}</div>
+
+            <button
+              disabled={!name || !email || !subject || !message}
+              type="submit"
+              className={
+                !name || !email || !subject || !message ? "disabled-button" : ""
+              }
+            >
+              Send Message
+            </button>
           </form>
         </div>
       </div>

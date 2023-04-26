@@ -135,7 +135,7 @@ const Home = () => {
         </div>
       ) : (
         <div>
-          {/* <Reviews data={reviews} /> */}
+          <Reviews data={reviews} />
           <Footer />
         </div>
       )}

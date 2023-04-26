@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 // Components
 import Room from "./RoomCard";
 
 // Icons
-import { AiOutlinePlus } from "react-icons/ai";
-import search_icon from "../../assets/icons/search.svg";
+import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
 
+// API
 import GetRoom from "../../api-client/Rooms/GetRoom";
-
-import room1 from "../../assets/dummy.png";
 
 function Rooms() {
 	const [data, setData] = useState([]);
@@ -20,120 +19,12 @@ function Rooms() {
 
 	let counter_key = 1;
 
+	const { status, error, data: roomsData } = useQuery(["rooms_data"], GetRoom);
 	useEffect(() => {
-		// const resp = GetRoom();
-		// resp.then((res) => {
-		//   if (res.data.data.length > 0) {
-		//     setData(res.data.data);
-		//   } else {
-		//     setErr("No rooms found");
-		//   }
-
-		//   setData(res.data);
-		// });
-		setData([
-			{
-				id: 1,
-				name: "Standard Room",
-				price: 100.0,
-				old_price: 150.0,
-				guests: 2,
-				type: "Queen Bed",
-				size: 250,
-				wifi: true,
-				tv: true,
-				shower: true,
-				towels: false,
-				minibar: true,
-				desk: false,
-				images: [room1, room1, room1, room1, room1],
-				description:
-					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfast: false,
-				pets: true,
-			},
-			{
-				id: 1,
-				name: "Standard Room",
-				price: 100.0,
-				old_price: null,
-				guests: 2,
-				type: "Queen Bed",
-				size: 250,
-				wifi: true,
-				tv: true,
-				shower: true,
-				towels: false,
-				minibar: true,
-				desk: false,
-				images: [room1],
-				description:
-					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfast: false,
-				pets: true,
-			},
-			{
-				id: 1,
-				name: "Standard Room",
-				price: 100.0,
-				old_price: null,
-				guests: 2,
-				type: "Queen Bed",
-				size: 250,
-				wifi: true,
-				tv: true,
-				shower: true,
-				towels: false,
-				minibar: true,
-				desk: false,
-				images: [room1],
-				description:
-					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfast: false,
-				pets: true,
-			},
-			{
-				id: 1,
-				name: "Standard Room",
-				price: 100.0,
-				old_price: null,
-				guests: 2,
-				type: "Queen Bed",
-				size: 250,
-				wifi: true,
-				tv: true,
-				shower: true,
-				towels: false,
-				minibar: true,
-				desk: false,
-				images: [room1],
-				description:
-					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfast: false,
-				pets: true,
-			},
-			{
-				id: 1,
-				name: "Standard Room",
-				price: 100.0,
-				old_price: null,
-				guests: 2,
-				type: "Queen Bed",
-				size: 250,
-				wifi: true,
-				tv: true,
-				shower: true,
-				towels: false,
-				minibar: true,
-				desk: false,
-				images: [room1],
-				description:
-					"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam temporibus tenetur explicabo porro minus, odit excepturi, nemo, magnam iusto voluptates eligendi error. Eveniet dolor eos quia. Dolore nisi explicabo sint!",
-				breakfast: false,
-				pets: true,
-			},
-		]);
-	}, []);
+		if (roomsData) {
+			setData(roomsData);
+		}
+	}, [roomsData, status]);
 
 	const search_parameters = Object.keys(Object.assign({}, ...data));
 	const filter_items = [...new Set(data.map((item) => item.category))].map(
@@ -158,7 +49,7 @@ function Rooms() {
 		<div className='container'>
 			<div className='searchAndFilter'>
 				<div className='search-bar'>
-					<img src={search_icon} alt='' className='search-icon' />
+					<AiOutlineSearch className='search-icon' />
 					<input
 						className='search-input'
 						type='text'
@@ -182,9 +73,9 @@ function Rooms() {
 			</div>
 			<div className='rooms-container'>
 				<div className='list-box'>
-					{data.map((item) => (
-						<Room data={item} key={item.id} />
-					))}
+					{data.map((item) => {
+						return <Room data={item} key={item.room.id} />;
+					})}
 				</div>
 			</div>
 		</div>

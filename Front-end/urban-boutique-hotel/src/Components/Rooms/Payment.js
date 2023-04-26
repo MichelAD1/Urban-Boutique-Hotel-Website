@@ -31,7 +31,7 @@ const Payment = () => {
     response.then((res) => {
       if (res.data.status === "success") {
         localStorage.setItem("shouldReload", "true");
-        navigation("/rooms");
+        navigation("/submit");
       }
     });
   };

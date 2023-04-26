@@ -298,11 +298,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.contentmanager'])->group(function(){
             Route::post('sendall',[EmailController::class,'sendEmailToUsers']);
         });
-        Route::middleware(['auth', 'check.customer'])->group(function(){
-            Route::post('sendform',[EmailController::class,'sendEmailContactForm']);
-        });
-
-
+        Route::post('sendform',[EmailController::class,'sendEmailContactForm']);
     });
 
     Route::group(['prefix'=>'review'],function(){

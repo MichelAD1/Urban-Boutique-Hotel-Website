@@ -12,6 +12,8 @@ const Table = ({ reqData, columns, redirect, err }) => {
 	const [current, setCurrent] = useState(1);
 	const [lastNum, setLastNum] = useState(0);
 
+	const [loading, setLoading] = useState(false);
+
 	useEffect(() => {
 		if (reqData) {
 			setData(reqData.data);
@@ -52,6 +54,11 @@ const Table = ({ reqData, columns, redirect, err }) => {
 
 	const handleNextPage = () => {
 		if (next) {
+			setLoading(true);
+			setData([]);
+			setNext("");
+			setPrev("");
+
 			const param = {
 				queryKey: ["users_data", next],
 			};
@@ -60,11 +67,16 @@ const Table = ({ reqData, columns, redirect, err }) => {
 				setNext(res.next_page_url);
 				setPrev(res.prev_page_url);
 				setCurrent(res.current_page);
+				setLoading(false);
 			});
 		}
 	};
 	const handlePreviosPage = () => {
 		if (prev) {
+			setLoading(true);
+			setData([]);
+			setNext("");
+			setPrev("");
 			const param = {
 				queryKey: ["users_data", prev],
 			};
@@ -73,6 +85,7 @@ const Table = ({ reqData, columns, redirect, err }) => {
 				setNext(res.next_page_url);
 				setPrev(res.prev_page_url);
 				setCurrent(res.current_page);
+				setLoading(false);
 			});
 		}
 	};
@@ -91,6 +104,15 @@ const Table = ({ reqData, columns, redirect, err }) => {
 						</tr>
 					))}
 				</thead>
+				{loading && (
+					<tbody>
+						<tr>
+							<td className='error'>
+								<div className='buffer-loader home'></div>
+							</td>
+						</tr>
+					</tbody>
+				)}
 				{err && (
 					<tbody>
 						<tr>

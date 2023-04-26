@@ -16,10 +16,8 @@ const Requests = () => {
 
 	const [err, setErr] = useState("");
 
-	let counter_key = 1;
-
 	useEffect(() => {
-		if (data.length === 0) setErr("No pending requests");
+		if (data.data.length === 0) setErr("No pending requests");
 	}, [data]);
 
 	const columns = useMemo(
@@ -34,12 +32,12 @@ const Requests = () => {
 			},
 			{
 				Header: "Customer Email",
-				accessor: "email",
+				accessor: "customer_object.email",
 			},
 
 			{
 				Header: "Room",
-				accessor: "title",
+				accessor: "room_object.title",
 			},
 			{
 				Header: "Status",
@@ -48,32 +46,12 @@ const Requests = () => {
 		],
 		[],
 	);
-
-	const search_parameters = Object.keys(Object.assign({}, ...data));
-	const filter_items = [...new Set(data.map((item) => item.status))].map(
-		(status) => {
-			return { status: status, id: counter_key++ };
-		},
-	);
-
-	function search(items) {
-		return items.filter(
-			(item) =>
-				item.status.includes(filter) &&
-				search_parameters.some((parameter) =>
-					item[parameter]
-						.toString()
-						.toLowerCase()
-						.includes(query.toLowerCase()),
-				),
-		);
-	}
 	return (
 		<div className='container'>
 			<div className='requests-container'>
 				<h2>Room maintenance requests</h2>
 				<BasicTable
-					reqData={search(data)}
+					reqData={data}
 					columns={columns}
 					redirect={"request"}
 					err={err}

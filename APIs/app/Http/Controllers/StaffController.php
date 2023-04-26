@@ -37,7 +37,12 @@ class StaffController extends Controller
         if($employee->position=="admin"){
             $target=User::where('id',$employeeid)->first();
             Staff::where('user_id',$target->id)->delete();
-            $target->banned=1;
+            if($target->banned=1){
+                $target->banned=0;
+            }else{
+                $target->banned=1;
+            }
+
             $target->save();
             return "sucess";
         }
@@ -48,5 +53,13 @@ class StaffController extends Controller
                     ->sum("rooms.rent");
         return $revenue;
     }
+    public function searchEmployee($employeeid){
+        $employee = Staff::join('users','staff.user_id','=','users.id')->where('users.id','=',$employeeid)->first();
+        return $employee;
+    }
+    public function getEmployees(){
+        return Staff::join('users','staff.user_id','=','users.id')->get();
+    }
+
 
 }

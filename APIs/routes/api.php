@@ -73,7 +73,7 @@ Route::group(["prefix"=>"v0.1"], function(){
                 Route::post('reserve',[CustomerController::class,'reserveRoom']);
                 Route::post('edit',[CustomerController::class,'editReservation']);
                 Route::get('cancel/{reservationid}',[CustomerController::class,'cancelReservation']);
-                Route::get('getreservations',[CustomerController::class,'getCustomerReservations']);
+                Route::get('getreservations',[RoomController::class,'getCustomerReservations']);
             });
 
         });
@@ -108,6 +108,8 @@ Route::group(["prefix"=>"v0.1"], function(){
 
             Route::post('editinfo',[StaffController::class,'editInformation']);
             Route::get('ban/{employeeid}',[StaffController::class,'banEmployee']);
+            Route::get('search/{employeeid}',[StaffController::class,'searchEmployee']);
+            Route::get('get',[StaffController::class,'getEmployees']);
         });
 
     });

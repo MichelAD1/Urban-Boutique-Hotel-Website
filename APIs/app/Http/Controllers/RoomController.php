@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Google\Cloud\Storage\StorageClient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
@@ -224,6 +225,13 @@ class RoomController extends Controller
     }
     public function searchReservation($reservationid){
         return DB::table('customer_reserves_room')->where('id','=',$reservationid)->first();
+
+    }
+    public function getCustomerReservations(){
+        $user = Auth::user();
+        $reservations=DB::table('customer_reserves_room')->join('customers','customer_reserves_room.customer_id','=','customers.user_id')
+                                    ->join('users','customers.user_id','=','users.id')->get();
+        return $reservations;
 
     }
 

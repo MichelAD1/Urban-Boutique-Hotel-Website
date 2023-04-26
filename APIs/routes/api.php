@@ -296,7 +296,7 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::post('sendall',[EmailController::class,'sendEmailToUsers']);
         });
         Route::middleware(['auth', 'check.customer'])->group(function(){
-            Route::post('sendform',[EmailController::class,'sendEmailToUsers']);
+            Route::post('sendform',[EmailController::class,'sendEmailContactForm']);
         });
 
 

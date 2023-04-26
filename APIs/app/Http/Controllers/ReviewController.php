@@ -57,7 +57,9 @@ class ReviewController extends Controller
 
     }
     public function getFeaturedReviews(){
-        $reviews = Review::where('featured','=',1)->get();
+        $reviews = Review::join('customers','customers.user_id','=','reviews.customer_id')
+                            ->join('users.id','=','customers.user_id')
+                            ->where('reviews.featured','=',1);
         return $reviews;
     }
 }

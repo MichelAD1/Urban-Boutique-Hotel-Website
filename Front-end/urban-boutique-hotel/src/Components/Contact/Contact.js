@@ -10,16 +10,37 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [err, setErr] = useState("");
 
   //validators
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
+  const validateMessage = (message) => {
+    return message.length <= 255;
+  };
+  const validateSubject = (subject) => {
+    return subject.length <= 35;
+  };
+  //API handler
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Code to handle form submission
+    setErr("");
+    if (!validateEmail(email)) {
+      setErr("Please enter a valid email address");
+      return;
+    }
+    if (!validateSubject(subject)) {
+      setErr("Subject too long");
+      return;
+    }
+    if (!validateMessage(message)) {
+      setErr("Message too long");
+      return;
+    }
   };
+
   return (
     <>
       <div className="contactHero">
@@ -102,7 +123,7 @@ const Contact = () => {
               </div>
               <div className="message-input">
                 <input
-                  type="email"
+                  type="text"
                   id="email"
                   name="email"
                   placeholder="Email"
@@ -130,6 +151,8 @@ const Contact = () => {
                 onChange={(event) => setMessage(event.target.value)}
               ></textarea>
             </div>
+            <div className="login-error contact">{err}</div>
+
             <button
               disabled={!name || !email || !subject || !message}
               type="submit"

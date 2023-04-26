@@ -25,7 +25,7 @@ const RoomItem = () => {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
-	const [oldPrice, setOldPrice] = useState(0);
+	const [discount, setDiscount] = useState(0);
 	const [size, setSize] = useState(0);
 	const [guests, setGuests] = useState(0);
 	const [type, setType] = useState("");
@@ -164,22 +164,22 @@ const RoomItem = () => {
 	const handleCancel = () => {
 		if (isValid) {
 			setEdit(false);
-			setName(isValid.data.name);
-			setDescription(isValid.data.description);
+			setName(isValid.data.room.title);
+			setDescription(isValid.data.room.description);
 			setImages(isValid.data.images);
-			setPrice(isValid.data.price);
-			setOldPrice(isValid.data.old_price);
-			setSize(isValid.data.size);
-			setMinibar(isValid.data.minibar);
-			setGuests(isValid.data.guests);
-			setType(isValid.data.type);
-			setShower(isValid.data.shower);
-			setTowels(isValid.data.towels);
-			setTv(isValid.data.tv);
-			setWifi(isValid.data.wifi);
-			setDesk(isValid.data.desk);
-			setBreakfast(isValid.data.breakfast);
-			setPets(isValid.data.pets);
+			setPrice(isValid.data.room.rent);
+			setDiscount(isValid.data.room.discount);
+			setSize(isValid.data.room.size);
+			setMinibar(isValid.data.room.minibar);
+			setGuests(isValid.data.room.guests);
+			setType(isValid.data.room.beds);
+			setShower(isValid.data.room.shower);
+			setTowels(isValid.data.room.towels);
+			setTv(isValid.data.room.tv);
+			setWifi(isValid.data.room.wifi);
+			setDesk(isValid.data.room.desk);
+			setBreakfast(isValid.data.room.breakfast);
+			setPets(isValid.data.room.pets);
 		} else {
 			navigate("/rooms");
 		}
@@ -226,7 +226,7 @@ const RoomItem = () => {
 				}}>
 				<div className='edit-container edit-container-large'>
 					<div className='edit-item'>
-						{isValid && <h2>Room #{isValid.data.id}</h2>}
+						{isValid && <h2>Room #{isValid.data.room.id}</h2>}
 						{!isValid && <h2>Add Room</h2>}
 						{isValid && (
 							<button className='button' onClick={() => handleDelete()}>
@@ -362,16 +362,16 @@ const RoomItem = () => {
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
 							<div>
-								<label>Old price</label>
+								<label>Discount</label>
 							</div>
 							<div>
-								{!edit && <p>${oldPrice}</p>}
+								{!edit && <p>${discount}</p>}
 								{edit && (
 									<input
 										type='number'
-										value={oldPrice}
+										value={discount}
 										className='input-box'
-										onChange={(e) => setOldPrice(e.target.value)}
+										onChange={(e) => setDiscount(e.target.value)}
 									/>
 								)}
 							</div>

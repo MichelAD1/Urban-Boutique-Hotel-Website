@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 function RoomCard({ data }) {
 	const navigate = useNavigate();
-	console.log(data);
 	const showPopup = (item) => {
 		navigate("/room/profile", { state: { data: item } });
 	};
@@ -13,17 +12,17 @@ function RoomCard({ data }) {
 			<div className='room-logo'>
 				<img className='image' alt='Room image' />
 			</div>
-			<div className='name'>{data.title}</div>
+			<div className='name'>{data.room.title}</div>
 			<div className='room-details'>
 				<p className='paragraph'>
-					<b>Size:</b> {data.size} sqft
+					<b>Size:</b> {data.room.size} sqft
 				</p>
 				<p className='paragraph'>
-					<b>Price:</b> USD {data.rent}
+					<b>Price:</b> USD {data.room.rent}
 				</p>
 				{data.discount !== 0 && (
 					<p className='paragraph'>
-						<b>New Price</b> {data.rent - data.discount}
+						<b>Discount</b> {data.room.discount}
 					</p>
 				)}
 				{data.discount === 0 && (

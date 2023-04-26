@@ -12,12 +12,11 @@ import CancelReservation from "../../api-client/Account/CancelReservation";
 
 export default function HotelTables({ columns, initialRows }) {
   const [rows, setRows] = React.useState(initialRows);
-
   const handleCancel = (id) => {
     let response = CancelReservation(id);
     response.then((res) => {
-      if (res) {
-        console.log(res);
+      if (res === "success") {
+        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
       }
     });
   };

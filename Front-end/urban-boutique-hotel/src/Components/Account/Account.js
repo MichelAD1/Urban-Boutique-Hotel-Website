@@ -19,15 +19,13 @@ const Profile = () => {
     status,
     error,
     data: reservationData,
-  } = useQuery(["reservationdata"], GetReservations, {
-    staleTime: 300000, // 5 minutes
-  });
+  } = useQuery(["reservationdata"], GetReservations);
 
   useEffect(() => {
     if (status === "success" && reservationData) {
-      console.log(reservationData);
       const newRows = reservationData.map((reservation) =>
         createData(
+          reservation.id,
           reservation.title,
           reservation.reservation_date,
           reservation.reservation_end
@@ -43,8 +41,8 @@ const Profile = () => {
     { id: "reservation_date", label: "Check In Date", minWidth: 100 },
     { id: "reservation_end", label: "Check Out Date", minWidth: 100 },
   ];
-  function createData(title, reservation_date, reservation_end) {
-    return { title, reservation_date, reservation_end };
+  function createData(id, title, reservation_date, reservation_end) {
+    return { id, title, reservation_date, reservation_end };
   }
   useEffect(() => {
     if (initialRows.length > 0) {

@@ -78,7 +78,11 @@ const RoomItem = () => {
 				}
 			}
 		}
-		return data;
+		if (Object.keys(data).length > 1) {
+			return data;
+		} else {
+			return false;
+		}
 	};
 
 	const handleCancel = () => {
@@ -86,7 +90,9 @@ const RoomItem = () => {
 			setEdit(false);
 			setName(isValid.data.room.title);
 			setDescription(isValid.data.room.description);
-			setImages(isValid.data.images);
+			{
+				isValid.data.image ? setImages(isValid.data.images) : setImages([]);
+			}
 			setPrice(isValid.data.room.rent);
 			setDiscount(isValid.data.room.discount);
 			setSize(isValid.data.room.size);
@@ -189,13 +195,25 @@ const RoomItem = () => {
 
 		if (checkAddValid(data)) {
 			const reqData = checkEditValid(data);
-			console.log(reqData);
+			if (reqData) {
+				const response = EditRoom(reqData);
+				response.then((res) => {
+					if (res.message === "room added successfully") {
+						const new_data = res;
+						loc.state = { data: new_data };
+						setIsValid(loc.state);
+						setEdit(false);
+					} else {
+						alert("Something went wrong");
+					}
+				});
+			} else {
+				alert("No changes made");
+			}
 		} else {
 			alert("Please fill all the fields");
 			return;
 		}
-
-		setEdit(false);
 	};
 
 	// Modal

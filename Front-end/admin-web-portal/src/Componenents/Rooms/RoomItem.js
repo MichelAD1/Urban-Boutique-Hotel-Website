@@ -37,6 +37,7 @@ const RoomItem = () => {
 	const [desk, setDesk] = useState(false);
 	const [breakfast, setBreakfast] = useState(false);
 	const [pets, setPets] = useState(false);
+	const [floor, setFloor] = useState(0);
 
 	const [err, setErr] = useState("");
 
@@ -54,109 +55,14 @@ const RoomItem = () => {
 		}
 	}, []);
 
-	const removeImage = (id) => {
-		const newData = images.filter((image) => image.id !== id);
-		setImages(newData);
-		setDeletedImages((deletedImages) => [...deletedImages, id]);
-		setImagesChanged(true);
-	};
-
-	async function addImage(e) {
-		let v_id = 0;
-		if (images.length !== 0) {
-			v_id = images[images.length - 1].id;
-		}
-		for (let i = 0; i < e.target.files.length; i++) {
-			await ConvertImage(e.target.files[i]).then((res) => {
-				setImages((images) => [...images, { id: v_id + 1, imageurl: res }]);
-				setAddedImages((addedImages) => [
-					...addedImages,
-					{ id: v_id + 1, imageurl: res },
-				]);
-				v_id++;
-			});
-		}
-		setImagesChanged(true);
-	}
-
-	const dataToSend = () => {
-		const requestData = new FormData();
-		requestData.append("id", isValid.data.id);
-		return requestData;
-	};
-
-	const checkChange = () => {
-		return !(name === isValid.data.name);
-	};
-
-	const mergeJson = (obj1, obj2, obj3) => {
-		const obj4 = {};
-		for (const attrname in obj1) {
-			obj4[attrname] = obj1[attrname];
-		}
-		for (const attrname in obj2) {
-			obj4[attrname] = obj2[attrname];
-		}
-		obj4["images"] = obj3;
-		return obj4;
-	};
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// setErr("");
-		// if (profile === default_profile) {
-		// 	setErr("Please upload a profile picture");
-		// } else if (images.length === 0) {
-		// 	setErr("Please upload at least one image");
-		// } else {
-		// 	const resp = AddRoom(
-		// 		email,
-		// 		password,
-		// 		phoneNumber,
-		// 		name,
-		// 		location,
-		// 		description,
-		// 		category,
-		// 		fb,
-		// 		ig,
-		// 		tiktok,
-		// 		menu,
-		// 		profile,
-		// 		images,
-		// 	);
-		// 	resp.then((res) => {
-		// 		if (res.status === 422) {
-		// 			if (res.data.errors.email) {
-		// 				setErr(res.data.message);
-		// 			}
-		// 			if (res.data.errors.number) {
-		// 				setErr(res.data.message);
-		// 			}
-		// 		} else {
-		// 			const new_data = mergeJson(res.user, res.business, res.images);
-		// 			navigate("/room/profile", { state: { data: new_data } });
-		// 			window.location.reload();
-		// 		}
-		// 	});
-		// }
 		console.log("submit");
 		setEdit(false);
 	};
 
 	const handleEdit = (e) => {
 		e.preventDefault();
-		// const resp = EditRoom(
-		// 	isValid.data,
-		// 	dataToSend(),
-		// 	addedImages,
-		// 	deletedImages,
-		// 	imagesChanged,
-		// 	checkChange(),
-		// );
-		// resp.then((res) => {
-		// 	navigate("/room/profile", { state: { data: res } });
-		// 	window.location.reload();
-		// });
 		console.log("Edit");
 		setEdit(false);
 	};
@@ -180,6 +86,7 @@ const RoomItem = () => {
 			setDesk(isValid.data.room.desk);
 			setBreakfast(isValid.data.room.breakfast);
 			setPets(isValid.data.room.pets);
+			setFloor(isValid.data.room.floor);
 		} else {
 			navigate("/rooms");
 		}
@@ -290,7 +197,7 @@ const RoomItem = () => {
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
 							<div>
-								<label>Type</label>
+								<label>Bed type</label>
 							</div>
 							<div>
 								{!edit && <p>{type}</p>}
@@ -326,10 +233,10 @@ const RoomItem = () => {
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
 							<div>
-								<label>Size</label>
+								<label>Size {edit ? "(sqft)" : ""}</label>
 							</div>
 							<div>
-								{!edit && <p>{size}sqft</p>}
+								{!edit && <p>{size} sqft</p>}
 								{edit && (
 									<input
 										type='number'
@@ -344,10 +251,28 @@ const RoomItem = () => {
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
 							<div>
-								<label>Price</label>
+								<label>Floor</label>
 							</div>
 							<div>
-								{!edit && <p>${price}</p>}
+								{!edit && <p>{floor}th</p>}
+								{edit && (
+									<input
+										type='number'
+										value={floor}
+										className='input-box'
+										onChange={(e) => setFloor(e.target.value)}
+									/>
+								)}
+							</div>
+						</div>
+					</div>
+					<div className='edit-item'>
+						<div className='edit-info info-large'>
+							<div>
+								<label>Price {edit ? "(USD)" : ""}</label>
+							</div>
+							<div>
+								{!edit && <p>USD {price}</p>}
 								{edit && (
 									<input
 										type='number'
@@ -362,10 +287,10 @@ const RoomItem = () => {
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
 							<div>
-								<label>Discount</label>
+								<label>Discount {edit ? "(USD)" : ""}</label>
 							</div>
 							<div>
-								{!edit && <p>${discount}</p>}
+								{!edit && <p>USD {discount}</p>}
 								{edit && (
 									<input
 										type='number'
@@ -498,7 +423,6 @@ const RoomItem = () => {
 									<input
 										type='file'
 										multiple
-										onChange={(e) => addImage(e)}
 										id='images-upload'
 										name='images-upload'
 										className='upload-image'

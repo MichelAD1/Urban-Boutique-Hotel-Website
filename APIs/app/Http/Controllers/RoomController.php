@@ -37,8 +37,8 @@ class RoomController extends Controller
             $roomid = $room->id;
             $images = $request->images;
             $storage = new StorageClient([
-                'projectId' => 'meno-a6fd9',
-                'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
+                'projectId' => 'urban-boutique-hotel',
+                'keyFilePath' => 'urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
             ]);
             $bucket = $storage->bucket('your-bucket-name');
             $imagearray=array();
@@ -229,10 +229,7 @@ class RoomController extends Controller
     }
     public function getCustomerReservations(){
         $user = Auth::user();
-        $reservations = DB::table('customer_reserves_room')
-                        ->join('rooms', 'rooms.id', '=', 'customer_reserves_room.room_id')
-                        ->select('rooms.title', 'customer_reserves_room.*')
-                        ->get();
+        $reservations=DB::table('customer_reserves_room')->join('rooms','rooms.id','=','customer_reserves_room.room_id')->get();
         return $reservations;
     }
     

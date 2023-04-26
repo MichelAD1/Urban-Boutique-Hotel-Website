@@ -25,9 +25,10 @@ const Profile = () => {
 
   useEffect(() => {
     if (status === "success" && reservationData) {
+      console.log(reservationData);
       const newRows = reservationData.map((reservation) =>
         createData(
-          reservation.name,
+          reservation.title,
           reservation.reservation_date,
           reservation.reservation_end
         )
@@ -38,12 +39,12 @@ const Profile = () => {
   }, [reservationData, status, error]);
 
   const columns = [
-    { id: "name", label: "Room Name", minWidth: 100 },
+    { id: "title", label: "Room Name", minWidth: 100 },
     { id: "reservation_date", label: "Check In Date", minWidth: 100 },
     { id: "reservation_end", label: "Check Out Date", minWidth: 100 },
   ];
-  function createData(name, reservation_date, reservation_end) {
-    return { name, reservation_date, reservation_end };
+  function createData(title, reservation_date, reservation_end) {
+    return { title, reservation_date, reservation_end };
   }
   useEffect(() => {
     if (initialRows.length > 0) {

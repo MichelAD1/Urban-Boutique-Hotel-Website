@@ -1,29 +1,49 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 // Icons
 import { MdManageAccounts, MdMarkEmailUnread } from "react-icons/md";
 import { IoMdOptions } from "react-icons/io";
 import { BsPersonLock } from "react-icons/bs";
 import Table from "../../Global/Components/Table";
 
+//Apis
+import GetReservations from "../../api-client/Account/GetReservations";
+
 const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(true);
+  const [initialRows, setRows] = useState([]);
+
+  const {
+    status,
+    error,
+    data: reservationData,
+  } = useQuery(["reservationdata"], GetReservations);
+
+  useEffect(() => {
+    if (status === "success" && reservationData) {
+      const newRows = reservationData.map((reservation) =>
+        createData(
+          reservation.id,
+          reservation.title,
+          reservation.reservation_date,
+          reservation.reservation_end
+        )
+      );
+      setRows(newRows);
+      setLoading(false);
+    }
+  }, [reservationData, status, error]);
 
   const columns = [
-    { id: "room_name", label: "Room Name", minWidth: 100 },
-    { id: "checkin", label: "Check In Date", minWidth: 100 },
-    { id: "checkout", label: "Check Out Date", minWidth: 100 },
+    { id: "title", label: "Room Name", minWidth: 100 },
+    { id: "reservation_date", label: "Check In Date", minWidth: 100 },
+    { id: "reservation_end", label: "Check Out Date", minWidth: 100 },
   ];
-
-  function createData(room_name, checkin, checkout) {
-    return { room_name, checkin, checkout };
+  function createData(id, title, reservation_date, reservation_end) {
+    return { id, title, reservation_date, reservation_end };
   }
-  const initialRows = [
-    createData("Standard Room", "2023-04-27", "2023-04-27"),
-    createData("Exclusive Room", "2023-04-27", "2023-04-27"),
-    createData("Deluxe Room", "2023-04-27", "2023-04-27"),
-  ];
   useEffect(() => {
     if (initialRows.length > 0) {
       setIsEmpty(false);
@@ -67,13 +87,28 @@ const Profile = () => {
       </div>
       <div className="reservations-section">
         <h2>Reservations</h2>
-
         {isEmpty ? (
-          <h5>You currently have no reservations</h5>
+          <>
+            {loading ? (
+              <div className="buffer-space">
+                <div className="buffer-loader home"></div>
+              </div>
+            ) : (
+              <h5>You currently have no reservations</h5>
+            )}
+          </>
         ) : (
           <>
-            <h5>Manage your reservations</h5>{" "}
-            <Table columns={columns} initialRows={initialRows} />
+            {loading ? (
+              <div className="buffer-space">
+                <div className="buffer-loader home"></div>
+              </div>
+            ) : (
+              <div>
+                <h5>Manage your reservations</h5>{" "}
+                <Table columns={columns} initialRows={initialRows} />
+              </div>
+            )}
           </>
         )}
       </div>

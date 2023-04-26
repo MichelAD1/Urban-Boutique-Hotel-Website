@@ -7,13 +7,19 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
+//apis
+import CancelReservation from "../../api-client/Account/CancelReservation";
+
 export default function HotelTables({ columns, initialRows }) {
   const [rows, setRows] = React.useState(initialRows);
-
-  const handleCancel = (roomName) => {
-    setRows(rows.filter((row) => row.room_name !== roomName));
+  const handleCancel = (id) => {
+    let response = CancelReservation(id);
+    response.then((res) => {
+      if (res === "success") {
+        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+      }
+    });
   };
-
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -33,14 +39,9 @@ export default function HotelTables({ columns, initialRows }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => {
+            {rows.map((row, index) => {
               return (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  tabIndex={-1}
-                  key={row.room_name}
-                >
+                <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
@@ -53,7 +54,7 @@ export default function HotelTables({ columns, initialRows }) {
                   })}
                   <TableCell>
                     <div className="table-button">
-                      <button onClick={() => handleCancel(row.room_name)}>
+                      <button onClick={() => handleCancel(row.id)}>
                         Cancel
                       </button>
                     </div>

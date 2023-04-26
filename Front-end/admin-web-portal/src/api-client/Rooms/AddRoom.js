@@ -1,7 +1,9 @@
 import axios from "axios";
+import base_url from "../BaseUrl";
+
 export default async function AddRoom(data) {
 	const resp = await axios
-		.post("http://127.0.0.1:8000/api/v0.1/room/add", data, {
+		.post(`${base_url}room/add`, data, {
 			headers: { Authorization: localStorage.getItem("token") },
 		})
 		.then((res) => {

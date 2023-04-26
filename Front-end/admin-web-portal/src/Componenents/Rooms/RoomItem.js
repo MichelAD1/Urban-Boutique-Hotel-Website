@@ -55,18 +55,6 @@ const RoomItem = () => {
 		}
 	}, []);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log("submit");
-		setEdit(false);
-	};
-
-	const handleEdit = (e) => {
-		e.preventDefault();
-		console.log("Edit");
-		setEdit(false);
-	};
-
 	const handleCancel = () => {
 		if (isValid) {
 			setEdit(false);
@@ -90,6 +78,40 @@ const RoomItem = () => {
 		} else {
 			navigate("/rooms");
 		}
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setErr("");
+
+		const data = {
+			title: name,
+			description: description,
+			rent: parseInt(price),
+			discount: parseInt(discount),
+			size: parseInt(size),
+			guests: parseInt(guests),
+			beds: type,
+			minibar: minibar,
+			shower: shower,
+			towels: towels,
+			tv: tv,
+			wifi: wifi,
+			desk: desk,
+			breakfast: breakfast,
+			pets: pets,
+			floor: floor,
+		};
+
+		console.log(data);
+
+		setEdit(false);
+	};
+
+	const handleEdit = (e) => {
+		e.preventDefault();
+		console.log("Edit");
+		setEdit(false);
 	};
 
 	// Modal
@@ -118,6 +140,41 @@ const RoomItem = () => {
 
 	const closeModal = () => {
 		setIsModalOpen(false);
+	};
+
+	// Images handler
+	const convertImageToBase64 = (image, id) => {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(image);
+			reader.onload = () => resolve({ id, image: reader.result });
+			reader.onerror = (error) => reject(error);
+		});
+	};
+
+	const handleImageUpload = async (e) => {
+		const files = e.target.files;
+
+		const base64Images = await Promise.all(
+			Object.values(files).map((file, id) => {
+				return convertImageToBase64(file, images.length + id);
+			}),
+		);
+
+		setImages([...images, ...base64Images]);
+		setAddedImages([...addedImages, ...base64Images]);
+		setImagesChanged(true);
+		console.log(images);
+	};
+
+	const handleImageDelete = (index) => {
+		const newImages = [...images];
+		newImages.splice(index, 1);
+		setImages(newImages);
+		setImagesChanged(true);
+		if (index < isValid.data.images.length) {
+			setDeletedImages([...deletedImages, isValid.data.images[index].id]);
+		}
 	};
 
 	return (
@@ -423,6 +480,7 @@ const RoomItem = () => {
 									<input
 										type='file'
 										multiple
+										onChange={(e) => handleImageUpload(e)}
 										id='images-upload'
 										name='images-upload'
 										className='upload-image'
@@ -433,9 +491,14 @@ const RoomItem = () => {
 						<div className='gallery'>
 							{images.map((image) => {
 								return (
-									<div>
-										<img className='gallery-images' src={image} />
-										{edit && <RiDeleteBin2Fill className='delete-icon' />}
+									<div key={image.id}>
+										<img className='gallery-images' src={image.image} />
+										{edit && (
+											<RiDeleteBin2Fill
+												className='delete-icon'
+												onClick={handleImageDelete}
+											/>
+										)}
 									</div>
 								);
 							})}

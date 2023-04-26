@@ -37,7 +37,7 @@ class RoomController extends Controller
             $images = $request->images;
             $storage = new StorageClient([
                 'projectId' => 'meno-a6fd9',
-                'keyFilePath' => 'urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
+                'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
             ]);
             $bucket = $storage->bucket('your-bucket-name');
             $imagearray=array();

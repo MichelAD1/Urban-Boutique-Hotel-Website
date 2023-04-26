@@ -2,10 +2,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 
-import ConvertImage from "../../Global/Functions/ConvertImage";
+// API
 import AddRoom from "../../api-client/Rooms/AddRoom";
 import EditRoom from "../../api-client/Rooms/EditRoom";
-import GetOptions from "../../api-client/Options/GetOptions";
+
 //Icons
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin2Fill } from "react-icons/ri";
@@ -24,10 +24,10 @@ const RoomItem = () => {
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
-	const [price, setPrice] = useState(0);
-	const [discount, setDiscount] = useState(0);
-	const [size, setSize] = useState(0);
-	const [guests, setGuests] = useState(0);
+	const [price, setPrice] = useState("");
+	const [discount, setDiscount] = useState("");
+	const [size, setSize] = useState("");
+	const [guests, setGuests] = useState("");
 	const [type, setType] = useState("");
 	const [minibar, setMinibar] = useState(false);
 	const [shower, setShower] = useState(false);
@@ -37,7 +37,7 @@ const RoomItem = () => {
 	const [desk, setDesk] = useState(false);
 	const [breakfast, setBreakfast] = useState(false);
 	const [pets, setPets] = useState(false);
-	const [floor, setFloor] = useState(0);
+	const [floor, setFloor] = useState("");
 
 	const [err, setErr] = useState("");
 
@@ -80,9 +80,22 @@ const RoomItem = () => {
 		}
 	};
 
+	const mergeJson = (json1, json2) => {
+		var result = {
+			json1,
+			json2,
+		};
+		return result;
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setErr("");
+
+		const reqImages = [];
+		images.forEach((image) => {
+			reqImages.push(image.image);
+		});
 
 		const data = {
 			title: name,
@@ -92,7 +105,7 @@ const RoomItem = () => {
 			size: parseInt(size),
 			guests: parseInt(guests),
 			beds: type,
-			minibar: minibar,
+			mini_bar: minibar,
 			shower: shower,
 			towels: towels,
 			tv: tv,
@@ -101,9 +114,18 @@ const RoomItem = () => {
 			breakfast: breakfast,
 			pets: pets,
 			floor: floor,
+			images: reqImages,
 		};
 
-		console.log(data);
+		AddRoom(data).then((res) => {
+			if (res.message === "Room added successfully") {
+				const new_data = mergeJson(res.room, res.images);
+				loc.state = { data: new_data };
+				setIsValid(loc.state);
+			} else {
+				setErr("Something went wrong");
+			}
+		});
 
 		setEdit(false);
 	};

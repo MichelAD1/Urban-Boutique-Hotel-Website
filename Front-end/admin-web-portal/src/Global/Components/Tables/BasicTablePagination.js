@@ -1,7 +1,9 @@
 import { useTable, usePagination } from "react-table";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import GetClients from "../../../api-client/Clients/GetClients";
+
+// API
+import FetchData from "../../../api-client/FetchData";
 
 const Table = ({ reqData, columns, redirect, err }) => {
 	const [data, setData] = useState([]);
@@ -53,7 +55,7 @@ const Table = ({ reqData, columns, redirect, err }) => {
 			const param = {
 				queryKey: ["users_data", next],
 			};
-			GetClients(param).then((res) => {
+			FetchData(param).then((res) => {
 				setData(res.data);
 				setNext(res.next_page_url);
 				setPrev(res.prev_page_url);
@@ -61,13 +63,12 @@ const Table = ({ reqData, columns, redirect, err }) => {
 			});
 		}
 	};
-
 	const handlePreviosPage = () => {
 		if (prev) {
 			const param = {
 				queryKey: ["users_data", prev],
 			};
-			GetClients(param).then((res) => {
+			FetchData(param).then((res) => {
 				setData(res.data);
 				setNext(res.next_page_url);
 				setPrev(res.prev_page_url);

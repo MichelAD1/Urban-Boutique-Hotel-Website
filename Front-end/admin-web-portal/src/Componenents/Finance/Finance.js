@@ -14,6 +14,7 @@ import FetchFinance from "../../api-client/Finance/FetchFinance";
 
 const Finance = () => {
 	const [loading, setLoading] = useState(true);
+	const [err, setErr] = useState("");
 	// State for storing budget information
 	const [budgetErr, setBudgetErr] = useState("");
 	const [isBudgetModalOpen, setBudgetModalOpen] = useState(false);
@@ -35,6 +36,13 @@ const Finance = () => {
 	useEffect(() => {
 		if (financeData) {
 			Promise.all(financeData).then((results) => {
+				if (
+					results[0].name === "AxiosError" ||
+					results[1].name === "AxiosError"
+				) {
+					setLoading(false);
+					setErr("Something went wrong");
+				}
 				if (results[0].length === 0) {
 					setBudgetErr("No budgets found");
 				}
@@ -116,6 +124,10 @@ const Finance = () => {
 		],
 		[],
 	);
+	console.log(err);
+	if (err !== "") {
+		return <div className='container-buffer'>{err}</div>;
+	}
 
 	if (loading) {
 		return (

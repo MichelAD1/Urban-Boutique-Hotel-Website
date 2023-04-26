@@ -39,6 +39,13 @@ const Rooms = () => {
     staleTime: 300000, // 5 minutes
   });
   useEffect(() => {
+    const shouldreload = localStorage.getItem("shouldReload");
+    if (shouldreload === "true") {
+      localStorage.removeItem("shouldReload");
+      window.location.reload();
+    }
+  }, []);
+  useEffect(() => {
     if (status === "success" && roomData) {
       setRooms(roomData);
       setTmpRooms(roomData);

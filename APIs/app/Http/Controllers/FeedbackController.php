@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
     public function addFeedback(Request $request){
+        $user = Auth::user();
         //admin function
         $feedback = new Feedback();
         $feedback->text = $request->text;
-        $feedback->customer_id = $request->customer_id;
+        $feedback->customer_id = $user->id;
 
         if($feedback->save()){
             return response()->json([
@@ -23,6 +25,9 @@ class FeedbackController extends Controller
     }
 
     public function getFeedbacks(){
-        return Feedback::all();
+        $feedbacks = Feedback::paginate(14);
+        return response()->json([
+            $feedbacks
+        ],200);
     }
 }

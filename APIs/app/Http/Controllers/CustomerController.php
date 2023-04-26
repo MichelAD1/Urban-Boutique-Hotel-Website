@@ -84,7 +84,7 @@ class CustomerController extends Controller
 
         ]);
         return response()->json([
-            'message'=>"Editted successfuly",
+            'status'=>"success",
             'reservation'=>$reservation,
             'room' => Room::find($request->room_id),
             'customer' => Customer::join('user','users.id','=','customers.user_id')

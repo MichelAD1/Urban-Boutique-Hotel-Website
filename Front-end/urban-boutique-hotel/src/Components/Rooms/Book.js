@@ -22,7 +22,7 @@ const Book = () => {
   const [checkOutDate, setCheckOutDate] = useState(null);
   const lastFreeDate = room.free_dates[room.free_dates.length - 1];
   const firstFreeDate = room.free_dates[0];
-
+  const [maxCheckout, setMaxDate] = useState(null);
   const [total_price, setTotalPrice] = useState(
     room.room.rent * 0.1 + room.room.rent
   );
@@ -43,8 +43,38 @@ const Book = () => {
   ];
   //useEffect
   useEffect(() => {
-    if (!checkInDate) {
-      setCheckOutDate("");
+    setCheckOutDate("");
+    if (checkInDate) {
+      let parsedDate1 = checkInDate;
+      let year = parsedDate1.getFullYear();
+      let month =
+        parsedDate1.getMonth() + 1 < 10
+          ? `0${parsedDate1.getMonth() + 1}`
+          : parsedDate1.getMonth() + 1;
+      let day =
+        parsedDate1.getDate() < 10
+          ? `0${parsedDate1.getDate()}`
+          : parsedDate1.getDate();
+      const checkin = `${year}-${month}-${day}`;
+      const selectedIndex = room.free_dates.findIndex(
+        (date) => date === checkin
+      );
+      const consecutiveDates = [checkin];
+      const checkdate = new Date(lastFreeDate);
+      for (let i = selectedIndex + 1; i < room.free_dates.length; i++) {
+        const prevDate = new Date(room.free_dates[i - 1]);
+        const currDate = new Date(room.free_dates[i]);
+        if (currDate.toISOString() === checkdate.toISOString()) {
+          setMaxDate(new Date(lastFreeDate));
+          break;
+        }
+        if ((currDate - prevDate) / (1000 * 60 * 60 * 24) === 1) {
+          consecutiveDates.push(room.free_dates[i]);
+        } else {
+          setMaxDate(new Date(consecutiveDates[consecutiveDates.length - 1]));
+          break;
+        }
+      }
     }
   }, [checkInDate]);
   //Validators
@@ -170,10 +200,7 @@ const Book = () => {
                   selected={checkOutDate}
                   onChange={(date) => setCheckOutDate(date)}
                   minDate={checkInDate}
-                  maxDate={new Date(lastFreeDate)}
-                  excludeDates={room.occupied_dates.map(
-                    (date) => new Date(date)
-                  )}
+                  maxDate={maxCheckout}
                   placeholderText="Check Out"
                   className="react-datepicker"
                   dateFormat="yyyy/MM/dd"

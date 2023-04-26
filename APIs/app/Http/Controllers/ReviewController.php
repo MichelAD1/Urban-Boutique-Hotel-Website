@@ -38,15 +38,23 @@ class ReviewController extends Controller
     }
     public function getReviews(){
         return Review::join('users', 'reviews.customer_id', '=', 'users.id')
-                     ->select('reviews.*', 'users.username')
-                     ->get();
+                     ->select('reviews.*', 'users.email')
+                     ->paginate(14);
     }
 
     public function featureReview($reviewid){
         $review = Review::find($reviewid);
-        $review->featured=true;
-        $review->save();
-        return "success";
+        if($review->featured){
+            $review->featured = false;
+        }else{
+            $review->featured = true;
+        }
+        if($review->save()){
+            return $review;
+        }else{
+            return "failed";
+        }
+
     }
     public function getFeaturedReviews(){
         $reviews = Review::where('featured','=',1)->get();

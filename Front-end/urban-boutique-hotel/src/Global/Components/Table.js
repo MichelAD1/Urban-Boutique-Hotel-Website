@@ -33,14 +33,9 @@ export default function HotelTables({ columns, initialRows }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => {
+            {rows.map((row, index) => {
               return (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  tabIndex={-1}
-                  key={row.room_name}
-                >
+                <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
@@ -53,7 +48,7 @@ export default function HotelTables({ columns, initialRows }) {
                   })}
                   <TableCell>
                     <div className="table-button">
-                      <button onClick={() => handleCancel(row.room_name)}>
+                      <button onClick={() => handleCancel(row.title)}>
                         Cancel
                       </button>
                     </div>

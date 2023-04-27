@@ -103,7 +103,7 @@ h6 {
 }
 
 .btn-secondary {
-  width: 9em;
+  width: 11.5em;
   background-color: #2a3249;
   color: #fff;
   border: none;
@@ -119,6 +119,7 @@ h6 {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 
 .arrow {

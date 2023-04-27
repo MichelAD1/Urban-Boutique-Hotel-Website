@@ -7,10 +7,16 @@ import { CgScreen } from "react-icons/cg";
 import { MdOutlineShower, MdOutlineLocalBar } from "react-icons/md";
 import { GiTowel, GiDesk } from "react-icons/gi";
 import { IoIosArrowUp } from "react-icons/io";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 import dummy1 from "../../assets/images/room-1.jpeg";
 
 const SingleRoom = ({ reverse, room, type }) => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   const navigate = useNavigate();
 
   const handleRedirect = (item) => {
@@ -33,46 +39,51 @@ const SingleRoom = ({ reverse, room, type }) => {
         <div className="deal-stats">
           <div className="stat-item">
             <RxPerson />
-            <p>Occupancy: {room.room.guests}</p>
+            <p>
+              {t("occupancy")}: {room.room.guests}
+            </p>
           </div>
           <div className="stat-item">
             <TbResize />
-            <p>Size: {room.room.size}sqm</p>
+            <p>
+              {t("size")}: {room.room.size}
+              {t("sqm")}
+            </p>
           </div>
           {room.room.wifi ? (
             <div className="stat-item">
               <AiOutlineWifi />
-              <p>WI-Fi</p>
+              <p>{t("wifi")}</p>
             </div>
           ) : null}
           {room.room.tv ? (
             <div className="stat-item">
               <CgScreen />
-              <p>TV</p>
+              <p>{t("tv")}</p>
             </div>
           ) : null}
           {room.room.shower ? (
             <div className="stat-item">
               <MdOutlineShower />
-              <p>Shower</p>
+              <p>{t("shower")}</p>
             </div>
           ) : null}
           {room.room.towels ? (
             <div className="stat-item">
               <GiTowel />
-              <p>Towels</p>
+              <p>{t("towels")}</p>
             </div>
           ) : null}
           {room.room.mini_bar ? (
             <div className="stat-item">
               <MdOutlineLocalBar />
-              <p>Minibar</p>
+              <p>{t("minibar")}</p>
             </div>
           ) : null}
           {room.room.desk ? (
             <div className="stat-item">
               <GiDesk />
-              <p>Work Space</p>
+              <p>{t("workspace")}</p>
             </div>
           ) : null}
         </div>
@@ -85,7 +96,7 @@ const SingleRoom = ({ reverse, room, type }) => {
           ) : null}
         </div>
         <button className="btn-secondary">
-          Learn more
+          {t("learnmore")}
           <IoIosArrowUp className="arrow" />
         </button>
       </div>

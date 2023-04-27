@@ -118,6 +118,35 @@ i18n.use(initReactI18next).init({
         discover_p2:
           "Linger in our breakfast room and enjoy a rich buffet breakfast before setting out to explore the city from our fabulous location.",
         photogallery: "Photo Gallery",
+        findus_title1: "Schönbrunn Palace",
+        findus_title2: "The Hofburg",
+        findus_title3: "Belvedere Palace",
+        findus_title4: "St. Stephen's Cathedral",
+        findus_title5: "Vienna Operahouse",
+        findus_desc1:
+          "Schönbrunn Palace is a Baroque palace in Vienna, Austria built as a summer residence for the Habsburgs. It has over 1,400 rooms, luxurious furnishings, and intricate decorations showcasing Habsburg opulence. The palace gardens feature lawns, flower beds, fountains, and landmarks such as the Neptune Fountain and Gloriette. It is a popular tourist attraction and a UNESCO World Heritage Site.",
+        findus_desc2:
+          "The Hofburg is a large palace complex in the center of Vienna, Austria. It has served as the residence of the Habsburg dynasty and the Austrian government for over 700 years. The palace features impressive Baroque and Gothic architecture and is home to several museums, including the Imperial Apartments, the Sisi Museum, and the Austrian National Library. Today, it is one of Vienna's most popular tourist attractions, offering a glimpse into Austria's rich history and culture.",
+        findus_desc3:
+          "Belvedere Palace is a Baroque-style building complex in Vienna, Austria, built as a summer residence for Prince Eugene of Savoy in the 18th century. It consists of the Upper and Lower Belvedere palaces, connected by a beautiful garden. Today, it is a popular tourist attraction and art museum, displaying works by famous Austrian artists such as Gustav Klimt and Egon Schiele.",
+        findus_desc4:
+          "St. Stephen's Cathedral, or Stephansdom, is a Gothic-style cathedral in Vienna, Austria. Its iconic spire stands at 136 meters tall, and it boasts intricate stained glass windows, vaulted ceilings, and ornate altarpieces. The cathedral has a rich history as a religious and cultural landmark and remains a popular destination for visitors today.",
+        findus_desc5:
+          "The Vienna Opera House is a world-famous opera house located in Vienna, Austria. It opened in 1869 and is home to the Vienna State Opera and Vienna Philharmonic Orchestra. The Neo-Renaissance building has a seating capacity of over 2,200 and is known for its ornate architecture.",
+        findus_arr1: "S-Bahn (S7)",
+        findus_arr2: "CAT - City Airport Train",
+        findus_arr3: "Vienna Airport Lines (Postbus ÖBB)",
+        findus_arr4: "TAXI",
+        findus_arrd1:
+          "The S-Bahn offers the cheapest fare to the airport. Several stopovers allow easy entry and exit across the city, most of them with suburban and subway connections. Trains leave between about 04.00 and 00.00. A ride takes about 23 minutes from Wien Mitte and costs 4.10 €",
+        findus_arrd2:
+          "The City Airport Train is perhaps the most comfortable travel option, but also one of the most expensive. Every 30 minutes there is a fast train between Wien-Mitte and the airport. From / to: Wien-Mitte (U3, U4 + S) - Flughafen Wien, Bahnhof Cost: when buying online 11 € (single), 19 € (return); when buying at machines 12 € (single), 21 € (return) Interval: 30 minutes",
+        findus_arrd3:
+          "The Vienna Airport Lines connect important transport hubs with the airport. And most bus stops are directly connected to subway stations. Buses from Morzinplatz / Schwedenplatz and Westbahnhof leave every 30 minutes. Cost: 8 € (single), 13 € (return) Interval: 30 minutes or 1 hour (line VAL3) Duration: 20-40 minutes",
+        findus_arrd4:
+          "The Vienna taxi centers offer trips with an airport package. For a fixed price of 36 € (if ordered in advance) you get so directly from home to the airport. Accessible for example under 31300, 40100 or 60160. Please say on the phone that you need an airport taxi! From / to: anywhere in Vienna - Airport, departure / arrival Cost: 36 € fixed price (+ tip)  Duration: varies depending on place of departure and traffic Duration: 20-40 minutes",
+        arrival: "Arrival",
+        find_location_desc: `Our house is an ideal starting point to discover the beauty of Vienna. Thanks to our central location, all sights are within easy reach: We are only 10 minutes walk from the train station "Westbahnhof" and 20 minutes walk from the city center. Our address is Andreasgasse 1, 1070 Vienna, near the famous shopping street "Mariahilfer Straße". With the subway station "U3 Zieglergasse" directly in front of our house is a drive to cultural attractions or shopping just a few minutes away.`,
       },
     },
     es: {
@@ -243,6 +272,35 @@ i18n.use(initReactI18next).init({
         discover_p2:
           "Permanezca en nuestra sala de desayunos y disfrute de un rico desayuno buffet antes de salir a explorar la ciudad desde nuestra fabulosa ubicación.",
         photogallery: "Galería de fotos",
+        findus_title1: "Palacio de Schönbrunn",
+        findus_title2: "El Hofburg",
+        findus_title3: "Palacio de Belvedere",
+        findus_title4: "Catedral de San Esteban",
+        findus_title5: "Ópera de Viena",
+        findus_desc1:
+          "El Palacio de Schönbrunn es un palacio barroco en Viena, Austria, construido como residencia de verano de los Habsburgo. Tiene más de 1,400 habitaciones, lujosos muebles y decoraciones intrincadas que muestran la opulencia de los Habsburgo. Los jardines del palacio cuentan con césped, parterres, fuentes y monumentos como la Fuente de Neptuno y la Glorieta. Es una atracción turística popular y un sitio del Patrimonio Mundial de la UNESCO.",
+        findus_desc2:
+          "El Hofburg es un gran complejo palaciego en el centro de Viena, Austria. Ha servido como residencia de la dinastía de los Habsburgo y del gobierno austriaco durante más de 700 años. El palacio cuenta con impresionante arquitectura barroca y gótica y alberga varios museos, como los Apartamentos Imperiales, el Museo Sisi y la Biblioteca Nacional de Austria. Hoy en día, es una de las atracciones turísticas más populares de Viena, ofreciendo una visión de la rica historia y cultura de Austria.",
+        findus_desc3:
+          "El Palacio de Belvedere es un complejo de edificios de estilo barroco en Viena, Austria, construido como residencia de verano del príncipe Eugenio de Saboya en el siglo XVIII. Consta de los palacios Belvedere Superior e Inferior, conectados por un hermoso jardín. Hoy en día, es una popular atracción turística y museo de arte, que muestra obras de famosos artistas austriacos como Gustav Klimt y Egon Schiele.",
+        findus_desc4:
+          "La Catedral de San Esteban, o Stephansdom, es una catedral de estilo gótico en Viena, Austria. Su icónica aguja mide 136 metros de altura, y cuenta con intrincados vitrales, techos abovedados y retablos ornamentados. La catedral tiene una rica historia como hito religioso y cultural y sigue siendo un destino popular para visitantes en la actualidad.",
+        findus_desc5:
+          "La Ópera de Viena es una famosa casa de ópera ubicada en Viena, Austria. Abrió en 1869 y es el hogar de la Ópera Estatal de Viena y la Orquesta Filarmónica de Viena. El edificio neo-renacentista tiene una capacidad de más de 2,200 asientos y es conocido por su arquitectura ornamentada.",
+        findus_arr1: "S-Bahn (S7)",
+        findus_arr2: "CAT - Tren del aeropuerto de la ciudad",
+        findus_arr3: "Vienna Airport Lines (Postbus ÖBB)",
+        findus_arr4: "TAXI",
+        findus_arrd1:
+          "El S-Bahn ofrece la tarifa más económica para llegar al aeropuerto. Varias paradas permiten un fácil acceso y salida a través de la ciudad, la mayoría de ellas con conexiones suburbanas y de metro. Los trenes salen entre las 04.00 y las 00.00 horas. Un viaje dura unos 23 minutos desde Wien Mitte y cuesta 4,10 €.",
+        findus_arrd2:
+          "El Tren del Aeropuerto de la Ciudad es quizás la opción de viaje más cómoda, pero también una de las más caras. Cada 30 minutos hay un tren rápido entre Wien-Mitte y el aeropuerto. Desde/hasta: Wien-Mitte (U3, U4 + S) - Flughafen Wien, Bahnhof Costo: al comprar en línea 11 € (sencillo), 19 € (ida y vuelta); al comprar en las máquinas 12 € (sencillo), 21 € (ida y vuelta) Intervalo: 30 minutos",
+        findus_arrd3:
+          "Las Líneas del Aeropuerto de Viena conectan importantes centros de transporte con el aeropuerto. La mayoría de las paradas de autobús están directamente conectadas con estaciones de metro. Los autobuses desde Morzinplatz / Schwedenplatz y Westbahnhof salen cada 30 minutos. Costo: 8 € (sencillo), 13 € (ida y vuelta) Intervalo: 30 minutos o 1 hora (línea VAL3) Duración: 20-40 minutos",
+        findus_arrd4:
+          "Los centros de taxis de Viena ofrecen viajes con paquete de aeropuerto. Por un precio fijo de 36 € (si se solicita con anticipación) puede llegar directamente desde su hogar hasta el aeropuerto. Accesible por ejemplo bajo 31300, 40100 o 60160. ¡Por favor, diga por teléfono que necesita un taxi al aeropuerto! Desde / hasta: cualquier lugar de Viena - Aeropuerto, salida / llegada Costo: precio fijo de 36 € (+ propina) Duración: varía según el lugar de salida y el tráfico Duración: 20-40 minutos",
+        arrival: "Llegada",
+        find_location_desc: `Nuestra casa es un punto de partida ideal para descubrir la belleza de Viena. Gracias a nuestra ubicación central, todas las atracciones están al alcance de la mano: estamos a solo 10 minutos a pie de la estación de tren "Westbahnhof" y a 20 minutos a pie del centro de la ciudad. Nuestra dirección es Andreasgasse 1, 1070 Viena, cerca de la famosa calle comercial "Mariahilfer Straße". Con la estación de metro "U3 Zieglergasse" justo enfrente de nuestra casa, un viaje a atracciones culturales o de compras está a solo unos minutos de distancia.`,
       },
     },
     fr: {
@@ -356,6 +414,35 @@ i18n.use(initReactI18next).init({
         discover_p2:
           "Restez dans notre salle de petit-déjeuner et profitez d'un délicieux petit-déjeuner buffet avant de partir explorer la ville depuis notre fabuleux emplacement.",
         photogallery: "Galerie de photos",
+        findus_title1: "Palais de Schönbrunn",
+        findus_title2: "Le Hofburg",
+        findus_title3: "Palais du Belvédère",
+        findus_title4: "La cathédrale Saint-Étienne",
+        findus_title5: "Opéra de Vienne",
+        findus_desc1:
+          "Le palais de Schönbrunn est un palais baroque situé à Vienne, en Autriche, construit comme résidence d'été pour les Habsbourg. Il possède plus de 1 400 pièces, un mobilier luxueux et des décorations complexes mettant en valeur l'opulence des Habsbourg. Les jardins du palais comportent des pelouses, des parterres de fleurs, des fontaines et des monuments tels que la fontaine de Neptune et la Gloriette. Il s'agit d'une attraction touristique populaire et d'un site du patrimoine mondial de l'UNESCO.",
+        findus_desc2:
+          "Le Hofburg est un grand complexe de palais situé au centre de Vienne, en Autriche. Il a servi de résidence à la dynastie des Habsbourg et au gouvernement autrichien pendant plus de 700 ans. Le palais présente une architecture baroque et gothique impressionnante et abrite plusieurs musées, dont les appartements impériaux, le musée Sisi et la Bibliothèque nationale autrichienne. Aujourd'hui, c'est l'une des attractions touristiques les plus populaires de Vienne, offrant un aperçu de l'histoire et de la culture riches de l'Autriche.",
+        findus_desc3:
+          "Le palais du Belvédère est un complexe de bâtiments de style baroque à Vienne, en Autriche, construit comme résidence d'été pour le prince Eugène de Savoie au XVIIIe siècle. Il se compose des palais du Belvédère supérieur et inférieur, reliés par un beau jardin. Aujourd'hui, c'est une attraction touristique populaire et un musée d'art, exposant des œuvres d'artistes autrichiens célèbres tels que Gustav Klimt et Egon Schiele.",
+        findus_desc4:
+          "La cathédrale Saint-Étienne, ou Stephansdom, est une cathédrale gothique située à Vienne, en Autriche. Son icône flèche s'élève à 136 mètres de haut, et elle possède des vitraux complexes, des plafonds voûtés et des retables ornés. La cathédrale a une riche histoire en tant que lieu de culte et de repère culturel et reste une destination populaire pour les visiteurs aujourd'hui.",
+        findus_desc5:
+          "L'Opéra de Vienne est un opéra de renommée mondiale situé à Vienne, en Autriche. Il a ouvert ses portes en 1869 et abrite l'Opéra national de Vienne et l'Orchestre philharmonique de Vienne. Le bâtiment de style néo-Renaissance a une capacité d'assise de plus de 2 200 personnes et est connu pour son architecture ornée.",
+        findus_arr1: "S-Bahn (S7)",
+        findus_arr2: "CAT - City Airport Train",
+        findus_arr3: "Vienna Airport Lines (Postbus ÖBB)",
+        findus_arr4: "TAXI",
+        findus_arrd1:
+          "Le S-Bahn offre le tarif le moins cher pour l'aéroport. Plusieurs arrêts permettent une entrée et une sortie faciles dans toute la ville, la plupart d'entre eux étant connectés aux banlieues et au métro. Les trains circulent entre environ 04h00 et 00h00. Le trajet prend environ 23 minutes depuis Wien Mitte et coûte 4,10 €.",
+        findus_arrd2:
+          "Le City Airport Train est peut-être l'option de voyage la plus confortable, mais aussi l'une des plus chères. Toutes les 30 minutes, un train rapide relie Wien-Mitte à l'aéroport. De / à: Wien-Mitte (U3, U4 + S) - Flughafen Wien, Bahnhof Coût: 11 € en ligne (aller simple), 19 € (aller-retour) ; 12 € aux distributeurs (aller simple), 21 € (aller-retour) Fréquence: toutes les 30 minutes",
+        findus_arrd3:
+          "Les Vienna Airport Lines connectent les centres de transport importants à l'aéroport. Et la plupart des arrêts de bus sont directement reliés aux stations de métro. Les bus de Morzinplatz/Schwedenplatz et de Westbahnhof partent toutes les 30 minutes. Coût : 8 € (aller simple), 13 € (aller-retour) Fréquence : 30 minutes ou 1 heure (ligne VAL3) Durée : 20-40 minutes",
+        findus_arrd4:
+          "Les centres de taxi de Vienne offrent des trajets avec un forfait aéroportuaire. Pour un prix fixe de 36 € (si commandé à l'avance), vous pouvez vous rendre directement de chez vous à l'aéroport. Accessible par exemple sous les numéros 31300, 40100 ou 60160. Veuillez dire au téléphone que vous avez besoin d'un taxi pour l'aéroport ! De / à : partout à Vienne - Aéroport, départ / arrivée Coût : 36 € prix fixe (+ pourboire) Durée : varie selon le lieu de départ et le trafic Durée : 20-40 minutes",
+        arrival: "Arrivée",
+        find_location_desc: `Notre maison est un point de départ idéal pour découvrir la beauté de Vienne. Grâce à notre emplacement central, tous les sites touristiques sont facilement accessibles : nous ne sommes qu'à 10 minutes à pied de la gare "Westbahnhof" et à 20 minutes à pied du centre-ville. Notre adresse est Andreasgasse 1, 1070 Vienne, près de la célèbre rue commerçante "Mariahilfer Straße". Avec la station de métro "U3 Zieglergasse" directement devant notre maison, il ne faut que quelques minutes pour se rendre aux attractions culturelles ou faire du shopping.`,
       },
     },
     de: {
@@ -469,6 +556,21 @@ i18n.use(initReactI18next).init({
         discover_p2:
           "Verweilen Sie in unserem Frühstücksraum und genießen Sie ein reichhaltiges Frühstücksbuffet, bevor Sie von unserem fabelhaften Standort aus die Stadt erkunden.",
         photogallery: "Fotogalerie",
+        findus_title1: "Schloss Schönbrunn",
+        findus_title2: "Die Hofburg",
+        findus_title3: "Schloss Belvedere",
+        findus_title4: "Stephansdom",
+        findus_title5: "Wiener Opernhaus",
+        findus_desc1:
+          "Schloss Schönbrunn ist ein barockes Schloss in Wien, Österreich, das als Sommerresidenz für die Habsburger erbaut wurde. Es hat über 1.400 Zimmer, luxuriöse Ausstattung und aufwändige Dekorationen, die den Habsburger Prunk zur Schau stellen. Die Schlossgärten umfassen Rasenflächen, Blumenbeete, Springbrunnen und Wahrzeichen wie den Neptunbrunnen und die Gloriette. Es ist eine beliebte Touristenattraktion und ein UNESCO-Weltkulturerbe.",
+        findus_desc2:
+          "Die Hofburg ist eine große Palastanlage im Zentrum von Wien, Österreich. Sie diente als Residenz der Habsburger Dynastie und der österreichischen Regierung für über 700 Jahre. Der Palast besticht durch beeindruckende barocke und gotische Architektur und beherbergt mehrere Museen, darunter die Kaiserappartements, das Sisi-Museum und die Österreichische Nationalbibliothek. Heute ist es eine der beliebtesten Touristenattraktionen Wiens und bietet einen Einblick in die reiche Geschichte und Kultur Österreichs.",
+        findus_desc3:
+          "Das Schloss Belvedere ist ein barockes Gebäudeensemble in Wien, Österreich, das im 18. Jahrhundert als Sommerresidenz für Prinz Eugen von Savoyen erbaut wurde. Es besteht aus den Oberen und Unteren Belvedere-Schlössern, die von einem wunderschönen Garten verbunden sind. Heute ist es eine beliebte Touristenattraktion und Kunstmuseum, das Werke berühmter österreichischer Künstler wie Gustav Klimt und Egon Schiele ausstellt.",
+        findus_desc4:
+          "Der Stephansdom ist eine gotische Kathedrale in Wien, Österreich. Sein markanter Turm ragt 136 Meter hoch auf und er verfügt über kunstvoll gestaltete Bleiglasfenster, Gewölbedecken und Altarbilder. Die Kathedrale hat eine reiche Geschichte als religiöses und kulturelles Wahrzeichen und ist auch heute noch ein beliebtes Reiseziel für Besucher.",
+        findus_desc5:
+          "Das Wiener Opernhaus ist ein weltberühmtes Opernhaus in Wien, Österreich. Es wurde 1869 eröffnet und beherbergt die Wiener Staatsoper und das Wiener Philharmonische Orchester. Das neorenaissance Gebäude hat eine Sitzkapazität von über 2.200 und ist für seine prächtige Architektur bekannt.",
       },
     },
     it: {
@@ -581,6 +683,21 @@ i18n.use(initReactI18next).init({
         discover_p2:
           "Rimanete nella nostra sala colazione e gustate una ricca colazione a buffet prima di partire per esplorare la città dalla nostra favolosa posizione.",
         photogallery: "Galleria fotografica",
+        findus_title1: "Palazzo Schönbrunn",
+        findus_title2: "Il Palazzo Imperiale di Hofburg",
+        findus_title3: "Palazzo del Belvedere",
+        findus_title4: "Cattedrale di Santo Stefano",
+        findus_title5: "Teatro dell'Opera di Vienna",
+        findus_desc1:
+          "Il Palazzo Schönbrunn è un palazzo barocco a Vienna, Austria, costruito come residenza estiva per gli Asburgo. Dispone di oltre 1.400 stanze, arredi lussuosi e decorazioni intricate che mostrano l'opulenza degli Asburgo. I giardini del palazzo presentano prati, aiuole fiorite, fontane e punti di riferimento come la Fontana di Nettuno e la Gloriette. È una popolare attrazione turistica e un sito del patrimonio mondiale dell'UNESCO.",
+        findus_desc2:
+          "Il Palazzo di Hofburg è un grande complesso di palazzi nel centro di Vienna, Austria. Ha servito come residenza della dinastia degli Asburgo e del governo austriaco per oltre 700 anni. Il palazzo presenta impressionanti architetture barocche e gotiche ed è sede di diversi musei, tra cui gli appartamenti imperiali, il Museo Sisi e la Biblioteca Nazionale Austriaca. Oggi, è una delle attrazioni turistiche più popolari di Vienna, offrendo uno sguardo sulla ricca storia e cultura dell'Austria.",
+        findus_desc3:
+          "Il Palazzo del Belvedere è un complesso di edifici in stile barocco a Vienna, Austria, costruito come residenza estiva per il principe Eugenio di Savoia nel XVIII secolo. È composto dai palazzi di Belvedere superiore e inferiore, collegati da un bellissimo giardino. Oggi, è una popolare attrazione turistica e un museo d'arte, che espone opere di famosi artisti austriaci come Gustav Klimt ed Egon Schiele.",
+        findus_desc4:
+          "La Cattedrale di Santo Stefano, o Stephansdom, è una cattedrale in stile gotico a Vienna, Austria. La sua iconica guglia si erge a 136 metri di altezza e vanta finestre con vetrate artistiche intricate, soffitti a volta e altari ornati. La cattedrale ha una ricca storia come punto di riferimento religioso e culturale e rimane una popolare destinazione per i visitatori oggi.",
+        findus_desc5:
+          "Il Teatro dell'Opera di Vienna è un famoso teatro d'opera situato a Vienna, in Austria. È stato inaugurato nel 1869 ed è la sede dell'Opera di Stato di Vienna e dell'Orchestra Filarmonica di Vienna. L'edificio in stile neorinascimentale ha una capacità di oltre 2.200 posti a sedere ed è noto per la sua architettura ornamentale.",
       },
     },
   },

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
+import { useTranslation } from "react-i18next";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 // Images
 import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
+
   const navigation = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const path = useLocation().pathname;
@@ -15,6 +18,9 @@ const Navbar = () => {
     window.innerWidth,
     window.innerHeight,
   ]);
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -96,31 +102,33 @@ const Navbar = () => {
       >
         {" "}
         <Link to="/" className="nav-link" onClick={handleClose}>
-          <li className={`routes ${path === "/" ? "active" : ""}`}>Home</li>
+          <li className={`routes ${path === "/" ? "active" : ""}`}>
+            {t("home")}
+          </li>
         </Link>
         <Link to="/rooms" className="nav-link" onClick={handleClose}>
           <li className={`routes ${path === "/rooms" ? "active" : ""}`}>
-            Rooms
+            {t("rooms")}
           </li>
         </Link>
         <Link to="/services" className="nav-link" onClick={handleClose}>
           <li className={`routes ${path === "/services" ? "active" : ""}`}>
-            Services
+            {t("services")}
           </li>
         </Link>
         <Link to="/findus" className="nav-link" onClick={handleClose}>
           <li className={`routes ${path === "/findus" ? "active" : ""}`}>
-            Find Us
+            {t("findus")}
           </li>
         </Link>
         <Link to="/discover" className="nav-link" onClick={handleClose}>
           <li className={`routes ${path === "/discover" ? "active" : ""}`}>
-            Discover
+            {t("discover")}
           </li>
         </Link>
         <Link to="/contact" className="nav-link" onClick={handleClose}>
           <li className={`routes ${path === "/contact" ? "active" : ""}`}>
-            Contact
+            {t("contact")}
           </li>
         </Link>
       </ul>
@@ -140,7 +148,7 @@ const Navbar = () => {
               <div className="login-img">
                 <HiUserCircle className="nav-image" />
               </div>
-              <div className="routes login">Log in</div>
+              <div className="routes login">{t("login")}</div>
             </Link>
           </div>
         )}

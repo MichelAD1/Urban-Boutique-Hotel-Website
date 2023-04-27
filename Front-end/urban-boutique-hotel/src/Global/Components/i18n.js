@@ -97,6 +97,8 @@ i18n.use(initReactI18next).init({
           "Begin your day with a delicious and nutritious breakfast, freshly prepared daily. We serve a buffet in our breakfast room from 07:30 to 10:00. If you prefer a 'breakfast to go', our staff will gladly prepare it for you.",
         submit_1: "Thank you for booking at our hotel",
         submit_2: "You will be redirected to the home page shortly",
+        pagenotfound: "The page you’re looking for doesn’t exist.",
+        goback: "Go back",
       },
     },
     es: {
@@ -189,6 +191,8 @@ i18n.use(initReactI18next).init({
           "Comienza tu día con un desayuno delicioso y nutritivo, recién preparado todos los días. Servimos un buffet en nuestra sala de desayunos de 07:30 a 10:00. Si prefieres un 'desayuno para llevar', nuestro personal lo preparará con mucho gusto para ti.",
         submit_1: "Gracias por reservar en nuestro hotel",
         submit_2: "En breve serás redirigido a la página principal",
+        pagenotfound: "La página que buscas no existe.",
+        goback: "Volver",
       },
     },
     fr: {
@@ -281,6 +285,8 @@ i18n.use(initReactI18next).init({
           "Commencez votre journée avec un petit-déjeuner délicieux et nutritif, fraîchement préparé tous les jours. Nous servons un buffet dans notre salle de petit-déjeuner de 07h30 à 10h00. Si vous préférez un 'petit-déjeuner à emporter', notre personnel se fera un plaisir de le préparer pour vous.",
         submit_1: "Merci d'avoir réservé dans notre hôtel",
         submit_2: "Vous serez bientôt redirigé vers la page d'accueil",
+        pagenotfound: "La page que vous recherchez n'existe pas.",
+        goback: "Retourner",
       },
     },
     de: {
@@ -373,6 +379,8 @@ i18n.use(initReactI18next).init({
           "Beginnen Sie Ihren Tag mit einem köstlichen und nahrhaften Frühstück, das täglich frisch zubereitet wird. Wir servieren ein Buffet in unserem Frühstücksraum von 07:30 bis 10:00 Uhr. Wenn Sie ein 'Frühstück zum Mitnehmen' bevorzugen, bereitet unser Personal es Ihnen gerne zu.",
         submit_1: "Vielen Dank für Ihre Buchung in unserem Hotel",
         submit_2: "Sie werden in Kürze zur Startseite weitergeleitet",
+        pagenotfound: "Die von Ihnen gesuchte Seite existiert nicht.",
+        goback: "Zurück",
       },
     },
     it: {
@@ -464,6 +472,8 @@ i18n.use(initReactI18next).init({
           "Inizia la tua giornata con una deliziosa e nutriente colazione, preparata fresca ogni giorno. Serviamo un buffet nella nostra sala colazioni dalle 7:30 alle 10:00. Se preferisci una 'colazione da portare via', il nostro personale sarà lieto di preparartela.",
         submit_1: "Grazie per aver prenotato presso il nostro hotel",
         submit_2: "Verrai reindirizzato alla pagina principale tra poco",
+        pagenotfound: "La pagina che stai cercando non esiste.",
+        goback: "Torna indietro",
       },
     },
   },

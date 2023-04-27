@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+// API
+import GetRoom from "../../api-client/Rooms/GetRoom";
+
 const ReservationItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
@@ -13,11 +16,26 @@ const ReservationItem = () => {
 	const [requests, setRequests] = useState("");
 	const [customer_name, setCustomerName] = useState("");
 
+	const [roomId, setRoomId] = useState("");
+
 	const [edit, setEdit] = useState(false);
+	const [rooms, setRooms] = useState(false);
+	const [unavailableDates, setUnavailableDates] = useState([]);
+	const [availableDates, setAvailableDates] = useState([]);
 
 	useEffect(() => {
 		if (data) {
 			handleClose();
+			const reqRooms = GetRoom();
+			reqRooms.then((res) => {
+				if (res) {
+					if (res.length > 0) {
+						setRooms(res);
+						setUnavailableDates(res.occupied_dates);
+						setAvailableDates(res.free_dates);
+					}
+				}
+			});
 		}
 	}, [data]);
 
@@ -28,8 +46,6 @@ const ReservationItem = () => {
 	const handleClose = () => {
 		setEdit(false);
 
-		console.log(data);
-
 		setCheckin(data.reservation_date);
 		setCheckout(data.reservation_end);
 		setRoom_name(data.room_object.title);
@@ -37,6 +53,7 @@ const ReservationItem = () => {
 		setStatus(data.status);
 		setRequests(data.requests);
 		setCustomerName(data.customer_object.email);
+		setRoomId(data.room_object.id);
 	};
 
 	const handleSubmit = () => {
@@ -108,19 +125,16 @@ const ReservationItem = () => {
 							{edit && (
 								<select
 									className='input-dropdown'
-									value={room_name}
-									onChange={(e) => setRoom_name(e.target.value)}>
-									<option value=''>Select room</option>
-									<option value='Room 1'>Room 1</option>
-									<option value='Room 2'>Room 2</option>
-									<option value='Room 3'>Room 3</option>
-									<option value='Room 4'>Room 4</option>
-									<option value='Room 5'>Room 5</option>
-									<option value='Room 6'>Room 6</option>
-									<option value='Room 7'>Room 7</option>
-									<option value='Room 8'>Room 8</option>
-									<option value='Room 9'>Room 9</option>
-									<option value='Room 10'>Room 10</option>
+									value={roomId}
+									onChange={(e) => setRoomId(e.target.value)}>
+									<option value='' hidden>
+										Select room
+									</option>
+									{rooms.map((room) => (
+										<option key={room.room.id} value={room.room.id}>
+											{room.room.title}
+										</option>
+									))}
 								</select>
 							)}
 						</div>

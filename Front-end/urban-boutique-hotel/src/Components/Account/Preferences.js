@@ -12,10 +12,6 @@ const Preferences = () => {
     handleCancel();
   }, []);
   useEffect(() => {
-    if (!localStorage.getItem("Translate")) {
-      localStorage.setItem("Translate", "en");
-      localStorage.setItem("Lg", "English");
-    }
     i18n.changeLanguage(localStorage.getItem("Translate"));
     setLanguage(localStorage.getItem("Lg"));
   }, [localStorage.getItem("Translate")]);

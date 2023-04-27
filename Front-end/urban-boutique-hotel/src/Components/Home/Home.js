@@ -8,13 +8,14 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../Global/Components/Footer";
 import SingleRoom from "../Rooms/SingleRoom";
 import Reviews from "../../Global/Components/Reviews";
+import { useTranslation } from "react-i18next";
 
 //APIS
 import GetHomePage from "../../api-client/Home/GetHomePage";
 // Images
 
 const Home = () => {
-  const navigation = useNavigate();
+  const { t, i18n } = useTranslation();
   const [rooms, setRooms] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,6 +39,15 @@ const Home = () => {
       localStorage.setItem("shouldReload", "true");
     }
   }
+  //Translation handler
+  useEffect(() => {
+    if (!localStorage.getItem("Translate")) {
+      localStorage.setItem("Translate", "en");
+      localStorage.setItem("Lg", "English");
+    }
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+    setLanguage(localStorage.getItem("Lg"));
+  }, [localStorage.getItem("Translate")]);
 
   //Api handler
   const {

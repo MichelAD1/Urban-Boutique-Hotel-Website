@@ -154,14 +154,44 @@ const EmployeeItem = () => {
 			alert("Please fill in all fields");
 			return;
 		}
-		console.log(reqData);
+		console.log("adding employee");
 	}
 
 	function handleEdit(e) {
 		e.preventDefault();
-		setErr("");
-		setEdit(false);
-		console.log("Edit Employee");
+
+		const reqData = {
+			username: username,
+			name: name,
+			email: email,
+			dob: dob,
+			gender: gender,
+			position: position,
+			password: password,
+		};
+
+		const check_empty = checkEmpty(reqData);
+		if (!check_empty) {
+			alert("Please fill in all fields");
+			return;
+		}
+		const sentData = checkEqual(reqData, isValid.data);
+		if (!sentData) {
+			alert("No changes detected");
+			return;
+		}
+		sentData.employeeid = isValid.data.id;
+		const response = EditEmployee(reqData);
+		response.then((res) => {
+			if (res.message === "eddited succesfully") {
+				const new_data = res;
+				loc.state = { data: new_data };
+				setIsValid(loc.state);
+				setEdit(false);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 	}
 
 	return (

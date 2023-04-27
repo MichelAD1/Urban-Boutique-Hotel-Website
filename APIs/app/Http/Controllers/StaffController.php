@@ -17,11 +17,20 @@ class StaffController extends Controller
         if($request->has("username")){
             $userinfo->username=$request->username;
         }
+        if($request->has("name")){
+            $userinfo->name=$request->name;
+        }
         if($request->has("password")){
             $userinfo->password=$request->password;
         }
         if($request->has("email")){
             $userinfo->email=$request->email;
+        }
+        if($request->has("dob")){
+            $userinfo->dob=$request->dob;
+        }
+        if($request->has("gender")){
+            $userinfo->gender=$request->gender;
         }
         if($request->has("position")){
             $employee->position = $request->position;

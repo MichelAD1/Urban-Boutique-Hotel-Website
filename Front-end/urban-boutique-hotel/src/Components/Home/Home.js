@@ -46,7 +46,6 @@ const Home = () => {
       localStorage.setItem("Lg", "English");
     }
     i18n.changeLanguage(localStorage.getItem("Translate"));
-    setLanguage(localStorage.getItem("Lg"));
   }, [localStorage.getItem("Translate")]);
 
   //Api handler

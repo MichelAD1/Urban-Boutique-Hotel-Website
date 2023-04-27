@@ -46,21 +46,22 @@ class StaffController extends Controller
         }
     }
     public function banEmployee($employeeid){
-        $user=Auth::user();
-        $employee = Staff::where("user_id",$user->id)->first();
-        if($employee->position=="admin"){
-            $target=User::where('id',$employeeid)->first();
-            Staff::where('user_id',$target->id)->delete();
-            if($target->banned=1){
+            $target = User::find($employeeid);
+            $employee = Staff::find($target->id);
+            if($target->banned==1){
                 $target->banned=0;
             }else{
                 $target->banned=1;
             }
 
-            $target->save();
-            return "sucess";
-        }
-        return "Failed";
+            if($target->save()){
+                return response()->json([
+                    'message'=>"banned succesfully",
+                    "user"=>$target,
+                    "staff"=>$employee,
+                ]);
+            }
+            return "Failed";
     }
     public function getRevenue(){
         $revenue = DB::table('customer_reserves_room')->join("rooms",'rooms.id','=','customer_reserves_room.room_id')

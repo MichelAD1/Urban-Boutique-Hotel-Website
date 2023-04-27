@@ -7,7 +7,7 @@ import ReactModal from "react-modal";
 // API
 import AddEmployee from "../../api-client/Employees/AddEmployee";
 import EditEmployee from "../../api-client/Employees/EditEmployee";
-import DeleteEmployee from "../../api-client/Employees/DeleteEmployee";
+import BanEmployee from "../../api-client/Employees/BanEmployee";
 
 // Functions
 import checkEmpty from "../../Global/Functions/CheckEmpty";
@@ -25,7 +25,7 @@ const EmployeeItem = () => {
 	const [gender, setGender] = useState("Male");
 	const [position, setPosition] = useState("");
 	const [password, setPassword] = useState("");
-	const [err, setErr] = useState("");
+	const [ban, setBan] = useState("");
 
 	const [edit, setEdit] = useState(false);
 
@@ -111,15 +111,26 @@ const EmployeeItem = () => {
 		setIsModalOpen(true);
 	};
 
-	const handleDelete = () => {
+	const handleDelete = (e) => {
+		e.preventDefault();
 		openModal();
 	};
 
 	const handleConfirmDelete = () => {
 		let user_id = isValid.data.id;
-		const response = DeleteEmployee(user_id);
+		const response = BanEmployee(user_id);
 		response.then((res) => {
-			navigate("/employees");
+			if (res.message === "banned succesfully") {
+				const new_data = mergeJson(res.user, res.staff);
+				if (res.user.banned === 0) {
+					setBan("Ban");
+				} else {
+					setBan("Unban");
+				}
+				loc.state = { data: new_data };
+			} else {
+				alert("Something went wrong");
+			}
 		});
 		closeModal();
 	};
@@ -137,6 +148,11 @@ const EmployeeItem = () => {
 			setDob(formattedDate());
 			setGender(isValid.data.gender);
 			setPosition(isValid.data.position);
+			if (isValid.data.banned === 0) {
+				setBan("Ban");
+			} else {
+				setBan("Unban");
+			}
 			setEdit(false);
 		} else {
 			navigate("/employees");
@@ -214,7 +230,6 @@ const EmployeeItem = () => {
 			} else {
 				alert("Something went wrong");
 			}
-			console.log(res);
 		});
 	}
 
@@ -233,8 +248,8 @@ const EmployeeItem = () => {
 					{isValid && <h2>Employee #{isValid.data.id}</h2>}
 					{!isValid && <h2>Add Employee</h2>}
 					{isValid && (
-						<button className='button' onClick={() => handleDelete()}>
-							Delete
+						<button className='button' onClick={(e) => handleDelete(e)}>
+							{ban}
 						</button>
 					)}
 					{!edit && isValid && (
@@ -419,7 +434,7 @@ const EmployeeItem = () => {
 						Are you sure you want to remove this room? This action cannot be
 						undone.
 					</p>
-					<button onClick={handleConfirmDelete}>Yes</button>
+					<button onClick={() => handleConfirmDelete()}>Yes</button>
 					<button onClick={closeModal}>No</button>
 				</div>
 			</ReactModal>

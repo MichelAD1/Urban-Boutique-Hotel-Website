@@ -111,6 +111,13 @@ i18n.use(initReactI18next).init({
         con_name: "Name",
         con_subject: "Subject",
         con_message: "Message",
+        discover_w1: "RAISING COMFOMRT TO THE HIGHEST LEVEL",
+        discover_w2: "Discover the Hotel",
+        discover_p:
+          "Our pension is located in a typical Wilhelminian style house on the Mariahilferstrasse. The guesthouse is spread over 3 floors and  offers 30 rooms &amp; 2 apartments with different room &amp; price categories. Each of our rooms is different but furnished with  attention to detail. High-quality mattresses and individual furniture identify us.",
+        discover_p2:
+          "Linger in our breakfast room and enjoy a rich buffet breakfast before setting out to explore the city from our fabulous location.",
+        photogallery: "Photo Gallery",
       },
     },
     es: {
@@ -229,6 +236,13 @@ i18n.use(initReactI18next).init({
         con_name: "Nombre",
         con_subject: "Asunto",
         con_message: "Mensaje",
+        discover_w1: "ELEVANDO LA COMODIDAD AL NIVEL MÁS ALTO",
+        discover_w2: "Descubre el hotel",
+        discover_p:
+          "Nuestra pensión se encuentra en una típica casa de estilo Wilhelminiano en la calle Mariahilferstrasse. La pensión se extiende sobre 3 plantas y ofrece 30 habitaciones y 2 apartamentos con diferentes categorías de habitaciones y precios. Cada una de nuestras habitaciones es diferente pero está amueblada con atención al detalle. Colchones de alta calidad y muebles individuales nos identifican.",
+        discover_p2:
+          "Permanezca en nuestra sala de desayunos y disfrute de un rico desayuno buffet antes de salir a explorar la ciudad desde nuestra fabulosa ubicación.",
+        photogallery: "Galería de fotos",
       },
     },
     fr: {
@@ -335,6 +349,13 @@ i18n.use(initReactI18next).init({
         con_name: "Nom",
         con_subject: "Sujet",
         con_message: "Message",
+        discover_w1: "ÉLÉVATION DU CONFORT AU PLUS HAUT NIVEAU",
+        discover_w2: "Découvrez l'hôtel",
+        discover_p:
+          "Notre pension est située dans une maison typique de style wilhelmien sur la Mariahilferstrasse. La maison d'hôtes s'étend sur 3 étages et propose 30 chambres et 2 appartements avec différentes catégories de chambres et de prix. Chacune de nos chambres est différente mais meublée avec une grande attention aux détails. Des matelas de haute qualité et des meubles individuels nous identifient.",
+        discover_p2:
+          "Restez dans notre salle de petit-déjeuner et profitez d'un délicieux petit-déjeuner buffet avant de partir explorer la ville depuis notre fabuleux emplacement.",
+        photogallery: "Galerie de photos",
       },
     },
     de: {
@@ -441,6 +462,13 @@ i18n.use(initReactI18next).init({
         con_name: "Name",
         con_subject: "Betreff",
         con_message: "Nachricht",
+        discover_w1: "KOMFORT AUF HÖCHSTEM NIVEAU",
+        discover_w2: "Entdecken Sie das Hotel",
+        discover_p:
+          "Unsere Pension befindet sich in einem typischen Wilhelminischen Stilhaus an der Mariahilferstraße. Das Gästehaus erstreckt sich über 3 Etagen und bietet 30 Zimmer und 2 Apartments mit unterschiedlichen Zimmer- und Preis-Kategorien. Jedes unserer Zimmer ist unterschiedlich, aber mit Liebe zum Detail eingerichtet. Hochwertige Matratzen und individuelle Möbel zeichnen uns aus.",
+        discover_p2:
+          "Verweilen Sie in unserem Frühstücksraum und genießen Sie ein reichhaltiges Frühstücksbuffet, bevor Sie von unserem fabelhaften Standort aus die Stadt erkunden.",
+        photogallery: "Fotogalerie",
       },
     },
     it: {
@@ -546,6 +574,13 @@ i18n.use(initReactI18next).init({
         con_name: "Nome",
         con_subject: "Oggetto",
         con_message: "Messaggio",
+        discover_w1: "ALZARE IL COMFORT AL LIVELLO PIÙ ALTO",
+        discover_w2: "Scopri l'hotel",
+        discover_p:
+          "La nostra pensione si trova in una tipica casa in stile Wilhelminiano sulla Mariahilferstrasse. La pensione si estende su 3 piani e offre 30 camere e 2 appartamenti con diverse categorie di camere e prezzi. Ogni una delle nostre camere è diversa ma arredata con attenzione ai dettagli. Materassi di alta qualità e mobili individuali ci identificano.",
+        discover_p2:
+          "Rimanete nella nostra sala colazione e gustate una ricca colazione a buffet prima di partire per esplorare la città dalla nostra favolosa posizione.",
+        photogallery: "Galleria fotografica",
       },
     },
   },

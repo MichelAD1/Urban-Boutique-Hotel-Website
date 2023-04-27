@@ -23,20 +23,20 @@ const Reservations = () => {
 			accessor: "id",
 		},
 		{
-			Header: "Customer Name",
-			accessor: "customer_name",
+			Header: "Customer Email",
+			accessor: "customer_object.email",
 		},
 		{
 			Header: "Room",
-			accessor: "room_name",
+			accessor: "room_object.title",
 		},
 		{
 			Header: "Check-in",
-			accessor: "checkin",
+			accessor: "reservation_date",
 		},
 		{
 			Header: "Check-out",
-			accessor: "checkout",
+			accessor: "reservation_end",
 		},
 		{
 			Header: "Payment amount",
@@ -58,8 +58,8 @@ const Reservations = () => {
 	useEffect(() => {
 		if (reservationData) {
 			console.log(reservationData);
-			if (reservationData.data.length > 0) {
-				setData(reservationData);
+			if (reservationData.reservations.data.length > 0) {
+				setData(reservationData.reservations);
 			} else {
 				setErr("No staff found");
 			}

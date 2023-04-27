@@ -53,8 +53,14 @@ class StaffController extends Controller
                     ->sum("rooms.rent");
         return $revenue;
     }
-    public function searchEmployee($employeeid){
-        $employee = Staff::join('users','staff.user_id','=','users.id')->where('users.id','=',$employeeid)->first();
+    public function searchEmployee(Request $request){ //name or username
+        if($request->has('name')){
+            $employee = Staff::join('users','staff.user_id','=','users.id')->where('users.name','=',$request->name)->first();
+        }
+        else if($request->has('username')){
+            $employee = Staff::join('users','staff.user_id','=','users.id')->where('users.username','=',$request->username)->first();
+        }
+
         return $employee;
     }
     public function getEmployees(){

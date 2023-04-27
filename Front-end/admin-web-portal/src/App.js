@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import ReactModal from "react-modal";
 
 // Context

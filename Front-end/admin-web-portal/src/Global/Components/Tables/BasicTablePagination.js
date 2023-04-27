@@ -90,6 +90,26 @@ const Table = ({ reqData, columns, redirect, err }) => {
 		}
 	};
 
+	if (reqData.length === 0) {
+		return (
+			<>
+				<table {...getTableProps()} className='basic-table'>
+					<thead>
+						{headerGroups.map((headerGroup) => (
+							<tr {...headerGroup.getHeaderGroupProps()}>
+								{headerGroup.headers.map((column) => (
+									<th {...column.getHeaderProps()} className='basic-heading'>
+										{column.render("Header")}
+									</th>
+								))}
+							</tr>
+						))}
+					</thead>
+				</table>
+			</>
+		);
+	}
+
 	return (
 		<>
 			<table {...getTableProps()} className='basic-table'>

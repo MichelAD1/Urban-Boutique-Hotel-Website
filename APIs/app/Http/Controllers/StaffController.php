@@ -10,17 +10,27 @@ use Illuminate\Support\Facades\DB;
 
 class StaffController extends Controller
 {
+
     public function editInformation(Request $request){
         $userinfo = User::find($request->employeeid);
         $employee = Staff::where("user_id",$userinfo->id)->first();
         if($request->has("username")){
             $userinfo->username=$request->username;
         }
+        if($request->has("name")){
+            $userinfo->name=$request->name;
+        }
         if($request->has("password")){
             $userinfo->password=$request->password;
         }
         if($request->has("email")){
             $userinfo->email=$request->email;
+        }
+        if($request->has("dob")){
+            $userinfo->dob=$request->dob;
+        }
+        if($request->has("gender")){
+            $userinfo->gender=$request->gender;
         }
         if($request->has("position")){
             $employee->position = $request->position;
@@ -58,7 +68,8 @@ class StaffController extends Controller
         return $employee;
     }
     public function getEmployees(){
-        return Staff::join('users','staff.user_id','=','users.id')->get();
+        $user = Auth::user();
+        return Staff::join('users','staff.user_id','=','users.id')->where('users.id','!=', $user->id)->paginate(14);
     }
 
 

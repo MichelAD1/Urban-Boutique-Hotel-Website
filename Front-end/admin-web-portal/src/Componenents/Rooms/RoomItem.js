@@ -5,14 +5,15 @@ import ReactModal from "react-modal";
 // API
 import AddRoom from "../../api-client/Rooms/AddRoom";
 import EditRoom from "../../api-client/Rooms/EditRoom";
+import DeleteRoom from "../../api-client/Rooms/DeleteRoom";
 
 //Icons
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 
-// Images
-import delete_icon from "../../assets/icons/cancel-icon.svg";
-import DeleteRoom from "../../api-client/Rooms/DeleteRoom";
+// Functions
+import checkEqual from "../../Global/Functions/CheckEqual";
+import checkEmpty from "../../Global/Functions/CheckEmpty";
 
 const RoomItem = () => {
 	const loc = useLocation();
@@ -55,36 +56,16 @@ const RoomItem = () => {
 		}
 	}, []);
 
-	// Check data
-	const checkAddValid = (data) => {
-		for (let prop in data) {
-			if (
-				data[prop] === "" ||
-				data[prop] === null ||
-				data[prop] === undefined ||
-				(typeof data[prop] === "number" && isNaN(data[prop]))
-			) {
-				return false;
-			}
-		}
-		return true;
+	// Merge data
+	const mergeJson = (json1, json2) => {
+		var result = {
+			json1,
+			json2,
+		};
+		return result;
 	};
 
-	const checkEditValid = (data) => {
-		for (let prop in data) {
-			if (data[prop] !== "id") {
-				if (data[prop] === isValid.data.room[prop]) {
-					delete data[prop];
-				}
-			}
-		}
-		if (Object.keys(data).length > 1) {
-			return data;
-		} else {
-			return false;
-		}
-	};
-
+	// Handle Edit, Cancel, Submit
 	const handleCancel = () => {
 		if (isValid) {
 			setEdit(false);
@@ -110,14 +91,6 @@ const RoomItem = () => {
 		} else {
 			navigate("/rooms");
 		}
-	};
-
-	const mergeJson = (json1, json2) => {
-		var result = {
-			json1,
-			json2,
-		};
-		return result;
 	};
 
 	const handleSubmit = (e) => {
@@ -149,7 +122,7 @@ const RoomItem = () => {
 			images: reqImages,
 		};
 
-		const validData = checkAddValid(data);
+		const validData = checkEmpty(data);
 
 		if (!validData && !imagesChanged) {
 			alert("Please fill all the fields");
@@ -174,7 +147,6 @@ const RoomItem = () => {
 		e.preventDefault();
 
 		const data = {
-			room_id: isValid.data.room.id,
 			title: name,
 			description: description,
 			rent: parseInt(price),
@@ -193,9 +165,10 @@ const RoomItem = () => {
 			floor: floor,
 		};
 
-		if (checkAddValid(data)) {
-			const reqData = checkEditValid(data);
+		if (checkEmpty(data)) {
+			const reqData = checkEqual(data, isValid.data.room);
 			if (reqData) {
+				reqData.room_id = isValid.data.room.id;
 				const response = EditRoom(reqData);
 				response.then((res) => {
 					if (res.message === "room added successfully") {

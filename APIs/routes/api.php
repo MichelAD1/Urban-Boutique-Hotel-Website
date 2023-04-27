@@ -110,6 +110,8 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::get('ban/{employeeid}',[StaffController::class,'banEmployee']);
             Route::get('search/{employeeid}',[StaffController::class,'searchEmployee']);
             Route::get('get',[StaffController::class,'getEmployees']);
+            Route::post('add',[StaffController::class,'addEmployee']);
+
         });
 
     });

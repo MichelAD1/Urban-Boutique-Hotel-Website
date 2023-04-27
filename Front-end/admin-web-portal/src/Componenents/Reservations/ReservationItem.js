@@ -96,11 +96,12 @@ const ReservationItem = () => {
 							{!edit && (
 								<p
 									style={{ cursor: "pointer" }}
-									onClick={() =>
+									onClick={() => {
+										data.room = data.room_object;
 										handleRedirect("/room/profile", {
-											state: { data: data.room_object },
-										})
-									}>
+											state: { data: data },
+										});
+									}}>
 									{room_name}
 								</p>
 							)}

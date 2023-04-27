@@ -68,13 +68,11 @@ const Reservations = () => {
 	}, [reservationData, status]);
 
 	if (loading) {
-		if (loading) {
-			return (
-				<div className='container-buffer'>
-					<div className='buffer-loader home'></div>
-				</div>
-			);
-		}
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
 	}
 
 	return (

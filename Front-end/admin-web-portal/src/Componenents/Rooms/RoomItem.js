@@ -20,6 +20,7 @@ const RoomItem = () => {
 	const navigate = useNavigate();
 
 	const [edit, setEdit] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const [isValid, setIsValid] = useState(loc.state);
 
@@ -88,6 +89,7 @@ const RoomItem = () => {
 			setBreakfast(isValid.data.room.breakfast);
 			setPets(isValid.data.room.pets);
 			setFloor(isValid.data.room.floor);
+			setLoading(false);
 		} else {
 			navigate("/rooms");
 		}
@@ -246,6 +248,14 @@ const RoomItem = () => {
 		setImages(newImages);
 		setImagesChanged(true);
 	};
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
 
 	return (
 		<div className='container'>

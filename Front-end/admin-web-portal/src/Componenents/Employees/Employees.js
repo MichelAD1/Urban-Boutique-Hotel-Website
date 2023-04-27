@@ -49,7 +49,7 @@ export default function Employees() {
 			},
 			{
 				Header: "Full name",
-				accessor: "full_name",
+				accessor: "name",
 			},
 			{
 				Header: "Email",

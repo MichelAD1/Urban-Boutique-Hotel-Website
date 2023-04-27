@@ -58,7 +58,8 @@ class StaffController extends Controller
         return $employee;
     }
     public function getEmployees(){
-        return Staff::join('users','staff.user_id','=','users.id')->paginate(14);
+        $user = Auth::user();
+        return Staff::join('users','staff.user_id','=','users.id')->where('users.id','!=', $user->id)->paginate(14);
     }
 
 

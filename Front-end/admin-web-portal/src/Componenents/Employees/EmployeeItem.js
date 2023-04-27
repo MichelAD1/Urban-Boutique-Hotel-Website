@@ -21,18 +21,32 @@ const EmployeeItem = () => {
 	const [dob, setDob] = useState(new Date());
 	const [gender, setGender] = useState("Male");
 	const [position, setPosition] = useState("");
-	const [auth, setAuth] = useState("");
 	const [password, setPassword] = useState("");
 	const [err, setErr] = useState("");
 
 	const [edit, setEdit] = useState(false);
 
 	const authorizations = [
-		"super admin",
-		"content manager",
-		"user manager",
-		"reservation manager",
-		"default employee",
+		{
+			id: 1,
+			name: "Super admin",
+		},
+		{
+			id: 2,
+			name: "Content manager",
+		},
+		{
+			id: 3,
+			name: "User manager",
+		},
+		{
+			id: 4,
+			name: "Reservation manager",
+		},
+		{
+			id: 5,
+			name: "Default employee",
+		},
 	];
 
 	useEffect(() => {
@@ -44,19 +58,12 @@ const EmployeeItem = () => {
 	}, []);
 
 	function capitalizeFirstLetter(string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
+		if (string) {
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		}
 	}
 
-	function checkDatesAreEqual() {
-		const date1 = new Date(formattedDate());
-		const date2 = new Date(dob);
-		return (
-			date1.getDate() === date2.getDate() &&
-			date1.getMonth() === date2.getMonth() &&
-			date1.getFullYear() === date2.getFullYear()
-		);
-	}
-
+	// Date picker
 	const formattedDate = () => {
 		const parsedDate = new Date(isValid.data.dob);
 		const year = parsedDate.getFullYear();
@@ -87,59 +94,9 @@ const EmployeeItem = () => {
 		return formattedDate;
 	};
 
-	const checkChange = () => {
-		return !(
-			username === isValid.data.username &&
-			name === isValid.data.full_name &&
-			email === isValid.data.email &&
-			// checkDatesAreEqual() &&
-			gender === isValid.data.gender &&
-			position === isValid.data.position &&
-			password === ""
-		);
-	};
-
-	const dataToSend = () => {
-		const requestData = new FormData();
-		requestData.append("user_id", isValid.data.id);
-		if (username !== isValid.data.username) {
-			requestData.append("username", username);
-		}
-		if (name !== isValid.data.full_name) {
-			requestData.append("full_name", name);
-		}
-		if (email !== isValid.data.email) {
-			requestData.append("email", email);
-		}
-		if (gender !== isValid.data.gender) {
-			requestData.append("gender", gender);
-		}
-		if (!checkDatesAreEqual()) {
-			requestData.append("dob", dob);
-		}
-		if (position !== isValid.data.position) {
-			requestData.append("position", position);
-		}
-		if (password !== "") {
-			requestData.append("password", password);
-		}
-		return requestData;
-	};
-
-	const mergeJson = (obj1, obj2) => {
-		const obj3 = {};
-		for (const attrname in obj1) {
-			obj3[attrname] = obj1[attrname];
-		}
-		for (const attrname in obj2) {
-			obj3[attrname] = obj2[attrname];
-		}
-		return obj3;
-	};
-
+	// Modal
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	// Modal
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
@@ -161,15 +118,15 @@ const EmployeeItem = () => {
 		setIsModalOpen(false);
 	};
 
+	// Actions for edit, cancel and save
 	const handleCancel = () => {
 		if (isValid) {
 			setUsername(isValid.data.username);
-			setName(isValid.data.full_name);
+			setName(isValid.data.name);
 			setEmail(isValid.data.email);
-			// setDob(formattedDate());
+			setDob(formattedDate());
 			setGender(isValid.data.gender);
 			setPosition(isValid.data.position);
-			setAuth(isValid.data.authorization);
 			setEdit(false);
 		} else {
 			navigate("/employees");
@@ -178,54 +135,6 @@ const EmployeeItem = () => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		// setErr("");
-		// if (!isValid) {
-		// 	if (
-		// 		username === "" ||
-		// 		email === "" ||
-		// 		password === "" ||
-		// 		name === "" ||
-		// 		dob === "" ||
-		// 		position === "" ||
-		// 		gender === ""
-		// 	) {
-		// 		setErr("All fields are required.");
-		// 	} else if (password.length < 6) {
-		// 		setErr("Your password must be at least 6 characters long.");
-		// 	} else if (dob === null) {
-		// 		setErr("Date of birth is required.");
-		// 	} else {
-		// 		const response = AddEmployee(
-		// 			username,
-		// 			email,
-		// 			password,
-		// 			name,
-		// 			dob,
-		// 			position,
-		// 			gender,
-		// 		);
-		// 		response.then((res) => {
-		// 			console.log(res);
-		// 			if (res.status === "error") {
-		// 				if (res.message.username) {
-		// 					setErr(res.message.username);
-		// 				} else if (res.message.password) {
-		// 					setErr(res.message.password);
-		// 				} else if (res.message.number) {
-		// 					setErr(res.message.number);
-		// 				} else if (res.message.email) {
-		// 					setErr(res.message.email);
-		// 				} else if (res.message.dob) {
-		// 					setErr(res.message.dob);
-		// 				}
-		// 			} else {
-		// 				const new_data = mergeJson(res.user, res.user_details);
-		// 				navigate("/employee/profile", { state: { data: new_data } });
-		// 				window.location.reload();
-		// 			}
-		// 		});
-		// 	}
-		// }
 		setEdit(false);
 		console.log("Add Employee");
 	}
@@ -233,27 +142,6 @@ const EmployeeItem = () => {
 	function handleEdit(e) {
 		e.preventDefault();
 		setErr("");
-		// if (isValid) {
-		// 	const response = EditEmployee(dataToSend());
-		// 	response.then((res) => {
-		// 		if (res.status === "error") {
-		// 			if (res.message.username) {
-		// 				setErr(res.message.username);
-		// 			} else if (res.message.password) {
-		// 				setErr(res.message.password);
-		// 			} else if (res.message.number) {
-		// 				setErr(res.message.number);
-		// 			} else if (res.message.email) {
-		// 				setErr(res.message.email);
-		// 			}
-		// 		} else {
-		// 			const new_data = mergeJson(res.user, res.user_details);
-		// 			setIsValid({ data: new_data });
-		// 			loc.state = { data: new_data };
-		// 			alert("Changes saved");
-		// 		}
-		// 	});
-		// }
 		setEdit(false);
 		console.log("Edit Employee");
 	}
@@ -396,36 +284,20 @@ const EmployeeItem = () => {
 							<label>Position</label>
 						</div>
 						<div>
-							{!edit && <p>{position}</p>}
-							{edit && (
-								<input
-									type='text'
-									value={position}
-									className='input-box'
-									onChange={(e) => setPosition(e.target.value)}
-								/>
+							{!edit && (
+								<p>{authorizations.find((item) => item.id === 3).name}</p>
 							)}
-						</div>
-					</div>
-				</div>
-				<div className='edit-item'>
-					<div className='edit-info'>
-						<div>
-							<label>Authorization</label>
-						</div>
-						<div>
-							{!edit && <p>{capitalizeFirstLetter(auth)}</p>}
 							{edit && (
 								<select
-									value={auth}
+									value={position}
 									className='input-box'
-									onChange={(e) => setAuth(e.target.value)}>
+									onChange={(e) => setPosition(e.target.value)}>
 									<option value='' hidden>
-										Select authorization
+										Select position
 									</option>
-									{authorizations.map((auth, index) => (
-										<option key={index} value={auth}>
-											{capitalizeFirstLetter(auth)}
+									{authorizations.map((auth) => (
+										<option key={auth.id} value={auth.id}>
+											{auth.name}
 										</option>
 									))}
 								</select>

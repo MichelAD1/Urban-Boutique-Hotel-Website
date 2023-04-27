@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ReservationItem = () => {
 	const loc = useLocation();
@@ -28,17 +28,24 @@ const ReservationItem = () => {
 	const handleClose = () => {
 		setEdit(false);
 
-		setCheckin(data.checkin);
-		setCheckout(data.checkout);
-		setRoom_name(data.room_name);
+		console.log(data);
+
+		setCheckin(data.reservation_date);
+		setCheckout(data.reservation_end);
+		setRoom_name(data.room_object.title);
 		setAmount(data.amount);
 		setStatus(data.status);
 		setRequests(data.requests);
-		setCustomerName(data.customer_name);
+		setCustomerName(data.customer_object.email);
 	};
 
 	const handleSubmit = () => {
 		setEdit(false);
+	};
+
+	const navigate = useNavigate();
+	const handleRedirect = (url, state) => {
+		navigate(url, state);
 	};
 
 	return (
@@ -65,10 +72,18 @@ const ReservationItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info'>
 						<div>
-							<label>Customer name</label>
+							<label>Customer email</label>
 						</div>
 						<div>
-							<p>{customer_name}</p>
+							<p
+								style={{ cursor: "pointer" }}
+								onClick={() =>
+									handleRedirect("/user/profile", {
+										state: { data: data.customer_object },
+									})
+								}>
+								{customer_name}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -78,7 +93,17 @@ const ReservationItem = () => {
 							<label>Room name</label>
 						</div>
 						<div>
-							{!edit && <p>{room_name}</p>}
+							{!edit && (
+								<p
+									style={{ cursor: "pointer" }}
+									onClick={() =>
+										handleRedirect("/room/profile", {
+											state: { data: data.room_object },
+										})
+									}>
+									{room_name}
+								</p>
+							)}
 							{edit && (
 								<select
 									className='input-dropdown'

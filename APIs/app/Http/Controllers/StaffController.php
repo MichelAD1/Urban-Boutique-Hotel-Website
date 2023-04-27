@@ -15,7 +15,7 @@ class StaffController extends Controller
 
     public function editInformation(Request $request){
         $userinfo = User::find($request->employeeid);
-        $employee = Staff::where("user_id",$userinfo->id)->first();
+        $employee = Staff::find($request->employeeid);
         if($request->has("username")){
             $userinfo->username=$request->username;
         }
@@ -37,28 +37,31 @@ class StaffController extends Controller
         if($request->has("position")){
             $employee->position = $request->position;
         }
-        if($userinfo->save() && $employee->save()){
+        if($userinfo->save() || $employee->save()){
             return response()->json([
-                'message'=>"eddited succesfully"
+                'message'=>"eddited succesfully",
+                "user"=>$userinfo,
+                "staff"=>$employee,
             ]);
         }
     }
     public function banEmployee($employeeid){
-        $user=Auth::user();
-        $employee = Staff::where("user_id",$user->id)->first();
-        if($employee->position=="admin"){
-            $target=User::where('id',$employeeid)->first();
-            Staff::where('user_id',$target->id)->delete();
-            if($target->banned=1){
+            $target = User::find($employeeid);
+            $employee = Staff::find($target->id);
+            if($target->banned==1){
                 $target->banned=0;
             }else{
                 $target->banned=1;
             }
 
-            $target->save();
-            return "sucess";
-        }
-        return "Failed";
+            if($target->save()){
+                return response()->json([
+                    'message'=>"banned succesfully",
+                    "user"=>$target,
+                    "staff"=>$employee,
+                ]);
+            }
+            return "Failed";
     }
     public function getRevenue(){
         $revenue = DB::table('customer_reserves_room')->join("rooms",'rooms.id','=','customer_reserves_room.room_id')
@@ -83,8 +86,7 @@ class StaffController extends Controller
         $validation = Validator::make($request->all(), [
             'username' => 'required|string|min:6',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string',
-            'type' => 'required|int',
+            'password' => 'required|string|min:6',
 
         ]);
         if ($validation->fails()) {
@@ -107,16 +109,11 @@ class StaffController extends Controller
             'user_id'=>$user->id,
             'position'=>$request->position
         ]);
-        $token = Auth::login($user);
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
             'user' => $user,
             'staff'=>$staff,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
         ]);
 
     }

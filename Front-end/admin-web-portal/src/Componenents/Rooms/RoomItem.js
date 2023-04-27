@@ -147,7 +147,6 @@ const RoomItem = () => {
 		e.preventDefault();
 
 		const data = {
-			room_id: isValid.data.room.id,
 			title: name,
 			description: description,
 			rent: parseInt(price),
@@ -169,6 +168,7 @@ const RoomItem = () => {
 		if (checkEmpty(data)) {
 			const reqData = checkEqual(data, isValid.data.room);
 			if (reqData) {
+				reqData.room_id = isValid.data.room.id;
 				const response = EditRoom(reqData);
 				response.then((res) => {
 					if (res.message === "room added successfully") {

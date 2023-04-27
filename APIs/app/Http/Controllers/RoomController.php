@@ -213,8 +213,8 @@ class RoomController extends Controller
         ]);
     }
     public function getReservations(){
-        $reservations = DB::table('customer_reserves_room')->paginate(10);
-        foreach($reservations as $reservation){
+        $reservations = DB::table('customer_reserves_room')->paginate(14);
+        foreach($reservations->items() as $reservation){
             $customer = Customer::join('users','users.id','=','customers.user_id')->where('users.id','=',$reservation->customer_id)->first();
             $room = Room::find($reservation->room_id);
             $reservation['customer_object'] = $customer;
@@ -266,6 +266,6 @@ class RoomController extends Controller
         $reservations=DB::table('customer_reserves_room')->join('rooms','rooms.id','=','customer_reserves_room.room_id')->get();
         return $reservations;
     }
-    
-    
+
+
 }

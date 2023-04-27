@@ -4,11 +4,16 @@ import { useQuery } from "@tanstack/react-query";
 
 import RoomsList from "./RoomsList";
 import Footer from "../../Global/Components/Footer";
+import { useTranslation } from "react-i18next";
 
 //APIS
 import GetRooms from "../../api-client/Rooms/GetRooms";
 
 const Rooms = () => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   const [rooms, setRooms] = useState([]);
   const [tmpRooms, setTmpRooms] = useState([]);
   const [types, setTypes] = useState(["All"]);
@@ -100,7 +105,7 @@ const Rooms = () => {
     <>
       <div className="roomsHero">
         <div className="banner">
-          <h1>Our Rooms</h1>
+          <h1>{t("room_w")}</h1>
 
           <ScrollLink
             to="roomlist"
@@ -109,7 +114,7 @@ const Rooms = () => {
             offset={-100}
             className="btn-primary"
           >
-            Book your room
+            {t("bookroom")}
           </ScrollLink>
         </div>
       </div>
@@ -121,13 +126,13 @@ const Rooms = () => {
         <div>
           <section className="filter-container">
             <div className="section-title">
-              <h4>Search rooms</h4>
+              <h4>{t("searchroom")}</h4>
               <div />
             </div>
             <form className="filter-form">
               {/* select type */}
               <div className="form-group">
-                <label htmlFor="type">room type</label>
+                <label htmlFor="type">{t("roomtype")}</label>
                 <select
                   name="type"
                   id="type"
@@ -149,7 +154,7 @@ const Rooms = () => {
               {/* end of select type */}
               {/* guest */}
               <div className="form-group">
-                <label htmlFor="capacity">guests</label>
+                <label htmlFor="capacity">{t("guests")}</label>
                 <select
                   name="capacity"
                   id="capacity"
@@ -171,7 +176,9 @@ const Rooms = () => {
               {/* end of guest */}
               {/* rooms price */}
               <div className="form-group">
-                <label htmlFor="price">room price ${price}</label>
+                <label htmlFor="price">
+                  {t("roomprice")} ${price}
+                </label>
                 <input
                   type="range"
                   id="price"
@@ -199,7 +206,7 @@ const Rooms = () => {
                       setBreakfast(e.target.checked);
                     }}
                   />
-                  <label htmlFor="breakfast">breakfast</label>
+                  <label htmlFor="breakfast">{t("breakfast_r")}</label>
                 </div>
                 <div className="single-extra">
                   <input
@@ -212,7 +219,7 @@ const Rooms = () => {
                       setPets(e.target.checked);
                     }}
                   />
-                  <label htmlFor="pets">pets</label>
+                  <label htmlFor="pets">{t("pets")}</label>
                 </div>
               </div>
               {/* end of extras */}

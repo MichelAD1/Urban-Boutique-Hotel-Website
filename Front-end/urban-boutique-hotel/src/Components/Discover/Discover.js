@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Footer from "../../Global/Components/Footer";
 
 import { FaTimes } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 import aboutImage1 from "../../assets/images/about-image1.jpg";
 import aboutImage2 from "../../assets/images/about-image2.jpeg";
@@ -10,6 +11,11 @@ import galleryImage1 from "../../assets/images/gallery-image1.jpg";
 import galleryImage2 from "../../assets/images/gallery-image2.jpeg";
 
 const Discover = () => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
+
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -35,7 +41,7 @@ const Discover = () => {
     <>
       <div className="aboutHero">
         <div className="banner">
-          <h1>Discover</h1>
+          <h1>{t("discover")}</h1>
           <div></div>
           <ScrollLink
             to="about-section"
@@ -44,7 +50,7 @@ const Discover = () => {
             offset={-100}
             className="btn-primary"
           >
-            Welcome to Our Hotel
+            {t("home_w")}
           </ScrollLink>
         </div>
       </div>
@@ -60,21 +66,11 @@ const Discover = () => {
           </div>
           <div className="about-description">
             <div className="heading">
-              <h5>RAISING COMFOMRT TO THE HIGHEST LEVEL</h5>
+              <h5>{t("discover_w1")}</h5>
             </div>
-            <h2>Discover the Hotel</h2>
-            <p>
-              Our pension is located in a typical Wilhelminian style house on
-              the Mariahilferstrasse. The guesthouse is spread over 3 floors and
-              offers 30 rooms &amp; 2 apartments with different room &amp; price
-              categories. Each of our rooms is different but furnished with
-              attention to detail. High-quality mattresses and individual
-              furniture identify us.
-            </p>
-            <p>
-              Linger in our breakfast room and enjoy a rich buffet breakfast
-              before setting out to explore the city from our fabulous location.
-            </p>
+            <h2>{t("discover_w2")}</h2>
+            <p>{t("discover_p")}</p>
+            <p>{t("discover_p2")}</p>
           </div>
         </section>
       </div>
@@ -88,7 +84,7 @@ const Discover = () => {
       )}
 
       <div className="gallery">
-        <h2>Photo Gallery</h2>
+        <h2>{t("photogallery")}</h2>
         <div className="gallery-images">
           <div
             className="gallery-image"

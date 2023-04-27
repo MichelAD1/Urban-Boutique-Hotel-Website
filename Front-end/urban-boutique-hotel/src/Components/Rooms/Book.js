@@ -4,8 +4,13 @@ import galleryImage1 from "../../assets/images/gallery-image1.jpg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Footer from "../../Global/Components/Footer";
+import { useTranslation } from "react-i18next";
 
 const Book = () => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   const location = useLocation();
   const navigation = useNavigate();
   const [err, setErr] = useState("");
@@ -118,15 +123,15 @@ const Book = () => {
     event.preventDefault();
     setErr("");
     if (!validateEmail(email)) {
-      setErr("Please enter a valid email address");
+      setErr(t("err_email"));
       return;
     }
     if (!validatePhoneNumber(phone)) {
-      setErr("Please enter a valid phone number");
+      setErr(t("err_num"));
       return;
     }
     if (!validateRequest(special_request)) {
-      setErr("Special request message too long");
+      setErr(t("err_special"));
       return;
     }
 
@@ -171,7 +176,7 @@ const Book = () => {
         <div className="message-form book">
           <div className="message-header">
             <div className="room-display book">
-              <h1>Guest Details</h1>
+              <h1>{t("guestdetails")}</h1>
             </div>
           </div>
 
@@ -186,7 +191,7 @@ const Book = () => {
                   excludeDates={room.occupied_dates.map(
                     (date) => new Date(date)
                   )}
-                  placeholderText="Check In"
+                  placeholderText={t("res_checkin")}
                   className="react-datepicker"
                   dateFormat="yyyy/MM/dd"
                   peekNextMonth
@@ -201,7 +206,7 @@ const Book = () => {
                   onChange={(date) => setCheckOutDate(date)}
                   minDate={checkInDate}
                   maxDate={maxCheckout}
-                  placeholderText="Check Out"
+                  placeholderText={t("res_checkout")}
                   className="react-datepicker"
                   dateFormat="yyyy/MM/dd"
                   peekNextMonth
@@ -217,7 +222,7 @@ const Book = () => {
                 <input
                   type="text"
                   id="first_name"
-                  placeholder="First Name"
+                  placeholder={t("firstname")}
                   value={first_name}
                   onChange={handleFirstNameChange}
                 />
@@ -226,7 +231,7 @@ const Book = () => {
                 <input
                   type="text"
                   id="last_name"
-                  placeholder="Last Name"
+                  placeholder={t("lastname")}
                   value={last_name}
                   onChange={handleLastNameChange}
                 />
@@ -238,7 +243,7 @@ const Book = () => {
                 <input
                   type="text"
                   id="email"
-                  placeholder="Email"
+                  placeholder={t("pro_email")}
                   value={email}
                   onChange={handleEmailChange}
                 />
@@ -247,7 +252,7 @@ const Book = () => {
                 <input
                   type="number"
                   id="phone"
-                  placeholder="Phone Number"
+                  placeholder={t("pro_num")}
                   value={phone}
                   onChange={handlePhoneChange}
                 />
@@ -260,7 +265,7 @@ const Book = () => {
                 onChange={handleSelectChange}
               >
                 <option className="option-booking" value="">
-                  Country
+                  {t("country")}
                 </option>
                 {countries.map((country) => (
                   <option key={country} value={country}>
@@ -272,17 +277,15 @@ const Book = () => {
             <div className="message-textarea">
               <textarea
                 id="special_request"
-                placeholder="Special Request"
+                placeholder={t("specialrequest")}
                 value={special_request}
                 onChange={handleSpecialRequestChange}
               ></textarea>
             </div>
             <div className="booking-policies">
               <p>
-                {" "}
-                By completing this booking I acknowledge I have read and
-                accepted the <Link to="/privacypolicies">Privacy Policies</Link>
-                .
+                {t("completing")}{" "}
+                <Link to="/privacypolicies">{t("privacypolicy")}</Link>.
               </p>
             </div>
             <div className="booking-nav">
@@ -310,7 +313,7 @@ const Book = () => {
                     : ""
                 }
               >
-                Continue to Check-out
+                {t("continue")}
               </button>
             </div>
           </form>
@@ -318,7 +321,7 @@ const Book = () => {
         <div className="message-form order">
           <div className="message-header">
             <div className="room-display order">
-              <h1>Order Summary</h1>
+              <h1>{t("order")}</h1>
             </div>
             <div className="order-image">
               <div className="gallery-image order">
@@ -327,29 +330,29 @@ const Book = () => {
             </div>
             <div className="order-infos">
               <div className="order-info">
-                <p className="order-label">Name</p>
+                <p className="order-label">{t("con_name")}</p>
                 <p className="order-desc">{room.room.title}</p>
               </div>
               <div className="order-info">
-                <p className="order-label">Beds</p>
+                <p className="order-label">{t("beds")}</p>
                 <p className="order-desc">{room.room.beds}</p>
               </div>
               <div className="order-info">
-                <p className="order-label">Guests</p>
+                <p className="order-label">{t("guests")}</p>
                 <p className="order-desc">{room.room.guests + " Adults"}</p>
               </div>
               <div className="underline"></div>
               <div className="order-info price">
-                <p className="order-label price">Subtotal</p>
+                <p className="order-label price">{t("subtotal")}</p>
                 <p className="order-desc price">€{room.room.rent}</p>
               </div>
               <div className="order-info">
-                <p className="order-label price">Tax (10%) </p>
+                <p className="order-label price">{t("tax")} (10%) </p>
                 <p className="order-desc price">€{room.room.rent * 0.1}</p>
               </div>
               <div className="underline"></div>
               <div className="order-info">
-                <p className="order-label total">Total </p>
+                <p className="order-label total">{t("total")} </p>
                 <p className="order-desc total">€{total_price}</p>
               </div>
             </div>

@@ -6,44 +6,45 @@ import breakfastImg from "../../assets/images/breakfast.jpg";
 import groupOffersImg from "../../assets/images/group-offers.jpg";
 import parkingImg from "../../assets/images/parking.jpg";
 import promotionsImg from "../../assets/images/promotions.jpg";
-
-const servicesData = [
-  {
-    id: 1,
-    title: "BREAKFAST",
-    description:
-      "Begin your day with a delicious and nutritious breakfast, freshly prepared daily. We serve a buffet in our breakfast room from 07:30 to 10:00. If you prefer a 'breakfast to go', our staff will gladly prepare it for you.",
-    image: breakfastImg,
-  },
-  {
-    id: 2,
-    title: "GROUP OFFERS",
-    description:
-      "Whether you're traveling with a school group, a professional delegation, or for a wedding, we have customized group packages to fit your needs. Contact us to learn more about our tailored offers for groups.",
-    image: groupOffersImg,
-  },
-  {
-    id: 3,
-    title: "PARKING",
-    description:
-      "To find a parking space in Vienna is very tedious and expensive. Thanks to our location there is a garage opposite the pension. Parking tickets can be purchased at the reception from just €18 per day.",
-    image: parkingImg,
-  },
-  {
-    id: 4,
-    title: "PROMOTIONS",
-    description:
-      "At our establishment, we provide a variety of vouchers and promotions that cater to your needs. You have the opportunity to save money and enjoy our services depending on the season.",
-    image: promotionsImg,
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const Services = () => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
+  const servicesData = [
+    {
+      id: 1,
+      title: t("breakfast_t"),
+      description: t("breakfast"),
+      image: breakfastImg,
+    },
+    {
+      id: 2,
+      title: t("groupoffers_t"),
+      description: t("groupoffers"),
+      image: groupOffersImg,
+    },
+    {
+      id: 3,
+      title: t("parking_t"),
+      description: t("parking"),
+      image: parkingImg,
+    },
+    {
+      id: 4,
+      title: t("promotions_t"),
+      description: t("promotions"),
+      image: promotionsImg,
+    },
+  ];
+
   return (
     <>
       <div className="servicesHero">
         <div className="banner">
-          <h1>Services</h1>
+          <h1>{t("services")}</h1>
           <div></div>
           <ScrollLink
             to="services-container"
@@ -52,7 +53,7 @@ const Services = () => {
             offset={-100}
             className="btn-primary"
           >
-            Discover our exclusive services
+            {t("services_w")}
           </ScrollLink>
         </div>
       </div>

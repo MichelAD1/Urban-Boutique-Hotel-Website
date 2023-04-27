@@ -1,12 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import SingleRoom from "../Rooms/SingleRoom";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 const RoomsList = ({ rooms }) => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   if (rooms.length === 0) {
     return (
       <div className="empty-search">
-        <h3>unfortunately no rooms matched your search parameters</h3>
+        <h3>{t("no_rooms")}</h3>
       </div>
     );
   }

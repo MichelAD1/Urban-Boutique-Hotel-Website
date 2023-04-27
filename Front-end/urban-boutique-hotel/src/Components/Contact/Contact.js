@@ -4,11 +4,16 @@ import Footer from "../../Global/Components/Footer";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationPin } from "react-icons/md";
 import { FaFax } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 //Apis
 import SendMessage from "../../api-client/Contact/SendMessage";
 
 const Contact = () => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -31,15 +36,15 @@ const Contact = () => {
     event.preventDefault();
     setErr("");
     if (!validateEmail(email)) {
-      setErr("Please enter a valid email address");
+      setErr(t("err_email"));
       return;
     }
     if (!validateSubject(subject)) {
-      setErr("Subject too long");
+      setErr(t("err_subject"));
       return;
     }
     if (!validateMessage(message)) {
-      setErr("Message too long");
+      setErr(t("err_message"));
       return;
     }
     const body = message;
@@ -61,7 +66,7 @@ const Contact = () => {
     <>
       <div className="contactHero">
         <div className="banner">
-          <h1>Contact</h1>
+          <h1>{t("contact")}</h1>
           <div></div>
           <ScrollLink
             to="contact-section"
@@ -70,7 +75,7 @@ const Contact = () => {
             offset={-100}
             className="btn-primary"
           >
-            Contact us to book
+            {t("contact_w")}
           </ScrollLink>
         </div>
       </div>
@@ -81,7 +86,7 @@ const Contact = () => {
               <BsFillTelephoneFill />
             </div>
             <div className="contact-stats">
-              <div className="contact-stat">Phone Number</div>
+              <div className="contact-stat">{t("pro_num")}</div>
               <div className="contact-paragraph">+43 1 526 19 28</div>
             </div>
           </div>
@@ -90,7 +95,7 @@ const Contact = () => {
               <MdEmail />
             </div>
             <div className="contact-stats">
-              <div className="contact-stat">Email Address</div>
+              <div className="contact-stat">{t("con_email")}</div>
               <div className="contact-paragraph">pension@hargita.at</div>
             </div>
           </div>
@@ -99,7 +104,7 @@ const Contact = () => {
               <FaFax />
             </div>
             <div className="contact-stats">
-              <div className="contact-stat">Fax Address</div>
+              <div className="contact-stat">{t("con_fax")}</div>
               <div className="contact-paragraph">1070 Wien </div>
             </div>
           </div>
@@ -108,7 +113,7 @@ const Contact = () => {
               <MdLocationPin />
             </div>
             <div className="contact-stats">
-              <div className="contact-stat">Location</div>
+              <div className="contact-stat">{t("con_location")}</div>
               <div className="contact-paragraph">
                 Andreasgasse 1, 1070 Vienna
               </div>
@@ -117,13 +122,10 @@ const Contact = () => {
         </div>
         <div className="message-form">
           <div className="message-header">
-            <h1>Send Message</h1>
+            <h1>{t("con_send")}</h1>
           </div>
           <div className="message-paragraph">
-            <p>
-              We're excited to welcome you to our hotel! Reach out to us to
-              learn more about our accommodations and bookings.
-            </p>
+            <p>{t("con_send_w")}</p>
           </div>
           <form className="message-inputs contact" onSubmit={handleSubmit}>
             <div className="message-name-email">
@@ -132,7 +134,7 @@ const Contact = () => {
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Name"
+                  placeholder={t("con_name")}
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                 />
@@ -142,7 +144,7 @@ const Contact = () => {
                   type="text"
                   id="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder={t("pro_email")}
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                 />
@@ -153,7 +155,7 @@ const Contact = () => {
                 type="text"
                 id="subject"
                 name="subject"
-                placeholder="Subject"
+                placeholder={t("con_subject")}
                 value={subject}
                 onChange={(event) => setSubject(event.target.value)}
               />
@@ -162,7 +164,7 @@ const Contact = () => {
               <textarea
                 id="message"
                 name="message"
-                placeholder="Message"
+                placeholder={t("con_message")}
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
               ></textarea>
@@ -176,7 +178,7 @@ const Contact = () => {
                 !name || !email || !subject || !message ? "disabled-button" : ""
               }
             >
-              Send Message
+              {t("con_send")}
             </button>
           </form>
         </div>

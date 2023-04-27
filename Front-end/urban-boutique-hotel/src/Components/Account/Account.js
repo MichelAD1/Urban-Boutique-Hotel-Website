@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+
 // Icons
-import { MdManageAccounts, MdMarkEmailUnread } from "react-icons/md";
+import { MdManageAccounts } from "react-icons/md";
 import { IoMdOptions } from "react-icons/io";
 import { BsPersonLock } from "react-icons/bs";
 import Table from "../../Global/Components/Table";
@@ -11,6 +13,8 @@ import Table from "../../Global/Components/Table";
 import GetReservations from "../../api-client/Account/GetReservations";
 
 const Profile = () => {
+  const { t, i18n } = useTranslation();
+
   const [loading, setLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(true);
   const [initialRows, setRows] = useState([]);
@@ -21,6 +25,9 @@ const Profile = () => {
     data: reservationData,
   } = useQuery(["reservationdata"], GetReservations);
 
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   useEffect(() => {
     if (status === "success" && reservationData) {
       const newRows = reservationData.map((reservation) =>
@@ -37,9 +44,9 @@ const Profile = () => {
   }, [reservationData, status, error]);
 
   const columns = [
-    { id: "title", label: "Room Name", minWidth: 100 },
-    { id: "reservation_date", label: "Check In Date", minWidth: 100 },
-    { id: "reservation_end", label: "Check Out Date", minWidth: 100 },
+    { id: "title", label: t("res_room_name"), minWidth: 100 },
+    { id: "reservation_date", label: t("res_checkin"), minWidth: 100 },
+    { id: "reservation_end", label: t("res_checkout"), minWidth: 100 },
   ];
   function createData(id, title, reservation_date, reservation_end) {
     return { id, title, reservation_date, reservation_end };
@@ -54,39 +61,37 @@ const Profile = () => {
   return (
     <div className="account-container">
       <div className="account-section">
-        <h2>Account settings</h2>
-        <h5>Manage your booking experience</h5>
+        <h2>{t("acc")}</h2>
+        <h5>{t("acc_desc")}</h5>
         <div className="settings-container">
           <Link to="/account/profile" className="settings-box">
             <MdManageAccounts className="settings-icon" />
             <div className="settings-content">
-              <h3>Personal information</h3>
-              <p>Update your personal information</p>
-              <div className="settings-link">
-                Manage your personal information
-              </div>
+              <h3>{t("acc_info")}</h3>
+              <p>{t("acc_info_upd")}</p>
+              <div className="settings-link">{t("acc_info_mng")}</div>
             </div>
           </Link>
           <Link to="/account/security" className="settings-box">
             <BsPersonLock className="settings-icon" />
             <div className="settings-content">
-              <h3>Security</h3>
-              <p>Adjust your security settings</p>
-              <div className="settings-link">Manage security</div>
+              <h3>{t("acc_sec")}</h3>
+              <p>{t("acc_sec_adj")}</p>
+              <div className="settings-link">{t("acc_sec_mng")}</div>
             </div>
           </Link>
           <Link to="/account/preferences" className="settings-box">
             <IoMdOptions className="settings-icon" />
             <div className="settings-content">
-              <h3>Preferences</h3>
-              <p>Change your language and currency</p>
-              <div className="settings-link">Manage preferences</div>
+              <h3>{t("preferences")}</h3>
+              <p>{t("changelg")}</p>
+              <div className="settings-link">{t("acc_pref_mng")}</div>
             </div>
           </Link>
         </div>
       </div>
       <div className="reservations-section">
-        <h2>Reservations</h2>
+        <h2>{t("acc_res")}</h2>
         {isEmpty ? (
           <>
             {loading ? (
@@ -94,7 +99,7 @@ const Profile = () => {
                 <div className="buffer-loader home"></div>
               </div>
             ) : (
-              <h5>You currently have no reservations</h5>
+              <h5>{t("acc_res_no_desc")}</h5>
             )}
           </>
         ) : (
@@ -105,7 +110,7 @@ const Profile = () => {
               </div>
             ) : (
               <div>
-                <h5>Manage your reservations</h5>{" "}
+                <h5>{t("acc_res_desc")}</h5>
                 <Table columns={columns} initialRows={initialRows} />
               </div>
             )}

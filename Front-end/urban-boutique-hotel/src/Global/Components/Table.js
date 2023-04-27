@@ -1,5 +1,7 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Paper from "@mui/material/Paper";
+import { useTranslation } from "react-i18next";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,6 +13,8 @@ import TableRow from "@mui/material/TableRow";
 import CancelReservation from "../../api-client/Account/CancelReservation";
 
 export default function HotelTables({ columns, initialRows }) {
+  const { t, i18n } = useTranslation();
+
   const [rows, setRows] = React.useState(initialRows);
   const handleCancel = (id) => {
     let response = CancelReservation(id);
@@ -20,6 +24,9 @@ export default function HotelTables({ columns, initialRows }) {
       }
     });
   };
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -55,7 +62,7 @@ export default function HotelTables({ columns, initialRows }) {
                   <TableCell>
                     <div className="table-button">
                       <button onClick={() => handleCancel(row.id)}>
-                        Cancel
+                        {t("cancel")}
                       </button>
                     </div>
                   </TableCell>

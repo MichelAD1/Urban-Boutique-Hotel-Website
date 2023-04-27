@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+
 // Components
 import Footer from "../../Global/Components/Footer";
 import countries from "../../Global/Components/CountryCodes";
@@ -9,6 +11,7 @@ import GetProfile from "../../api-client/Account/GetProfile";
 import EditProfile from "../../api-client/Account/EditProfile";
 
 const Profile = () => {
+  const { t, i18n } = useTranslation();
   const [user, setUser] = useState({});
   const [user_details, setUserDetails] = useState({});
 
@@ -28,6 +31,9 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
 
   //useEffects
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   const {
     status,
     error,
@@ -126,7 +132,6 @@ const Profile = () => {
 
     // Check if age is exactly 18 years old
     if (age.getUTCFullYear() - 1970 === ageLimit) {
-      const birthYear = inputDate.getFullYear();
       const todayYear = new Date().getFullYear();
       const isLeapYear = new Date(todayYear, 1, 29).getMonth() === 1;
 
@@ -169,26 +174,26 @@ const Profile = () => {
     setErr("");
     if (!validateUsername(username)) {
       if (username.length === 0) {
-        setErr("Username field required");
+        setErr(t("err_username"));
       } else {
-        setErr("Please enter a username that is not too long");
+        setErr(t("err_username2"));
       }
       return;
     }
     if (!validateName(name)) {
-      setErr("Name field required");
+      setErr(t("err_name"));
       return;
     }
     if (!validateEmail(email)) {
-      setErr("Please enter a valid email address");
+      setErr(t("err_email"));
       return;
     }
     if (!validatePhoneNumber(tmp_number)) {
-      setErr("Please enter a valid phone number");
+      setErr(t("err_num"));
       return;
     }
     if (!validateDate(dob)) {
-      setErr("Invalid date of birth");
+      setErr(t("err_dob"));
       return;
     }
     const phone_number = countryCode + " " + tmp_number;
@@ -205,7 +210,7 @@ const Profile = () => {
     let response = EditProfile(data);
     response.then((res) => {
       if (res.status === 409) {
-        setErr("The email has already been taken");
+        setErr(t("err_email2"));
       } else {
         setUser({
           ...user,
@@ -238,8 +243,8 @@ const Profile = () => {
         <form className="profile-section">
           <div className="profile-item">
             <div className="profile-title">
-              <h2>Personal information</h2>
-              <h5>Update your personal information</h5>
+              <h2>{t("acc_info")}</h2>
+              <h5>{t("acc_info_upd")}</h5>
               <div className="edit-error">{err}</div>
             </div>
             <div>
@@ -249,7 +254,7 @@ const Profile = () => {
                   className="profile-btn save"
                   onClick={handleSubmit}
                 >
-                  Save
+                  {t("save")}
                 </button>
               )}
               <button
@@ -263,7 +268,7 @@ const Profile = () => {
                   }
                 }}
               >
-                {!edit ? "Edit" : "Cancel"}
+                {!edit ? t("edit") : t("cancel")}
               </button>
             </div>
           </div>
@@ -272,7 +277,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Display name</label>
+                    <label>{t("pro_name")}</label>
                   </div>
                   <div className="info-item">
                     <div className="buffer-loader"></div>
@@ -282,7 +287,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Username</label>
+                    <label>{t("pro_username")}</label>
                   </div>
                   <div className="info-item">
                     <div className="buffer-loader"></div>
@@ -292,7 +297,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Email</label>
+                    <label>{t("pro_email")}</label>
                   </div>
                   <div className="info-item">
                     <div className="buffer-loader"></div>
@@ -302,7 +307,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Phone number</label>
+                    <label>{t("pro_num")}</label>
                   </div>
                   <div className="info-item">
                     <div className="buffer-loader"></div>
@@ -312,7 +317,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Date of birth</label>
+                    <label>{t("pro_dob")}</label>
                   </div>
                   <div className="info-item">
                     <div className="buffer-loader"></div>
@@ -322,7 +327,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Gender</label>
+                    <label>{t("pro_gender")}</label>
                   </div>
                   <div className="info-item">
                     <div className="buffer-loader"></div>
@@ -335,7 +340,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Display name</label>
+                    <label>{t("pro_name")}</label>
                   </div>
                   {edit && (
                     <div className="info-item">
@@ -359,7 +364,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Username</label>
+                    <label>{t("pro_username")}</label>
                   </div>
                   {edit && (
                     <div className="info-item">
@@ -383,7 +388,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Email</label>
+                    <label>{t("pro_email")}</label>
                   </div>
                   {edit && (
                     <div className="info-item">
@@ -407,7 +412,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Phone number</label>
+                    <label>{t("pro_num")}</label>
                   </div>
                   {edit && (
                     <div className="info-item phone">
@@ -444,7 +449,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Date of birth</label>
+                    <label>{t("pro_dob")}</label>
                   </div>
                   {edit && (
                     <div className="info-item">
@@ -469,7 +474,7 @@ const Profile = () => {
               <div className="account-item">
                 <div className="account-info">
                   <div className="info-item">
-                    <label>Gender</label>
+                    <label>{t("pro_gender")}</label>
                   </div>
                   {edit && (
                     <div className="info-item">
@@ -482,13 +487,13 @@ const Profile = () => {
                       >
                         {gender === "Female" ? (
                           <>
-                            <option value="Female">Female</option>
-                            <option value="Male">Male</option>
+                            <option value="Female">{t("female")}</option>
+                            <option value="Male">{t("male")}</option>
                           </>
                         ) : (
                           <>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                            <option value="Male">{t("male")}</option>
+                            <option value="Female">{t("female")}</option>
                           </>
                         )}
                       </select>

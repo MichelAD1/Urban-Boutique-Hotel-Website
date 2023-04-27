@@ -15,7 +15,7 @@ class StaffController extends Controller
 
     public function editInformation(Request $request){
         $userinfo = User::find($request->employeeid);
-        $employee = Staff::where("user_id",$userinfo->id)->first();
+        $employee = Staff::find($request->employeeid);
         if($request->has("username")){
             $userinfo->username=$request->username;
         }
@@ -37,9 +37,11 @@ class StaffController extends Controller
         if($request->has("position")){
             $employee->position = $request->position;
         }
-        if($userinfo->save() && $employee->save()){
+        if($userinfo->save() || $employee->save()){
             return response()->json([
-                'message'=>"eddited succesfully"
+                'message'=>"eddited succesfully",
+                "user"=>$userinfo,
+                "staff"=>$employee,
             ]);
         }
     }
@@ -83,8 +85,7 @@ class StaffController extends Controller
         $validation = Validator::make($request->all(), [
             'username' => 'required|string|min:6',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string',
-            'type' => 'required|int',
+            'password' => 'required|string|min:6',
 
         ]);
         if ($validation->fails()) {
@@ -107,16 +108,11 @@ class StaffController extends Controller
             'user_id'=>$user->id,
             'position'=>$request->position
         ]);
-        $token = Auth::login($user);
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
             'user' => $user,
             'staff'=>$staff,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
         ]);
 
     }

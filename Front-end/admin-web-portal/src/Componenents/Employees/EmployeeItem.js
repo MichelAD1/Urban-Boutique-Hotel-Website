@@ -66,6 +66,13 @@ const EmployeeItem = () => {
 		}
 	}
 
+	const mergeJson = (json1, json2) => {
+		let result = {};
+		for (let key in json1) result[key] = json1[key];
+		for (let key in json2) result[key] = json2[key];
+		return result;
+	};
+
 	// Date picker
 	const formattedDate = () => {
 		const parsedDate = new Date(isValid.data.dob);
@@ -154,7 +161,22 @@ const EmployeeItem = () => {
 			alert("Please fill in all fields");
 			return;
 		}
-		console.log("adding employee");
+		const response = AddEmployee(reqData);
+		response.then((res) => {
+			if (res.message === "User created successfully") {
+				const new_data = mergeJson(res.user, res.staff);
+				navigate("/employee/profile", { state: { data: new_data } });
+				window.location.reload();
+			} else {
+				if (res.message.username) {
+					alert(res.message.username);
+				} else if (res.message.email) {
+					alert(res.message.email);
+				} else if (res.message.password) {
+					alert(res.message.password);
+				}
+			}
+		});
 	}
 
 	function handleEdit(e) {
@@ -181,16 +203,18 @@ const EmployeeItem = () => {
 			return;
 		}
 		sentData.employeeid = isValid.data.id;
-		const response = EditEmployee(reqData);
+
+		const response = EditEmployee(sentData);
 		response.then((res) => {
 			if (res.message === "eddited succesfully") {
-				const new_data = res;
-				loc.state = { data: new_data };
-				setIsValid(loc.state);
+				const new_data = mergeJson(res.user, res.staff);
+				navigate("/employee/profile", { state: { data: new_data } });
+				window.location.reload();
 				setEdit(false);
 			} else {
 				alert("Something went wrong");
 			}
+			console.log(res);
 		});
 	}
 

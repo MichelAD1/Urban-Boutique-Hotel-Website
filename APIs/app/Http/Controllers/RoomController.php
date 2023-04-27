@@ -217,8 +217,8 @@ class RoomController extends Controller
         foreach($reservations as $reservation){
             $customer = Customer::join('users','users.id','=','customers.user_id')->where('users.id','=',$reservation->customer_id)->first();
             $room = Room::find($reservation->room_id);
-            $reservation['customer_object'] = $customer;
-            $reservation['room_object']=$room;
+            $reservation->customer_object = $customer;
+            $reservation->room_object=$room;
             $occupiedDates = [];
             $freeDates = [];
 
@@ -243,8 +243,8 @@ class RoomController extends Controller
                 }
                 $currentDate->addDay();
             }
-            $reservation['occupied_dates']=$occupiedDates;
-            $reservation['free_dates']=$freeDates;
+            $reservation->occupied_dates=$occupiedDates;
+            $reservation->free_dates=$freeDates;
 
         }
         return response()->json([

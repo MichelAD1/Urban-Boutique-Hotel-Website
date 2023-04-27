@@ -2,7 +2,7 @@ runtime: php
 env: flex
 runtime_config:
   document_root: public
-  php_version: 8.2
+  php_version: 8.2.*
 
 skip_files:
   .env

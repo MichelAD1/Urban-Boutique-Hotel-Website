@@ -50,6 +50,11 @@ class ReviewController extends Controller
             $review->featured = true;
         }
         if($review->save()){
+            $review = Review::join('customers', 'customers.user_id', '=', 'reviews.customer_id')
+                            ->join('users', 'users.id', '=', 'reviews.customer_id')
+                            ->where('reviews.id', '=', $reviewid)
+                            ->select('users.email', 'reviews.*')
+                            ->first();
             return $review;
         }else{
             return "failed";
@@ -63,9 +68,9 @@ class ReviewController extends Controller
                             ->join('users', 'users.id', '=', 'customers.user_id')
                             ->where('reviews.featured', '=', 1)
                             ->select('users.username', 'reviews.*')
-                            ->get(); 
+                            ->get();
         return $reviews;
     }
-    
-    
+
+
 }

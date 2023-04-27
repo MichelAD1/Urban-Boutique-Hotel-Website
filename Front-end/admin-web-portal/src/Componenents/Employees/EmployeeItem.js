@@ -1,14 +1,17 @@
-import "../../Global/Styles/styles.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import FormData from "form-data";
-import ReactModal from "react-modal";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { useState, useEffect } from "react";
 
+// Componenets
+import ReactModal from "react-modal";
+
+// API
 import AddEmployee from "../../api-client/Employees/AddEmployee";
 import EditEmployee from "../../api-client/Employees/EditEmployee";
 import DeleteEmployee from "../../api-client/Employees/DeleteEmployee";
+
+// Functions
+import checkEmpty from "../../Global/Functions/CheckEmpty";
+import checkEqual from "../../Global/Functions/CheckEqual";
 
 const EmployeeItem = () => {
 	const loc = useLocation();
@@ -18,7 +21,7 @@ const EmployeeItem = () => {
 	const [username, setUsername] = useState("");
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-	const [dob, setDob] = useState(new Date());
+	const [dob, setDob] = useState("");
 	const [gender, setGender] = useState("Male");
 	const [position, setPosition] = useState("");
 	const [password, setPassword] = useState("");
@@ -79,7 +82,7 @@ const EmployeeItem = () => {
 		return formattedDate;
 	};
 
-	const dateChange = (setDob) => {
+	const dateChange = () => {
 		const parsedDate = new Date(dob);
 		const year = parsedDate.getFullYear();
 		const month =
@@ -135,8 +138,23 @@ const EmployeeItem = () => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		setEdit(false);
-		console.log("Add Employee");
+
+		const reqData = {
+			username: username,
+			name: name,
+			email: email,
+			dob: dob,
+			gender: gender,
+			position: position,
+			password: password,
+		};
+
+		const check_empty = checkEmpty(reqData);
+		if (!check_empty) {
+			alert("Please fill in all fields");
+			return;
+		}
+		console.log(reqData);
 	}
 
 	function handleEdit(e) {

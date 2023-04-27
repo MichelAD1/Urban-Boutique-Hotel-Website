@@ -1,10 +1,10 @@
-const checkEmpty = (data) => {
-	for (let prop in data) {
+const checkEmpty = (reqData) => {
+	for (let prop in reqData) {
 		if (
-			data[prop] === "" ||
-			data[prop] === null ||
-			data[prop] === undefined ||
-			(typeof data[prop] === "number" && isNaN(data[prop]))
+			reqData[prop] === "" ||
+			reqData[prop] === null ||
+			reqData[prop] === undefined ||
+			(typeof reqData[prop] === "number" && isNaN(reqData[prop]))
 		) {
 			return false;
 		}

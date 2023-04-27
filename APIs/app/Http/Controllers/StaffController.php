@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class StaffController extends Controller
 {
+
     public function editInformation(Request $request){
         $userinfo = User::find($request->employeeid);
         $employee = Staff::where("user_id",$userinfo->id)->first();

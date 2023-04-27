@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "8.2.4",
         "google/cloud-storage": "^1.30",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
@@ -61,6 +61,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.2.4"
         }
     },
     "minimum-stability": "stable",

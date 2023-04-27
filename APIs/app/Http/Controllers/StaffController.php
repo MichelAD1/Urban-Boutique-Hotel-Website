@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
@@ -63,13 +65,60 @@ class StaffController extends Controller
                     ->sum("rooms.rent");
         return $revenue;
     }
-    public function searchEmployee($employeeid){
-        $employee = Staff::join('users','staff.user_id','=','users.id')->where('users.id','=',$employeeid)->first();
+    public function searchEmployee(Request $request){ //name or username
+        if($request->has('name')){
+            $employee = Staff::join('users','staff.user_id','=','users.id')->where('users.name','=',$request->name)->first();
+        }
+        else if($request->has('username')){
+            $employee = Staff::join('users','staff.user_id','=','users.id')->where('users.username','=',$request->username)->first();
+        }
+
         return $employee;
     }
     public function getEmployees(){
         $user = Auth::user();
         return Staff::join('users','staff.user_id','=','users.id')->where('users.id','!=', $user->id)->paginate(14);
+    }
+    public function addEmployee(Request $request){
+        $validation = Validator::make($request->all(), [
+            'username' => 'required|string|min:6',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string',
+            'type' => 'required|int',
+
+        ]);
+        if ($validation->fails()) {
+            return response()->json([
+                 "status"=> "error",
+                 "message"=>$validation->errors(),
+             ]);
+         }
+         $user = User::create([
+            'username' => $request->username,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'type'=>1,
+            'dob'=>$request->dob,
+            'gender'=>$request->gender,
+            'banned'=>0
+        ]);
+        $staff = Staff::create([
+            'user_id'=>$user->id,
+            'position'=>$request->position
+        ]);
+        $token = Auth::login($user);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User created successfully',
+            'user' => $user,
+            'staff'=>$staff,
+            'authorisation' => [
+                'token' => $token,
+                'type' => 'bearer',
+            ]
+        ]);
+
     }
 
 

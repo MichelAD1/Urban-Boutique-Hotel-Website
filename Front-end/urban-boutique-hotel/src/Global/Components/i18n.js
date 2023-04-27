@@ -571,6 +571,20 @@ i18n.use(initReactI18next).init({
           "Der Stephansdom ist eine gotische Kathedrale in Wien, Österreich. Sein markanter Turm ragt 136 Meter hoch auf und er verfügt über kunstvoll gestaltete Bleiglasfenster, Gewölbedecken und Altarbilder. Die Kathedrale hat eine reiche Geschichte als religiöses und kulturelles Wahrzeichen und ist auch heute noch ein beliebtes Reiseziel für Besucher.",
         findus_desc5:
           "Das Wiener Opernhaus ist ein weltberühmtes Opernhaus in Wien, Österreich. Es wurde 1869 eröffnet und beherbergt die Wiener Staatsoper und das Wiener Philharmonische Orchester. Das neorenaissance Gebäude hat eine Sitzkapazität von über 2.200 und ist für seine prächtige Architektur bekannt.",
+        findus_arr1: "S-Bahn (S7)",
+        findus_arr2: "CAT - City Airport Train",
+        findus_arr3: "Vienna Airport Lines (Postbus ÖBB)",
+        findus_arr4: "TAXI",
+        findus_arrd1:
+          "Die S-Bahn bietet den günstigsten Fahrpreis zum Flughafen. Mehrere Haltestellen ermöglichen einen einfachen Einstieg und Ausstieg in der ganzen Stadt, die meisten davon mit Anschlüssen an S-Bahn und U-Bahn. Züge fahren zwischen ca. 04:00 und 00:00 Uhr. Eine Fahrt dauert etwa 23 Minuten von Wien Mitte und kostet 4,10 €.",
+        findus_arrd2:
+          "Der City Airport Train ist vielleicht die komfortabelste Reisemöglichkeit, aber auch eine der teuersten. Alle 30 Minuten fährt ein Schnellzug zwischen Wien-Mitte und dem Flughafen. Von / nach: Wien-Mitte (U3, U4 + S) - Flughafen Wien, Bahnhof. Kosten: beim Online-Kauf 11 € (einfache Fahrt), 19 € (Rückfahrt); beim Kauf an den Automaten 12 € (einfache Fahrt), 21 € (Rückfahrt). Intervall: 30 Minuten.",
+        findus_arrd3:
+          "Die Vienna Airport Lines verbinden wichtige Verkehrsknotenpunkte mit dem Flughafen. Und die meisten Bushaltestellen sind direkt mit U-Bahn-Stationen verbunden. Busse vom Morzinplatz / Schwedenplatz und Westbahnhof fahren alle 30 Minuten. Kosten: 8 € (einfache Fahrt), 13 € (Rückfahrt). Intervall: 30 Minuten oder 1 Stunde (Linie VAL3). Dauer: 20-40 Minuten.",
+        findus_arrd4:
+          "Die Wiener Taxizentralen bieten Fahrten mit einem Flughafenpaket an. Für einen Festpreis von 36 € (bei Vorbestellung) gelangen Sie so direkt von zu Hause zum Flughafen. Erreichbar z.B. unter 31300, 40100 oder 60160. Bitte sagen Sie am Telefon, dass Sie ein Flughafentaxi benötigen! Von / nach: überall in Wien - Flughafen, Abfahrt / Ankunft. Kosten: 36 € Festpreis (+ Trinkgeld). Dauer: variiert je nach Abfahrtsort und Verkehr. Dauer: 20-40 Minuten.",
+        arrival: "Ankunft",
+        find_location_desc: `Unser Haus ist ein idealer Ausgangspunkt, um die Schönheit von Wien zu entdecken. Dank unserer zentralen Lage sind alle Sehenswürdigkeiten leicht zu erreichen: Wir sind nur 10 Minuten zu Fuß vom Bahnhof "Westbahnhof" und 20 Minuten zu Fuß vom Stadtzentrum entfernt. Unsere Adresse lautet Andreasgasse 1, 1070 Wien, in der Nähe der berühmten Einkaufsstraße "Mariahilfer Straße". Mit der U-Bahn-Station "U3 Zieglergasse" direkt vor unserem Haus sind kulturelle Attraktionen oder Einkaufsmöglichkeiten nur wenige Minuten entfernt.`,
       },
     },
     it: {
@@ -698,6 +712,20 @@ i18n.use(initReactI18next).init({
           "La Cattedrale di Santo Stefano, o Stephansdom, è una cattedrale in stile gotico a Vienna, Austria. La sua iconica guglia si erge a 136 metri di altezza e vanta finestre con vetrate artistiche intricate, soffitti a volta e altari ornati. La cattedrale ha una ricca storia come punto di riferimento religioso e culturale e rimane una popolare destinazione per i visitatori oggi.",
         findus_desc5:
           "Il Teatro dell'Opera di Vienna è un famoso teatro d'opera situato a Vienna, in Austria. È stato inaugurato nel 1869 ed è la sede dell'Opera di Stato di Vienna e dell'Orchestra Filarmonica di Vienna. L'edificio in stile neorinascimentale ha una capacità di oltre 2.200 posti a sedere ed è noto per la sua architettura ornamentale.",
+        findus_arr1: "S-Bahn (S7)",
+        findus_arr2: "CAT - City Airport Train",
+        findus_arr3: "Vienna Airport Lines (Postbus ÖBB)",
+        findus_arr4: "TAXI",
+        findus_arrd1:
+          "La S-Bahn offre il biglietto più economico per l'aeroporto. Diversi stop consentono un facile ingresso e uscita in tutta la città, la maggior parte con collegamenti suburbani e metropolitani. I treni partono dalle ore 04.00 alle ore 00.00. Il viaggio dura circa 23 minuti da Wien Mitte e costa 4,10 €",
+        findus_arrd2:
+          "Il City Airport Train è forse l'opzione di viaggio più comoda, ma anche una delle più costose. Ogni 30 minuti c'è un treno rapido tra Wien-Mitte e l'aeroporto. Da / a: Wien-Mitte (U3, U4 + S) - Flughafen Wien, Bahnhof Costo: acquistando online 11 € (solo andata), 19 € (andata e ritorno); acquistando alle macchine 12 € (solo andata), 21 € (andata e ritorno) Intervallo: 30 minuti",
+        findus_arrd3:
+          "Le Vienna Airport Lines collegano importanti snodi di trasporto con l'aeroporto. La maggior parte delle fermate degli autobus sono direttamente collegate alle stazioni della metropolitana. Gli autobus da Morzinplatz / Schwedenplatz e Westbahnhof partono ogni 30 minuti. Costo: 8 € (solo andata), 13 € (andata e ritorno) Intervallo: 30 minuti o 1 ora (linea VAL3) Durata: 20-40 minuti",
+        findus_arrd4:
+          "I centri taxi di Vienna offrono viaggi con un pacchetto aeroportuale. Per un prezzo fisso di 36 € (se ordinato in anticipo) si arriva direttamente da casa all'aeroporto. Accessibile ad esempio sotto 31300, 40100 o 60160. Si prega di dire al telefono che si ha bisogno di un taxi per l'aeroporto! Da / a: ovunque a Vienna - Aeroporto, partenza / arrivo Costo: prezzo fisso di 36 € (+ mancia) Durata: varia a seconda del luogo di partenza e del traffico Durata: 20-40 minuti",
+        arrival: "Arrivo",
+        find_location_desc: `La nostra casa è un punto di partenza ideale per scoprire la bellezza di Vienna. Grazie alla nostra posizione centrale, tutte le attrazioni sono facilmente raggiungibili: siamo a soli 10 minuti a piedi dalla stazione ferroviaria "Westbahnhof" e a 20 minuti a piedi dal centro città. Il nostro indirizzo è Andreasgasse 1, 1070 Vienna, vicino alla famosa via dello shopping "Mariahilfer Straße". Con la stazione della metropolitana "U3 Zieglergasse" proprio di fronte alla nostra casa, è possibile raggiungere le attrazioni culturali o lo shopping in pochi minuti.`,
       },
     },
   },

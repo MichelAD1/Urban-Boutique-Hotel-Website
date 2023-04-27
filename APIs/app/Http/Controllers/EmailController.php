@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactFormSender;
+use App\Mail\ContactFormEmailSender;
 use App\Models\EmailSender;
 use App\Models\ForgottenPasswordSender;
 use App\Models\Staff;
@@ -24,12 +24,18 @@ class EmailController extends Controller
     }
     public function sendEmailContactForm(Request $request)
     {
-        $employee = Staff::join('users','users.id','=','staff.user_id')->where('staff.position','=',1)->first;
+        $employee = Staff::join('users','users.id','=','staff.user_id')->where('staff.position','=',1)->first();
+        $data = [
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'subject'=>$request->subject,
+            'message'=>$request->message
+        ];
+        $response=Mail::to($employee->email)->send(new ContactFormEmailSender($data));
+        return $response;
 
-        Mail::to($employee->email)->send(new ContactFormSender($request->name,$request->email,$request->subject,$request->body));
 
-
-        return response()->json(['message' => 'Email sent successfully']);
+        // return response()->json(['message' => 'Email sent successfully']);
     }
 
     public function sendForgottenPassword(Request $request)

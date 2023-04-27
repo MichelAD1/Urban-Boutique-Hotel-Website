@@ -164,6 +164,7 @@ i18n.use(initReactI18next).init({
         size: "Size",
         sqm: "sqm",
         occupancy: "Occupancy",
+        no_rooms: "unfortunately no rooms matched your search parameters",
       },
     },
     es: {
@@ -335,6 +336,8 @@ i18n.use(initReactI18next).init({
         size: "Tamaño",
         sqm: "m²",
         occupancy: "Ocupación",
+        no_rooms:
+          "Lo sentimos, no hay habitaciones que coincidan con los parámetros de búsqueda.",
       },
     },
     fr: {
@@ -494,6 +497,8 @@ i18n.use(initReactI18next).init({
         size: "Taille",
         sqm: "m²",
         occupancy: "Occupation",
+        no_rooms:
+          "Malheureusement, aucune chambre ne correspond à vos critères de recherche.",
       },
     },
     de: {
@@ -653,6 +658,7 @@ i18n.use(initReactI18next).init({
         size: "Größe",
         sqm: "m²",
         occupancy: "Belegung",
+        no_rooms: "Leider entspricht keine Zimmer den Suchparametern.",
       },
     },
     it: {
@@ -811,6 +817,8 @@ i18n.use(initReactI18next).init({
         size: "Dimensione",
         sqm: "m²",
         occupancy: "Occupazione",
+        no_rooms:
+          "Purtroppo nessuna stanza corrisponde ai parametri di ricerca.",
       },
     },
   },

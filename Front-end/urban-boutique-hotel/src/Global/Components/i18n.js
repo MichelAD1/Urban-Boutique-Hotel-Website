@@ -82,6 +82,19 @@ i18n.use(initReactI18next).init({
         privacypolicy: "Privacy Policy",
         faq: "FAQs",
         allrights: "All Rights Reserved",
+        breakfast_t: "BREAKFAST",
+        groupoffers_t: "GROUP OFFERS",
+        parking_t: "PARKING",
+        promotions_t: "PROMOTIONS",
+        services_w: "Discover our exclusive services",
+        promotions:
+          "At our establishment, we provide a variety of vouchers and promotions that cater to your needs. You have the opportunity to save money and enjoy our services depending on the season.",
+        parking:
+          "To find a parking space in Vienna is very tedious and expensive. Thanks to our location there is a garage opposite the pension. Parking tickets can be purchased at the reception from just €18 per day.",
+        groupoffers:
+          "Whether you're traveling with a school group, a professional delegation, or for a wedding, we have customized group packages to fit your needs. Contact us to learn more about our tailored offers for groups.",
+        breakfast:
+          "Begin your day with a delicious and nutritious breakfast, freshly prepared daily. We serve a buffet in our breakfast room from 07:30 to 10:00. If you prefer a 'breakfast to go', our staff will gladly prepare it for you.",
       },
     },
     es: {
@@ -159,6 +172,19 @@ i18n.use(initReactI18next).init({
         privacypolicy: "Política de privacidad",
         faq: "Preguntas frecuentes",
         allrights: "Todos Los Derechos Reservados",
+        breakfast_t: "DESAYUNO",
+        groupoffers_t: "OFERTAS PARA GRUPOS",
+        parking_t: "ESTACIONAMIENTO",
+        promotions_t: "PROMOCIONES",
+        services_w: "Descubre nuestros exclusivos servicios",
+        promotions:
+          "En nuestro establecimiento, ofrecemos una variedad de cupones y promociones que se adaptan a tus necesidades. Tienes la oportunidad de ahorrar dinero y disfrutar de nuestros servicios dependiendo de la temporada.",
+        parking:
+          "Encontrar un lugar para estacionar en Viena es muy tedioso y costoso. Gracias a nuestra ubicación, hay un garaje frente a la pensión. Los tickets de estacionamiento se pueden comprar en la recepción a partir de solo €18 por día.",
+        groupoffers:
+          "Ya sea que viajes con un grupo escolar, una delegación profesional o para una boda, tenemos paquetes de grupos personalizados para satisfacer tus necesidades. Contáctanos para conocer más sobre nuestras ofertas hechas a medida para grupos.",
+        breakfast:
+          "Comienza tu día con un desayuno delicioso y nutritivo, recién preparado todos los días. Servimos un buffet en nuestra sala de desayunos de 07:30 a 10:00. Si prefieres un 'desayuno para llevar', nuestro personal lo preparará con mucho gusto para ti.",
       },
     },
     fr: {
@@ -236,6 +262,19 @@ i18n.use(initReactI18next).init({
         privacypolicy: "Politique de confidentialité",
         faq: "FAQ",
         allrights: "Tous Droits Réservés",
+        breakfast_t: "PETIT-DÉJEUNER",
+        groupoffers_t: "OFFRES DE GROUPE",
+        parking_t: "STATIONNEMENT",
+        promotions_t: "PROMOTIONS",
+        services_w: "Découvrez nos services exclusifs",
+        promotions:
+          "Dans notre établissement, nous proposons une variété de bons et de promotions qui répondent à vos besoins. Vous avez la possibilité d'économiser de l'argent et de profiter de nos services en fonction de la saison.",
+        parking:
+          "Trouver une place de parking à Vienne est très fastidieux et coûteux. Grâce à notre emplacement, il y a un garage en face de la pension. Les tickets de parking peuvent être achetés à la réception à partir de seulement €18 par jour.",
+        groupoffers:
+          "Que vous voyagiez avec un groupe scolaire, une délégation professionnelle ou pour un mariage, nous avons des forfaits de groupe personnalisés pour répondre à vos besoins. Contactez-nous pour en savoir plus sur nos offres sur mesure pour les groupes.",
+        breakfast:
+          "Commencez votre journée avec un petit-déjeuner délicieux et nutritif, fraîchement préparé tous les jours. Nous servons un buffet dans notre salle de petit-déjeuner de 07h30 à 10h00. Si vous préférez un 'petit-déjeuner à emporter', notre personnel se fera un plaisir de le préparer pour vous.",
       },
     },
     de: {
@@ -313,6 +352,19 @@ i18n.use(initReactI18next).init({
         privacypolicy: "Datenschutzrichtlinie",
         faq: "FAQs",
         allrights: "Alle Rechte vorbehalten",
+        breakfast_t: "FRÜHSTÜCK",
+        groupoffers_t: "GRUPPENANGEBOTE",
+        parking_t: "PARKPLATZ",
+        promotions_t: "PROMOTIONEN",
+        services_w: "Entdecken Sie unsere exklusiven Services",
+        promotions:
+          "In unserer Einrichtung bieten wir eine Vielzahl von Gutscheinen und Promotionen, die auf Ihre Bedürfnisse zugeschnitten sind. Je nach Saison haben Sie die Möglichkeit, Geld zu sparen und unsere Services zu genießen.",
+        parking:
+          "Das Finden eines Parkplatzes in Wien ist sehr mühsam und teuer. Dank unserer Lage gibt es gegenüber der Pension eine Garage. Parktickets können an der Rezeption ab 18 € pro Tag erworben werden.",
+        groupoffers:
+          "Ob Sie mit einer Schulgruppe, einer professionellen Delegation oder für eine Hochzeit reisen - wir haben maßgeschneiderte Gruppenpakete, die auf Ihre Bedürfnisse zugeschnitten sind. Kontaktieren Sie uns, um mehr über unsere auf Gruppen zugeschnittenen Angebote zu erfahren.",
+        breakfast:
+          "Beginnen Sie Ihren Tag mit einem köstlichen und nahrhaften Frühstück, das täglich frisch zubereitet wird. Wir servieren ein Buffet in unserem Frühstücksraum von 07:30 bis 10:00 Uhr. Wenn Sie ein 'Frühstück zum Mitnehmen' bevorzugen, bereitet unser Personal es Ihnen gerne zu.",
       },
     },
     it: {
@@ -389,6 +441,19 @@ i18n.use(initReactI18next).init({
         privacypolicy: "Informativa sulla privacy",
         faq: "Domande frequenti",
         allrights: "Tutti i diritti riservati",
+        breakfast_t: "COLAZIONE",
+        groupoffers_t: "OFFERTE DI GRUPPO",
+        parking_t: "PARCHEGGIO",
+        promotions_t: "PROMOZIONI",
+        services_w: "Scopri i nostri servizi esclusivi",
+        promotions:
+          "Presso la nostra struttura offriamo una varietà di buoni e promozioni che soddisfano le tue esigenze. Hai l'opportunità di risparmiare denaro e goderti i nostri servizi a seconda della stagione.",
+        parking:
+          "Trovare un parcheggio a Vienna è molto tedioso e costoso. Grazie alla nostra posizione, c'è un garage di fronte alla pensione. I biglietti per il parcheggio possono essere acquistati presso la reception a partire da soli 18 € al giorno.",
+        groupoffers:
+          "Che tu stia viaggiando con un gruppo scolastico, una delegazione professionale o per un matrimonio, abbiamo pacchetti personalizzati per gruppi per soddisfare le tue esigenze. Contattaci per scoprire di più sulle nostre offerte su misura per i gruppi.",
+        breakfast:
+          "Inizia la tua giornata con una deliziosa e nutriente colazione, preparata fresca ogni giorno. Serviamo un buffet nella nostra sala colazioni dalle 7:30 alle 10:00. Se preferisci una 'colazione da portare via', il nostro personale sarà lieto di preparartela.",
       },
     },
   },

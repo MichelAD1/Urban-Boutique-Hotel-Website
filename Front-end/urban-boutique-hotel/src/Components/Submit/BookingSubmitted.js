@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const BookingSubmitted = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -11,11 +13,14 @@ const BookingSubmitted = () => {
 
     return () => clearTimeout(timeoutId);
   }, [navigate]);
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
 
   return (
     <div className="faq-container">
-      <h1>Thank you for booking at our hotel</h1>
-      <h4>You will be redirected to the home page shortly</h4>
+      <h1>{t("submit_1")}</h1>
+      <h4>{t("submit_2")}</h4>
       <div className="buffer-loader submit"></div>
     </div>
   );

@@ -95,6 +95,8 @@ i18n.use(initReactI18next).init({
           "Whether you're traveling with a school group, a professional delegation, or for a wedding, we have customized group packages to fit your needs. Contact us to learn more about our tailored offers for groups.",
         breakfast:
           "Begin your day with a delicious and nutritious breakfast, freshly prepared daily. We serve a buffet in our breakfast room from 07:30 to 10:00. If you prefer a 'breakfast to go', our staff will gladly prepare it for you.",
+        submit_1: "Thank you for booking at our hotel",
+        submit_2: "You will be redirected to the home page shortly",
       },
     },
     es: {
@@ -185,6 +187,8 @@ i18n.use(initReactI18next).init({
           "Ya sea que viajes con un grupo escolar, una delegación profesional o para una boda, tenemos paquetes de grupos personalizados para satisfacer tus necesidades. Contáctanos para conocer más sobre nuestras ofertas hechas a medida para grupos.",
         breakfast:
           "Comienza tu día con un desayuno delicioso y nutritivo, recién preparado todos los días. Servimos un buffet en nuestra sala de desayunos de 07:30 a 10:00. Si prefieres un 'desayuno para llevar', nuestro personal lo preparará con mucho gusto para ti.",
+        submit_1: "Gracias por reservar en nuestro hotel",
+        submit_2: "En breve serás redirigido a la página principal",
       },
     },
     fr: {
@@ -275,6 +279,8 @@ i18n.use(initReactI18next).init({
           "Que vous voyagiez avec un groupe scolaire, une délégation professionnelle ou pour un mariage, nous avons des forfaits de groupe personnalisés pour répondre à vos besoins. Contactez-nous pour en savoir plus sur nos offres sur mesure pour les groupes.",
         breakfast:
           "Commencez votre journée avec un petit-déjeuner délicieux et nutritif, fraîchement préparé tous les jours. Nous servons un buffet dans notre salle de petit-déjeuner de 07h30 à 10h00. Si vous préférez un 'petit-déjeuner à emporter', notre personnel se fera un plaisir de le préparer pour vous.",
+        submit_1: "Merci d'avoir réservé dans notre hôtel",
+        submit_2: "Vous serez bientôt redirigé vers la page d'accueil",
       },
     },
     de: {
@@ -365,6 +371,8 @@ i18n.use(initReactI18next).init({
           "Ob Sie mit einer Schulgruppe, einer professionellen Delegation oder für eine Hochzeit reisen - wir haben maßgeschneiderte Gruppenpakete, die auf Ihre Bedürfnisse zugeschnitten sind. Kontaktieren Sie uns, um mehr über unsere auf Gruppen zugeschnittenen Angebote zu erfahren.",
         breakfast:
           "Beginnen Sie Ihren Tag mit einem köstlichen und nahrhaften Frühstück, das täglich frisch zubereitet wird. Wir servieren ein Buffet in unserem Frühstücksraum von 07:30 bis 10:00 Uhr. Wenn Sie ein 'Frühstück zum Mitnehmen' bevorzugen, bereitet unser Personal es Ihnen gerne zu.",
+        submit_1: "Vielen Dank für Ihre Buchung in unserem Hotel",
+        submit_2: "Sie werden in Kürze zur Startseite weitergeleitet",
       },
     },
     it: {
@@ -454,6 +462,8 @@ i18n.use(initReactI18next).init({
           "Che tu stia viaggiando con un gruppo scolastico, una delegazione professionale o per un matrimonio, abbiamo pacchetti personalizzati per gruppi per soddisfare le tue esigenze. Contattaci per scoprire di più sulle nostre offerte su misura per i gruppi.",
         breakfast:
           "Inizia la tua giornata con una deliziosa e nutriente colazione, preparata fresca ogni giorno. Serviamo un buffet nella nostra sala colazioni dalle 7:30 alle 10:00. Se preferisci una 'colazione da portare via', il nostro personale sarà lieto di preparartela.",
+        submit_1: "Grazie per aver prenotato presso il nostro hotel",
+        submit_2: "Verrai reindirizzato alla pagina principale tra poco",
       },
     },
   },

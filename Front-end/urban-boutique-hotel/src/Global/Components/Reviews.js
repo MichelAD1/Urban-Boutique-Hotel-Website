@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import React, { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 
 // Componenet
 import Rating from "./Rating";
 
 const Reviews = ({ data }) => {
   const delay = 10000;
-
+  const { t, i18n } = useTranslation();
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
 
@@ -15,7 +16,9 @@ const Reviews = ({ data }) => {
       clearTimeout(timeoutRef.current);
     }
   }
-
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   useEffect(() => {
     resetTimeout();
     if (data) {
@@ -37,7 +40,7 @@ const Reviews = ({ data }) => {
     return (
       <div className="reviews">
         <div className="section-title">
-          <h4>Reviews</h4>
+          <h4>{t("reviews")}</h4>
           <div />
         </div>
         <div className="review-section">

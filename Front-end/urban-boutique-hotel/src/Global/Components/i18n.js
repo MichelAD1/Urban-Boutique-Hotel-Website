@@ -60,6 +60,22 @@ i18n.use(initReactI18next).init({
         contact: "Contact",
         services: "Services",
         discover: "Discover",
+        cocktail_t: "Free Cocktails",
+        hiking_t: "endless hiking",
+        shuttles_t: "free shuttles",
+        beer_t: "strongest beers",
+        cocktail:
+          "Enjoy complimentary cocktails during your stay! Our expert bartenders are sure to mix up something that you'll love.",
+        hiking:
+          "Explore the beautiful nature surrounding our resort with endless hiking opportunities. From beginner trails to more advanced hikes, there's something for everyone.",
+        shuttles:
+          "Let us take care of transportation during your stay. Our free shuttle service will take you to nearby attractions and make sure you get where you need to go.",
+        beer: "Beer lovers rejoice! Our resort boasts some of the strongest beers around, perfect for enjoying after a day of adventure. With a wide selection of craft beers, you're sure to find a new favorite.",
+        home_w: "Welcome To Our Hotel",
+        room_w: "Our Rooms",
+        home_feat: "Featured room",
+        home_feat2: "Deal of the month",
+        reviews: "Reviews",
       },
     },
     es: {
@@ -115,6 +131,22 @@ i18n.use(initReactI18next).init({
         contact: "Contacto",
         services: "Servicios",
         discover: "Descubrir",
+        cocktail_t: "Cócteles gratis",
+        hiking_t: "senderismo sin fin",
+        shuttles_t: "traslados gratuitos",
+        beer_t: "cervezas más fuertes",
+        cocktail:
+          "¡Disfrute de cócteles gratuitos durante su estadía! Nuestros expertos bartenders están seguros de mezclar algo que te encantará.",
+        hiking:
+          "Explore la hermosa naturaleza que rodea nuestro resort con infinitas oportunidades de senderismo. Desde senderos para principiantes hasta caminatas más avanzadas, hay algo para todos.",
+        shuttles:
+          "Permítanos encargarnos del transporte durante su estadía. Nuestro servicio de traslado gratuito lo llevará a atracciones cercanas y se asegurará de que llegue a donde necesita ir.",
+        beer: "¡Los amantes de la cerveza pueden regocijarse! Nuestro resort cuenta con algunas de las cervezas más fuertes, perfectas para disfrutar después de un día de aventuras. Con una amplia selección de cervezas artesanales, seguramente encontrará una nueva favorita.",
+        home_w: "Bienvenidos a nuestro hotel",
+        room_w: "Nuestras habitaciones",
+        home_feat: "Habitación destacada",
+        home_feat2: "Oferta del mes",
+        reviews: "Reseñas",
       },
     },
     fr: {
@@ -170,6 +202,22 @@ i18n.use(initReactI18next).init({
         contact: "Contact",
         services: "Services",
         discover: "Découvrir",
+        cocktail_t: "Cocktails gratuits",
+        hiking_t: "randonnée sans fin",
+        shuttles_t: "navettes gratuites",
+        beer_t: "bières les plus fortes",
+        cocktail:
+          "Profitez de cocktails gratuits pendant votre séjour ! Nos barmans experts sont sûrs de mélanger quelque chose que vous allez adorer.",
+        hiking:
+          "Explorez la belle nature qui entoure notre complexe avec d'innombrables possibilités de randonnée. Des sentiers pour débutants aux randonnées plus avancées, il y en a pour tous les goûts.",
+        shuttles:
+          "Laissez-nous nous occuper du transport pendant votre séjour. Notre service de navette gratuit vous emmènera vers les attractions à proximité et s'assurera que vous arriviez à destination.",
+        beer: "Les amateurs de bière se réjouiront ! Notre complexe propose certaines des bières les plus fortes, parfaites pour se détendre après une journée d'aventures. Avec une large sélection de bières artisanales, vous êtes sûr de trouver une nouvelle préférée.",
+        home_w: "Bienvenue dans notre hôtel",
+        room_w: "Nos chambres",
+        home_feat: "Chambre en vedette",
+        home_feat2: "Offre du mois",
+        reviews: "Avis",
       },
     },
     de: {
@@ -225,6 +273,22 @@ i18n.use(initReactI18next).init({
         contact: "Kontakt",
         services: "Dienstleistungen",
         discover: "Entdecken",
+        cocktail_t: "Kostenlose Cocktails",
+        hiking_t: "Endloses Wandern",
+        shuttles_t: "Kostenlose Shuttles",
+        beer_t: "Stärkste Biere",
+        cocktail:
+          "Genießen Sie kostenlose Cocktails während Ihres Aufenthalts! Unsere erfahrenen Barkeeper werden sicherlich etwas mixen, das Sie lieben werden.",
+        hiking:
+          "Erkunden Sie die wunderschöne Natur rund um unser Resort mit endlosen Wandermöglichkeiten. Von Anfängerwegen bis hin zu fortgeschritteneren Wanderungen gibt es für jeden etwas.",
+        shuttles:
+          "Lassen Sie uns den Transport während Ihres Aufenthalts übernehmen. Unser kostenloser Shuttle-Service bringt Sie zu nahegelegenen Attraktionen und sorgt dafür, dass Sie dorthin gelangen, wo Sie hin möchten.",
+        beer: "Bierliebhaber aufgepasst! Unser Resort bietet einige der stärksten Biere der Umgebung, perfekt zum Genießen nach einem Tag voller Abenteuer. Mit einer großen Auswahl an Craft-Bieren finden Sie bestimmt einen neuen Favoriten.",
+        home_w: "Willkommen in unserem Hotel",
+        room_w: "Unsere Zimmer",
+        home_feat: "Vorgestelltes Zimmer",
+        home_feat2: "Angebot des Monats",
+        reviews: "Bewertungen",
       },
     },
     it: {
@@ -279,6 +343,22 @@ i18n.use(initReactI18next).init({
         contact: "Contatto",
         services: "Servizi",
         discover: "Scoprire",
+        cocktail_t: "Cocktail gratuiti",
+        hiking_t: "Escursioni infinite",
+        shuttles_t: "Navette gratuite",
+        beer_t: "Birre più forti",
+        cocktail:
+          "Goditi cocktail gratuiti durante il tuo soggiorno! I nostri barman esperti sono sicuri di preparare qualcosa che amerai.",
+        hiking:
+          "Esplora la splendida natura circostante il nostro resort con infinite opportunità di escursioni. Dai sentieri per principianti alle escursioni più avanzate, c'è qualcosa per tutti.",
+        shuttles:
+          "Facciamo noi il trasporto durante il tuo soggiorno. Il nostro servizio navetta gratuito ti porterà alle attrazioni nelle vicinanze e si assicurerà che arrivi dove vuoi andare.",
+        beer: "Amanti della birra, rallegratevi! Il nostro resort vanta alcune delle birre più forti della zona, perfette da gustare dopo una giornata di avventura. Con una vasta selezione di birre artigianali, troverai sicuramente un nuovo preferito.",
+        home_w: "Benvenuti al nostro hotel",
+        room_w: "Le nostre camere",
+        home_feat: "Camera in evidenza",
+        home_feat2: "Offerta del mese",
+        reviews: "Recensioni",
       },
     },
   },

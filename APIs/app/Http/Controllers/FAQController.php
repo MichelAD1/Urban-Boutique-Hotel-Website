@@ -13,7 +13,8 @@ class FAQController extends Controller
         $faq->answer = $request->answer;
         if($faq->save()){
             return response()->json([
-                'message'=>"successful"
+                'message'=>"successful",
+                "faq"=>$faq
             ],200);
         }
 

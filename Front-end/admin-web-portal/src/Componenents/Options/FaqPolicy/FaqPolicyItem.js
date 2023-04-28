@@ -5,6 +5,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 // Components
 import ReactModal from "react-modal";
 
+// Functions
+import checkEmpty from "../../../Global/Functions/CheckEmpty";
+
+// API
+import AddOption from "../../../api-client/Options/AddOption";
+import GetOptions from "../../../api-client/Options/GetOptions";
+
 const FaqPolicyItem = () => {
 	const loc = useLocation();
 	const [isValid, setIsValid] = useState(loc.state);
@@ -61,9 +68,29 @@ const FaqPolicyItem = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		const data = {};
 		if (tag === "faq") {
-			console.log("FAQ");
+			data.question = question;
+			data.answer = answer;
 		}
+
+		const check_empty = checkEmpty(data);
+		if (!check_empty) {
+			alert("Please fill all the fields");
+			return;
+		}
+
+		const response = AddOption(data, tag);
+		response.then((res) => {
+			console.log(res);
+			if (res.message === "successful") {
+				const new_data = { data: res.data };
+				loc.state = new_data;
+			} else {
+				alert("Something went wrong");
+			}
+		});
+
 		setEdit(false);
 		console.log("Submit");
 	};

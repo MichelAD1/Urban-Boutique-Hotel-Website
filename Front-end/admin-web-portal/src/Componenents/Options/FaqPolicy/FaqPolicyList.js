@@ -9,6 +9,10 @@ import search_icon from "../../../assets/icons/search.svg";
 import OptionsCard from "../../../Global/Components/OptionsCard";
 import ReactModal from "react-modal";
 
+// API
+
+import GetOptions from "../../../api-client/Options/GetOptions";
+
 const FaqPolicyList = () => {
 	const [data, setData] = useState([]);
 
@@ -22,48 +26,6 @@ const FaqPolicyList = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		setPolicies([
-			{
-				id: 1,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-			{
-				id: 2,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-			{
-				id: 3,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-		]);
-
-		setFaqs([
-			{
-				id: 1,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-			{
-				id: 2,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-			{
-				id: 3,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-		]);
-
 		setData(mergeAndTagData());
 	}, []);
 

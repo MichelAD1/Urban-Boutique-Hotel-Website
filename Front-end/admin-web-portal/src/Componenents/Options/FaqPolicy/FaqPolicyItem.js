@@ -9,8 +9,8 @@ const FaqPolicyItem = () => {
 	const loc = useLocation();
 	const [isValid, setIsValid] = useState(loc.state);
 
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
+	const [question, setQuestion] = useState("");
+	const [answer, setAnswer] = useState("");
 	const [tag, setTag] = useState("");
 
 	const [edit, setEdit] = useState(false);
@@ -30,8 +30,8 @@ const FaqPolicyItem = () => {
 
 	useEffect(() => {
 		if (!isValid.type) {
-			setTitle(isValid.title);
-			setDescription(isValid.description);
+			setQuestion(isValid.question);
+			setAnswer(isValid.answer);
 			setTag(isValid.tag);
 		}
 	}, [isValid]);
@@ -48,8 +48,8 @@ const FaqPolicyItem = () => {
 			navigate(-1);
 		} else {
 			setEdit(false);
-			setTitle(isValid.title);
-			setDescription(isValid.description);
+			setQuestion(isValid.question);
+			setAnswer(isValid.answer);
 			setTag(isValid.tag);
 		}
 	};
@@ -61,6 +61,9 @@ const FaqPolicyItem = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (tag === "faq") {
+			console.log("FAQ");
+		}
 		setEdit(false);
 		console.log("Submit");
 	};
@@ -128,14 +131,14 @@ const FaqPolicyItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div style={{ alignSelf: "flex-start" }}>
-							<label>Title</label>
+							<label>Question</label>
 						</div>
 						<div>
-							{!edit && <p>{title}</p>}
+							{!edit && <p>{question}</p>}
 							{edit && (
 								<textarea
-									value={title}
-									onChange={(e) => setTitle(e.target.value)}
+									value={question}
+									onChange={(e) => setQuestion(e.target.value)}
 									className='input-box bio-input'
 								/>
 							)}
@@ -145,14 +148,14 @@ const FaqPolicyItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div style={{ alignSelf: "flex-start" }}>
-							<label>Description</label>
+							<label>Answer</label>
 						</div>
 						<div>
-							{!edit && <p>{description}</p>}
+							{!edit && <p>{answer}</p>}
 							{edit && (
 								<textarea
-									value={description}
-									onChange={(e) => setDescription(e.target.value)}
+									value={answer}
+									onChange={(e) => setAnswer(e.target.value)}
 									className='input-box bio-input'
 								/>
 							)}

@@ -103,15 +103,6 @@ const FaqPolicyList = () => {
 	return (
 		<div className='container'>
 			<div className='searchAndFilter'>
-				<div className='search-bar'>
-					<img src={search_icon} alt='' className='search-icon' />
-					<input
-						className='search-input'
-						type='text'
-						placeholder='Search'
-						onChange={(e) => setQuery(e.target.value)}
-					/>
-				</div>
 				<select
 					className='filterDropDown'
 					onChange={(e) => setFilter(e.target.value)}>

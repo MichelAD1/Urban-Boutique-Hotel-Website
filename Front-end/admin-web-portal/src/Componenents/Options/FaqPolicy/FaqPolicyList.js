@@ -102,19 +102,24 @@ const FaqPolicyList = () => {
 
 	return (
 		<div className='container'>
-			<div className='searchAndFilter'>
-				<select
-					className='filterDropDown'
-					onChange={(e) => setFilter(e.target.value)}>
-					<option value=''>All</option>
-					{tags.map((tag) => (
-						<option key={tag} value={tag}>
-							{capitalize(tag)}
-						</option>
-					))}
-				</select>
-				<div onClick={() => openModal()}>
-					<AiOutlinePlus className='add-button' />
+			<div
+				className='searchAndFilter'
+				style={{ justifyContent: "space-between" }}>
+				<h2>FAQs & Policies</h2>
+				<div className='filter'>
+					<select
+						className='filterDropDown'
+						onChange={(e) => setFilter(e.target.value)}>
+						<option value=''>All</option>
+						{tags.map((tag) => (
+							<option key={tag} value={tag}>
+								{capitalize(tag)}
+							</option>
+						))}
+					</select>
+					<div onClick={() => openModal()}>
+						<AiOutlinePlus className='add-button' />
+					</div>
 				</div>
 			</div>
 			<div className='options-list'>

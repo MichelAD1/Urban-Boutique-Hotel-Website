@@ -5,6 +5,7 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationPin } from "react-icons/md";
 import { FaFax } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { Fab } from "@mui/material";
 
 //Apis
 import SendMessage from "../../api-client/Contact/SendMessage";
@@ -64,6 +65,20 @@ const Contact = () => {
 
   return (
     <>
+      <div className="live-chat">
+        <Fab
+          className="chat-button"
+          sx={{
+            color: "white",
+            fontSize: "14px",
+            width: "8em",
+            height: "3.5em",
+            borderRadius: "30px",
+          }}
+        >
+          Live Chat
+        </Fab>
+      </div>
       <div className="contactHero">
         <div className="banner">
           <h1>{t("contact")}</h1>

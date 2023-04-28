@@ -2787,3 +2787,56 @@ h6 {
   background-color: #2a32499a;
 }
 /* End of reservations */
+/* Live Chat */
+.chat-button {
+  animation-name: pulse;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  background-size: 300%;
+  background-position: left;
+  background-image: linear-gradient(to right, #2c3e50, #42596f, #2c3e50);
+  z-index: 3;
+  transition: 0.5s ease-in-out;
+}
+.chat-button:not(:hover) {
+  background-position: left;
+  transition: 0.5s ease-in-out;
+}
+
+.chat-button:hover {
+  background-position: right;
+  transition: 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.live-chat {
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 1%;
+  margin-left: 1%;
+  z-index: 99;
+}
+@media only screen and (max-width: 768px) {
+  .chat-button {
+    font-size: 12px;
+  }
+
+  .live-chat {
+    bottom: 2%;
+    margin-left: 2%;
+  }
+}
+/* End of live chat */

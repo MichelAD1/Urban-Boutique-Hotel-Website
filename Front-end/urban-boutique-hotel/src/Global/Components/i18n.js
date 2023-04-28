@@ -198,6 +198,8 @@ i18n.use(initReactI18next).init({
         subtotal: "Subtotal",
         tax: "Tax",
         total: "Total",
+        livechat: "Live Chat",
+        send: "Send",
       },
     },
     es: {
@@ -404,6 +406,8 @@ i18n.use(initReactI18next).init({
         subtotal: "Subtotal",
         tax: "Impuesto",
         total: "Total",
+        livechat: "Chat en vivo",
+        send: "Enviar",
       },
     },
     fr: {
@@ -598,6 +602,8 @@ i18n.use(initReactI18next).init({
         subtotal: "Sous-total",
         tax: "Taxe",
         total: "Total",
+        livechat: "Chat direct",
+        send: "Envoyer",
       },
     },
     de: {
@@ -791,6 +797,8 @@ i18n.use(initReactI18next).init({
         subtotal: "Zwischensumme",
         tax: "Steuer",
         total: "Gesamt",
+        livechat: "Live-Chat",
+        send: "Senden",
       },
     },
     it: {
@@ -984,6 +992,8 @@ i18n.use(initReactI18next).init({
         subtotal: "Subtotale",
         tax: "Imposta",
         total: "Totale",
+        livechat: "Chat vivo",
+        send: "Invia",
       },
     },
   },

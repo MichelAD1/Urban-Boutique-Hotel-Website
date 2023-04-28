@@ -72,8 +72,7 @@ const FaqPolicyItem = () => {
 			data.question = question;
 			data.answer = answer;
 		}
-
-		if (tag === "policy") {
+		if (tag === "Policy") {
 			data.title = question;
 			data.text = answer;
 		}

@@ -7,9 +7,11 @@ import ReactModal from "react-modal";
 
 // Functions
 import checkEmpty from "../../../Global/Functions/CheckEmpty";
+import checkEqual from "../../../Global/Functions/CheckEqual";
 
 // API
 import AddOption from "../../../api-client/Options/AddOption";
+import EditOption from "../../../api-client/Options/EditOption";
 
 const FaqPolicyItem = () => {
 	const loc = useLocation();
@@ -36,8 +38,14 @@ const FaqPolicyItem = () => {
 
 	useEffect(() => {
 		if (!isValid.type) {
-			setQuestion(isValid.question);
-			setAnswer(isValid.answer);
+			if (isValid.tag === "faq") {
+				setQuestion(isValid.question);
+				setAnswer(isValid.answer);
+			} else {
+				setQuestion(isValid.title);
+				setAnswer(isValid.text);
+			}
+
 			setTag(isValid.tag);
 		}
 	}, [isValid]);
@@ -61,8 +69,48 @@ const FaqPolicyItem = () => {
 	};
 
 	const handleEdit = (e) => {
+		const data = {};
 		e.preventDefault();
-		setEdit(false);
+		if (tag === "faq") {
+			data.question = question;
+			data.answer = answer;
+		}
+		if (tag === "policy") {
+			data.title = question;
+			data.text = answer;
+		}
+
+		const check_empty = checkEmpty(data);
+		if (!check_empty) {
+			alert("Please fill all the fields");
+			return;
+		}
+		const reqData = checkEqual(data, isValid);
+		if (!reqData) {
+			alert("No changes made");
+			return;
+		}
+
+		if (tag === "faq") {
+			reqData.faq_id = isValid.id;
+		} else {
+			reqData.policy_id = isValid.id;
+		}
+		const response = EditOption(reqData, tag);
+		response.then((res) => {
+			if (
+				res.message === "policy editted successfuly" ||
+				res.message === "faq editted successfuly"
+			) {
+				res.data.tag = tag;
+				const new_data = { data: res.data };
+				loc.state = new_data;
+				setIsValid(new_data);
+				setEdit(false);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 	};
 
 	const handleSubmit = (e) => {
@@ -85,17 +133,14 @@ const FaqPolicyItem = () => {
 
 		const response = AddOption(data, tag);
 		response.then((res) => {
-			console.log(res);
 			if (res.message === "successful") {
 				const new_data = { data: res.data };
 				loc.state = new_data;
+				setEdit(false);
 			} else {
 				alert("Something went wrong");
 			}
 		});
-
-		setEdit(false);
-		console.log("Submit");
 	};
 
 	const handleDelete = () => {

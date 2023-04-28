@@ -1,25 +1,28 @@
 import axios from "axios";
 import base_url from "../BaseUrl";
 
-export default async function DeleteOption(option_id, tag) {
+const AddOption = async (data, tag) => {
 	let url = base_url;
 	if (tag === "faq") {
-		url += `faq/remove/${option_id}`;
+		url += "faq/add";
 	}
-	if (tag === "policy") {
-		url += `policy/remove/${option_id}`;
+	console.log(tag);
+	if (tag === "Policy") {
+		url += "policy/add";
 	}
-
 	const response = await axios({
-		method: "get",
+		method: "post",
 		url: url,
 		headers: { Authorization: localStorage.getItem("token") },
+		data: data,
 	})
 		.then((res) => {
 			return res.data;
 		})
 		.catch((err) => {
-			return err.response;
+			return err.response.data;
 		});
 	return response;
-}
+};
+
+export default AddOption;

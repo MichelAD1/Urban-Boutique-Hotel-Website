@@ -143,7 +143,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.contentmanager'])->group(function(){
             Route::post('add',[FAQController::class,'addFAQ']);
             Route::post('edit',[FAQController::class,'editFAQ']);
-            Route::get('remove',[FAQController::class,'removeFAQ']);
+            Route::get('remove/{faqid}',[FAQController::class,'removeFAQ']);
 
         });
         Route::middleware(['auth', 'check.customer'])->group(function(){
@@ -161,7 +161,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.contentmanager'])->group(function(){
             Route::post('add',[PolicyController::class,'addPolicy']);
             Route::post('edit',[PolicyController::class,'editPolicy']);
-            Route::get('remove',[PolicyController::class,'removePolicy']);
+            Route::get('remove/{policyid}',[PolicyController::class,'removePolicy']);
 
         });
         Route::middleware(['auth', 'check.customer'])->group(function(){

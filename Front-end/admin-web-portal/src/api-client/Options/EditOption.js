@@ -1,19 +1,16 @@
 import axios from "axios";
 import base_url from "../BaseUrl";
 
-export default async function DeleteOption(option_id, tag) {
+const EditOption = async (data, tag) => {
 	let url = base_url;
-	if (tag === "faq") {
-		url += `faq/remove/${option_id}`;
-	}
-	if (tag === "policy") {
-		url += `policy/remove/${option_id}`;
-	}
+	if (tag === "faq") url += `faq/remove/`;
+	if (tag === "policy") url += `policy/remove/`;
 
 	const response = await axios({
-		method: "get",
+		method: "post",
 		url: url,
 		headers: { Authorization: localStorage.getItem("token") },
+		data: data,
 	})
 		.then((res) => {
 			return res.data;
@@ -22,4 +19,6 @@ export default async function DeleteOption(option_id, tag) {
 			return err.response;
 		});
 	return response;
-}
+};
+
+export default EditOption;

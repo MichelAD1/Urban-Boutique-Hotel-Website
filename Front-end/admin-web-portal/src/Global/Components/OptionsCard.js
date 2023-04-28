@@ -8,6 +8,10 @@ const OptionsCard = (reqData) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		if (reqData.reqData.tag === "faq") {
+			reqData.reqData.title = reqData.reqData.question;
+			reqData.reqData.text = reqData.reqData.answer;
+		}
 		setData(reqData.reqData);
 	}, [reqData]);
 
@@ -31,7 +35,7 @@ const OptionsCard = (reqData) => {
 				<h2>{data.title}</h2>
 				<span>{capitalize(data.tag)}</span>
 			</div>
-			<p>{data.description}</p>
+			<p>{data.text}</p>
 		</div>
 	);
 };

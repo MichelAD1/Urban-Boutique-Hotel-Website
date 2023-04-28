@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Livechat = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const chatBottomRef = useRef(null);
 
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  });
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -27,7 +32,7 @@ const Livechat = () => {
   return (
     <div className="live-chat-container">
       <div className="chat-header">
-        <h2>Live Chat</h2>
+        <h2>{t("livechat")}</h2>
       </div>
       <div className="chat-messages">
         {messages.map((message, index) => (
@@ -46,7 +51,7 @@ const Livechat = () => {
           onChange={handleInputChange}
           placeholder="Type your message..."
         />
-        <button type="submit">Send</button>
+        <button type="submit">{t("send")}</button>
       </form>
     </div>
   );

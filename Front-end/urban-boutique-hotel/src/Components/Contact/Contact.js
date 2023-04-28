@@ -77,7 +77,7 @@ const Contact = () => {
           }}
           onClick={() => window.open("http://localhost:3000/livechat")}
         >
-          Live Chat
+          {t("livechat")}
         </Fab>
       </div>
       <div className="contactHero">

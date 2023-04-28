@@ -158,7 +158,6 @@ const FaqPolicyItem = () => {
 	const handleConfirmDelete = () => {
 		const response = DeleteOption(isValid.id, tag);
 		response.then((res) => {
-			console.log(res);
 			if (
 				res.message === "faq removed successfuly" ||
 				res.message === "policy removed successfuly"

@@ -20,7 +20,7 @@ import BookingSubmitted from "./Components/Submit/BookingSubmitted";
 import Navbar from "./Components/Navbar/Navbar";
 import Account from "./Components/Account/Account";
 import AccountNav from "./Components/Navbar/AccountNav";
-
+import Livechat from "./Components/Livechat/Livechat";
 import PrivateRoute from "./Routes/PrivateRoute";
 
 import Profile from "./Components/Account/Profile";
@@ -67,6 +67,15 @@ function App() {
                 <>
                   <ScrollToTop />
                   <RoomsItem />
+                </>
+              }
+            />
+            <Route
+              path="/livechat"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Livechat />
                 </>
               }
             />

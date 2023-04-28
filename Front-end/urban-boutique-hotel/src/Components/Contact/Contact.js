@@ -75,6 +75,7 @@ const Contact = () => {
             height: "3.5em",
             borderRadius: "30px",
           }}
+          onClick={() => window.open("http://localhost:3000/livechat")}
         >
           Live Chat
         </Fab>

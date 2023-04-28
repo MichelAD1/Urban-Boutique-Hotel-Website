@@ -12,6 +12,7 @@ import checkEqual from "../../../Global/Functions/CheckEqual";
 // API
 import AddOption from "../../../api-client/Options/AddOption";
 import EditOption from "../../../api-client/Options/EditOption";
+import DeleteOption from "../../../api-client/Options/DeleteOptions";
 
 const FaqPolicyItem = () => {
 	const loc = useLocation();
@@ -143,7 +144,8 @@ const FaqPolicyItem = () => {
 		});
 	};
 
-	const handleDelete = () => {
+	const handleDelete = (e) => {
+		e.preventDefault();
 		openModal();
 	};
 
@@ -154,6 +156,18 @@ const FaqPolicyItem = () => {
 	};
 
 	const handleConfirmDelete = () => {
+		const response = DeleteOption(isValid.id, tag);
+		response.then((res) => {
+			console.log(res);
+			if (
+				res.message === "faq removed successfuly" ||
+				res.message === "policy removed successfuly"
+			) {
+				navigate(-1);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 		closeModal();
 	};
 
@@ -183,7 +197,7 @@ const FaqPolicyItem = () => {
 					{isValid.type && <h2>{capitalize(tag)}</h2>}
 
 					{!isValid.type && (
-						<button className='button' onClick={() => handleDelete()}>
+						<button className='button' onClick={(e) => handleDelete(e)}>
 							Delete
 						</button>
 					)}

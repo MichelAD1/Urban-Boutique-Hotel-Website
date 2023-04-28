@@ -3,8 +3,8 @@ import base_url from "../BaseUrl";
 
 const EditOption = async (data, tag) => {
 	let url = base_url;
-	if (tag === "faq") url += `faq/edit/`;
-	if (tag === "policy") url += `policy/edit/`;
+	if (tag === "faq") url += `faq/remove/`;
+	if (tag === "policy") url += `policy/remove/`;
 
 	const response = await axios({
 		method: "post",

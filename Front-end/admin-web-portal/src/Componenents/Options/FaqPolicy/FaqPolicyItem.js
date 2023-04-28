@@ -10,7 +10,6 @@ import checkEmpty from "../../../Global/Functions/CheckEmpty";
 
 // API
 import AddOption from "../../../api-client/Options/AddOption";
-import GetOptions from "../../../api-client/Options/GetOptions";
 
 const FaqPolicyItem = () => {
 	const loc = useLocation();

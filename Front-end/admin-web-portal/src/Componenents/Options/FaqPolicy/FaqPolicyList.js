@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 // Icons
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
@@ -10,7 +11,6 @@ import OptionsCard from "../../../Global/Components/OptionsCard";
 import ReactModal from "react-modal";
 
 // API
-
 import GetOptions from "../../../api-client/Options/GetOptions";
 
 const FaqPolicyList = () => {
@@ -23,11 +23,29 @@ const FaqPolicyList = () => {
 	const [filter, setFilter] = useState("");
 	const [err, setErr] = useState("");
 
+	const [loading, setLoading] = useState(true);
+
 	const navigate = useNavigate();
 
+	const {
+		status,
+		error,
+		data: policiesFaqs,
+	} = useQuery(["policies_faqs", "pf"], GetOptions);
 	useEffect(() => {
-		setData(mergeAndTagData());
-	}, []);
+		if (policiesFaqs) {
+			setFaqs(policiesFaqs[0]);
+			setPolicies(policiesFaqs[1]);
+			setData(mergeAndTagData());
+			setLoading(false);
+		}
+	}, [policiesFaqs, status]);
+
+	useEffect(() => {
+		if (error) {
+			alert("Error fetching data");
+		}
+	}, [error]);
 
 	useEffect(() => {
 		setData(mergeAndTagData());
@@ -73,6 +91,16 @@ const FaqPolicyList = () => {
 		closeModal();
 		navigate("/options/faqs_policies/info", item);
 	};
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
+
+	console.log(data);
 
 	return (
 		<div className='container'>

@@ -73,6 +73,11 @@ const FaqPolicyItem = () => {
 			data.answer = answer;
 		}
 
+		if (tag === "policy") {
+			data.title = question;
+			data.text = answer;
+		}
+
 		const check_empty = checkEmpty(data);
 		if (!check_empty) {
 			alert("Please fill all the fields");
@@ -157,7 +162,7 @@ const FaqPolicyItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div style={{ alignSelf: "flex-start" }}>
-							<label>Question</label>
+							<label>{tag === "faq" ? "Question" : "Title"}</label>
 						</div>
 						<div>
 							{!edit && <p>{question}</p>}
@@ -174,7 +179,7 @@ const FaqPolicyItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div style={{ alignSelf: "flex-start" }}>
-							<label>Answer</label>
+							<label>{tag === "faq" ? "Answer" : "Description"}</label>
 						</div>
 						<div>
 							{!edit && <p>{answer}</p>}

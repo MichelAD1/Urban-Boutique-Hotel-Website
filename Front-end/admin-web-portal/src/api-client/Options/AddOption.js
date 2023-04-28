@@ -6,6 +6,10 @@ const AddOption = async (data, tag) => {
 	if (tag === "faq") {
 		url += "faq/add";
 	}
+	console.log(tag);
+	if (tag === "Policy") {
+		url += "policy/add";
+	}
 	const response = await axios({
 		method: "post",
 		url: url,

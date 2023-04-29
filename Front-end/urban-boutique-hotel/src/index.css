@@ -2565,28 +2565,28 @@ h6 {
 /* Buffer */
 .buffer-loader {
   border: 2px solid #f3f3f3;
-  border-top: 2px solid #777777;
+  border-top: 2px solid var(--primaryColor);
   border-radius: 50%;
   width: 20px;
   height: 20px;
   animation: spin 2s linear infinite;
 }
 .buffer-loader.home {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #777777;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #777777;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 2s linear infinite;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
 }
 .buffer-loader.submit {
   margin: 0 auto;
-  border: 4px solid transparent;
-  border-top: 4px solid var(--primaryColor);
+  border: 3px solid transparent;
+  border-top: 3px solid var(--primaryColor);
   border-radius: 50%;
-  width: 30px;
+  width: 35px;
   margin-top: 4%;
-  height: 30px;
+  height: 35px;
   animation: spin 1s linear infinite;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }

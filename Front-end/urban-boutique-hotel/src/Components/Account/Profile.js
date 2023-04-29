@@ -207,6 +207,7 @@ const Profile = () => {
       dob,
       phone_number,
     };
+    setLoading(true);
     let response = EditProfile(data);
     response.then((res) => {
       if (res.status === 409) {
@@ -225,6 +226,7 @@ const Profile = () => {
           phone_number,
         });
         setEdit(false);
+        setLoading(false);
         localStorage.setItem("username", username);
       }
     });

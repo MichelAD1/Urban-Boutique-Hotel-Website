@@ -175,16 +175,40 @@ const RoomItem = () => {
 		};
 
 		if (checkEmpty(data)) {
-			const reqData = checkEqual(data, isValid.data.room);
-			if (reqData) {
+			let reqData = checkEqual(data, isValid.data.room);
+			if (reqData || imagesChanged) {
+				if (!reqData && imagesChanged) {
+					reqData = {};
+					if (addedImages.length > 0) {
+						reqData.images_added = addedImages;
+					}
+					if (deletedImages.length > 0) {
+						reqData.images_removed = deletedImages;
+					}
+				} else if (reqData && imagesChanged) {
+					if (addedImages.length > 0) {
+						reqData.images_added = addedImages;
+					}
+					if (deletedImages.length > 0) {
+						reqData.images_removed = deletedImages;
+					}
+				}
+
 				reqData.room_id = isValid.data.room.id;
+				setLoading(true);
 				const response = EditRoom(reqData);
 				response.then((res) => {
-					if (res.message === "room added successfully") {
-						const new_data = res;
+					console.log(res);
+					if (res[0].message === "room added successfully") {
+						const new_data = {};
+						new_data.room = res[0].room;
+						new_data.images = res[1];
 						loc.state = { data: new_data };
 						setIsValid(loc.state);
 						setEdit(false);
+						setLoading(false);
+						setAddedImages([]);
+						setDeletedImages([]);
 					} else {
 						alert("Something went wrong");
 					}
@@ -248,7 +272,11 @@ const RoomItem = () => {
 		);
 
 		setImages([...images, ...base64Images]);
-		setAddedImages([...addedImages, ...base64Images]);
+		const reqImages = [];
+		for (let i = 0; i < base64Images.length; i++) {
+			reqImages.push(base64Images[i].image_url);
+		}
+		setAddedImages([...addedImages, ...reqImages]);
 		setImagesChanged(true);
 	};
 

@@ -16,7 +16,7 @@ class ImageController extends Controller
             'projectId' => 'urban-boutique-hotel',
                 'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
         ]);
-        $bucket = $storage->bucket('your-bucket-name');
+        $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
         if(!empty($images)){
             for($i=0;$i<sizeof($images);$i++){
                 $base64image = $images[$i];
@@ -40,7 +40,7 @@ class ImageController extends Controller
             'projectId' => 'urban-boutique-hotel',
             'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
         ]);
-        $bucket = $storage->bucket('your-bucket-name');
+        $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
         if($request->has("images_added")){
             $images = $request->images_added;
             $roomid = $request->room_id;
@@ -62,23 +62,25 @@ class ImageController extends Controller
             }
         }
         if($request->has("images_removed")){
-            $images = $request->images_added;
-            $roomid = $request->room_id;
+            $images = $request->images_removed;
             $folder_name = "RoomImages/";
             if(!empty($images)){
                 for($i=0;$i<sizeof($images);$i++){
-                    $image = $images[$i];
+                    $imageid = $images[$i];
+                    $image = Image::find($imageid);
                     $url = $image->image_url;
-                    if (preg_match('/([\w]+\.(png|jpg|jpeg|gif))/', $url, $matches)) {
+                    if (preg_match('/([\w]+.(png|jpg|jpeg|gif))/', $url, $matches)) {
                         $filename = $matches[1];
                         $overallpath = $folder_name.$filename;
                         $object = $bucket->object($overallpath);
                         $object->delete();
+                        $image->delete();
                     }
 
                 }
             }
         }
+        return Image::where("room_id",$request->room_id)->get();
     }
 
 }

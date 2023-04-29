@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
+// API
+import GetRoom from "../../api-client/Rooms/GetRoom";
 
 const ReservationItem = () => {
 	const loc = useLocation();
@@ -13,11 +16,26 @@ const ReservationItem = () => {
 	const [requests, setRequests] = useState("");
 	const [customer_name, setCustomerName] = useState("");
 
+	const [roomId, setRoomId] = useState("");
+
 	const [edit, setEdit] = useState(false);
+	const [rooms, setRooms] = useState(false);
+	const [unavailableDates, setUnavailableDates] = useState([]);
+	const [availableDates, setAvailableDates] = useState([]);
 
 	useEffect(() => {
 		if (data) {
 			handleClose();
+			const reqRooms = GetRoom();
+			reqRooms.then((res) => {
+				if (res) {
+					if (res.length > 0) {
+						setRooms(res);
+						setUnavailableDates(res.occupied_dates);
+						setAvailableDates(res.free_dates);
+					}
+				}
+			});
 		}
 	}, [data]);
 
@@ -28,17 +46,23 @@ const ReservationItem = () => {
 	const handleClose = () => {
 		setEdit(false);
 
-		setCheckin(data.checkin);
-		setCheckout(data.checkout);
-		setRoom_name(data.room_name);
+		setCheckin(data.reservation_date);
+		setCheckout(data.reservation_end);
+		setRoom_name(data.room_object.title);
 		setAmount(data.amount);
 		setStatus(data.status);
 		setRequests(data.requests);
-		setCustomerName(data.customer_name);
+		setCustomerName(data.customer_object.email);
+		setRoomId(data.room_object.id);
 	};
 
 	const handleSubmit = () => {
 		setEdit(false);
+	};
+
+	const navigate = useNavigate();
+	const handleRedirect = (url, state) => {
+		navigate(url, state);
 	};
 
 	return (
@@ -65,10 +89,18 @@ const ReservationItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info'>
 						<div>
-							<label>Customer name</label>
+							<label>Customer email</label>
 						</div>
 						<div>
-							<p>{customer_name}</p>
+							<p
+								style={{ cursor: "pointer" }}
+								onClick={() =>
+									handleRedirect("/user/profile", {
+										state: { data: data.customer_object },
+									})
+								}>
+								{customer_name}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -78,23 +110,31 @@ const ReservationItem = () => {
 							<label>Room name</label>
 						</div>
 						<div>
-							{!edit && <p>{room_name}</p>}
+							{!edit && (
+								<p
+									style={{ cursor: "pointer" }}
+									onClick={() => {
+										data.room = data.room_object;
+										handleRedirect("/room/profile", {
+											state: { data: data },
+										});
+									}}>
+									{room_name}
+								</p>
+							)}
 							{edit && (
 								<select
 									className='input-dropdown'
-									value={room_name}
-									onChange={(e) => setRoom_name(e.target.value)}>
-									<option value=''>Select room</option>
-									<option value='Room 1'>Room 1</option>
-									<option value='Room 2'>Room 2</option>
-									<option value='Room 3'>Room 3</option>
-									<option value='Room 4'>Room 4</option>
-									<option value='Room 5'>Room 5</option>
-									<option value='Room 6'>Room 6</option>
-									<option value='Room 7'>Room 7</option>
-									<option value='Room 8'>Room 8</option>
-									<option value='Room 9'>Room 9</option>
-									<option value='Room 10'>Room 10</option>
+									value={roomId}
+									onChange={(e) => setRoomId(e.target.value)}>
+									<option value='' hidden>
+										Select room
+									</option>
+									{rooms.map((room) => (
+										<option key={room.room.id} value={room.room.id}>
+											{room.room.title}
+										</option>
+									))}
 								</select>
 							)}
 						</div>

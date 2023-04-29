@@ -29,31 +29,31 @@ function FindUs() {
       id: 1,
       title: t("findus_title1"),
       description: t("findus_desc1"),
-      image: att_1,
+      image_url: att_1,
     },
     {
       id: 2,
       title: t("findus_title2"),
       description: t("findus_desc2"),
-      image: att_2,
+      image_url: att_2,
     },
     {
       id: 3,
       title: t("findus_title3"),
       description: t("findus_desc3"),
-      image: att_3,
+      image_url: att_3,
     },
     {
       id: 4,
       title: t("findus_title4"),
       description: t("findus_desc4"),
-      image: att_4,
+      image_url: att_4,
     },
     {
       id: 5,
       title: t("findus_title5"),
       description: t("findus_desc5"),
-      image: att_5,
+      image_url: att_5,
     },
   ];
   const arrival = [

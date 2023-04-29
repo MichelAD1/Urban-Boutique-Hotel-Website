@@ -33,28 +33,6 @@ const RoomsItem = () => {
   const [breakfast, setBreakfast] = useState(room.room.breakfast);
   const [pets, setPets] = useState(room.room.pets);
   const [images, setImages] = useState(room.images);
-  const slideshowd_data = [
-    {
-      id: 1,
-      image: att_1,
-    },
-    {
-      id: 2,
-      image: att_2,
-    },
-    {
-      id: 3,
-      image: att_3,
-    },
-    {
-      id: 4,
-      image: att_4,
-    },
-    {
-      id: 5,
-      image: att_5,
-    },
-  ];
 
   const handleBooking = () => {
     navigate(`/rooms/booking`, { state: { data: room } });
@@ -72,7 +50,7 @@ const RoomsItem = () => {
         </div>
       </div>
       <div className="room-images">
-        <Slideshow data={slideshowd_data} type={"Room"} />
+        <Slideshow data={images} type={"Room"} />
       </div>
       <div className="room-infos">
         <div className="room-display">

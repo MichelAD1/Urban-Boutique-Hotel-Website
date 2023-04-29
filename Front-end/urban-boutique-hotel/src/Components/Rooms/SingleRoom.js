@@ -30,7 +30,7 @@ const SingleRoom = ({ reverse, room, type }) => {
       id="deals-rooms"
       onClick={() => handleRedirect(room)}
     >
-      <img src={dummy1} alt="" className="deal-image" />
+      <img src={room.images[0].image_url} alt="" className="deal-image" />
       <div className="deal-info">
         {type && <h2>{type}</h2>}
         {type && <h5>{room.room.title}</h5>}

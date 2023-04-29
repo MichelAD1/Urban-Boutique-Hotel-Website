@@ -5,6 +5,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 // Components
 import ReactModal from "react-modal";
 
+// Functions
+import checkEmpty from "../../../Global/Functions/CheckEmpty";
+import checkEqual from "../../../Global/Functions/CheckEqual";
+
+// API
+import AddOption from "../../../api-client/Options/AddOption";
+import EditOption from "../../../api-client/Options/EditOption";
+import DeleteOption from "../../../api-client/Options/DeleteOptions";
+
 const RegulationDisasterItem = () => {
 	const loc = useLocation();
 	const [isValid, setIsValid] = useState(loc.state);
@@ -31,7 +40,7 @@ const RegulationDisasterItem = () => {
 	useEffect(() => {
 		if (!isValid.type) {
 			setTitle(isValid.title);
-			setDescription(isValid.description);
+			setDescription(isValid.text);
 			setTag(isValid.tag);
 		}
 	}, [isValid]);
@@ -49,33 +58,101 @@ const RegulationDisasterItem = () => {
 		} else {
 			setEdit(false);
 			setTitle(isValid.title);
-			setDescription(isValid.description);
+			setDescription(isValid.text);
 			setTag(isValid.tag);
 		}
 	};
 
 	const handleEdit = (e) => {
+		const data = {
+			title: title,
+			text: description,
+		};
 		e.preventDefault();
-		setEdit(false);
+
+		const check_empty = checkEmpty(data);
+		if (!check_empty) {
+			alert("Please fill all the fields");
+			return;
+		}
+		const reqData = checkEqual(data, isValid);
+		if (!reqData) {
+			alert("No changes made");
+			return;
+		}
+
+		if (tag === "regulation") {
+			reqData.regulationid = isValid.id;
+		} else {
+			reqData.responseid = isValid.id;
+		}
+		const response = EditOption(reqData, tag);
+		response.then((res) => {
+			if (
+				res.message === "disaster response editted successfuly" ||
+				res.message === "regulation editted successfuly"
+			) {
+				res.data.tag = tag;
+				const new_data = { data: res.data };
+				loc.state = new_data;
+				setIsValid(new_data);
+				setEdit(false);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setEdit(false);
-		console.log("Submit");
-	};
+		const reqData = {
+			title: title,
+			text: description,
+		};
 
-	const handleDelete = () => {
-		openModal();
+		const check_empty = checkEmpty(reqData);
+
+		if (!check_empty) {
+			alert("All fields are required");
+			return;
+		}
+		const response = AddOption(reqData, tag);
+		response.then((res) => {
+			if (res.message === "successful") {
+				const new_data = res.data;
+				new_data.tag = tag;
+				loc.state = { data: new_data };
+				setIsValid(loc.state);
+				setEdit(false);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 	};
 
 	// Modal
+	const handleDelete = (e) => {
+		e.preventDefault();
+		openModal();
+	};
+
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
 
 	const handleConfirmDelete = () => {
+		const response = DeleteOption(isValid.id, tag);
+		response.then((res) => {
+			if (
+				res.message === "regulation removed successfuly" ||
+				res.message === "disaster response removed successfuly"
+			) {
+				navigate(-1);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 		closeModal();
 	};
 
@@ -105,7 +182,7 @@ const RegulationDisasterItem = () => {
 					{isValid.type && <h2>{capitalize(tag)}</h2>}
 
 					{!isValid.type && (
-						<button className='button' onClick={() => handleDelete()}>
+						<button className='button' onClick={(e) => handleDelete(e)}>
 							Delete
 						</button>
 					)}

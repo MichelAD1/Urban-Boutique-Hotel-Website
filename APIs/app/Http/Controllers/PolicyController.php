@@ -14,7 +14,8 @@ class PolicyController extends Controller
         $policy->title = $request->title;
         if($policy->save()){
             return response()->json([
-                'message'=>"successful"
+                'message'=>"successful",
+                'data'=>$policy
             ],200);
         }
 

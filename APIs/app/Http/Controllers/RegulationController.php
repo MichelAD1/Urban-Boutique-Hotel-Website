@@ -14,7 +14,8 @@ class RegulationController extends Controller
         $regulation->title = $request->title;
         if($regulation->save()){
             return response()->json([
-                'message'=>"successful"
+                'message'=>"successful",
+                'data'=>$regulation
             ],200);
         }
 
@@ -31,7 +32,8 @@ class RegulationController extends Controller
         }
         if($regulation->save()){
             return response()->json([
-                'message'=>"regulation editted successfuly"
+                'message'=>"regulation editted successfuly",
+                'data'=>$regulation
             ],200);
         }
     }

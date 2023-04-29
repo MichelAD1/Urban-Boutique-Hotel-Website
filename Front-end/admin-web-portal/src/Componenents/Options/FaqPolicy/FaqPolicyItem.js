@@ -135,8 +135,12 @@ const FaqPolicyItem = () => {
 		const response = AddOption(data, tag);
 		response.then((res) => {
 			if (res.message === "successful") {
-				const new_data = { data: res.data };
-				loc.state = new_data;
+				console.log(res);
+				const new_data = res.data;
+				console.log(new_data);
+				new_data.tag = tag;
+				loc.state = { data: new_data };
+				setIsValid(loc.state);
 				setEdit(false);
 			} else {
 				alert("Something went wrong");
@@ -144,12 +148,12 @@ const FaqPolicyItem = () => {
 		});
 	};
 
+	// Modal
 	const handleDelete = (e) => {
 		e.preventDefault();
 		openModal();
 	};
 
-	// Modal
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const openModal = () => {
 		setIsModalOpen(true);

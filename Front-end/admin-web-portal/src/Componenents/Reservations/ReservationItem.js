@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import ReactModal from "react-modal";
+
 // API
-import GetRoom from "../../api-client/Rooms/GetRoom";
+import CancelReservation from "../../api-client/Reservations/CancelReservation";
 
 const ReservationItem = () => {
 	const loc = useLocation();
@@ -16,36 +18,17 @@ const ReservationItem = () => {
 	const [requests, setRequests] = useState("");
 	const [customer_name, setCustomerName] = useState("");
 
-	const [roomId, setRoomId] = useState("");
+	const [room, setRoom] = useState({});
 
-	const [edit, setEdit] = useState(false);
-	const [rooms, setRooms] = useState(false);
-	const [unavailableDates, setUnavailableDates] = useState([]);
-	const [availableDates, setAvailableDates] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		if (data) {
 			handleClose();
-			const reqRooms = GetRoom();
-			reqRooms.then((res) => {
-				if (res) {
-					if (res.length > 0) {
-						setRooms(res);
-						setUnavailableDates(res.occupied_dates);
-						setAvailableDates(res.free_dates);
-					}
-				}
-			});
 		}
 	}, [data]);
 
-	const handleEdit = () => {
-		setEdit(true);
-	};
-
 	const handleClose = () => {
-		setEdit(false);
-
 		setCheckin(data.reservation_date);
 		setCheckout(data.reservation_end);
 		setRoom_name(data.room_object.title);
@@ -53,11 +36,11 @@ const ReservationItem = () => {
 		setStatus(data.status);
 		setRequests(data.requests);
 		setCustomerName(data.customer_object.email);
-		setRoomId(data.room_object.id);
-	};
 
-	const handleSubmit = () => {
-		setEdit(false);
+		setRoom({
+			room: data.room_object,
+			images: data.images,
+		});
 	};
 
 	const navigate = useNavigate();
@@ -65,26 +48,53 @@ const ReservationItem = () => {
 		navigate(url, state);
 	};
 
+	// Modal
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const handleDelete = (e) => {
+		e.preventDefault();
+		openModal();
+	};
+
+	const handleConfirmDelete = () => {
+		const id = data.id;
+		setLoading(true);
+		const response = CancelReservation(id);
+		response.then((res) => {
+			if (res === "success") {
+				navigate("/reservations");
+			} else {
+				alert("Something went wrong");
+				setLoading(false);
+			}
+		});
+		closeModal();
+	};
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
+
 	return (
 		<div className='container'>
 			<div className='edit-container'>
 				<div className='edit-item'>
 					<h2>Reservation #{data.id}</h2>
-					{!edit && (
-						<button className='button' onClick={handleEdit}>
-							Edit
-						</button>
-					)}
-					{edit && (
-						<>
-							<button className='save-button' onClick={handleSubmit}>
-								Save
-							</button>
-							<button className='button' onClick={handleClose}>
-								cancel
-							</button>
-						</>
-					)}
+					<button className='button' onClick={(e) => handleDelete(e)}>
+						Cancel
+					</button>
 				</div>
 				<div className='edit-item'>
 					<div className='edit-info'>
@@ -110,33 +120,15 @@ const ReservationItem = () => {
 							<label>Room name</label>
 						</div>
 						<div>
-							{!edit && (
-								<p
-									style={{ cursor: "pointer" }}
-									onClick={() => {
-										data.room = data.room_object;
-										handleRedirect("/room/profile", {
-											state: { data: data },
-										});
-									}}>
-									{room_name}
-								</p>
-							)}
-							{edit && (
-								<select
-									className='input-dropdown'
-									value={roomId}
-									onChange={(e) => setRoomId(e.target.value)}>
-									<option value='' hidden>
-										Select room
-									</option>
-									{rooms.map((room) => (
-										<option key={room.room.id} value={room.room.id}>
-											{room.room.title}
-										</option>
-									))}
-								</select>
-							)}
+							<p
+								style={{ cursor: "pointer" }}
+								onClick={() => {
+									handleRedirect("/room/profile", {
+										state: { data: room },
+									});
+								}}>
+								{room_name}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -146,15 +138,7 @@ const ReservationItem = () => {
 							<label>Check in</label>
 						</div>
 						<div>
-							{!edit && <p>{checkin}</p>}
-							{edit && (
-								<input
-									className='input-box'
-									type='date'
-									value={checkin}
-									onChange={(e) => setCheckin(e.target.value)}
-								/>
-							)}
+							<p>{checkin}</p>
 						</div>
 					</div>
 				</div>
@@ -164,15 +148,7 @@ const ReservationItem = () => {
 							<label>Check out</label>
 						</div>
 						<div>
-							{!edit && <p>{checkout}</p>}
-							{edit && (
-								<input
-									className='input-box'
-									type='date'
-									value={checkout}
-									onChange={(e) => setCheckout(e.target.value)}
-								/>
-							)}
+							<p>{checkout}</p>
 						</div>
 					</div>
 				</div>
@@ -207,6 +183,33 @@ const ReservationItem = () => {
 					</div>
 				</div>
 			</div>
+			<ReactModal
+				className='custom-modal'
+				isOpen={isModalOpen}
+				style={{
+					overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+					content: {
+						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						border: "none",
+						width: "100%",
+						height: "100%",
+						margin: "auto",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						zIndex: "100",
+					},
+				}}>
+				<div>
+					<h1>Confirm Cancellation</h1>
+					<p>
+						Are you sure you want to cancel this reservation? This action cannot
+						be undone. Make sure to notify the customer.
+					</p>
+					<button onClick={handleConfirmDelete}>Yes</button>
+					<button onClick={closeModal}>No</button>
+				</div>
+			</ReactModal>
 		</div>
 	);
 };

@@ -71,9 +71,7 @@ const RoomItem = () => {
 			setEdit(false);
 			setName(isValid.data.room.title);
 			setDescription(isValid.data.room.description);
-			{
-				isValid.data.image ? setImages(isValid.data.images) : setImages([]);
-			}
+			setImages(isValid.data.images);
 			setPrice(isValid.data.room.rent);
 			setDiscount(isValid.data.room.discount);
 			setSize(isValid.data.room.size);
@@ -562,7 +560,7 @@ const RoomItem = () => {
 							{images.map((image) => {
 								return (
 									<div key={image.id}>
-										<img className='gallery-images' src={image.image} />
+										<img className='gallery-images' src={image.image_url} />
 										{edit && (
 											<RiDeleteBin2Fill
 												className='delete-icon'

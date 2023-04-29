@@ -39,7 +39,7 @@ class RoomController extends Controller
             $images = $request->images;
             $storage = new StorageClient([
                 'projectId' => 'urban-boutique-hotel',
-                'keyFilePath' => 'C:\Users\miche\Desktop\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
+                'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
             ]);
             $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
             $imagearray=array();
@@ -266,6 +266,6 @@ class RoomController extends Controller
         $reservations=DB::table('customer_reserves_room')->join('rooms','rooms.id','=','customer_reserves_room.room_id')->get();
         return $reservations;
     }
-    
-    
+
+
 }

@@ -22,6 +22,7 @@ function Rooms() {
 	const { status, error, data: roomsData } = useQuery(["rooms_data"], GetRoom);
 	useEffect(() => {
 		if (roomsData) {
+			console.log(roomsData);
 			setData(roomsData);
 		}
 	}, [roomsData, status]);

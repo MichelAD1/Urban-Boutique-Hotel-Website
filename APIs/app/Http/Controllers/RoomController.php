@@ -11,7 +11,7 @@ use Google\Cloud\Storage\StorageClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use stdClass;
 class RoomController extends Controller
 {
     public function addRoom(Request $request){
@@ -273,11 +273,50 @@ class RoomController extends Controller
     }
     public function getCustomerReservations(){
         $user = Auth::user();
-        $reservations=DB::table('customer_reserves_room')
-            ->join('rooms', 'rooms.id', '=', 'customer_reserves_room.room_id')
-            ->select('customer_reserves_room.id','rooms.title', 'customer_reserves_room.reservation_date','customer_reserves_room.reservation_end')
-            ->get();
-        return $reservations;
+
+        $reservations=DB::table('customer_reserves_room')->where('customer_reserves_room.customer_id','=',$user->id)->get();
+        $output = array();
+        foreach($reservations as $reservation){
+            $object = new stdClass();
+            $object->id = $reservation->id;
+            $object->reservation_date = $reservation->reservation_date;
+            $object->reservation_end = $reservation->reservation_end;
+            $room = Room::find($reservation->room_id);
+            $roomReservations = DB::table('customer_reserves_room')->where('customer_reserves_room.room_id','=',$room->id)->get();
+            $object->title = $room->title;
+            $occupiedDates = [];
+            $freeDates = [];
+
+            $currentDate = Carbon::today();
+
+            $endDate = Carbon::today()->addDays(50);
+            while ($currentDate <= $endDate) {
+                $isOccupied = false;
+                foreach ($roomReservations as $Reservation) {
+                    $reservationDates = CarbonPeriod::create($Reservation->reservation_date, $Reservation->reservation_end)->toArray();
+
+                    if (in_array($currentDate, $reservationDates)) {
+
+                        $occupiedDates[] = $currentDate->format('Y-m-d');
+                        $isOccupied = true;
+                        break;
+                    }
+                }
+                if (!$isOccupied) {
+                    $freeDates[] = $currentDate->format('Y-m-d');
+                }
+                $currentDate->addDay();
+            }
+
+
+
+
+            $object->occupied_dates=$occupiedDates;
+            $object->free_dates=$freeDates;
+            array_push($output,$object);
+
+        }
+        return $output;
     }
 
 

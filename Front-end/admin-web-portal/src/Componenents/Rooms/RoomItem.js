@@ -204,7 +204,6 @@ const RoomItem = () => {
 		const room_id = isValid.data.room.id;
 		const response = DeleteRoom(room_id);
 		response.then((res) => {
-			console.log(res);
 			if (res.message === "room deleted successfully") {
 				navigate("/rooms");
 			} else {

@@ -97,7 +97,7 @@ const RoomItem = () => {
 
 		const reqImages = [];
 		images.forEach((image) => {
-			reqImages.push(image.image);
+			reqImages.push(image.image_url);
 		});
 
 		const data = {
@@ -133,6 +133,7 @@ const RoomItem = () => {
 				const new_data = mergeJson(res.room, res.images);
 				loc.state = { data: new_data };
 				setIsValid(loc.state);
+				setEdit(false);
 			} else {
 				alert("Something went wrong");
 			}
@@ -220,7 +221,7 @@ const RoomItem = () => {
 		return new Promise((resolve, reject) => {
 			const reader = new FileReader();
 			reader.readAsDataURL(image);
-			reader.onload = () => resolve({ id, image: reader.result });
+			reader.onload = () => resolve({ id, image_url: reader.result });
 			reader.onerror = (error) => reject(error);
 		});
 	};

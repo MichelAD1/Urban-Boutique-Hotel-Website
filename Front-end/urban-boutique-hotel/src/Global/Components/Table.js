@@ -24,6 +24,9 @@ export default function HotelTables({ columns, initialRows }) {
       }
     });
   };
+  const handleEdit = (id) => {
+    console.log("edited");
+  };
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
@@ -60,10 +63,17 @@ export default function HotelTables({ columns, initialRows }) {
                     );
                   })}
                   <TableCell>
-                    <div className="table-button">
-                      <button onClick={() => handleCancel(row.id)}>
-                        {t("cancel")}
-                      </button>
+                    <div className="res-buttons">
+                      <div className="table-button">
+                        <button onClick={() => handleEdit(row.id)}>
+                          {t("edit")}
+                        </button>
+                      </div>{" "}
+                      <div className="table-button">
+                        <button onClick={() => handleCancel(row.id)}>
+                          {t("cancel")}
+                        </button>
+                      </div>
                     </div>
                   </TableCell>
                 </TableRow>

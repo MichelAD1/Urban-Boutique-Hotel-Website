@@ -2778,6 +2778,11 @@ h6 {
 }
 /* End of FAQS */
 /* Reservations */
+.res-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 .table-button button {
   width: 6em;
   height: 2em;

@@ -8,12 +8,14 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { useNavigate } from "react-router-dom";
 
 //apis
 import CancelReservation from "../../api-client/Account/CancelReservation";
 
 export default function HotelTables({ columns, initialRows }) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [rows, setRows] = React.useState(initialRows);
   const handleCancel = (id) => {
@@ -24,8 +26,9 @@ export default function HotelTables({ columns, initialRows }) {
       }
     });
   };
-  const handleEdit = (id) => {
-    console.log("edited");
+  const handleEdit = (row) => {
+    console.log(row);
+    navigate(`/reservations/edit`, { state: { data: row } });
   };
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
@@ -65,7 +68,7 @@ export default function HotelTables({ columns, initialRows }) {
                   <TableCell>
                     <div className="res-buttons">
                       <div className="table-button">
-                        <button onClick={() => handleEdit(row.id)}>
+                        <button onClick={() => handleEdit(row)}>
                           {t("edit")}
                         </button>
                       </div>{" "}

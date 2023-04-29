@@ -1,10 +1,10 @@
 runtime: php82
 env: flexible
-
 handlers:
 - url: /.*
   script: public/index.php
-
+runtime_config:
+  document_root: public
 skip_files:
 - .gitignore
 - .gitattributes

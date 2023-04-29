@@ -89,6 +89,7 @@ class RoomController extends Controller
                         $overallpath = $folder_name.$filename;
                         $object = $bucket->object($overallpath);
                         $object->delete();
+                        $image->delete();
                     }
 
                 }

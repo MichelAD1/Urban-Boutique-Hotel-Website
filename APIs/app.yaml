@@ -1,13 +1,19 @@
-runtime: php
-env: flex
-runtime_config:
-  document_root: public
-  php_version: 8.2.*
+runtime: php82
+env: flexible
+
+handlers:
+- url: /.*
+  script: public/index.php
 
 skip_files:
-  .env
-
-env_variables:
-  APP_LOG: errorlog
-  APP_KEY: base64:bk2GBnOUDrcjVgblsgep6SZcja2pUpnC8K40XP4UMno=
-  STORAGE_DIR: /tmp
+- .gitignore
+- .gitattributes
+- composer.lock
+- phpunit.xml
+- phpcs.xml
+- phpdcd.xml
+- phpmd.xml
+- .env
+- .env.example
+- storage/*
+- node_modules/*

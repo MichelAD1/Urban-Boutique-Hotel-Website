@@ -62,23 +62,26 @@ class ImageController extends Controller
             }
         }
         if($request->has("images_removed")){
-            $images = $request->images_added;
+            $images = $request->images_removed;
             $roomid = $request->room_id;
             $folder_name = "RoomImages/";
             if(!empty($images)){
                 for($i=0;$i<sizeof($images);$i++){
-                    $image = $images[$i];
+                    $imageid = $images[$i];
+                    $image = Image::find($imageid);
                     $url = $image->image_url;
-                    if (preg_match('/([\w]+\.(png|jpg|jpeg|gif))/', $url, $matches)) {
+                    if (preg_match('/([\w]+.(png|jpg|jpeg|gif))/', $url, $matches)) {
                         $filename = $matches[1];
                         $overallpath = $folder_name.$filename;
                         $object = $bucket->object($overallpath);
                         $object->delete();
+                        $image->delete();
                     }
 
                 }
             }
         }
+        return Image::where('room_id','=',$request->room_id)->get();
     }
 
 }

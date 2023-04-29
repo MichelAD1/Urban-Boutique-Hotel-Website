@@ -2454,6 +2454,13 @@ h6 {
     display: none;
   }
 }
+.reservations-edit-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 15%;
+  padding-right: 15%;
+  height: 22em;
+}
 
 .reservations-section {
   display: flex;

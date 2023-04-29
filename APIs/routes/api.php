@@ -263,6 +263,7 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::post('add',[PaymentOptionController::class,'addPaymentOption']);
             Route::post('select',[PaymentOptionController::class,'selectOptions']);
             Route::get('getall',[PaymentOptionController::class,'getPaymentOptions']);
+            Route::get('set/{payment_option_id}',[PaymentOptionController::class,'setavailability']);
         });
         Route::get('get',[PaymentOptionController::class,'getAvailablePaymentOptions']);
     });
@@ -271,8 +272,10 @@ Route::group(["prefix"=>"v0.1"], function(){
     Route::group(['prefix'=>'currency'],function(){
         Route::middleware(['auth', 'check.financemanager'])->group(function(){
             Route::post('add',[CurrencyController::class,'addCurrency']);
-            Route::get('get',[CurrencyController::class,'getCurrencies']);
+            Route::get('getall',[CurrencyController::class,'getCurrencies']);
+            Route::get('set/{currencyid}',[CurrencyController::class,'setavailability']);
         });
+        Route::get('get',[CurrencyController::class,'getAvailableCurrencies']);
 
     });
 
@@ -282,6 +285,7 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::post('add',[LanguageController::class,'addLanguage']);
             Route::post('select',[LanguageController::class,'selectLanguages']);
             Route::get('getall',[LanguageController::class,'getLanguages']);
+            Route::get('set/{languageid}',[LanguageController::class,'setavailability']);
         });
         Route::get('get',[LanguageController::class,'getAvailableLanguages']);
     });

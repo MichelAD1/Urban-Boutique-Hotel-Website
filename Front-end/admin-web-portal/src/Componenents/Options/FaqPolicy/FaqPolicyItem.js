@@ -148,12 +148,12 @@ const FaqPolicyItem = () => {
 		});
 	};
 
+	// Modal
 	const handleDelete = (e) => {
 		e.preventDefault();
 		openModal();
 	};
 
-	// Modal
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const openModal = () => {
 		setIsModalOpen(true);

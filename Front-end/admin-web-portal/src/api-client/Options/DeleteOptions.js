@@ -9,6 +9,12 @@ export default async function DeleteOption(option_id, tag) {
 	if (tag === "policy") {
 		url += `policy/remove/${option_id}`;
 	}
+	if (tag === "regulation") {
+		url += `regulation/remove/${option_id}`;
+	}
+	if (tag === "disaster") {
+		url += `response/remove/${option_id}`;
+	}
 
 	const response = await axios({
 		method: "get",

@@ -12,6 +12,7 @@ import checkEqual from "../../../Global/Functions/CheckEqual";
 // API
 import AddOption from "../../../api-client/Options/AddOption";
 import EditOption from "../../../api-client/Options/EditOption";
+import DeleteOption from "../../../api-client/Options/DeleteOptions";
 
 const RegulationDisasterItem = () => {
 	const loc = useLocation();
@@ -129,17 +130,29 @@ const RegulationDisasterItem = () => {
 		});
 	};
 
-	const handleDelete = () => {
+	// Modal
+	const handleDelete = (e) => {
+		e.preventDefault();
 		openModal();
 	};
 
-	// Modal
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
 
 	const handleConfirmDelete = () => {
+		const response = DeleteOption(isValid.id, tag);
+		response.then((res) => {
+			if (
+				res.message === "regulation removed successfuly" ||
+				res.message === "disaster response removed successfuly"
+			) {
+				navigate(-1);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 		closeModal();
 	};
 
@@ -169,7 +182,7 @@ const RegulationDisasterItem = () => {
 					{isValid.type && <h2>{capitalize(tag)}</h2>}
 
 					{!isValid.type && (
-						<button className='button' onClick={() => handleDelete()}>
+						<button className='button' onClick={(e) => handleDelete(e)}>
 							Delete
 						</button>
 					)}

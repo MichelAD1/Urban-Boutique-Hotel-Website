@@ -38,7 +38,7 @@ class ImageController extends Controller
     public function addAndRemoveImages(Request $request){ // images_removed/images_added
         $storage = new StorageClient([
             'projectId' => 'urban-boutique-hotel',
-            'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
+            'keyFilePath' => 'C:\Users\miche\Downloads\urban_boutique_hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
         ]);
         $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
         if($request->has("images_added")){

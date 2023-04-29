@@ -135,8 +135,10 @@ const FaqPolicyItem = () => {
 		const response = AddOption(data, tag);
 		response.then((res) => {
 			if (res.message === "successful") {
-				const new_data = { data: res.data };
-				loc.state = new_data;
+				const new_data = res.data;
+				new_data.tag = tag;
+				loc.state = { data: new_data };
+				setIsValid(loc.state);
 				setEdit(false);
 			} else {
 				alert("Something went wrong");

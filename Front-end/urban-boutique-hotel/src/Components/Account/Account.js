@@ -28,6 +28,15 @@ const Profile = () => {
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+
+  useEffect(() => {
+    const shouldReload = localStorage.getItem("shouldReload");
+    if (shouldReload === "true") {
+      localStorage.removeItem("shouldReload");
+      window.location.reload(true);
+    }
+  }, []);
+
   useEffect(() => {
     if (status === "success" && reservationData) {
       const newRows = reservationData.map((reservation) =>
@@ -35,7 +44,9 @@ const Profile = () => {
           reservation.id,
           reservation.title,
           reservation.reservation_date,
-          reservation.reservation_end
+          reservation.reservation_end,
+          reservation.free_dates,
+          reservation.occupied_dates
         )
       );
       setRows(newRows);
@@ -48,8 +59,22 @@ const Profile = () => {
     { id: "reservation_date", label: t("res_checkin"), minWidth: 100 },
     { id: "reservation_end", label: t("res_checkout"), minWidth: 100 },
   ];
-  function createData(id, title, reservation_date, reservation_end) {
-    return { id, title, reservation_date, reservation_end };
+  function createData(
+    id,
+    title,
+    reservation_date,
+    reservation_end,
+    free_dates,
+    occupied_dates
+  ) {
+    return {
+      id,
+      title,
+      reservation_date,
+      reservation_end,
+      free_dates,
+      occupied_dates,
+    };
   }
   useEffect(() => {
     if (initialRows.length > 0) {

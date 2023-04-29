@@ -11,6 +11,7 @@ use Google\Cloud\Storage\StorageClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class RoomController extends Controller
 {
@@ -230,32 +231,8 @@ class RoomController extends Controller
             $room = Room::find($reservation->room_id);
             $reservation->customer_object = $customer;
             $reservation->room_object=$room;
-            $occupiedDates = [];
-            $freeDates = [];
-
-            // Loop through each day of the next week and check if it's occupied
-            $currentDate = Carbon::today();
-
-            $endDate = Carbon::today()->addDays(50);
-            while ($currentDate <= $endDate) {
-                $isOccupied = false;
-
-                $reservationDates = CarbonPeriod::create($reservation->reservation_date, $reservation->reservation_end)->toArray();
-
-                if (in_array($currentDate, $reservationDates)) {
-
-                    $occupiedDates[] = $currentDate->format('Y-m-d');
-                    $isOccupied = true;
-                    break;
-                }
-
-                if (!$isOccupied) {
-                    $freeDates[] = $currentDate->format('Y-m-d');
-                }
-                $currentDate->addDay();
-            }
-            $reservation->occupied_dates=$occupiedDates;
-            $reservation->free_dates=$freeDates;
+            $images = Image::where('room_id','=',$reservation->room_id)->get();
+            $reservation->images = $images;
 
         }
         return response()->json([
@@ -275,11 +252,49 @@ class RoomController extends Controller
     public function getCustomerReservations(){
         $user = Auth::user();
 
-        $reservations=DB::table('customer_reserves_room')
-            ->join('rooms', 'rooms.id', '=', 'customer_reserves_room.room_id')
-            ->select('customer_reserves_room.id','rooms.title', 'customer_reserves_room.reservation_date','customer_reserves_room.reservation_end')
-            ->get();
-        return $reservations;
+        $reservations=DB::table('customer_reserves_room')->where('customer_reserves_room.customer_id','=',$user->id)->get();
+        $output = array();
+        foreach($reservations as $reservation){
+            $object = new stdClass();
+            $object->id = $reservation->id;
+            $object->reservation_date = $reservation->reservation_date;
+            $object->reservation_end = $reservation->reservation_end;
+            $room = Room::find($reservation->room_id);
+            $roomReservations = DB::table('customer_reserves_room')->where('customer_reserves_room.room_id','=',$room->id)->get();
+            $object->title = $room->title;
+            $occupiedDates = [];
+            $freeDates = [];
+
+            $currentDate = Carbon::today();
+
+            $endDate = Carbon::today()->addDays(50);
+            while ($currentDate <= $endDate) {
+                $isOccupied = false;
+                foreach ($roomReservations as $Reservation) {
+                    $reservationDates = CarbonPeriod::create($Reservation->reservation_date, $Reservation->reservation_end)->toArray();
+
+                    if (in_array($currentDate, $reservationDates)) {
+
+                        $occupiedDates[] = $currentDate->format('Y-m-d');
+                        $isOccupied = true;
+                        break;
+                    }
+                }
+                if (!$isOccupied) {
+                    $freeDates[] = $currentDate->format('Y-m-d');
+                }
+                $currentDate->addDay();
+            }
+
+
+
+
+            $object->occupied_dates=$occupiedDates;
+            $object->free_dates=$freeDates;
+            array_push($output,$object);
+
+        }
+        return $output;
     }
 
 

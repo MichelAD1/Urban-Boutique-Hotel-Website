@@ -26,9 +26,8 @@ export default function HotelTables({ columns, initialRows }) {
       }
     });
   };
-  const handleEdit = (row) => {
-    console.log(row);
-    navigate(`/reservations/edit`, { state: { data: row } });
+  const handleEdit = (room) => {
+    navigate(`/reservations/edit`, { state: { data: room } });
   };
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));

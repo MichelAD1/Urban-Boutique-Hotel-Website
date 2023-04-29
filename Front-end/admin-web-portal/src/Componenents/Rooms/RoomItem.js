@@ -48,6 +48,8 @@ const RoomItem = () => {
 	const [addedImages, setAddedImages] = useState([]);
 	const [deletedImages, setDeletedImages] = useState([]);
 
+	const [loading, setLoading] = useState(false);
+
 	useEffect(() => {
 		if (isValid) {
 			handleCancel();
@@ -117,29 +119,37 @@ const RoomItem = () => {
 			breakfast: breakfast,
 			pets: pets,
 			floor: floor,
-			images: reqImages,
 		};
 
-		const validData = checkEmpty(data);
+		const check_empty = checkEmpty(data);
 
-		if (!validData && !imagesChanged) {
+		if (!check_empty) {
 			alert("Please fill all the fields");
 			return;
 		}
+
+		if (!imagesChanged) {
+			alert("Please add images");
+			return;
+		}
+
+		data.images = reqImages;
+
+		setLoading(true);
 		const response = AddRoom(data);
 
 		response.then((res) => {
-			if (res.message === "Room added successfully") {
-				const new_data = mergeJson(res.room, res.images);
+			if (res.message === "room added successfully") {
+				const new_data = res;
+				delete new_data.message;
 				loc.state = { data: new_data };
 				setIsValid(loc.state);
 				setEdit(false);
+				setLoading(false);
 			} else {
 				alert("Something went wrong");
 			}
 		});
-
-		setEdit(false);
 	};
 
 	const handleEdit = (e) => {
@@ -202,6 +212,7 @@ const RoomItem = () => {
 
 	const handleConfirmDelete = () => {
 		const room_id = isValid.data.room.id;
+		setLoading(true);
 		const response = DeleteRoom(room_id);
 		response.then((res) => {
 			if (res.message === "room deleted successfully") {
@@ -247,6 +258,14 @@ const RoomItem = () => {
 		setDeletedImages([...deletedImages, index]);
 		setImagesChanged(true);
 	};
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
 
 	return (
 		<div className='container'>

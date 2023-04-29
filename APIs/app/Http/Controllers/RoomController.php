@@ -20,6 +20,7 @@ class RoomController extends Controller
         $room->title = $request->title;
         $room->description = $request->description;
         $room->rent = $request->rent;
+        $room->discount = $request->discount;
         $room->size = $request->size;
         $room->guests = $request->guests;
         $room->floor = $request->floor;
@@ -110,6 +111,9 @@ class RoomController extends Controller
         if($request->has("rent")){
             $room->rent=$request->rent;
         }
+        if($request->has("discount")){
+            $room->discount=$request->discount;
+        }
         if($request->has("size")){
             $room->size=$request->size;
         }
@@ -139,6 +143,12 @@ class RoomController extends Controller
         }
         if($request->has("desk")){
             $room->desk=$request->desk;
+        }
+        if($request->has("pets")){
+            $room->pets=$request->pets;
+        }
+        if($request->has("breakfast")){
+            $room->breakfast=$request->breakfast;
         }
 
         if($room->save()){

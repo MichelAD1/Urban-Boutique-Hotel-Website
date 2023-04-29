@@ -7,9 +7,11 @@ import ReactModal from "react-modal";
 
 // Functions
 import checkEmpty from "../../../Global/Functions/CheckEmpty";
+import checkEqual from "../../../Global/Functions/CheckEqual";
 
 // API
 import AddOption from "../../../api-client/Options/AddOption";
+import EditOption from "../../../api-client/Options/EditOption";
 
 const RegulationDisasterItem = () => {
 	const loc = useLocation();
@@ -61,8 +63,43 @@ const RegulationDisasterItem = () => {
 	};
 
 	const handleEdit = (e) => {
+		const data = {
+			title: title,
+			text: description,
+		};
 		e.preventDefault();
-		setEdit(false);
+
+		const check_empty = checkEmpty(data);
+		if (!check_empty) {
+			alert("Please fill all the fields");
+			return;
+		}
+		const reqData = checkEqual(data, isValid);
+		if (!reqData) {
+			alert("No changes made");
+			return;
+		}
+
+		if (tag === "regulation") {
+			reqData.regulationid = isValid.id;
+		} else {
+			reqData.responseid = isValid.id;
+		}
+		const response = EditOption(reqData, tag);
+		response.then((res) => {
+			if (
+				res.message === "disaster response editted successfuly" ||
+				res.message === "regulation editted successfuly"
+			) {
+				res.data.tag = tag;
+				const new_data = { data: res.data };
+				loc.state = new_data;
+				setIsValid(new_data);
+				setEdit(false);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 	};
 
 	const handleSubmit = (e) => {

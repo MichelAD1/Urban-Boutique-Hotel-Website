@@ -32,7 +32,8 @@ class DisasterResponseController extends Controller
         }
         if($disasterresponse->save()){
             return response()->json([
-                'message'=>"disaster response editted successfuly"
+                'message'=>"disaster response editted successfuly",
+                'data'=>$disasterresponse
             ],200);
         }
     }

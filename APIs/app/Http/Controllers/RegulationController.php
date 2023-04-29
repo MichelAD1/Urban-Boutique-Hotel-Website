@@ -32,7 +32,8 @@ class RegulationController extends Controller
         }
         if($regulation->save()){
             return response()->json([
-                'message'=>"regulation editted successfuly"
+                'message'=>"regulation editted successfuly",
+                'data'=>$regulation
             ],200);
         }
     }

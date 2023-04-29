@@ -10,10 +10,10 @@ class Photo_Gallery extends Controller
 {
     public function addAndRemoveImages(Request $request){ // images_removed/images_added
         $storage = new StorageClient([
-            'projectId' => 'meno-a6fd9',
-            'keyFilePath' => 'C:\Users\marc issa\Desktop\Meno\MENO\APIs\meno-a6fd9-firebase-adminsdk-dv2i6-bbf9790bcf.json'
+            'projectId' => 'urban-boutique-hotel',
+            'keyFilePath' => 'C:\Users\miche\Desktop\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
         ]);
-        $bucket = $storage->bucket('your-bucket-name');
+        $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
         if($request->has("images_added")){
             $images = $request->images_added;
 
@@ -52,6 +52,7 @@ class Photo_Gallery extends Controller
                 }
             }
         }
+        return "success";
     }
     public function getImages(){
         return Image::where('room_id','=',0)->get();

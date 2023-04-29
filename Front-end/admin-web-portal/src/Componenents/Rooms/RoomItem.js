@@ -195,15 +195,17 @@ const RoomItem = () => {
 		setIsModalOpen(true);
 	};
 
-	const handleDelete = () => {
+	const handleDelete = (e) => {
+		e.preventDefault();
 		openModal();
 	};
 
 	const handleConfirmDelete = () => {
-		const user_id = isValid.data.id;
-		const response = DeleteRoom(user_id);
+		const room_id = isValid.data.room.id;
+		const response = DeleteRoom(room_id);
 		response.then((res) => {
-			if (res.status === 200) {
+			console.log(res);
+			if (res.message === "room deleted successfully") {
 				navigate("/rooms");
 			} else {
 				setErr("Something went wrong");
@@ -243,6 +245,7 @@ const RoomItem = () => {
 	const handleImageDelete = (index) => {
 		const newImages = images.filter((image) => image.id !== index);
 		setImages(newImages);
+		setDeletedImages([...deletedImages, index]);
 		setImagesChanged(true);
 	};
 
@@ -262,7 +265,7 @@ const RoomItem = () => {
 						{isValid && <h2>Room #{isValid.data.room.id}</h2>}
 						{!isValid && <h2>Add Room</h2>}
 						{isValid && (
-							<button className='button' onClick={() => handleDelete()}>
+							<button className='button' onClick={(e) => handleDelete(e)}>
 								Delete
 							</button>
 						)}

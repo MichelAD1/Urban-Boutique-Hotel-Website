@@ -1,13 +1,14 @@
 import axios from "axios";
 import base_url from "../BaseUrl";
 
-export default async function DeleteRoom(roomid) {
+export default async function DeleteRoom(room_id) {
+	console.log(room_id);
 	const resp = await axios
-		.get(`${base_url}room/remove/${roomid}`, {
+		.get(`${base_url}room/remove/${room_id}`, {
 			headers: { Authorization: localStorage.getItem("token") },
 		})
 		.then((res) => {
-			return res;
+			return res.data;
 		})
 		.catch((err) => {
 			return err;

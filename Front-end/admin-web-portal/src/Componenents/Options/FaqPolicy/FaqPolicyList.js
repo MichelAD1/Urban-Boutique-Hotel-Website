@@ -36,7 +36,6 @@ const FaqPolicyList = () => {
 		if (policiesFaqs) {
 			setFaqs(policiesFaqs[0]);
 			setPolicies(policiesFaqs[1]);
-			setData(mergeAndTagData());
 			setLoading(false);
 		}
 	}, [policiesFaqs, status]);

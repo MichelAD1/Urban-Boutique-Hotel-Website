@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use stdClass;
+
 class RoomController extends Controller
 {
     public function addRoom(Request $request){
@@ -90,6 +91,7 @@ class RoomController extends Controller
                         $overallpath = $folder_name.$filename;
                         $object = $bucket->object($overallpath);
                         $object->delete();
+                        $image->delete();
                     }
 
                 }
@@ -229,32 +231,8 @@ class RoomController extends Controller
             $room = Room::find($reservation->room_id);
             $reservation->customer_object = $customer;
             $reservation->room_object=$room;
-            $occupiedDates = [];
-            $freeDates = [];
-
-            // Loop through each day of the next week and check if it's occupied
-            $currentDate = Carbon::today();
-
-            $endDate = Carbon::today()->addDays(50);
-            while ($currentDate <= $endDate) {
-                $isOccupied = false;
-
-                $reservationDates = CarbonPeriod::create($reservation->reservation_date, $reservation->reservation_end)->toArray();
-
-                if (in_array($currentDate, $reservationDates)) {
-
-                    $occupiedDates[] = $currentDate->format('Y-m-d');
-                    $isOccupied = true;
-                    break;
-                }
-
-                if (!$isOccupied) {
-                    $freeDates[] = $currentDate->format('Y-m-d');
-                }
-                $currentDate->addDay();
-            }
-            $reservation->occupied_dates=$occupiedDates;
-            $reservation->free_dates=$freeDates;
+            $images = Image::where('room_id','=',$reservation->room_id)->get();
+            $reservation->images = $images;
 
         }
         return response()->json([

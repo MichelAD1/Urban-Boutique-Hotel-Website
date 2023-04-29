@@ -63,6 +63,7 @@ class ImageController extends Controller
         }
         if($request->has("images_removed")){
             $images = $request->images_removed;
+            $roomid = $request->room_id;
             $folder_name = "RoomImages/";
             if(!empty($images)){
                 for($i=0;$i<sizeof($images);$i++){
@@ -80,7 +81,8 @@ class ImageController extends Controller
                 }
             }
         }
-        return Image::where("room_id",$request->room_id)->get();
+        return Image::where('room_id','=',$request->room_id)->get();
+
     }
 
 }

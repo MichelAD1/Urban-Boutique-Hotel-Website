@@ -57,11 +57,9 @@ const Reservations = () => {
 	);
 	useEffect(() => {
 		if (reservationData) {
-			console.log(reservationData);
-			if (reservationData.reservations.data.length > 0) {
-				setData(reservationData.reservations);
-			} else {
-				setErr("No staff found");
+			setData(reservationData.reservations);
+			if (reservationData.reservations.data.length === 0) {
+				setErr("No reservations found");
 			}
 			setLoading(false);
 		}

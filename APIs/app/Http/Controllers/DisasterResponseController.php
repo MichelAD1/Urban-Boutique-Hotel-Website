@@ -14,7 +14,8 @@ class DisasterResponseController extends Controller
         $disasterresponse->title = $request->title;
         if($disasterresponse->save()){
             return response()->json([
-                'message'=>"successful"
+                'message'=>"successful",
+                'data'=>$disasterresponse
             ],200);
         }
 

@@ -25,4 +25,29 @@ export default async function getOptions(tag) {
 			});
 		return [faqs, policies];
 	}
+
+	if (tag.queryKey[1] === "dr") {
+		const response = await axios({
+			method: "get",
+			url: `${base_url}response/get`,
+		})
+			.then((res) => {
+				return res.data;
+			})
+			.catch((err) => {
+				return err.response;
+			});
+
+		const regulations = await axios({
+			method: "get",
+			url: `${base_url}regulation/get`,
+		})
+			.then((res) => {
+				return res.data;
+			})
+			.catch((err) => {
+				return err.response;
+			});
+		return [response, regulations];
+	}
 }

@@ -5,6 +5,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 // Components
 import ReactModal from "react-modal";
 
+// Functions
+import checkEmpty from "../../../Global/Functions/CheckEmpty";
+
+// API
+import AddOption from "../../../api-client/Options/AddOption";
+
 const RegulationDisasterItem = () => {
 	const loc = useLocation();
 	const [isValid, setIsValid] = useState(loc.state);
@@ -31,7 +37,7 @@ const RegulationDisasterItem = () => {
 	useEffect(() => {
 		if (!isValid.type) {
 			setTitle(isValid.title);
-			setDescription(isValid.description);
+			setDescription(isValid.text);
 			setTag(isValid.tag);
 		}
 	}, [isValid]);
@@ -49,7 +55,7 @@ const RegulationDisasterItem = () => {
 		} else {
 			setEdit(false);
 			setTitle(isValid.title);
-			setDescription(isValid.description);
+			setDescription(isValid.text);
 			setTag(isValid.tag);
 		}
 	};
@@ -61,8 +67,29 @@ const RegulationDisasterItem = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setEdit(false);
-		console.log("Submit");
+		const reqData = {
+			title: title,
+			text: description,
+		};
+
+		const check_empty = checkEmpty(reqData);
+
+		if (!check_empty) {
+			alert("All fields are required");
+			return;
+		}
+		const response = AddOption(reqData, tag);
+		response.then((res) => {
+			if (res.message === "successful") {
+				const new_data = res.data;
+				new_data.tag = tag;
+				loc.state = { data: new_data };
+				setIsValid(loc.state);
+				setEdit(false);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 	};
 
 	const handleDelete = () => {

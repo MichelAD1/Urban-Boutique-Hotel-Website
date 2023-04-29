@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,6 +7,7 @@ import Footer from "../../Global/Components/Footer";
 
 const Reservation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const room = location.state.data;
 
   const [checkInDate, setCheckInDate] = useState(
@@ -85,7 +86,10 @@ const Reservation = () => {
   function removeValuesFromArray(arr1, arr2) {
     return arr1.filter((value) => !arr2.includes(value));
   }
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    navigate(`/account`);
+  };
+
   return (
     <>
       <div className="reservations-edit-container">
@@ -126,6 +130,9 @@ const Reservation = () => {
                 dropdownMode="select"
               />
             </div>
+          </div>
+          <div className="confirm-edit">
+            <button type="submit">Save Changes</button>
           </div>
         </form>
       </div>

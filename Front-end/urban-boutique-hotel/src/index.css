@@ -2806,6 +2806,28 @@ h6 {
 .table-button button:hover {
   background-color: #2a32499a;
 }
+.confirm-edit button {
+  width: 10em;
+  height: 3em;
+  padding: 0.2rem 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.confirm-edit {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5%;
+  margin-top: 3%;
+}
+
+.confirm-edit button:hover {
+  background-color: #2a32499a;
+}
 /* End of reservations */
 /* Live Chat */
 .chat-button {

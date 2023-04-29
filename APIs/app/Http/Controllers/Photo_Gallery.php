@@ -11,7 +11,7 @@ class Photo_Gallery extends Controller
     public function addAndRemoveImages(Request $request){ // images_removed/images_added
         $storage = new StorageClient([
             'projectId' => 'urban-boutique-hotel',
-            'keyFilePath' => 'C:\Users\miche\Desktop\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
+            'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
         ]);
         $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
         if($request->has("images_added")){
@@ -35,24 +35,25 @@ class Photo_Gallery extends Controller
             }
         }
         if($request->has("images_removed")){
-            $images = $request->images_added;
-
+            $images = $request->images_removed;
             $folder_name = "gallery/";
             if(!empty($images)){
                 for($i=0;$i<sizeof($images);$i++){
-                    $image = $images[$i];
+                    $imageid = $images[$i];
+                    $image = Image::find($imageid);
                     $url = $image->image_url;
-                    if (preg_match('/([\w]+\.(png|jpg|jpeg|gif))/', $url, $matches)) {
+                    if (preg_match('/([\w]+.(png|jpg|jpeg|gif))/', $url, $matches)) {
                         $filename = $matches[1];
                         $overallpath = $folder_name.$filename;
                         $object = $bucket->object($overallpath);
                         $object->delete();
+                        $image->delete();
                     }
 
                 }
             }
         }
-        return "success";
+        return $this->getImages();
     }
     public function getImages(){
         return Image::where('room_id','=',0)->get();

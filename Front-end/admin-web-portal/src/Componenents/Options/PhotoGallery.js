@@ -7,6 +7,7 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 
 // Photo Gallery
 import GetImages from "../../api-client/Options/GetImages";
+import EditImages from "../../api-client/Options/EditImages";
 
 const PhotoGallery = () => {
 	const [edit, setEdit] = useState(false);
@@ -20,6 +21,8 @@ const PhotoGallery = () => {
 
 	const [imagesChanged, setImagesChanged] = useState(false);
 
+	const [loading, setLoading] = useState(true);
+
 	const {
 		status,
 		error,
@@ -31,18 +34,52 @@ const PhotoGallery = () => {
 				setErr("No images found");
 			}
 			setImages(photoGalleryData);
+			setLoading(false);
 		}
 	}, [photoGalleryData, status]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setEdit(false);
+		const data = {};
+		if (images.length > 16) {
+			alert("You can only add 16 images");
+			return;
+		}
+		if (!imagesChanged) {
+			alert("No changes made");
+			return;
+		}
+		if (addedImages.length > 0) {
+			data.images_added = addedImages;
+		}
+		if (deletedImages.length > 0) {
+			data.images_removed = deletedImages;
+		}
+		setLoading(true);
+		const response = EditImages(data);
+		response.then((res) => {
+			if (res.status === 200) {
+				setImages(res.data);
+				setImagesChanged(false);
+				setEdit(false);
+			} else {
+				alert("Something went wrong");
+			}
+			setLoading(false);
+			setAddedImages([]);
+			setDeletedImages([]);
+		});
 	};
 
 	const handleCancel = () => {
+		setImages(photoGalleryData);
+		setAddedImages([]);
+		setDeletedImages([]);
+		setImagesChanged(false);
 		setEdit(false);
 	};
 
+	// Image Handler
 	const convertImageToBase64 = (image, id) => {
 		return new Promise((resolve, reject) => {
 			const reader = new FileReader();
@@ -81,7 +118,7 @@ const PhotoGallery = () => {
 		<div className='container'>
 			<form
 				className='edit-container edit-container-large'
-				onSubmit={handleSubmit}>
+				onSubmit={(e) => handleSubmit(e)}>
 				<div className='edit-item'>
 					<h2>Gallery</h2>
 					{!edit && (
@@ -107,7 +144,7 @@ const PhotoGallery = () => {
 					<div className='gallery-box '>
 						<div className='gallery-header'>
 							<div className='gallery-text'>
-								<p>Add up to 15 images</p>
+								<p>Add up to 16 images</p>
 							</div>
 							{edit && (
 								<div>
@@ -126,7 +163,11 @@ const PhotoGallery = () => {
 							)}
 						</div>
 						<div className='gallery'>
-							{!err}
+							{loading && (
+								<div className='container-buffer'>
+									<div className='buffer-loader home'></div>
+								</div>
+							)}
 							{!err &&
 								images.map((image) => {
 									return (

@@ -28,6 +28,15 @@ const Profile = () => {
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+
+  useEffect(() => {
+    const shouldReload = localStorage.getItem("shouldReload");
+    if (shouldReload === "true") {
+      localStorage.removeItem("shouldReload");
+      window.location.reload(true);
+    }
+  }, []);
+
   useEffect(() => {
     if (status === "success" && reservationData) {
       const newRows = reservationData.map((reservation) =>

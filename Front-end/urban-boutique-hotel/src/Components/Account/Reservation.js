@@ -4,11 +4,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useTranslation } from "react-i18next";
 import Footer from "../../Global/Components/Footer";
+//apis
+import EditReservation from "../../api-client/Account/EditReservation";
 
 const Reservation = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const room = location.state.data;
+  const room = location.state?.data;
 
   const [checkInDate, setCheckInDate] = useState(
     new Date(room.reservation_date)
@@ -87,7 +89,37 @@ const Reservation = () => {
     return arr1.filter((value) => !arr2.includes(value));
   }
   const handleSubmit = () => {
-    navigate(`/account`);
+    let parsedDate1 = checkInDate;
+    let year = parsedDate1.getFullYear();
+    let month =
+      parsedDate1.getMonth() + 1 < 10
+        ? `0${parsedDate1.getMonth() + 1}`
+        : parsedDate1.getMonth() + 1;
+    let day =
+      parsedDate1.getDate() < 10
+        ? `0${parsedDate1.getDate()}`
+        : parsedDate1.getDate();
+    const reservation_date = `${year}-${month}-${day}`;
+    parsedDate1 = checkOutDate;
+    year = parsedDate1.getFullYear();
+    month =
+      parsedDate1.getMonth() + 1 < 10
+        ? `0${parsedDate1.getMonth() + 1}`
+        : parsedDate1.getMonth() + 1;
+    day =
+      parsedDate1.getDate() < 10
+        ? `0${parsedDate1.getDate()}`
+        : parsedDate1.getDate();
+    const reservation_end = `${year}-${month}-${day}`;
+    const reservation_id = room.id;
+    const data = { reservation_id, reservation_date, reservation_end };
+    let response = EditReservation(data);
+    response.then((res) => {
+      if (res) {
+        localStorage.setItem("shouldReload", "true");
+        navigate(`/account`);
+      }
+    });
   };
 
   return (
@@ -96,45 +128,46 @@ const Reservation = () => {
         <div className="reservations">
           <h2>{t("acc_res")}</h2>
         </div>
-        <form className="message-inputs book" onSubmit={handleSubmit}>
-          <div className="message-name-email">
-            <div className="message-input">
-              <DatePicker
-                selected={checkInDate}
-                onChange={(date) => setCheckInDate(date)}
-                minDate={new Date(firstFreeDate)}
-                maxDate={new Date(lastFreeDate)}
-                excludeDates={filtered.map((date) => new Date(date))}
-                placeholderText={t("res_checkin")}
-                className="react-datepicker"
-                dateFormat="yyyy/MM/dd"
-                peekNextMonth
-                showMonthDropdown
-                showYearDropdown
-                dropdownMode="select"
-              />
-            </div>
-            <div className="message-input">
-              <DatePicker
-                selected={checkOutDate}
-                onChange={(date) => setCheckOutDate(date)}
-                minDate={checkInDate}
-                maxDate={new Date(lastFreeDate)}
-                excludeDates={filtered.map((date) => new Date(date))}
-                placeholderText={t("res_checkout")}
-                className="react-datepicker"
-                dateFormat="yyyy/MM/dd"
-                peekNextMonth
-                showMonthDropdown
-                showYearDropdown
-                dropdownMode="select"
-              />
-            </div>
+
+        <div className="message-name-email">
+          <div className="message-input">
+            <DatePicker
+              selected={checkInDate}
+              onChange={(date) => setCheckInDate(date)}
+              minDate={new Date(firstFreeDate)}
+              maxDate={new Date(lastFreeDate)}
+              excludeDates={filtered.map((date) => new Date(date))}
+              placeholderText={t("res_checkin")}
+              className="react-datepicker"
+              dateFormat="yyyy/MM/dd"
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+            />
           </div>
-          <div className="confirm-edit">
-            <button type="submit">Save Changes</button>
+          <div className="message-input">
+            <DatePicker
+              selected={checkOutDate}
+              onChange={(date) => setCheckOutDate(date)}
+              minDate={checkInDate}
+              maxDate={new Date(lastFreeDate)}
+              excludeDates={filtered.map((date) => new Date(date))}
+              placeholderText={t("res_checkout")}
+              className="react-datepicker"
+              dateFormat="yyyy/MM/dd"
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+            />
           </div>
-        </form>
+        </div>
+        <div className="confirm-edit">
+          <button onClick={handleSubmit} type="submit">
+            Save Changes
+          </button>
+        </div>
       </div>
       <Footer />
     </>

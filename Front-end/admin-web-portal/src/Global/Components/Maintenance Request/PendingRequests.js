@@ -54,11 +54,7 @@ export default function PendingRequests({ reqData }) {
 				</div>
 			</div>
 
-			<BasicTable
-				reqData={data}
-				columns={columns}
-				err={err === "" ? err : null}
-			/>
+			<BasicTable reqData={data} columns={columns} err={err} />
 		</div>
 	);
 }

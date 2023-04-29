@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import jwt_decode from "jwt-decode";
 
 // used components
 import MaintenanceRequest from "../../Global/Components/Maintenance Request/PendingRequests";
@@ -16,6 +15,7 @@ export default function Home() {
 	const [roomsCount, setRoomsCount] = useState(0);
 
 	const [data, setData] = useState([]);
+	const [err, setErr] = useState("");
 
 	const [loading, setLoading] = useState(true);
 
@@ -38,25 +38,6 @@ export default function Home() {
 			});
 		}
 	}, [homeData, status]);
-
-	//Token handler
-	const token = localStorage.getItem("token");
-	useEffect(() => {
-		const shouldReload = localStorage.getItem("shouldReload");
-		if (shouldReload === "true") {
-			localStorage.removeItem("shouldReload");
-			window.location.reload(true);
-		}
-	}, []);
-	if (token) {
-		const decoded = jwt_decode(token);
-		const currentTime = Date.now() / 1000; // Convert to seconds
-
-		if (decoded.exp < currentTime) {
-			localStorage.removeItem("token");
-			localStorage.setItem("shouldReload", "true");
-		}
-	}
 
 	if (loading) {
 		return (

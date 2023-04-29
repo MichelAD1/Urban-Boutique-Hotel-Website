@@ -17,12 +17,18 @@ function Rooms() {
 	const [filter, setFilter] = useState("");
 	const [err, setErr] = useState("");
 
+	const [loading, setLoading] = useState(true);
+
 	let counter_key = 1;
 
 	const { status, error, data: roomsData } = useQuery(["rooms_data"], GetRoom);
 	useEffect(() => {
 		if (roomsData) {
+			if (roomsData.length === 0) {
+				setErr("No rooms found");
+			}
 			setData(roomsData);
+			setLoading(false);
 		}
 	}, [roomsData, status]);
 
@@ -45,6 +51,15 @@ function Rooms() {
 				),
 		);
 	}
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
+
 	return (
 		<div className='container'>
 			<div className='searchAndFilter'>
@@ -73,9 +88,20 @@ function Rooms() {
 			</div>
 			<div className='rooms-container'>
 				<div className='list-box'>
-					{data.map((item) => {
-						return <Room data={item} key={item.room.id} />;
-					})}
+					{err && (
+						<h2
+							style={{
+								position: "fixed",
+								top: "50%",
+								left: "50%",
+							}}>
+							{err}
+						</h2>
+					)}
+					{!err &&
+						data.map((item) => {
+							return <Room data={item} key={item.room.id} />;
+						})}
 				</div>
 			</div>
 		</div>

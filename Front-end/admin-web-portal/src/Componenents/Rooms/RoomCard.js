@@ -10,7 +10,13 @@ function RoomCard({ data }) {
 	return (
 		<div className='room-card' onClick={() => showPopup(data)}>
 			<div className='room-logo'>
-				<img className='image' alt='Room image' />
+				{data.images.length !== 0 && (
+					<img
+						src={data.images[0].image_url}
+						className='image'
+						alt='Room image'
+					/>
+				)}
 			</div>
 			<div className='name'>{data.room.title}</div>
 			<div className='room-details'>

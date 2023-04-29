@@ -48,6 +48,8 @@ const RoomItem = () => {
 	const [addedImages, setAddedImages] = useState([]);
 	const [deletedImages, setDeletedImages] = useState([]);
 
+	const [loading, setLoading] = useState(false);
+
 	useEffect(() => {
 		if (isValid) {
 			handleCancel();
@@ -71,9 +73,7 @@ const RoomItem = () => {
 			setEdit(false);
 			setName(isValid.data.room.title);
 			setDescription(isValid.data.room.description);
-			{
-				isValid.data.image ? setImages(isValid.data.images) : setImages([]);
-			}
+			setImages(isValid.data.images);
 			setPrice(isValid.data.room.rent);
 			setDiscount(isValid.data.room.discount);
 			setSize(isValid.data.room.size);
@@ -99,7 +99,7 @@ const RoomItem = () => {
 
 		const reqImages = [];
 		images.forEach((image) => {
-			reqImages.push(image.image);
+			reqImages.push(image.image_url);
 		});
 
 		const data = {
@@ -119,28 +119,37 @@ const RoomItem = () => {
 			breakfast: breakfast,
 			pets: pets,
 			floor: floor,
-			images: reqImages,
 		};
 
-		const validData = checkEmpty(data);
+		const check_empty = checkEmpty(data);
 
-		if (!validData && !imagesChanged) {
+		if (!check_empty) {
 			alert("Please fill all the fields");
 			return;
 		}
+
+		if (!imagesChanged) {
+			alert("Please add images");
+			return;
+		}
+
+		data.images = reqImages;
+
+		setLoading(true);
 		const response = AddRoom(data);
 
 		response.then((res) => {
-			if (res.message === "Room added successfully") {
-				const new_data = mergeJson(res.room, res.images);
+			if (res.message === "room added successfully") {
+				const new_data = res;
+				delete new_data.message;
 				loc.state = { data: new_data };
 				setIsValid(loc.state);
+				setEdit(false);
+				setLoading(false);
 			} else {
 				alert("Something went wrong");
 			}
 		});
-
-		setEdit(false);
 	};
 
 	const handleEdit = (e) => {
@@ -166,16 +175,40 @@ const RoomItem = () => {
 		};
 
 		if (checkEmpty(data)) {
-			const reqData = checkEqual(data, isValid.data.room);
-			if (reqData) {
+			let reqData = checkEqual(data, isValid.data.room);
+			if (reqData || imagesChanged) {
+				if (!reqData && imagesChanged) {
+					reqData = {};
+					if (addedImages.length > 0) {
+						reqData.images_added = addedImages;
+					}
+					if (deletedImages.length > 0) {
+						reqData.images_removed = deletedImages;
+					}
+				} else if (reqData && imagesChanged) {
+					if (addedImages.length > 0) {
+						reqData.images_added = addedImages;
+					}
+					if (deletedImages.length > 0) {
+						reqData.images_removed = deletedImages;
+					}
+				}
+
 				reqData.room_id = isValid.data.room.id;
+				setLoading(true);
 				const response = EditRoom(reqData);
 				response.then((res) => {
-					if (res.message === "room added successfully") {
-						const new_data = res;
+					console.log(res);
+					if (res[0].message === "room added successfully") {
+						const new_data = {};
+						new_data.room = res[0].room;
+						new_data.images = res[1];
 						loc.state = { data: new_data };
 						setIsValid(loc.state);
 						setEdit(false);
+						setLoading(false);
+						setAddedImages([]);
+						setDeletedImages([]);
 					} else {
 						alert("Something went wrong");
 					}
@@ -196,15 +229,17 @@ const RoomItem = () => {
 		setIsModalOpen(true);
 	};
 
-	const handleDelete = () => {
+	const handleDelete = (e) => {
+		e.preventDefault();
 		openModal();
 	};
 
 	const handleConfirmDelete = () => {
-		const user_id = isValid.data.id;
-		const response = DeleteRoom(user_id);
+		const room_id = isValid.data.room.id;
+		setLoading(true);
+		const response = DeleteRoom(room_id);
 		response.then((res) => {
-			if (res.status === 200) {
+			if (res.message === "room deleted successfully") {
 				navigate("/rooms");
 			} else {
 				setErr("Something went wrong");
@@ -222,7 +257,7 @@ const RoomItem = () => {
 		return new Promise((resolve, reject) => {
 			const reader = new FileReader();
 			reader.readAsDataURL(image);
-			reader.onload = () => resolve({ id, image: reader.result });
+			reader.onload = () => resolve({ id, image_url: reader.result });
 			reader.onerror = (error) => reject(error);
 		});
 	};
@@ -237,15 +272,28 @@ const RoomItem = () => {
 		);
 
 		setImages([...images, ...base64Images]);
-		setAddedImages([...addedImages, ...base64Images]);
+		const reqImages = [];
+		for (let i = 0; i < base64Images.length; i++) {
+			reqImages.push(base64Images[i].image_url);
+		}
+		setAddedImages([...addedImages, ...reqImages]);
 		setImagesChanged(true);
 	};
 
 	const handleImageDelete = (index) => {
 		const newImages = images.filter((image) => image.id !== index);
 		setImages(newImages);
+		setDeletedImages([...deletedImages, index]);
 		setImagesChanged(true);
 	};
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
 
 	return (
 		<div className='container'>
@@ -263,7 +311,7 @@ const RoomItem = () => {
 						{isValid && <h2>Room #{isValid.data.room.id}</h2>}
 						{!isValid && <h2>Add Room</h2>}
 						{isValid && (
-							<button className='button' onClick={() => handleDelete()}>
+							<button className='button' onClick={(e) => handleDelete(e)}>
 								Delete
 							</button>
 						)}
@@ -562,7 +610,7 @@ const RoomItem = () => {
 							{images.map((image) => {
 								return (
 									<div key={image.id}>
-										<img className='gallery-images' src={image.image} />
+										<img className='gallery-images' src={image.image_url} />
 										{edit && (
 											<RiDeleteBin2Fill
 												className='delete-icon'

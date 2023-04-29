@@ -62,7 +62,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::group(['prefix'=>'reservation'],function(){
             Route::middleware(['auth', 'check.reservationmanager'])->group(function(){
                 Route::get('get',[RoomController::class,'getReservations']);
-                Route::get('cancel/{reservationid}',[CustomerController::class,'cancelReservation']);
+                Route::get('cancel_res/{reservationid}',[CustomerController::class,'cancelReservation']);
                 Route::get('search/{reservationid}',[RoomController::class,'searchReservation']);
             });
             Route::middleware(['auth', 'check.admin'])->group(function(){

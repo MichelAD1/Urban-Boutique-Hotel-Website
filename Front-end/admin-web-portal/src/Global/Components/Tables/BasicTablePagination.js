@@ -53,7 +53,7 @@ const Table = ({ reqData, columns, redirect, err }) => {
 	};
 
 	const handleNextPage = () => {
-		if (next) {
+		if (next && !err) {
 			setLoading(true);
 			setData([]);
 			setNext("");
@@ -72,7 +72,7 @@ const Table = ({ reqData, columns, redirect, err }) => {
 		}
 	};
 	const handlePreviosPage = () => {
-		if (prev) {
+		if (prev && !err) {
 			setLoading(true);
 			setData([]);
 			setNext("");
@@ -109,7 +109,6 @@ const Table = ({ reqData, columns, redirect, err }) => {
 			</>
 		);
 	}
-
 	return (
 		<>
 			<table {...getTableProps()} className='basic-table'>

@@ -20,6 +20,7 @@ class RoomController extends Controller
         $room->title = $request->title;
         $room->description = $request->description;
         $room->rent = $request->rent;
+        $room->discount = $request->discount;
         $room->size = $request->size;
         $room->guests = $request->guests;
         $room->floor = $request->floor;
@@ -39,7 +40,7 @@ class RoomController extends Controller
             $images = $request->images;
             $storage = new StorageClient([
                 'projectId' => 'urban-boutique-hotel',
-                'keyFilePath' => 'C:\Users\miche\Desktop\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
+                'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
             ]);
             $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
             $imagearray=array();
@@ -75,7 +76,7 @@ class RoomController extends Controller
         if(Room::find($roomid)->delete()){
             $storage = new StorageClient([
                 'projectId' => 'urban-boutique-hotel',
-                'keyFilePath' => 'C:\Users\miche\Desktop\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
+                'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
             ]);
             $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
             $images = Image::where('room_id',$roomid)->get();
@@ -111,6 +112,9 @@ class RoomController extends Controller
         if($request->has("rent")){
             $room->rent=$request->rent;
         }
+        if($request->has("discount")){
+            $room->discount=$request->discount;
+        }
         if($request->has("size")){
             $room->size=$request->size;
         }
@@ -140,6 +144,12 @@ class RoomController extends Controller
         }
         if($request->has("desk")){
             $room->desk=$request->desk;
+        }
+        if($request->has("pets")){
+            $room->pets=$request->pets;
+        }
+        if($request->has("breakfast")){
+            $room->breakfast=$request->breakfast;
         }
 
         if($room->save()){
@@ -264,11 +274,13 @@ class RoomController extends Controller
     }
     public function getCustomerReservations(){
         $user = Auth::user();
-        $reservations=DB::table('customer_reserves_room')->join('rooms','rooms.id','=','customer_reserves_room.room_id')
-                        ->select('customer_reserves_room.id','rooms.title','customer_reserves_room.reservation_date','customer_reserves_room.reservation_end')
-                        ->get();
-        return $reservations;
 
+        $reservations=DB::table('customer_reserves_room')
+            ->join('rooms', 'rooms.id', '=', 'customer_reserves_room.room_id')
+            ->select('customer_reserves_room.id','rooms.title', 'customer_reserves_room.reservation_date','customer_reserves_room.reservation_end')
+            ->get();
+        return $reservations;
     }
+
 
 }

@@ -2,32 +2,34 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 
-import ConvertImage from "../../Global/Functions/ConvertImage";
+// API
 import AddRoom from "../../api-client/Rooms/AddRoom";
 import EditRoom from "../../api-client/Rooms/EditRoom";
-import GetOptions from "../../api-client/Options/GetOptions";
+import DeleteRoom from "../../api-client/Rooms/DeleteRoom";
+
 //Icons
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 
-// Images
-import delete_icon from "../../assets/icons/cancel-icon.svg";
-import DeleteRoom from "../../api-client/Rooms/DeleteRoom";
+// Functions
+import checkEqual from "../../Global/Functions/CheckEqual";
+import checkEmpty from "../../Global/Functions/CheckEmpty";
 
 const RoomItem = () => {
 	const loc = useLocation();
 	const navigate = useNavigate();
 
 	const [edit, setEdit] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const [isValid, setIsValid] = useState(loc.state);
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
-	const [price, setPrice] = useState(0);
-	const [oldPrice, setOldPrice] = useState(0);
-	const [size, setSize] = useState(0);
-	const [guests, setGuests] = useState(0);
+	const [price, setPrice] = useState("");
+	const [discount, setDiscount] = useState("");
+	const [size, setSize] = useState("");
+	const [guests, setGuests] = useState("");
 	const [type, setType] = useState("");
 	const [minibar, setMinibar] = useState(false);
 	const [shower, setShower] = useState(false);
@@ -37,6 +39,7 @@ const RoomItem = () => {
 	const [desk, setDesk] = useState(false);
 	const [breakfast, setBreakfast] = useState(false);
 	const [pets, setPets] = useState(false);
+	const [floor, setFloor] = useState("");
 
 	const [err, setErr] = useState("");
 
@@ -46,6 +49,8 @@ const RoomItem = () => {
 	const [addedImages, setAddedImages] = useState([]);
 	const [deletedImages, setDeletedImages] = useState([]);
 
+	const [loading, setLoading] = useState(false);
+
 	useEffect(() => {
 		if (isValid) {
 			handleCancel();
@@ -54,134 +59,168 @@ const RoomItem = () => {
 		}
 	}, []);
 
-	const removeImage = (id) => {
-		const newData = images.filter((image) => image.id !== id);
-		setImages(newData);
-		setDeletedImages((deletedImages) => [...deletedImages, id]);
-		setImagesChanged(true);
+	// Merge data
+	const mergeJson = (json1, json2) => {
+		var result = {
+			json1,
+			json2,
+		};
+		return result;
 	};
 
-	async function addImage(e) {
-		let v_id = 0;
-		if (images.length !== 0) {
-			v_id = images[images.length - 1].id;
+	// Handle Edit, Cancel, Submit
+	const handleCancel = () => {
+		if (isValid) {
+			setEdit(false);
+			setName(isValid.data.room.title);
+			setDescription(isValid.data.room.description);
+			setImages(isValid.data.images);
+			setPrice(isValid.data.room.rent);
+			setDiscount(isValid.data.room.discount);
+			setSize(isValid.data.room.size);
+			setMinibar(isValid.data.room.mini_bar);
+			setGuests(isValid.data.room.guests);
+			setType(isValid.data.room.beds);
+			setShower(isValid.data.room.shower);
+			setTowels(isValid.data.room.towels);
+			setTv(isValid.data.room.tv);
+			setWifi(isValid.data.room.wifi);
+			setDesk(isValid.data.room.desk);
+			setBreakfast(isValid.data.room.breakfast);
+			setPets(isValid.data.room.pets);
+			setFloor(isValid.data.room.floor);
+			setLoading(false);
+		} else {
+			navigate("/rooms");
 		}
-		for (let i = 0; i < e.target.files.length; i++) {
-			await ConvertImage(e.target.files[i]).then((res) => {
-				setImages((images) => [...images, { id: v_id + 1, imageurl: res }]);
-				setAddedImages((addedImages) => [
-					...addedImages,
-					{ id: v_id + 1, imageurl: res },
-				]);
-				v_id++;
-			});
-		}
-		setImagesChanged(true);
-	}
-
-	const dataToSend = () => {
-		const requestData = new FormData();
-		requestData.append("id", isValid.data.id);
-		return requestData;
-	};
-
-	const checkChange = () => {
-		return !(name === isValid.data.name);
-	};
-
-	const mergeJson = (obj1, obj2, obj3) => {
-		const obj4 = {};
-		for (const attrname in obj1) {
-			obj4[attrname] = obj1[attrname];
-		}
-		for (const attrname in obj2) {
-			obj4[attrname] = obj2[attrname];
-		}
-		obj4["images"] = obj3;
-		return obj4;
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// setErr("");
-		// if (profile === default_profile) {
-		// 	setErr("Please upload a profile picture");
-		// } else if (images.length === 0) {
-		// 	setErr("Please upload at least one image");
-		// } else {
-		// 	const resp = AddRoom(
-		// 		email,
-		// 		password,
-		// 		phoneNumber,
-		// 		name,
-		// 		location,
-		// 		description,
-		// 		category,
-		// 		fb,
-		// 		ig,
-		// 		tiktok,
-		// 		menu,
-		// 		profile,
-		// 		images,
-		// 	);
-		// 	resp.then((res) => {
-		// 		if (res.status === 422) {
-		// 			if (res.data.errors.email) {
-		// 				setErr(res.data.message);
-		// 			}
-		// 			if (res.data.errors.number) {
-		// 				setErr(res.data.message);
-		// 			}
-		// 		} else {
-		// 			const new_data = mergeJson(res.user, res.business, res.images);
-		// 			navigate("/room/profile", { state: { data: new_data } });
-		// 			window.location.reload();
-		// 		}
-		// 	});
-		// }
-		console.log("submit");
-		setEdit(false);
+		setErr("");
+
+		const reqImages = [];
+		images.forEach((image) => {
+			reqImages.push(image.image_url);
+		});
+
+		const data = {
+			title: name,
+			description: description,
+			rent: parseInt(price),
+			discount: parseInt(discount),
+			size: parseInt(size),
+			guests: parseInt(guests),
+			beds: type,
+			mini_bar: minibar,
+			shower: shower,
+			towels: towels,
+			tv: tv,
+			wifi: wifi,
+			desk: desk,
+			breakfast: breakfast,
+			pets: pets,
+			floor: floor,
+		};
+
+		const check_empty = checkEmpty(data);
+
+		if (!check_empty) {
+			alert("Please fill all the fields");
+			return;
+		}
+
+		if (!imagesChanged) {
+			alert("Please add images");
+			return;
+		}
+
+		data.images = reqImages;
+
+		setLoading(true);
+		const response = AddRoom(data);
+
+		response.then((res) => {
+			if (res.message === "room added successfully") {
+				const new_data = res;
+				delete new_data.message;
+				loc.state = { data: new_data };
+				setIsValid(loc.state);
+				setEdit(false);
+				setLoading(false);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 	};
 
 	const handleEdit = (e) => {
 		e.preventDefault();
-		// const resp = EditRoom(
-		// 	isValid.data,
-		// 	dataToSend(),
-		// 	addedImages,
-		// 	deletedImages,
-		// 	imagesChanged,
-		// 	checkChange(),
-		// );
-		// resp.then((res) => {
-		// 	navigate("/room/profile", { state: { data: res } });
-		// 	window.location.reload();
-		// });
-		console.log("Edit");
-		setEdit(false);
-	};
 
-	const handleCancel = () => {
-		if (isValid) {
-			setEdit(false);
-			setName(isValid.data.name);
-			setDescription(isValid.data.description);
-			setImages(isValid.data.images);
-			setPrice(isValid.data.price);
-			setOldPrice(isValid.data.old_price);
-			setSize(isValid.data.size);
-			setMinibar(isValid.data.minibar);
-			setGuests(isValid.data.guests);
-			setType(isValid.data.type);
-			setShower(isValid.data.shower);
-			setTowels(isValid.data.towels);
-			setTv(isValid.data.tv);
-			setWifi(isValid.data.wifi);
-			setDesk(isValid.data.desk);
-			setBreakfast(isValid.data.breakfast);
-			setPets(isValid.data.pets);
+		const data = {
+			title: name,
+			description: description,
+			rent: parseInt(price),
+			discount: parseInt(discount),
+			size: parseInt(size),
+			guests: parseInt(guests),
+			beds: type,
+			mini_bar: minibar,
+			shower: shower,
+			towels: towels,
+			tv: tv,
+			wifi: wifi,
+			desk: desk,
+			breakfast: breakfast,
+			pets: pets,
+			floor: floor,
+		};
+
+		if (checkEmpty(data)) {
+			let reqData = checkEqual(data, isValid.data.room);
+			if (reqData || imagesChanged) {
+				if (!reqData && imagesChanged) {
+					reqData = {};
+					if (addedImages.length > 0) {
+						reqData.images_added = addedImages;
+					}
+					if (deletedImages.length > 0) {
+						reqData.images_removed = deletedImages;
+					}
+				} else if (reqData && imagesChanged) {
+					if (addedImages.length > 0) {
+						reqData.images_added = addedImages;
+					}
+					if (deletedImages.length > 0) {
+						reqData.images_removed = deletedImages;
+					}
+				}
+
+				reqData.room_id = isValid.data.room.id;
+				setLoading(true);
+				const response = EditRoom(reqData);
+				response.then((res) => {
+					console.log(res);
+					if (res[0].message === "room added successfully") {
+						const new_data = {};
+						new_data.room = res[0].room;
+						new_data.images = res[1];
+						loc.state = { data: new_data };
+						setIsValid(loc.state);
+						setEdit(false);
+						setLoading(false);
+						setAddedImages([]);
+						setDeletedImages([]);
+					} else {
+						alert("Something went wrong");
+					}
+				});
+			} else {
+				alert("No changes made");
+			}
 		} else {
-			navigate("/rooms");
+			alert("Please fill all the fields");
+			return;
 		}
 	};
 
@@ -192,15 +231,17 @@ const RoomItem = () => {
 		setIsModalOpen(true);
 	};
 
-	const handleDelete = () => {
+	const handleDelete = (e) => {
+		e.preventDefault();
 		openModal();
 	};
 
 	const handleConfirmDelete = () => {
-		const user_id = isValid.data.id;
-		const response = DeleteRoom(user_id);
+		const room_id = isValid.data.room.id;
+		setLoading(true);
+		const response = DeleteRoom(room_id);
 		response.then((res) => {
-			if (res.status === 200) {
+			if (res.message === "room deleted successfully") {
 				navigate("/rooms");
 			} else {
 				setErr("Something went wrong");
@@ -212,6 +253,49 @@ const RoomItem = () => {
 	const closeModal = () => {
 		setIsModalOpen(false);
 	};
+
+	// Images handler
+	const convertImageToBase64 = (image, id) => {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(image);
+			reader.onload = () => resolve({ id, image_url: reader.result });
+			reader.onerror = (error) => reject(error);
+		});
+	};
+
+	const handleImageUpload = async (e) => {
+		const files = e.target.files;
+
+		const base64Images = await Promise.all(
+			Object.values(files).map((file, id) => {
+				return convertImageToBase64(file, images.length + id);
+			}),
+		);
+
+		setImages([...images, ...base64Images]);
+		const reqImages = [];
+		for (let i = 0; i < base64Images.length; i++) {
+			reqImages.push(base64Images[i].image_url);
+		}
+		setAddedImages([...addedImages, ...reqImages]);
+		setImagesChanged(true);
+	};
+
+	const handleImageDelete = (index) => {
+		const newImages = images.filter((image) => image.id !== index);
+		setImages(newImages);
+		setDeletedImages([...deletedImages, index]);
+		setImagesChanged(true);
+	};
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
 
 	return (
 		<div className='container'>
@@ -226,10 +310,10 @@ const RoomItem = () => {
 				}}>
 				<div className='edit-container edit-container-large'>
 					<div className='edit-item'>
-						{isValid && <h2>Room #{isValid.data.id}</h2>}
+						{isValid && <h2>Room #{isValid.data.room.id}</h2>}
 						{!isValid && <h2>Add Room</h2>}
 						{isValid && (
-							<button className='button' onClick={() => handleDelete()}>
+							<button className='button' onClick={(e) => handleDelete(e)}>
 								Delete
 							</button>
 						)}
@@ -290,7 +374,7 @@ const RoomItem = () => {
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
 							<div>
-								<label>Type</label>
+								<label>Bed type</label>
 							</div>
 							<div>
 								{!edit && <p>{type}</p>}
@@ -326,10 +410,10 @@ const RoomItem = () => {
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
 							<div>
-								<label>Size</label>
+								<label>Size {edit ? "(sqft)" : ""}</label>
 							</div>
 							<div>
-								{!edit && <p>{size}sqft</p>}
+								{!edit && <p>{size} sqft</p>}
 								{edit && (
 									<input
 										type='number'
@@ -344,10 +428,28 @@ const RoomItem = () => {
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
 							<div>
-								<label>Price</label>
+								<label>Floor</label>
 							</div>
 							<div>
-								{!edit && <p>${price}</p>}
+								{!edit && <p>{floor}th</p>}
+								{edit && (
+									<input
+										type='number'
+										value={floor}
+										className='input-box'
+										onChange={(e) => setFloor(e.target.value)}
+									/>
+								)}
+							</div>
+						</div>
+					</div>
+					<div className='edit-item'>
+						<div className='edit-info info-large'>
+							<div>
+								<label>Price {edit ? "(USD)" : ""}</label>
+							</div>
+							<div>
+								{!edit && <p>USD {price}</p>}
 								{edit && (
 									<input
 										type='number'
@@ -362,16 +464,16 @@ const RoomItem = () => {
 					<div className='edit-item'>
 						<div className='edit-info info-large'>
 							<div>
-								<label>Old price</label>
+								<label>Discount {edit ? "(USD)" : ""}</label>
 							</div>
 							<div>
-								{!edit && <p>${oldPrice}</p>}
+								{!edit && <p>USD {discount}</p>}
 								{edit && (
 									<input
 										type='number'
-										value={oldPrice}
+										value={discount}
 										className='input-box'
-										onChange={(e) => setOldPrice(e.target.value)}
+										onChange={(e) => setDiscount(e.target.value)}
 									/>
 								)}
 							</div>
@@ -498,7 +600,7 @@ const RoomItem = () => {
 									<input
 										type='file'
 										multiple
-										onChange={(e) => addImage(e)}
+										onChange={(e) => handleImageUpload(e)}
 										id='images-upload'
 										name='images-upload'
 										className='upload-image'
@@ -509,9 +611,14 @@ const RoomItem = () => {
 						<div className='gallery'>
 							{images.map((image) => {
 								return (
-									<div>
-										<img className='gallery-images' src={image} />
-										{edit && <RiDeleteBin2Fill className='delete-icon' />}
+									<div key={image.id}>
+										<img className='gallery-images' src={image.image_url} />
+										{edit && (
+											<RiDeleteBin2Fill
+												className='delete-icon'
+												onClick={() => handleImageDelete(image.id)}
+											/>
+										)}
 									</div>
 								);
 							})}

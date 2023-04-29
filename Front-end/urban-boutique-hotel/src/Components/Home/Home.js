@@ -8,13 +8,14 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../Global/Components/Footer";
 import SingleRoom from "../Rooms/SingleRoom";
 import Reviews from "../../Global/Components/Reviews";
+import { useTranslation } from "react-i18next";
 
 //APIS
 import GetHomePage from "../../api-client/Home/GetHomePage";
 // Images
 
 const Home = () => {
-  const navigation = useNavigate();
+  const { t, i18n } = useTranslation();
   const [rooms, setRooms] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,6 +39,14 @@ const Home = () => {
       localStorage.setItem("shouldReload", "true");
     }
   }
+  //Translation handler
+  useEffect(() => {
+    if (!localStorage.getItem("Translate")) {
+      localStorage.setItem("Translate", "en");
+      localStorage.setItem("Lg", "English");
+    }
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, [localStorage.getItem("Translate")]);
 
   //Api handler
   const {
@@ -61,23 +70,23 @@ const Home = () => {
   const services = [
     {
       icon: <FaCocktail />,
-      title: "free cocktails",
-      info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      title: t("cocktail_t"),
+      info: t("cocktail"),
     },
     {
       icon: <FaHiking />,
-      title: "endless hiking",
-      info: " Lorem It was popularised in the 1960s with the release of Letraset sheets containing.",
+      title: t("hiking_t"),
+      info: t("hiking"),
     },
     {
       icon: <FaShuttleVan />,
-      title: "free shuttles",
-      info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      title: t("shuttles_t"),
+      info: t("shuttles"),
     },
     {
       icon: <FaBeer />,
-      title: "strongest beers",
-      info: "Lorem There are many variations of passages of Lorem Ipsum available, but the majority form.",
+      title: t("beer_t"),
+      info: t("beer"),
     },
   ];
   return (
@@ -86,9 +95,9 @@ const Home = () => {
         <div className="banner">
           <h1>Urban Boutique Hotel</h1>
           <div></div>
-          <p>Delux Rooms Starting at $299</p>
+          <p>{t("home_w")}</p>
           <Link to="/rooms" className="btn-primary">
-            our rooms
+            {t("room_w")}
           </Link>
         </div>
       </div>
@@ -103,16 +112,14 @@ const Home = () => {
               key={index}
               reverse={index % 2 === 0}
               room={room}
-              type={
-                room.room.featured === 1 ? "Featured room" : "Deal of the month"
-              }
+              type={room.room.featured === 1 ? t("home_feat") : t("home_feat2")}
             />
           ))}
         </div>
       )}
       <div className="services-section">
         <div className="section-title">
-          <h4>Services</h4>
+          <h4>{t("services")}</h4>
           <div />
         </div>
       </div>
@@ -135,7 +142,7 @@ const Home = () => {
         </div>
       ) : (
         <div>
-          {/* <Reviews data={reviews} /> */}
+          <Reviews data={reviews} />
           <Footer />
         </div>
       )}

@@ -1,30 +1,53 @@
 import axios from "axios";
+import base_url from "../BaseUrl";
 
-export default async function getOptions() {
-	const categories = await axios({
-		method: "get",
-		url: "http://127.0.0.1:8000/api/v0.1/category/",
-		headers: { Authorization: localStorage.getItem("token") },
-	})
-		.then((res) => {
-			return res.data;
+export default async function getOptions(tag) {
+	if (tag.queryKey[1] === "pf") {
+		const faqs = await axios({
+			method: "get",
+			url: `${base_url}faq/get`,
 		})
-		.catch((err) => {
-			console.log(err);
-			return err.response.data;
-		});
-
-	const packages = await axios({
-		method: "get",
-		url: "http://127.0.0.1:8000/api/v0.1/package/all",
-		headers: { Authorization: localStorage.getItem("token") },
-	})
-		.then((res) => {
-			return res.data;
+			.then((res) => {
+				return res.data;
+			})
+			.catch((err) => {
+				return err.response;
+			});
+		const policies = await axios({
+			method: "get",
+			url: `${base_url}policy/get`,
 		})
-		.catch((err) => {
-			return err.response.data;
-		});
+			.then((res) => {
+				return res.data;
+			})
+			.catch((err) => {
+				return err.response;
+			});
+		return [faqs, policies];
+	}
 
-	return [packages, categories];
+	if (tag.queryKey[1] === "dr") {
+		const response = await axios({
+			method: "get",
+			url: `${base_url}response/get`,
+		})
+			.then((res) => {
+				return res.data;
+			})
+			.catch((err) => {
+				return err.response;
+			});
+
+		const regulations = await axios({
+			method: "get",
+			url: `${base_url}regulation/get`,
+		})
+			.then((res) => {
+				return res.data;
+			})
+			.catch((err) => {
+				return err.response;
+			});
+		return [response, regulations];
+	}
 }

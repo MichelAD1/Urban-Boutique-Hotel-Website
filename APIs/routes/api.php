@@ -19,7 +19,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SupplyController;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ImageController;
 use App\Models\EmailSender;
 use App\Models\Maintenance_Request;
 use Illuminate\Http\Request;
@@ -143,7 +143,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.contentmanager'])->group(function(){
             Route::post('add',[FAQController::class,'addFAQ']);
             Route::post('edit',[FAQController::class,'editFAQ']);
-            Route::get('remove',[FAQController::class,'removeFAQ']);
+            Route::get('remove/{faqid}',[FAQController::class,'removeFAQ']);
 
         });
         Route::middleware(['auth', 'check.customer'])->group(function(){
@@ -161,7 +161,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.contentmanager'])->group(function(){
             Route::post('add',[PolicyController::class,'addPolicy']);
             Route::post('edit',[PolicyController::class,'editPolicy']);
-            Route::get('remove',[PolicyController::class,'removePolicy']);
+            Route::get('remove/{policyid}',[PolicyController::class,'removePolicy']);
 
         });
         Route::middleware(['auth', 'check.customer'])->group(function(){
@@ -300,11 +300,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.contentmanager'])->group(function(){
             Route::post('sendall',[EmailController::class,'sendEmailToUsers']);
         });
-        Route::middleware(['auth', 'check.customer'])->group(function(){
-            Route::post('sendform',[EmailController::class,'sendEmailContactForm']);
-        });
-
-
+        Route::post('sendform',[EmailController::class,'sendEmailContactForm']);
     });
 
     Route::group(['prefix'=>'review'],function(){

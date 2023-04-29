@@ -55,9 +55,7 @@ const Reviews = () => {
 		status,
 		error,
 		data: reviewData,
-	} = useQuery(["review_data", `${base_url}review/getAll`], FetchData, {
-		staleTime: 300000, // 5 minutes
-	});
+	} = useQuery(["review_data", `${base_url}review/getall`], FetchData);
 	useEffect(() => {
 		if (reviewData) {
 			if (reviewData.data.length > 0) {

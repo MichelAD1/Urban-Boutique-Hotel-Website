@@ -5,12 +5,21 @@ import { useLocation, useNavigate } from "react-router-dom";
 // Components
 import ReactModal from "react-modal";
 
+// Functions
+import checkEmpty from "../../../Global/Functions/CheckEmpty";
+import checkEqual from "../../../Global/Functions/CheckEqual";
+
+// API
+import AddOption from "../../../api-client/Options/AddOption";
+import EditOption from "../../../api-client/Options/EditOption";
+import DeleteOption from "../../../api-client/Options/DeleteOptions";
+
 const FaqPolicyItem = () => {
 	const loc = useLocation();
 	const [isValid, setIsValid] = useState(loc.state);
 
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
+	const [question, setQuestion] = useState("");
+	const [answer, setAnswer] = useState("");
 	const [tag, setTag] = useState("");
 
 	const [edit, setEdit] = useState(false);
@@ -30,8 +39,14 @@ const FaqPolicyItem = () => {
 
 	useEffect(() => {
 		if (!isValid.type) {
-			setTitle(isValid.title);
-			setDescription(isValid.description);
+			if (isValid.tag === "faq") {
+				setQuestion(isValid.question);
+				setAnswer(isValid.answer);
+			} else {
+				setQuestion(isValid.title);
+				setAnswer(isValid.text);
+			}
+
 			setTag(isValid.tag);
 		}
 	}, [isValid]);
@@ -48,34 +63,114 @@ const FaqPolicyItem = () => {
 			navigate(-1);
 		} else {
 			setEdit(false);
-			setTitle(isValid.title);
-			setDescription(isValid.description);
+			setQuestion(isValid.question);
+			setAnswer(isValid.answer);
 			setTag(isValid.tag);
 		}
 	};
 
 	const handleEdit = (e) => {
+		const data = {};
 		e.preventDefault();
-		setEdit(false);
+		if (tag === "faq") {
+			data.question = question;
+			data.answer = answer;
+		}
+		if (tag === "policy") {
+			data.title = question;
+			data.text = answer;
+		}
+
+		const check_empty = checkEmpty(data);
+		if (!check_empty) {
+			alert("Please fill all the fields");
+			return;
+		}
+		const reqData = checkEqual(data, isValid);
+		if (!reqData) {
+			alert("No changes made");
+			return;
+		}
+
+		if (tag === "faq") {
+			reqData.faq_id = isValid.id;
+		} else {
+			reqData.policy_id = isValid.id;
+		}
+		const response = EditOption(reqData, tag);
+		response.then((res) => {
+			if (
+				res.message === "policy editted successfuly" ||
+				res.message === "faq editted successfuly"
+			) {
+				res.data.tag = tag;
+				const new_data = { data: res.data };
+				loc.state = new_data;
+				setIsValid(new_data);
+				setEdit(false);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setEdit(false);
-		console.log("Submit");
-	};
+		const data = {};
+		if (tag === "faq") {
+			data.question = question;
+			data.answer = answer;
+		}
+		if (tag === "Policy") {
+			data.title = question;
+			data.text = answer;
+		}
 
-	const handleDelete = () => {
-		openModal();
+		const check_empty = checkEmpty(data);
+		if (!check_empty) {
+			alert("Please fill all the fields");
+			return;
+		}
+
+		const response = AddOption(data, tag);
+		response.then((res) => {
+			if (res.message === "successful") {
+				console.log(res);
+				const new_data = res.data;
+				console.log(new_data);
+				new_data.tag = tag;
+				loc.state = { data: new_data };
+				setIsValid(loc.state);
+				setEdit(false);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 	};
 
 	// Modal
+	const handleDelete = (e) => {
+		e.preventDefault();
+		openModal();
+	};
+
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
 
 	const handleConfirmDelete = () => {
+		const response = DeleteOption(isValid.id, tag);
+		response.then((res) => {
+			if (
+				res.message === "faq removed successfuly" ||
+				res.message === "policy removed successfuly"
+			) {
+				navigate(-1);
+			} else {
+				alert("Something went wrong");
+			}
+		});
 		closeModal();
 	};
 
@@ -105,7 +200,7 @@ const FaqPolicyItem = () => {
 					{isValid.type && <h2>{capitalize(tag)}</h2>}
 
 					{!isValid.type && (
-						<button className='button' onClick={() => handleDelete()}>
+						<button className='button' onClick={(e) => handleDelete(e)}>
 							Delete
 						</button>
 					)}
@@ -128,14 +223,14 @@ const FaqPolicyItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div style={{ alignSelf: "flex-start" }}>
-							<label>Title</label>
+							<label>{tag === "faq" ? "Question" : "Title"}</label>
 						</div>
 						<div>
-							{!edit && <p>{title}</p>}
+							{!edit && <p>{question}</p>}
 							{edit && (
 								<textarea
-									value={title}
-									onChange={(e) => setTitle(e.target.value)}
+									value={question}
+									onChange={(e) => setQuestion(e.target.value)}
 									className='input-box bio-input'
 								/>
 							)}
@@ -145,14 +240,14 @@ const FaqPolicyItem = () => {
 				<div className='edit-item'>
 					<div className='edit-info info-large'>
 						<div style={{ alignSelf: "flex-start" }}>
-							<label>Description</label>
+							<label>{tag === "faq" ? "Answer" : "Description"}</label>
 						</div>
 						<div>
-							{!edit && <p>{description}</p>}
+							{!edit && <p>{answer}</p>}
 							{edit && (
 								<textarea
-									value={description}
-									onChange={(e) => setDescription(e.target.value)}
+									value={answer}
+									onChange={(e) => setAnswer(e.target.value)}
 									className='input-box bio-input'
 								/>
 							)}

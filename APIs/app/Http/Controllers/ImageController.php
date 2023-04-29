@@ -14,9 +14,9 @@ class ImageController extends Controller
         $images = $request->images;
         $storage = new StorageClient([
             'projectId' => 'urban-boutique-hotel',
-                'keyFilePath' => 'urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
+                'keyFilePath' => 'C:\Users\marc issa\Desktop\Urban Boutique Hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
         ]);
-        $bucket = $storage->bucket('your-bucket-name');
+        $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
         if(!empty($images)){
             for($i=0;$i<sizeof($images);$i++){
                 $base64image = $images[$i];
@@ -38,9 +38,9 @@ class ImageController extends Controller
     public function addAndRemoveImages(Request $request){ // images_removed/images_added
         $storage = new StorageClient([
             'projectId' => 'urban-boutique-hotel',
-            'keyFilePath' => 'urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
+            'keyFilePath' => 'C:\Users\miche\Downloads\urban_boutique_hotel\Urban-Boutique-Hotel-Website\APIs\urban-boutique-hotel-firebase-adminsdk-q0nzf-fb3292fd25.json'
         ]);
-        $bucket = $storage->bucket('your-bucket-name');
+        $bucket = $storage->bucket('urban-boutique-hotel.appspot.com');
         if($request->has("images_added")){
             $images = $request->images_added;
             $roomid = $request->room_id;
@@ -82,6 +82,7 @@ class ImageController extends Controller
             }
         }
         return Image::where('room_id','=',$request->room_id)->get();
+
     }
 
 }

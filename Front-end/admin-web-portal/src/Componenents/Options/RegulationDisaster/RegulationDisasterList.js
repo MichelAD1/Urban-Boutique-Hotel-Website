@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 // Icons
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
-import search_icon from "../../../assets/icons/search.svg";
 
 // Components
 import OptionsCard from "../../../Global/Components/OptionsCard";
 import ReactModal from "react-modal";
+
+// API
+import GetOptions from "../../../api-client/Options/GetOptions";
 
 const RegulationDisasterList = () => {
 	const [data, setData] = useState([]);
@@ -15,57 +18,30 @@ const RegulationDisasterList = () => {
 	const [regulations, setRegulations] = useState([]);
 	const [disaster, setDisaster] = useState([]);
 
-	const [query, setQuery] = useState("");
 	const [filter, setFilter] = useState("");
-	const [err, setErr] = useState("");
+
+	const [loading, setLoading] = useState(true);
 
 	const navigate = useNavigate();
 
+	const {
+		status,
+		error,
+		data: regulationDisaster,
+	} = useQuery(["regulation_disaster", "dr"], GetOptions);
 	useEffect(() => {
-		setRegulations([
-			{
-				id: 1,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-			{
-				id: 2,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-			{
-				id: 3,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-		]);
+		if (regulationDisaster) {
+			setDisaster(regulationDisaster[0]);
+			setRegulations(regulationDisaster[1]);
+			setLoading(false);
+		}
+	}, [regulationDisaster, status]);
 
-		setDisaster([
-			{
-				id: 1,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-			{
-				id: 2,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-			{
-				id: 3,
-				title: "What is the cancellation policy?",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-			},
-		]);
-
-		setData(mergeAndTagData());
-	}, []);
+	useEffect(() => {
+		if (error) {
+			alert("Error fetching data");
+		}
+	}, [error]);
 
 	useEffect(() => {
 		setData(mergeAndTagData());
@@ -112,30 +88,34 @@ const RegulationDisasterList = () => {
 		navigate("/options/regulation_disaster/info", item);
 	};
 
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
+
 	return (
 		<div className='container'>
-			<div className='searchAndFilter'>
-				<div className='search-bar'>
-					<img src={search_icon} alt='' className='search-icon' />
-					<input
-						className='search-input'
-						type='text'
-						placeholder='Search'
-						onChange={(e) => setQuery(e.target.value)}
-					/>
-				</div>
-				<select
-					className='filterDropDown'
-					onChange={(e) => setFilter(e.target.value)}>
-					<option value=''>All</option>
-					{tags.map((tag) => (
-						<option key={tag} value={tag}>
-							{capitalize(tag)}
-						</option>
-					))}
-				</select>
-				<div onClick={() => openModal()}>
-					<AiOutlinePlus className='add-button' />
+			<div
+				className='searchAndFilter'
+				style={{ justifyContent: "space-between" }}>
+				<h2>Regulations & Disaster response plan</h2>
+				<div className='filter'>
+					<select
+						className='filterDropDown'
+						onChange={(e) => setFilter(e.target.value)}>
+						<option value=''>All</option>
+						{tags.map((tag) => (
+							<option key={tag} value={tag}>
+								{capitalize(tag)}
+							</option>
+						))}
+					</select>
+					<div onClick={() => openModal()}>
+						<AiOutlinePlus className='add-button' />
+					</div>
 				</div>
 			</div>
 			<div className='options-list'>
@@ -145,6 +125,7 @@ const RegulationDisasterList = () => {
 					))}
 				</div>
 			</div>
+
 			<ReactModal
 				className='custom-modal'
 				isOpen={isModalOpen}

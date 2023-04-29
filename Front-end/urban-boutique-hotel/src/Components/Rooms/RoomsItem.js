@@ -1,12 +1,18 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Slideshow from "../../Global/Components/Slideshow";
 import att_1 from "../../assets/images/att-1.jpg";
 import att_2 from "../../assets/images/att-2.jpg";
 import att_3 from "../../assets/images/att-3.jpg";
 import att_4 from "../../assets/images/att-4.jpg";
 import att_5 from "../../assets/images/att-5.jpg";
+import { useTranslation } from "react-i18next";
+
 const RoomsItem = () => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   const location = useLocation();
   const navigate = useNavigate();
   const room = location.state.data;
@@ -27,28 +33,6 @@ const RoomsItem = () => {
   const [breakfast, setBreakfast] = useState(room.room.breakfast);
   const [pets, setPets] = useState(room.room.pets);
   const [images, setImages] = useState(room.images);
-  const slideshowd_data = [
-    {
-      id: 1,
-      image: att_1,
-    },
-    {
-      id: 2,
-      image: att_2,
-    },
-    {
-      id: 3,
-      image: att_3,
-    },
-    {
-      id: 4,
-      image: att_4,
-    },
-    {
-      id: 5,
-      image: att_5,
-    },
-  ];
 
   const handleBooking = () => {
     navigate(`/rooms/booking`, { state: { data: room } });
@@ -60,57 +44,57 @@ const RoomsItem = () => {
           <h1>{title}</h1>
         </div>
         <div className="room-display">
-          <p>PRICE</p>
+          <p>{t("price")}</p>
           <p className="room-tag">${rent}.00</p>
-          <button onClick={handleBooking}>BOOK NOW</button>
+          <button onClick={handleBooking}>{t("booknow")}</button>
         </div>
       </div>
       <div className="room-images">
-        <Slideshow data={slideshowd_data} type={"Room"} />
+        <Slideshow data={images} type={"Room"} />
       </div>
       <div className="room-infos">
         <div className="room-display">
-          <p>SQUARE M2</p>
+          <p>{t("squarem2")}</p>
           <p className="room-tag">{size}</p>
         </div>
         <div className="room-display">
-          <p>GUESTS</p>
+          <p>{t("guests2")}</p>
           <p className="room-tag">{guests}</p>
         </div>
         <div className="room-display">
-          <p>FLOORS</p>
+          <p>{t("floors")}</p>
           <p className="room-tag">{floor}</p>
         </div>
         <div className="room-display">
-          <p>BEDS</p>
+          <p>{t("beds2")}</p>
           <p className="room-tag">{beds}</p>
         </div>
       </div>
       <div className="room-options">
         <div className="room-right">
           <div className="room-name description">
-            <h1>Description</h1>
+            <h1>{t("description")}</h1>
           </div>
           <div className="room-description">
             <p>{description}</p>
           </div>
           <div className="room-name description">
-            <h1>Pricing</h1>
+            <h1>{t("pricing")}</h1>
           </div>
           <div className="room-description">
             {discount === 0 ? (
               <div className="room-display pricing">
-                <p>PRICE</p>
+                <p>{t("price")}</p>
                 <p className="room-tag pricing">${rent}.00</p>
               </div>
             ) : (
               <div>
                 <div className="room-display pricing">
-                  <p>NEW PRICE</p>
+                  <p>{t("newprice")}</p>
                   <p className="room-tag pricing">${rent}.00</p>
                 </div>
                 <div className="room-display pricing">
-                  <p>OLD PRICE</p>
+                  <p>{t("oldprice")}</p>
                   <p className="room-tag pricing">${rent + discount}.00</p>
                 </div>
               </div>
@@ -119,41 +103,41 @@ const RoomsItem = () => {
         </div>
         <div className="room-left">
           <div className="room-name description">
-            <h1>Amenities</h1>
+            <h1>{t("amenities")}</h1>
           </div>
           {wifi === 0 ? null : (
             <div className="room-display amenities">
-              <p>FREE WIFI</p>
+              <p>{t("freewifi")}</p>
             </div>
           )}
           {tv === 0 ? null : (
             <div className="room-display amenities">
-              <p>INTERNATIONAL TV CHANNELS</p>
+              <p>{t("inttv")}</p>
             </div>
           )}
           {shower === 0 ? null : (
             <div className="room-display amenities">
-              <p>SHOWER AVAILABLE</p>
+              <p>{t("showerava")}</p>
             </div>
           )}
           {mini_bar === 0 ? null : (
             <div className="room-display amenities">
-              <p>MINI BAR AVAILABLE</p>
+              <p>{t("minibarava")}</p>
             </div>
           )}
           {desk === 0 ? null : (
             <div className="room-display amenities">
-              <p>DESK AVAILABLE</p>
+              <p>{t("deskava")}</p>
             </div>
           )}
           {breakfast === 0 ? null : (
             <div className="room-display amenities">
-              <p>BREAKFAST AVAILABLE</p>
+              <p>{t("breakava")}</p>
             </div>
           )}
           {pets === 0 ? null : (
             <div className="room-display amenities">
-              <p>PETS ALLOWED</p>
+              <p>{t("petsava")}</p>
             </div>
           )}
         </div>

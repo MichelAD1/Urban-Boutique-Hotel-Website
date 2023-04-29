@@ -5,47 +5,54 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 const Footer = () => {
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   return (
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-col">
-          <h4>Explore</h4>
+          <h4>{t("Explore")}</h4>
           <ul className="footer-links">
             <Link to="/" className="footer-link">
-              <li>Home</li>
+              <li>{t("home")}</li>
             </Link>
 
             <Link to="/discover" className="footer-link">
-              <li>Discover</li>
+              <li>{t("discover")}</li>
             </Link>
 
             <Link to="/rooms" className="footer-link">
-              <li>Rooms</li>
+              <li>{t("rooms")}</li>
             </Link>
 
             <Link to="/services" className="footer-link">
-              <li>Services</li>
+              <li>{t("services")}</li>
             </Link>
           </ul>
         </div>
         <div className="footer-col">
-          <h4>About Us</h4>
+          <h4>{t("aboutus")}</h4>
           <ul className="footer-links">
             <Link to="/contact" className="footer-link">
-              <li>Contact</li>
+              <li>{t("contact")}</li>
             </Link>
             <Link to="/privacypolicies" className="footer-link">
-              <li>Privacy Policy</li>
+              <li>{t("privacypolicy")}</li>
             </Link>
             <Link to="/FAQ" className="footer-link">
-              <li>FAQs</li>
+              <li>{t("faq")}</li>
             </Link>
           </ul>
         </div>
         <div className="footer-col">
-          <h4>Follow Us</h4>
+          <h4>{t("followus")}</h4>
           <ul className="social-icons">
             <li>
               <a href="#">
@@ -81,8 +88,8 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <p className="text-sm-center">
-          &copy;{new Date().getFullYear()} Urban Boutique Hotel - All Rights
-          Reserved
+          &copy;{new Date().getFullYear()} Urban Boutique Hotel -{" "}
+          {t("allrights")}
         </p>
       </div>
     </footer>

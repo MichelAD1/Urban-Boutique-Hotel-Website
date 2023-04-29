@@ -1,47 +1,36 @@
 import axios from "axios";
+import base_url from "../BaseUrl";
 
-export default async function EditRoom(
-  data,
-  reqData,
-  addedImages,
-  deletedImages,
-  imagesChanged,
-  infoChanged
-) {
-  const resp = data;
-  if (infoChanged) {
-    await axios
-      .post("http://localhost:8000/api/v0.1/room/edit/all", reqData, {
-        headers: { Authorization: localStorage.getItem("token") },
-      })
-      .then((res) => {
-        for (const attrname in res.data.room) {
-          resp[attrname] = res.data.room[attrname];
-        }
-        for (const attrname in res.data.user) {
-          resp[attrname] = res.data.user[attrname];
-        }
-      })
-      .catch((err) => {
-        return err;
-      });
-  }
-  if (imagesChanged) {
-    const images_data = {
-      images_added: addedImages,
-      images_removed: deletedImages,
-      roomid: reqData.get("roomid"),
-    };
-    await axios
-      .post("http://localhost:8000/api/v0.1/images/edit/", images_data, {
-        headers: { Authorization: localStorage.getItem("token") },
-      })
-      .then((res) => {
-        resp["images"] = res.data.images;
-      })
-      .catch((err) => {
-        return err;
-      });
-  }
-  return resp;
+export default async function EditRoom(data) {
+	console.log(data);
+	const room = await axios({
+		method: "post",
+		url: `${base_url}room/edit`,
+		data: data,
+		headers: {
+			Authorization: "Bearer " + localStorage.getItem("token"),
+		},
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			return err;
+		});
+	const images = await axios({
+		method: "post",
+		url: `${base_url}room/images/edit`,
+		data: data,
+		headers: {
+			Authorization: "Bearer " + localStorage.getItem("token"),
+		},
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			return err;
+		});
+
+	return [room, images];
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // Components
 import Rating from "../../../Global/Components/Rating";
@@ -29,7 +29,7 @@ const ReviewItem = () => {
 		} else {
 			setShow("Show");
 		}
-	}, []);
+	}, [data]);
 
 	// Modal
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,6 +41,7 @@ const ReviewItem = () => {
 		openModal();
 	};
 
+	const navigate = useNavigate();
 	const handleConfirmAdd = () => {
 		const feature = FeatureReview(data.id);
 		feature.then((res) => {
@@ -50,7 +51,7 @@ const ReviewItem = () => {
 				} else {
 					setShow("Show");
 				}
-				const new_data = res.user;
+				const new_data = res.data;
 				loc.state = { data: new_data };
 			}
 		});

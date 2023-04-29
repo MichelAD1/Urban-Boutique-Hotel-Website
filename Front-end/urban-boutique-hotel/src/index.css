@@ -103,7 +103,7 @@ h6 {
 }
 
 .btn-secondary {
-  width: 9em;
+  width: 11.5em;
   background-color: #2a3249;
   color: #fff;
   border: none;
@@ -119,6 +119,7 @@ h6 {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 
 .arrow {
@@ -260,6 +261,14 @@ h6 {
 .disabled-button {
   opacity: 0.5;
   cursor: default !important;
+}
+.login-error.contact {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 12px;
+  padding: 0% !important;
+  margin-top: -1%;
+  color: red;
 }
 .login-error.book {
   display: flex;
@@ -1241,6 +1250,7 @@ h6 {
   height: 3em;
   padding: 0.5rem 1rem;
   border-radius: 3px;
+  margin-top: 2%;
   border: none;
   background-color: var(--primaryColor);
   color: white;
@@ -1558,8 +1568,8 @@ h6 {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  padding-top: 4%;
-  padding-bottom: 4%;
+  margin-top: 10%;
+  padding-bottom: 2%;
 }
 .room-options {
   display: flex;
@@ -2087,11 +2097,13 @@ h6 {
   margin: 0 auto;
   overflow: hidden;
   min-height: 60vh;
-  background-color: rgba(172, 160, 160, 0.4);
+  background-color: rgba(221, 220, 220, 0.4);
   padding-bottom: 2em;
 }
+
 .slideshow.rooms {
   background-color: rgba(255, 255, 255, 0.4);
+  height: 45em;
 }
 
 .slideshowSlider {
@@ -2110,18 +2122,24 @@ h6 {
   flex-direction: row;
   align-items: center;
 }
+
 .slide-content.rooms {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  width: 90em;
+  cursor: pointer;
 }
-
-.slide-image img {
-  max-width: 100%;
+.slide-content.rooms img {
+  width: 100%;
+  height: 38em;
+  object-fit: cover;
+}
+.slide-image {
   height: auto;
+  max-width: 80%;
 }
-
 .slide-info {
   margin-left: 2em;
 }
@@ -2547,20 +2565,32 @@ h6 {
 /* Buffer */
 .buffer-loader {
   border: 2px solid #f3f3f3;
-  border-top: 2px solid #777777;
+  border-top: 2px solid var(--primaryColor);
   border-radius: 50%;
   width: 20px;
   height: 20px;
   animation: spin 2s linear infinite;
 }
 .buffer-loader.home {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #777777;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #777777;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 2s linear infinite;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
 }
+.buffer-loader.submit {
+  margin: 0 auto;
+  border: 3px solid transparent;
+  border-top: 3px solid var(--primaryColor);
+  border-radius: 50%;
+  width: 35px;
+  margin-top: 4%;
+  height: 35px;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
 .buffer-space {
   display: flex;
   padding-top: 10%;
@@ -2731,6 +2761,10 @@ h6 {
   text-transform: uppercase;
   padding-bottom: 3%;
 }
+.faq-container > h4 {
+  margin: 0 auto;
+  padding-bottom: 3%;
+}
 .faq-question {
   font-weight: bolder;
   color: var(--primaryColor);
@@ -2743,3 +2777,186 @@ h6 {
   margin-top: 3%;
 }
 /* End of FAQS */
+/* Reservations */
+.table-button button {
+  width: 6em;
+  height: 2em;
+  padding: 0.2rem 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.table-button button:hover {
+  background-color: #2a32499a;
+}
+/* End of reservations */
+/* Live Chat */
+.chat-button {
+  animation-name: pulse;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  background-size: 300%;
+  background-position: left;
+  background-image: linear-gradient(to right, #2c3e50, #42596f, #2c3e50);
+  z-index: 3;
+  transition: 0.5s ease-in-out;
+}
+.chat-button:not(:hover) {
+  background-position: left;
+  transition: 0.5s ease-in-out;
+}
+
+.chat-button:hover {
+  background-position: right;
+  transition: 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.live-chat {
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 1%;
+  margin-left: 1%;
+  z-index: 99;
+}
+@media only screen and (max-width: 768px) {
+  .chat-button {
+    font-size: 12px;
+  }
+
+  .live-chat {
+    bottom: 2%;
+    margin-left: 2%;
+  }
+}
+.live-chat-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 450px;
+  height: 600px;
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+.chat-header {
+  display: flex;
+  height: 5em;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  color: white;
+  background-color: var(--primaryColor);
+  font-size: 16px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: calc(100% - 140px);
+  overflow-y: scroll;
+}
+.chat-sender {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.message.sender {
+  display: flex;
+  margin-bottom: 5px;
+  max-width: 80%;
+  padding-left: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 5px;
+  padding-right: 4%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.message.sender p {
+  font-size: 14px;
+  word-wrap: break-word;
+}
+.chat-receiver {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.message.receiver {
+  display: flex;
+  margin-bottom: 5px;
+  max-width: 80%;
+  padding-left: 4%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 5px;
+  padding-right: 2%;
+  background-color: var(--primaryColor);
+  box-shadow: 0 0 10px rgba(152, 152, 152, 0.677);
+}
+.message.receiver p {
+  font-size: 14px;
+  color: white;
+  word-wrap: break-word;
+}
+
+.live-chat-container form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 10px;
+}
+
+.live-chat-container input[type="text"] {
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 16px;
+}
+.live-chat-container input:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.live-chat-container button[type="submit"] {
+  width: 18%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.5s ease-in-out;
+}
+
+.live-chat-container button[type="submit"]:hover {
+  opacity: 0.8;
+}
+/* End of live chat */

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import removeProfile from "../../api-client/Account/RemoveProfile";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Security = () => {
   const navigation = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const [reset, setReset] = useState(false);
   const [deleteAcc, setDeleteAcc] = useState(false);
@@ -13,6 +15,9 @@ const Security = () => {
     handleDeleteCancel();
   }, []);
 
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   const handleReset = () => {
     setReset(true);
   };
@@ -45,12 +50,12 @@ const Security = () => {
         <div className="profile-section">
           <div className="profile-item">
             <div className="profile-title">
-              <h2>Security</h2>
-              <h5>Change your password & remove account</h5>
+              <h2>{t("acc_sec")}</h2>
+              <h5>{t("acc_sec_adj")}</h5>
             </div>
           </div>
           <div className="account-item">
-            <label>Password</label>
+            <label>{t("pro_password")}</label>
             <form className="account-info">
               <div>
                 {reset && (
@@ -59,7 +64,7 @@ const Security = () => {
                     className="profile-btn save"
                     onClick={handleSubmit}
                   >
-                    Send email
+                    {t("pro_send_email")}
                   </button>
                 )}
                 <button
@@ -73,13 +78,13 @@ const Security = () => {
                     }
                   }}
                 >
-                  {!reset ? "Reset" : "Cancel"}
+                  {!reset ? t("reset") : t("cancel")}
                 </button>
               </div>
             </form>
           </div>
           <div className="account-item">
-            <label>Account</label>
+            <label>{t("account")}</label>
             <form className="account-info">
               <div>
                 {deleteAcc && (
@@ -88,7 +93,7 @@ const Security = () => {
                     className="profile-btn save"
                     onClick={handleDelete}
                   >
-                    Delete
+                    {t("delete")}
                   </button>
                 )}
                 <button
@@ -102,7 +107,7 @@ const Security = () => {
                     }
                   }}
                 >
-                  {!deleteAcc ? "Delete account" : "Cancel"}
+                  {!deleteAcc ? t("delete") : t("cancel")}
                 </button>
               </div>
             </form>

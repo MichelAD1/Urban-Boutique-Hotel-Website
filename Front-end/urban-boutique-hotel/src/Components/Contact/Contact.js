@@ -4,38 +4,85 @@ import Footer from "../../Global/Components/Footer";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationPin } from "react-icons/md";
 import { FaFax } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import { Fab } from "@mui/material";
+
+//Apis
+import SendMessage from "../../api-client/Contact/SendMessage";
 
 const Contact = () => {
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, []);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [err, setErr] = useState("");
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  //validators
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
   };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const validateMessage = (message) => {
+    return message.length <= 255;
   };
-
-  const handleSubjectChange = (event) => {
-    setSubject(event.target.value);
+  const validateSubject = (subject) => {
+    return subject.length <= 35;
   };
-
-  const handleMessageChange = (event) => {
-    setMessage(event.target.value);
-  };
-
+  //API handler
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Code to handle form submission
+    setErr("");
+    if (!validateEmail(email)) {
+      setErr(t("err_email"));
+      return;
+    }
+    if (!validateSubject(subject)) {
+      setErr(t("err_subject"));
+      return;
+    }
+    if (!validateMessage(message)) {
+      setErr(t("err_message"));
+      return;
+    }
+    const body = message;
+    const data = {
+      name,
+      subject,
+      email,
+      body,
+    };
+    let response = SendMessage(data);
+    response.then((res) => {
+      if (res) {
+        console.log(res);
+      }
+    });
   };
+
   return (
     <>
+      <div className="live-chat">
+        <Fab
+          className="chat-button"
+          sx={{
+            color: "white",
+            fontSize: "14px",
+            width: "8em",
+            height: "3.5em",
+            borderRadius: "30px",
+          }}
+          onClick={() => window.open("http://localhost:3000/livechat")}
+        >
+          {t("livechat")}
+        </Fab>
+      </div>
       <div className="contactHero">
         <div className="banner">
-          <h1>Contact</h1>
+          <h1>{t("contact")}</h1>
           <div></div>
           <ScrollLink
             to="contact-section"
@@ -44,7 +91,7 @@ const Contact = () => {
             offset={-100}
             className="btn-primary"
           >
-            Contact us to book
+            {t("contact_w")}
           </ScrollLink>
         </div>
       </div>
@@ -55,7 +102,7 @@ const Contact = () => {
               <BsFillTelephoneFill />
             </div>
             <div className="contact-stats">
-              <div className="contact-stat">Phone Number</div>
+              <div className="contact-stat">{t("pro_num")}</div>
               <div className="contact-paragraph">+43 1 526 19 28</div>
             </div>
           </div>
@@ -64,7 +111,7 @@ const Contact = () => {
               <MdEmail />
             </div>
             <div className="contact-stats">
-              <div className="contact-stat">Email Address</div>
+              <div className="contact-stat">{t("con_email")}</div>
               <div className="contact-paragraph">pension@hargita.at</div>
             </div>
           </div>
@@ -73,7 +120,7 @@ const Contact = () => {
               <FaFax />
             </div>
             <div className="contact-stats">
-              <div className="contact-stat">Fax Address</div>
+              <div className="contact-stat">{t("con_fax")}</div>
               <div className="contact-paragraph">1070 Wien </div>
             </div>
           </div>
@@ -82,7 +129,7 @@ const Contact = () => {
               <MdLocationPin />
             </div>
             <div className="contact-stats">
-              <div className="contact-stat">Location</div>
+              <div className="contact-stat">{t("con_location")}</div>
               <div className="contact-paragraph">
                 Andreasgasse 1, 1070 Vienna
               </div>
@@ -91,13 +138,10 @@ const Contact = () => {
         </div>
         <div className="message-form">
           <div className="message-header">
-            <h1>Send Message</h1>
+            <h1>{t("con_send")}</h1>
           </div>
           <div className="message-paragraph">
-            <p>
-              We're excited to welcome you to our hotel! Reach out to us to
-              learn more about our accommodations and book your stay.
-            </p>
+            <p>{t("con_send_w")}</p>
           </div>
           <form className="message-inputs contact" onSubmit={handleSubmit}>
             <div className="message-name-email">
@@ -106,19 +150,19 @@ const Contact = () => {
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Name"
+                  placeholder={t("con_name")}
                   value={name}
-                  onChange={handleNameChange}
+                  onChange={(event) => setName(event.target.value)}
                 />
               </div>
               <div className="message-input">
                 <input
-                  type="email"
+                  type="text"
                   id="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder={t("pro_email")}
                   value={email}
-                  onChange={handleEmailChange}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
             </div>
@@ -127,21 +171,31 @@ const Contact = () => {
                 type="text"
                 id="subject"
                 name="subject"
-                placeholder="Subject"
+                placeholder={t("con_subject")}
                 value={subject}
-                onChange={handleSubjectChange}
+                onChange={(event) => setSubject(event.target.value)}
               />
             </div>
             <div className="message-textarea">
               <textarea
                 id="message"
                 name="message"
-                placeholder="Message"
+                placeholder={t("con_message")}
                 value={message}
-                onChange={handleMessageChange}
+                onChange={(event) => setMessage(event.target.value)}
               ></textarea>
             </div>
-            <button type="submit">Send Message</button>
+            <div className="login-error contact">{err}</div>
+
+            <button
+              disabled={!name || !email || !subject || !message}
+              type="submit"
+              className={
+                !name || !email || !subject || !message ? "disabled-button" : ""
+              }
+            >
+              {t("con_send")}
+            </button>
           </form>
         </div>
       </div>

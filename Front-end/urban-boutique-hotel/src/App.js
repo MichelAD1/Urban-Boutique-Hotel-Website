@@ -16,10 +16,11 @@ import FAQ from "./Components/Policies/FAQ";
 import Policy from "./Components/Policies/Policy";
 import Discover from "./Components/Discover/Discover";
 import Contact from "./Components/Contact/Contact";
+import BookingSubmitted from "./Components/Submit/BookingSubmitted";
 import Navbar from "./Components/Navbar/Navbar";
 import Account from "./Components/Account/Account";
 import AccountNav from "./Components/Navbar/AccountNav";
-
+import Livechat from "./Components/Livechat/Livechat";
 import PrivateRoute from "./Routes/PrivateRoute";
 
 import Profile from "./Components/Account/Profile";
@@ -70,6 +71,15 @@ function App() {
               }
             />
             <Route
+              path="/livechat"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Livechat />
+                </>
+              }
+            />
+            <Route
               path="/FAQ"
               element={
                 <>
@@ -94,6 +104,17 @@ function App() {
                   <>
                     <ScrollToTop />
                     <Book />
+                  </>
+                }
+              />
+            </Route>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/submit"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <BookingSubmitted />
                   </>
                 }
               />

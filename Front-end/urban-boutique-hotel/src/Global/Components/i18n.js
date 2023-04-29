@@ -200,6 +200,7 @@ i18n.use(initReactI18next).init({
         total: "Total",
         livechat: "Live Chat",
         send: "Send",
+        save_changes: "Save Changes",
       },
     },
     es: {
@@ -408,6 +409,7 @@ i18n.use(initReactI18next).init({
         total: "Total",
         livechat: "Chat en vivo",
         send: "Enviar",
+        save_changes: "Guardar",
       },
     },
     fr: {
@@ -604,6 +606,7 @@ i18n.use(initReactI18next).init({
         total: "Total",
         livechat: "Chat direct",
         send: "Envoyer",
+        save_changes: "Sauveguarder",
       },
     },
     de: {
@@ -799,6 +802,7 @@ i18n.use(initReactI18next).init({
         total: "Gesamt",
         livechat: "Live-Chat",
         send: "Senden",
+        save_changes: "Änderungen",
       },
     },
     it: {
@@ -994,6 +998,7 @@ i18n.use(initReactI18next).init({
         total: "Totale",
         livechat: "Chat vivo",
         send: "Invia",
+        save_changes: "Salva modifiche",
       },
     },
   },

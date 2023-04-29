@@ -165,7 +165,7 @@ const Reservation = () => {
         </div>
         <div className="confirm-edit">
           <button onClick={handleSubmit} type="submit">
-            Save Changes
+            {t("save_changes")}
           </button>
         </div>
       </div>

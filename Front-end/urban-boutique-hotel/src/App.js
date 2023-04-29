@@ -154,7 +154,7 @@ function App() {
             />
             <Route exact path="/" element={<PrivateRoute />}>
               <Route
-                path="/reservation/edit"
+                path="/reservations/edit"
                 element={
                   <>
                     <ScrollToTop />

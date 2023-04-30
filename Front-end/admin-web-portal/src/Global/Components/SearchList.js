@@ -17,7 +17,10 @@ const SearchList = ({ data, employee, loading, error }) => {
 			) : (
 				data.map((item) => {
 					return (
-						<div className='search-list-item' onClick={() => employee(item)}>
+						<div
+							className='search-list-item'
+							onClick={() => employee(item)}
+							key={item.id}>
 							<p>{item.username}</p>
 						</div>
 					);

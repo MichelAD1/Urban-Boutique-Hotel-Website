@@ -38,7 +38,6 @@ const RequestItem = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log(data);
 		setRoom(data.room_object);
 		setReservation(data.reservation_object);
 		setCustomer(data.customer_object);

@@ -35,7 +35,6 @@ const Requests = () => {
 	} = useQuery(["requests_data", url], FetchData);
 	useEffect(() => {
 		if (requestsData) {
-			console.log(requestsData);
 			if (requestsData.length === 0) {
 				setErr("No pending requests");
 			}

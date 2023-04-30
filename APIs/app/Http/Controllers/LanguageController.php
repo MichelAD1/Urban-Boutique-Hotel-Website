@@ -34,10 +34,16 @@ class LanguageController extends Controller
     }
     public function selectLanguages(Request $request){
         $selections = $request->selections;
-        foreach ($selections as $key => $value) {
+        foreach ($selections as $key) {
             $language = Language::find($key);
-            $language->isavailable = $value;
+            if($language->isavailable){
+                $language->isavailable=0;
+            }
+            else{
+                $language->isavailable=1;
+            }
             $language->save();
+
         }
         return "Success";
     }

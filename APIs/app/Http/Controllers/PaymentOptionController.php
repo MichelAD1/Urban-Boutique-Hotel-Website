@@ -34,10 +34,16 @@ class PaymentOptionController extends Controller
     }
     public function selectOptions(Request $request){
         $selections = $request->selections;
-        foreach ($selections as $key => $value) {
+        foreach ($selections as $key) {
             $payment_option = Payment_Option::find($key);
-            $payment_option->isavailable = $value;
+            if($payment_option->isavailable){
+                $payment_option->isavailable=0;
+            }
+            else{
+                $payment_option->isavailable=1;
+            }
             $payment_option->save();
+
         }
         return "Success";
     }

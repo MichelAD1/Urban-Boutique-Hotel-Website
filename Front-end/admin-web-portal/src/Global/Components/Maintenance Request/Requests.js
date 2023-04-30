@@ -82,7 +82,7 @@ const Requests = () => {
 			<div
 				className='searchAndFilter'
 				style={{ justifyContent: "space-between" }}>
-				<h2>FAQs & Policies</h2>
+				<h2>Maintenance Requests</h2>
 				<div className='filter'>
 					<select
 						value={filter}

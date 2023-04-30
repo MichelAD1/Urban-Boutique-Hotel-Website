@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import base_url from "../../api-client/BaseUrl";
 
@@ -19,7 +19,6 @@ import search_icon from "../../assets/icons/search.svg";
 export default function Employees() {
 	const [data, setData] = useState([]);
 	const [query, setQuery] = useState("");
-	const [filter, setFilter] = useState("");
 	const [err, setErr] = useState("");
 
 	const [searchErr, setSearchErr] = useState("");
@@ -47,6 +46,12 @@ export default function Employees() {
 	useEffect(() => {
 		handleSearch();
 	}, [query]);
+
+	const navigate = useNavigate();
+	const handleRedirect = (employee) => {
+		setQuery("");
+		navigate("/employee/profile", { state: { data: employee } });
+	};
 
 	const columns = useMemo(
 		() => [
@@ -119,18 +124,6 @@ export default function Employees() {
 						onChange={(e) => setQuery(e.target.value)}
 					/>
 				</div>
-
-				<select
-					className='filterDropDown'
-					value={filter}
-					onChange={(e) => setFilter(e.target.value)}>
-					<option value=''>Filter by position</option>
-					{/* {positions.map((position) => (
-							<option key={position} value={position}>
-								{position}
-							</option>
-						))} */}
-				</select>
 				<Link to='/employee/profile'>
 					<AiOutlinePlus className='add-button' />
 				</Link>
@@ -148,8 +141,9 @@ export default function Employees() {
 				{query && (
 					<SearchList
 						data={employees}
+						redirect={handleRedirect}
 						loading={searchLoading}
-						error={error}
+						error={searchErr}
 						type='employee'
 					/>
 				)}

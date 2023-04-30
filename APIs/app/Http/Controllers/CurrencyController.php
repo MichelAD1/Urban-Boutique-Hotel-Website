@@ -71,7 +71,7 @@ class CurrencyController extends Controller
         return Currency::all();
     }
     public function getAvailableCurrencies(){
-        return Currency::where('isavaliable','=',1);
+        return Currency::where('isavailable','=',1)->get();
     }
 
 }

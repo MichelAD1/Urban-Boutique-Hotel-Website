@@ -898,7 +898,6 @@ h6 {
 .order-desc.price {
   font-size: 13px;
   font-weight: bold;
-  width: 10%;
   color: var(--primaryColor);
 }
 .order-label.total {
@@ -910,7 +909,6 @@ h6 {
 .order-desc.total {
   font-size: 18px;
   font-weight: bold;
-  width: 20%;
   color: var(--primaryColor);
 }
 .gallery-image.order {

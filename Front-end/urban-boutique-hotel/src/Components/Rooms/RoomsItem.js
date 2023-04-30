@@ -17,6 +17,9 @@ const RoomsItem = () => {
   const navigate = useNavigate();
   const room = location.state.data;
 
+  const currency = localStorage.getItem("Currency");
+  const exchange = localStorage.getItem("Exchange");
+
   const [title, setName] = useState(room.room.title);
   const [rent, setRent] = useState(room.room.rent);
   const [guests, setGuests] = useState(room.room.guests);
@@ -45,7 +48,9 @@ const RoomsItem = () => {
         </div>
         <div className="room-display">
           <p>{t("price")}</p>
-          <p className="room-tag">${rent}.00</p>
+          <p className="room-tag">
+            {currency} {Number(rent * exchange).toFixed(0)}.00
+          </p>
           <button onClick={handleBooking}>{t("booknow")}</button>
         </div>
       </div>
@@ -85,17 +90,25 @@ const RoomsItem = () => {
             {discount === 0 ? (
               <div className="room-display pricing">
                 <p>{t("price")}</p>
-                <p className="room-tag pricing">${rent}.00</p>
+                <p className="room-tag pricing">
+                  {currency}
+                  {Number(rent * exchange).toFixed(0)}.00
+                </p>
               </div>
             ) : (
               <div>
                 <div className="room-display pricing">
                   <p>{t("newprice")}</p>
-                  <p className="room-tag pricing">${rent}.00</p>
+                  <p className="room-tag pricing">
+                    {currency} {Number(rent * exchange).toFixed(0)}.00
+                  </p>
                 </div>
                 <div className="room-display pricing">
                   <p>{t("oldprice")}</p>
-                  <p className="room-tag pricing">${rent + discount}.00</p>
+                  <p className="room-tag pricing">
+                    {currency} {Number((rent + discount) * exchange).toFixed(0)}
+                    .00
+                  </p>
                 </div>
               </div>
             )}

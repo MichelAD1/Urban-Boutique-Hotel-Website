@@ -36,6 +36,10 @@ const Home = () => {
     if (decoded.exp < currentTime) {
       localStorage.removeItem("username");
       localStorage.removeItem("token");
+      localStorage.removeItem("Translate");
+      localStorage.removeItem("Lg");
+      localStorage.removeItem("Exchange");
+      localStorage.removeItem("Currency");
       localStorage.setItem("shouldReload", "true");
     }
   }
@@ -53,7 +57,10 @@ const Home = () => {
     if (!localStorage.getItem("Currency")) {
       localStorage.setItem("Currency", "USD");
     }
-  }, [localStorage.getItem("Currency")]);
+    if (!localStorage.getItem("Exchange")) {
+      localStorage.setItem("Exchange", 1);
+    }
+  }, [localStorage.getItem("Currency"), localStorage.getItem("Exchange")]);
 
   //Api handler
   const {

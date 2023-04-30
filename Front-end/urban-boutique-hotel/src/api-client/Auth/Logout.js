@@ -10,6 +10,8 @@ export default async function Logout() {
       localStorage.removeItem("username");
       localStorage.removeItem("Translate");
       localStorage.removeItem("Lg");
+      localStorage.removeItem("Currency");
+      localStorage.removeItem("Exchange");
       return res.data;
     })
     .catch((err) => {

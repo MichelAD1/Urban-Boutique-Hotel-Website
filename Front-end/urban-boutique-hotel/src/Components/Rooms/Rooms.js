@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import RoomsList from "./RoomsList";
 import Footer from "../../Global/Components/Footer";
 import { useTranslation } from "react-i18next";
+import jwt_decode from "jwt-decode";
 
 //APIS
 import GetRooms from "../../api-client/Rooms/GetRooms";
@@ -14,6 +15,52 @@ const Rooms = () => {
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+
+  //Token handler
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const shouldReload = localStorage.getItem("shouldReload");
+    if (shouldReload === "true") {
+      localStorage.removeItem("shouldReload");
+      window.location.reload(true);
+    }
+  }, []);
+  if (token) {
+    const decoded = jwt_decode(token);
+    const currentTime = Date.now() / 1000; // Convert to seconds
+
+    if (decoded.exp < currentTime) {
+      localStorage.removeItem("username");
+      localStorage.removeItem("token");
+      localStorage.removeItem("Translate");
+      localStorage.removeItem("Lg");
+      localStorage.removeItem("Exchange");
+      localStorage.removeItem("Currency");
+      localStorage.setItem("shouldReload", "true");
+    }
+  }
+
+  //Translation handler
+  useEffect(() => {
+    if (!localStorage.getItem("Translate")) {
+      localStorage.setItem("Translate", "en");
+      localStorage.setItem("Lg", "English");
+    }
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, [localStorage.getItem("Translate")]);
+
+  //currency handler
+  useEffect(() => {
+    if (!localStorage.getItem("Currency")) {
+      localStorage.setItem("Currency", "USD");
+    }
+    if (!localStorage.getItem("Exchange")) {
+      localStorage.setItem("Exchange", 1);
+    }
+  }, [localStorage.getItem("Currency"), localStorage.getItem("Exchange")]);
+
+  const currency = localStorage.getItem("Currency");
+  const exchange = localStorage.getItem("Exchange");
   const [rooms, setRooms] = useState([]);
   const [tmpRooms, setTmpRooms] = useState([]);
   const [types, setTypes] = useState(["All"]);
@@ -177,7 +224,8 @@ const Rooms = () => {
               {/* rooms price */}
               <div className="form-group">
                 <label htmlFor="price">
-                  {t("roomprice")} ${price}
+                  {t("roomprice")} {currency}{" "}
+                  {Number(price * exchange).toFixed(0)}
                 </label>
                 <input
                   type="range"

@@ -1,6 +1,7 @@
 import { Link as ScrollLink } from "react-scroll";
 import { useState, useEffect } from "react";
 import Footer from "../../Global/Components/Footer";
+import jwt_decode from "jwt-decode";
 
 import { FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
@@ -8,8 +9,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import aboutImage1 from "../../assets/images/about-image1.jpg";
 import aboutImage2 from "../../assets/images/about-image2.jpeg";
-import galleryImage1 from "../../assets/images/gallery-image1.jpg";
-import galleryImage2 from "../../assets/images/gallery-image2.jpeg";
 
 //apis
 import GetPhotos from "../../api-client/Discover/GetPhotos";
@@ -20,6 +19,30 @@ const Discover = () => {
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+
+  //Token handler
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const shouldReload = localStorage.getItem("shouldReload");
+    if (shouldReload === "true") {
+      localStorage.removeItem("shouldReload");
+      window.location.reload(true);
+    }
+  }, []);
+  if (token) {
+    const decoded = jwt_decode(token);
+    const currentTime = Date.now() / 1000; // Convert to seconds
+
+    if (decoded.exp < currentTime) {
+      localStorage.removeItem("username");
+      localStorage.removeItem("token");
+      localStorage.removeItem("Translate");
+      localStorage.removeItem("Lg");
+      localStorage.removeItem("Exchange");
+      localStorage.removeItem("Currency");
+      localStorage.setItem("shouldReload", "true");
+    }
+  }
 
   //Translation handler
   useEffect(() => {

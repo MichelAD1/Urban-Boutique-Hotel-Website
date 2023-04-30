@@ -36,6 +36,10 @@ const Home = () => {
     if (decoded.exp < currentTime) {
       localStorage.removeItem("username");
       localStorage.removeItem("token");
+      localStorage.removeItem("Translate");
+      localStorage.removeItem("Lg");
+      localStorage.removeItem("Exchange");
+      localStorage.removeItem("Currency");
       localStorage.setItem("shouldReload", "true");
     }
   }

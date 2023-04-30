@@ -91,8 +91,7 @@ const RoomsItem = () => {
               <div className="room-display pricing">
                 <p>{t("price")}</p>
                 <p className="room-tag pricing">
-                  {currency}
-                  {Number(rent * exchange).toFixed(0)}.00
+                  {currency} {Number(rent * exchange).toFixed(0)}.00
                 </p>
               </div>
             ) : (

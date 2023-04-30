@@ -50,13 +50,13 @@ export default function Home() {
 	return (
 		<div className='container'>
 			<div className='headerStats'>
-				<Link className='smallStats'>
+				<Link to='/finance/transactions' className='smallStats'>
 					<p className='statsTitle'>Monthly Revenue</p>
 					<p className='statsAmount'>USD {revenueCount}</p>
 					<p className='statsLink'>View entire list</p>
 				</Link>
 
-				<Link className='smallStats'>
+				<Link to='/reservations' className='smallStats'>
 					<p className='statsTitle'>Total reservations</p>
 					<p className='statsAmount'>{reservationsCount}</p>
 					<p className='statsLink'>View entire list</p>

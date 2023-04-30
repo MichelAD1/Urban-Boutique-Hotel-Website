@@ -1,10 +1,17 @@
 import axios from "axios";
 import base_url from "./BaseUrl";
 
-async function Search(query) {
+async function Search(query, type) {
+	let url = `${base_url}staff/search/`;
+	if (type === "customer") {
+		url = `${base_url}customer/search/`;
+	}
+	if (type === "reservation") {
+		url = `${base_url}reservation/search/`;
+	}
 	return await axios({
 		method: "post",
-		url: `${base_url}staff/search/`,
+		url: url,
 		data: query,
 		headers: {
 			Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -77,7 +77,7 @@ class StaffController extends Controller
         ->get();
 
         if ($employees->isEmpty()) {
-        return response()->json(['error' => 'No employees found'], 404);
+        return response()->json(['error' => 'No employees found']);
         }
 
         return response()->json(['employees' => $employees]);

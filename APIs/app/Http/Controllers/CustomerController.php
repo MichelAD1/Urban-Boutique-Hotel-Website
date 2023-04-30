@@ -127,6 +127,21 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function searchCustomer(){
+        $query = $request->search_query;
+
+        $customer = Customer::join('users', 'customer.user_id', '=', 'users.id')
+        ->where('users.name', 'like', '%'.$query.'%')
+        ->orWhere('users.username', 'like', '%'.$query.'%')
+        ->get();
+
+        if ($customer->isEmpty()) {
+        return response()->json(['error' => 'No customers found'], 404);
+        }
+
+        return response()->json(['customer' => $customer]);
+    }
+
     public function removeAccount(){
         $user = Auth::user();
 

@@ -5,9 +5,6 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// Functions
-import checkEmpty from "../../Functions/CheckEmpty";
-
 // Components
 import SearchList from "../SearchList";
 
@@ -211,7 +208,7 @@ const RequestItem = () => {
 								{!employee && query && (
 									<SearchList
 										data={employees}
-										employee={handleSetEmployee}
+										redirect={handleSetEmployee}
 										loading={loading}
 										error={error}
 									/>

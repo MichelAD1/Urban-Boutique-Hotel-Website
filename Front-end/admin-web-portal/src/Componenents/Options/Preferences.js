@@ -27,35 +27,11 @@ const Preferences = () => {
 			Promise.all(preferencesData).then((results) => {
 				setLanguages(results[0]);
 				setCurrencies(results[1]);
-				// setPaymentMethods(results[2]);
+				setPaymentMethods(results[2]);
 				setLoading(false);
 			});
 		}
 	}, [preferencesData, status]);
-
-	useEffect(() => {
-		console.log(output);
-		setPaymentMethods([
-			{
-				id: 1,
-				name: "Credit Card",
-				isDefault: true,
-				available: true,
-			},
-			{
-				id: 2,
-				name: "Offline payment",
-				isDefault: false,
-				available: false,
-			},
-			{
-				id: 3,
-				name: "Paypal",
-				isDefault: false,
-				available: true,
-			},
-		]);
-	}, [output]);
 
 	const handleCancel = () => {
 		setEdit(false);
@@ -130,7 +106,7 @@ const Preferences = () => {
 								(language) =>
 									(language.isavailable || edit) && (
 										<div className='checkbox-item' key={language.id}>
-											{edit && (
+											{edit && language.isdeafult !== 1 && (
 												<input
 													type='checkbox'
 													checked={language.isavailable}
@@ -155,7 +131,7 @@ const Preferences = () => {
 								(currency) =>
 									(currency.isavailable || edit) && (
 										<div className='checkbox-item' key={currency.id}>
-											{edit && (
+											{edit && currency.isdefault !== 1 && (
 												<input
 													type='checkbox'
 													checked={currency.isavailable}
@@ -180,19 +156,19 @@ const Preferences = () => {
 						<div className='amm-checkbox currencies'>
 							{paymentMethods.map(
 								(paymentMethod) =>
-									(paymentMethod.available || edit) && (
+									(paymentMethod.isavailable || edit) && (
 										<div className='checkbox-item' key={paymentMethod.id}>
-											{edit && (
+											{edit && paymentMethod.isdeafult !== 1 && (
 												<input
 													type='checkbox'
-													checked={paymentMethod.available}
+													checked={paymentMethod.isavailable}
 													onChange={(e) =>
 														handlePaymentMethodChange(e, paymentMethod.id)
 													}
 												/>
 											)}
 											<label>{paymentMethod.name}</label>
-											{paymentMethod.isDefault && <span>Default</span>}
+											{paymentMethod.isdeafult === 1 && <span>Default</span>}
 										</div>
 									),
 							)}

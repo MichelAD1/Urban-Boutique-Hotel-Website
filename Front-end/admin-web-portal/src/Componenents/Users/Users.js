@@ -95,7 +95,6 @@ export default function Users() {
 		};
 		setSeachLoading(true);
 		Search(reqQuery, "customer").then((res) => {
-			console.log(res);
 			if (res.customers) {
 				setUsers(res.customers);
 			} else {

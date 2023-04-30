@@ -129,11 +129,6 @@ const RequestItem = () => {
 			<form className='edit-container' onSubmit={handleSubmit}>
 				<div className='edit-item'>
 					<h2>Request #{data.id}</h2>
-					{assigned && !edit && (
-						<button type='button' className='button' onClick={openEdit}>
-							Edit
-						</button>
-					)}
 					{(!assigned || edit) && (
 						<>
 							<button type='submit' className='save-button'>

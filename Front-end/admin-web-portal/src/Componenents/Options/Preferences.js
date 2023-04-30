@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import output from "../../Global/Data/Currencies";
-
 // API
 import GetPreferences from "../../api-client/Options/GetPreferences";
+import AssignPreferences from "../../api-client/Options/AssignPreferences";
 
 const Preferences = () => {
 	const [edit, setEdit] = useState(false);
@@ -13,15 +12,17 @@ const Preferences = () => {
 	const [currencies, setCurrencies] = useState([]);
 	const [paymentMethods, setPaymentMethods] = useState([]);
 
+	const [changedLanguages, setChangedLanguages] = useState([]);
+	const [changedCurrencies, setChangedCurrencies] = useState([]);
+	const [changedPaymentMethods, setChangedPaymentMethods] = useState([]);
+
 	const [loading, setLoading] = useState(true);
 
 	const {
 		status,
 		error,
 		data: preferencesData,
-	} = useQuery(["preferences_data"], GetPreferences, {
-		staleTime: 300000, // 5 minutes
-	});
+	} = useQuery(["preferences_data"], GetPreferences);
 	useEffect(() => {
 		if (preferencesData) {
 			Promise.all(preferencesData).then((results) => {
@@ -40,7 +41,8 @@ const Preferences = () => {
 	const handleLanguageChange = (e, id) => {
 		const newLanguages = languages.map((language) => {
 			if (language.id === id) {
-				language.available = e.target.checked;
+				language.isavailable = e.target.checked;
+				setChangedLanguages([...changedLanguages, language.id]);
 			}
 			return language;
 		});
@@ -50,7 +52,8 @@ const Preferences = () => {
 	const handleCurrencyChange = (e, id) => {
 		const newCurrencies = currencies.map((currency) => {
 			if (currency.id === id) {
-				currency.available = e.target.checked;
+				currency.isavailable = e.target.checked;
+				setChangedCurrencies([...changedCurrencies, currency.id]);
 			}
 			return currency;
 		});
@@ -60,7 +63,8 @@ const Preferences = () => {
 	const handlePaymentMethodChange = (e, id) => {
 		const newPaymentMethods = paymentMethods.map((paymentMethod) => {
 			if (paymentMethod.id === id) {
-				paymentMethod.available = e.target.checked;
+				paymentMethod.isavailable = e.target.checked;
+				setChangedPaymentMethods([...changedPaymentMethods, paymentMethod.id]);
 			}
 			return paymentMethod;
 		});
@@ -69,8 +73,35 @@ const Preferences = () => {
 
 	const handleEdit = (e) => {
 		e.preventDefault();
-		setEdit(false);
+		let isChanged = false;
+		const reqData = {};
+		if (changedLanguages.length > 0) {
+			reqData.languages = changedLanguages;
+			isChanged = true;
+		}
+		if (changedCurrencies.length > 0) {
+			reqData.currencies = changedCurrencies;
+			isChanged = true;
+		}
+		if (changedPaymentMethods.length > 0) {
+			reqData.payment_methods = changedPaymentMethods;
+			isChanged = true;
+		}
+
+		if (!isChanged) {
+			alert("No changes made");
+			return;
+		}
+		const response = AssignPreferences(reqData);
 	};
+
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
 
 	return (
 		<div className='container'>

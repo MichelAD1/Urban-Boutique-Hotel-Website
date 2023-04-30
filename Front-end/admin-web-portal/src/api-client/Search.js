@@ -7,7 +7,7 @@ async function Search(query, type) {
 		url = `${base_url}customer/search/`;
 	}
 	if (type === "reservation") {
-		url = `${base_url}reservation/search/`;
+		url = `${base_url}room/reservation/search/`;
 	}
 	return await axios({
 		method: "post",

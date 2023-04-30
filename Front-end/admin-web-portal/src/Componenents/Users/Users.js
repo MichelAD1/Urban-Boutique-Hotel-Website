@@ -124,7 +124,7 @@ export default function Users() {
 							/>
 						</div>
 					</div>
-					<div className='users-container'>
+					<div className='employees-container'>
 						{!query && (
 							<BasicTable
 								reqData={data}

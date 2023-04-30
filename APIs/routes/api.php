@@ -63,7 +63,7 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::middleware(['auth', 'check.reservationmanager'])->group(function(){
                 Route::get('get',[RoomController::class,'getReservations']);
                 Route::get('cancel_res/{reservationid}',[CustomerController::class,'cancelReservation']);
-                Route::get('search/{reservationid}',[RoomController::class,'searchReservation']);
+                Route::post('search',[RoomController::class,'searchReservation']);
             });
             Route::middleware(['auth', 'check.admin'])->group(function(){
                 Route::get('getcount',[RoomController::class,'getReservationsCount']);

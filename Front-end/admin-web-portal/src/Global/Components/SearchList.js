@@ -16,6 +16,19 @@ const SearchList = ({ data, redirect, loading, error, type }) => {
 				</div>
 			) : (
 				data.map((item) => {
+					if (type === "reservation") {
+						return (
+							<div
+								className='search-list-item'
+								onClick={() => redirect(item)}
+								key={item.id}>
+								<p>{item.id}</p>
+								<p>{item.customer_object.email}</p>
+								<p>{item.reservation_date}</p>
+								<p>{item.reservation_end}</p>
+							</div>
+						);
+					}
 					return (
 						<div
 							className='search-list-item'

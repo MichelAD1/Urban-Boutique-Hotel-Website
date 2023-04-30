@@ -12,6 +12,8 @@ class LanguageController extends Controller
         $language = new Language();
         $language->name = $request->name;
         $language->isavailable = $request->isavailable;
+        $language->isdeafult = $request->isdefault;
+        $language->code = $request->code;
         if($language->save()){
             return response()->json([
                 'message'=>"successful"

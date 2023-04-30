@@ -16,7 +16,7 @@ class CurrencyController extends Controller
         $currency->code = $request->code;
         $currency->symbol = $request->symbol;
         $currency->isavailable = 1;
-        $currency->isdefault = 0;
+        $currency->isdefault = $request->isdefault;
         $currency->exchange_rate = 0;
         $currency->exchange_rate=$this->getExchangeRate([$currency])[$currency->symbol];
         if($currency->save()){

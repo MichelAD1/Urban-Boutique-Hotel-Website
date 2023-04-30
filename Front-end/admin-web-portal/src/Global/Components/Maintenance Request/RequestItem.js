@@ -5,11 +5,15 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+// Functions
+import checkEmpty from "../../Functions/CheckEmpty";
+
 // Components
 import SearchList from "../SearchList";
 
 // API
 import Search from "../../../api-client/Search";
+import AssignEmployee from "../../../api-client/Maintenance/AssignEmployee";
 
 const RequestItem = () => {
 	const loc = useLocation();
@@ -34,9 +38,11 @@ const RequestItem = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		console.log(data);
 		setRoom(data.room_object);
 		setReservation(data.reservation_object);
 		setCustomer(data.customer_object);
+		setEmployee(data.employee_object);
 
 		if (data.status !== "pending") {
 			setAssigned(true);
@@ -69,7 +75,27 @@ const RequestItem = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("Submitted");
+		if (!assigned) {
+			alert("Please assign an employee first");
+		}
+
+		const reqData = {
+			employee_id: employee.id,
+			requestid: data.id,
+		};
+
+		const response = AssignEmployee(reqData);
+		response.then((res) => {
+			if (res.message === "success") {
+				res.id = res.maintenance_object.id;
+				res.status = res.maintenance_object.status;
+				loc.state = { data: res };
+				setData(res);
+				setEdit(false);
+			} else {
+				alert("Error assigning employee");
+			}
+		});
 	};
 
 	const handleCancel = () => {
@@ -172,7 +198,7 @@ const RequestItem = () => {
 						</div>
 						{assigned && !edit && (
 							<div>
-								<p>{}</p>
+								<p>{employee.username}</p>
 							</div>
 						)}
 						{(!assigned || edit) && (

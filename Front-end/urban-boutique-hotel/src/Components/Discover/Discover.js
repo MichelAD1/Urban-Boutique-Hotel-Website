@@ -4,17 +4,24 @@ import Footer from "../../Global/Components/Footer";
 
 import { FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
 
 import aboutImage1 from "../../assets/images/about-image1.jpg";
 import aboutImage2 from "../../assets/images/about-image2.jpeg";
 import galleryImage1 from "../../assets/images/gallery-image1.jpg";
 import galleryImage2 from "../../assets/images/gallery-image2.jpeg";
 
+//apis
+import GetPhotos from "../../api-client/Discover/GetPhotos";
+
 const Discover = () => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+
+  const [images, setImages] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -37,6 +44,20 @@ const Discover = () => {
     };
   }, []);
 
+  //Api handler
+  const {
+    status,
+    error,
+    data: photoData,
+  } = useQuery(["photoData"], GetPhotos, {
+    staleTime: 300000, // 5 minutes
+  });
+  useEffect(() => {
+    if (status === "success" && photoData) {
+      setImages(photoData);
+      setLoading(false);
+    }
+  }, [photoData, status]);
   return (
     <>
       <div className="aboutHero">
@@ -85,20 +106,23 @@ const Discover = () => {
 
       <div className="gallery">
         <h2>{t("photogallery")}</h2>
-        <div className="gallery-images">
-          <div
-            className="gallery-image"
-            onClick={() => openModal(galleryImage1)}
-          >
-            <img src={galleryImage1} alt="" />
+        {loading ? (
+          <div className="buffer-space">
+            <div className="buffer-loader home"></div>
           </div>
-          <div
-            className="gallery-image"
-            onClick={() => openModal(galleryImage2)}
-          >
-            <img src={galleryImage2} alt="" />
+        ) : (
+          <div className="gallery-images">
+            {images.map((image, index) => (
+              <div
+                key={index}
+                className="gallery-image"
+                onClick={() => openModal(image.image_url)}
+              >
+                <img src={image.image_url} alt="" />
+              </div>
+            ))}
           </div>
-        </div>
+        )}
       </div>
       <Footer />
     </>

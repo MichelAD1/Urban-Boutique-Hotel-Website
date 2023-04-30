@@ -23,6 +23,7 @@ export default function HotelTables({ columns, initialRows }) {
     response.then((res) => {
       if (res === "success") {
         setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+        localStorage.setItem("shouldReload", "true");
       }
     });
   };

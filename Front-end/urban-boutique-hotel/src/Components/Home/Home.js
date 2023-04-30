@@ -48,6 +48,13 @@ const Home = () => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, [localStorage.getItem("Translate")]);
 
+  //currency handler
+  useEffect(() => {
+    if (!localStorage.getItem("Currency")) {
+      localStorage.setItem("Currency", "USD");
+    }
+  }, [localStorage.getItem("Currency")]);
+
   //Api handler
   const {
     status,

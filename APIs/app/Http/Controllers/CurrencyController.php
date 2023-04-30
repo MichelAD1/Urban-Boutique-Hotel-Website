@@ -28,6 +28,17 @@ class CurrencyController extends Controller
         }
 
     }
+    public function setavailability($currencyid){
+        $currency = Currency::find($currencyid);
+        if($currency->isavailable){
+            $currency->isavailable=0;
+        }else{
+            $currency->isavailable = 1;
+        }
+        if($currency->save()){
+            return $currency;
+        }
+    }
     function getExchangeRate($currencies) {
         $apiKey = "36cad445b8d04af79f3b23769b6a6221";
         $input = "";
@@ -58,6 +69,9 @@ class CurrencyController extends Controller
             }
         }
         return Currency::all();
+    }
+    public function getAvailableCurrencies(){
+        return Currency::where('isavaliable','=',1);
     }
 
 }

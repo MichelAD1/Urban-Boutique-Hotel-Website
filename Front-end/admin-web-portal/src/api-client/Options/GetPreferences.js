@@ -14,19 +14,19 @@ const GetPreferences = async () => {
 			return err.response.data;
 		});
 
-	// const currencies = await axios({
-	// 	method: "get",
-	// 	url: base_url + "currency/get",
-	// 	headers: { Authorization: localStorage.getItem("token") },
-	// })
-	// 	.then((res) => {
-	// 		return res.data;
-	// 	})
-	// 	.catch((err) => {
-	// 		return err.response.data;
-	// 	});
+	const currencies = await axios({
+		method: "get",
+		url: base_url + "currency/get",
+		headers: { Authorization: localStorage.getItem("token") },
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			return err.response.data;
+		});
 
-	return [languages];
+	return [languages, currencies];
 };
 
 export default GetPreferences;

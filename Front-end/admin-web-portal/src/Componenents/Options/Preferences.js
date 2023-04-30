@@ -26,6 +26,7 @@ const Preferences = () => {
 		if (preferencesData) {
 			Promise.all(preferencesData).then((results) => {
 				setLanguages(results[0]);
+				setCurrencies(results[1]);
 				// setPaymentMethods(results[2]);
 				setLoading(false);
 			});
@@ -152,19 +153,19 @@ const Preferences = () => {
 						<div className='amm-checkbox currencies'>
 							{currencies.map(
 								(currency) =>
-									(currency.available || edit) && (
+									(currency.isavailable || edit) && (
 										<div className='checkbox-item' key={currency.id}>
 											{edit && (
 												<input
 													type='checkbox'
-													checked={currency.available}
+													checked={currency.isavailable}
 													onChange={(e) => handleCurrencyChange(e, currency.id)}
 												/>
 											)}
-											{(currency.available || edit) && (
+											{(currency.isavailable || edit) && (
 												<label>{currency.name}</label>
 											)}
-											{currency.isDefault && <span>Default</span>}
+											{currency.isdefault === 1 && <span>Default</span>}
 										</div>
 									),
 							)}

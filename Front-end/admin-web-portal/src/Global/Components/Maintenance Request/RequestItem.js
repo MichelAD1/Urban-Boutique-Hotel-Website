@@ -1,10 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 // Components
 import SearchList from "../SearchList";
 
@@ -102,23 +98,9 @@ const RequestItem = () => {
 		}
 	};
 
-	const openEdit = () => {
-		setEdit(true);
-	};
-
 	const handleRedirect = (path, state) => () => {
 		navigate(path, state);
 	};
-
-	const theme = createTheme({
-		palette: {
-			primary: {
-				light: "#2a3249",
-				main: "#2a3249",
-				contrastText: "#fff",
-			},
-		},
-	});
 
 	return (
 		<div className='container'>

@@ -13,7 +13,6 @@ import SearchList from "../../Global/Components/SearchList";
 
 // Icons
 import { AiOutlinePlus } from "react-icons/ai";
-
 import search_icon from "../../assets/icons/search.svg";
 
 export default function Employees() {
@@ -46,12 +45,6 @@ export default function Employees() {
 	useEffect(() => {
 		handleSearch();
 	}, [query]);
-
-	const navigate = useNavigate();
-	const handleRedirect = (employee) => {
-		setQuery("");
-		navigate("/employee/profile", { state: { data: employee } });
-	};
 
 	const columns = useMemo(
 		() => [
@@ -86,6 +79,13 @@ export default function Employees() {
 		],
 		[],
 	);
+
+	// Search handler
+	const navigate = useNavigate();
+	const handleRedirect = (employee) => {
+		setQuery("");
+		navigate("/employee/profile", { state: { data: employee } });
+	};
 
 	const handleSearch = () => {
 		setSearchErr("");

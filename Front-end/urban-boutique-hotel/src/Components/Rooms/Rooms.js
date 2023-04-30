@@ -14,6 +14,8 @@ const Rooms = () => {
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+  const currency = localStorage.getItem("Currency");
+  const exchange = localStorage.getItem("Exchange");
   const [rooms, setRooms] = useState([]);
   const [tmpRooms, setTmpRooms] = useState([]);
   const [types, setTypes] = useState(["All"]);
@@ -177,7 +179,8 @@ const Rooms = () => {
               {/* rooms price */}
               <div className="form-group">
                 <label htmlFor="price">
-                  {t("roomprice")} ${price}
+                  {t("roomprice")} {currency}
+                  {Number(price * exchange).toFixed(0)}
                 </label>
                 <input
                   type="range"

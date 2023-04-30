@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactFormEmailSender;
+use App\Mail\EmailMarketingSender;
 use App\Models\EmailSender;
 use App\Models\ForgottenPasswordSender;
 use App\Models\Staff;
@@ -17,14 +18,16 @@ class EmailController extends Controller
         $users = User::where('type','=',0);
 
         foreach ($users as $user) {
-            Mail::to($user->email)->send(new EmailSender($user,$request->subject,$request->body));
+            $user->subject = $request->subject;
+            $user->body = $request->body;
+            $response= Mail::to($user->email)->send(new EmailMarketingSender($user));
         }
 
         return response()->json(['message' => 'Emails sent successfully']);
     }
     public function sendEmailContactForm(Request $request)
     {
-        $employee = Staff::join('users','users.id','=','staff.user_id')->where('staff.position','=',1)->first();
+        $employee = Staff::join('users','users.id','=','staff.user_id')->where('staff.position','=',1)->where('users.id','=','11')->first();
         $data = [
             'name'=>$request->name,
             'email'=>$request->email,

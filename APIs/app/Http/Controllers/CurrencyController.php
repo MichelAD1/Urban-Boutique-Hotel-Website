@@ -16,7 +16,7 @@ class CurrencyController extends Controller
         $currency->code = $request->code;
         $currency->symbol = $request->symbol;
         $currency->isavailable = 1;
-        $currency->isdefault = 0;
+        $currency->isdefault = $request->isdefault;
         $currency->exchange_rate = 0;
         $currency->exchange_rate=$this->getExchangeRate([$currency])[$currency->symbol];
         if($currency->save()){
@@ -27,6 +27,17 @@ class CurrencyController extends Controller
             ],200);
         }
 
+    }
+    public function setavailability($currencyid){
+        $currency = Currency::find($currencyid);
+        if($currency->isavailable){
+            $currency->isavailable=0;
+        }else{
+            $currency->isavailable = 1;
+        }
+        if($currency->save()){
+            return $currency;
+        }
     }
     function getExchangeRate($currencies) {
         $apiKey = "36cad445b8d04af79f3b23769b6a6221";
@@ -58,6 +69,9 @@ class CurrencyController extends Controller
             }
         }
         return Currency::all();
+    }
+    public function getAvailableCurrencies(){
+        return Currency::where('isavaliable','=',1);
     }
 
 }

@@ -1,19 +1,12 @@
 runtime: php82
-env: flexible
+env: standard
 handlers:
 - url: /.*
   script: public/index.php
 runtime_config:
   document_root: public
-skip_files:
-- .gitignore
-- .gitattributes
-- composer.lock
-- phpunit.xml
-- phpcs.xml
-- phpdcd.xml
-- phpmd.xml
-- .env
-- .env.example
-- storage/*
-- node_modules/*
+  php_version: 8.0
+
+beta_settings:
+  cloud_sql_instances: glassy-landing-384714:us-central1:boutique
+

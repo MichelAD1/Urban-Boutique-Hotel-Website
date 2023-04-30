@@ -325,7 +325,7 @@ const Book = () => {
             </div>
             <div className="order-image">
               <div className="gallery-image order">
-                <img src={galleryImage1} alt="" />
+                <img src={room.images[0].image_url} alt="" />
               </div>
             </div>
             <div className="order-infos">

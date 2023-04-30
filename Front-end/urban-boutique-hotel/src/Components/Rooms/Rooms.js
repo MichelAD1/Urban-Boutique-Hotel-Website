@@ -179,7 +179,7 @@ const Rooms = () => {
               {/* rooms price */}
               <div className="form-group">
                 <label htmlFor="price">
-                  {t("roomprice")} {currency}
+                  {t("roomprice")} {currency}{" "}
                   {Number(price * exchange).toFixed(0)}
                 </label>
                 <input

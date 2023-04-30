@@ -91,13 +91,14 @@ const SingleRoom = ({ reverse, room, type }) => {
         </div>
         <div className="prices">
           <h4>
-            {currency}
-            {room.room.rent * exchange}
+            {currency} {Number(room.room.rent * exchange).toFixed(0)}
           </h4>
           {room.room.discount ? (
             <h4 className="old-price">
-              {currency}
-              {(room.room.rent + room.room.discount) * exchange}
+              {currency}{" "}
+              {Number((room.room.rent + room.room.discount) * exchange).toFixed(
+                0
+              )}
             </h4>
           ) : null}
         </div>

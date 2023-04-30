@@ -701,6 +701,12 @@ h6 {
   justify-content: center;
 }
 
+.buffer-loader .small{
+  width: 5px;
+  height: 5px;
+  background-color: red;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -710,6 +716,33 @@ h6 {
   }
 }
 /* End of buffer */
+/* search list */
+.search-list{
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+}
+.search-list-item{
+  padding: 0.5em;
+  border-bottom: 1px solid rgba(172, 160, 160, 0.2);
+  cursor: pointer;
+}
+.search-list-item p{
+  font-size: 14px;
+}
+.search-list-item:hover{
+  background-color: rgba(172, 160, 160, 0.2);
+}
+.search-list-item .no-hover:hover{
+  cursor: default;
+  background-color: #fff;
+}
+/* end of search list */
 /* end of global */
 /* navbar */
 .navbar {

@@ -53,7 +53,10 @@ const Home = () => {
     if (!localStorage.getItem("Currency")) {
       localStorage.setItem("Currency", "USD");
     }
-  }, [localStorage.getItem("Currency")]);
+    if (!localStorage.getItem("Exchange")) {
+      localStorage.setItem("Exchange", 1);
+    }
+  }, [localStorage.getItem("Currency"), localStorage.getItem("Exchange")]);
 
   //Api handler
   const {

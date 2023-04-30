@@ -14,6 +14,15 @@ const Services = () => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
 
+  //Translation handler
+  useEffect(() => {
+    if (!localStorage.getItem("Translate")) {
+      localStorage.setItem("Translate", "en");
+      localStorage.setItem("Lg", "English");
+    }
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, [localStorage.getItem("Translate")]);
+
   //currency handler
   useEffect(() => {
     if (!localStorage.getItem("Currency")) {

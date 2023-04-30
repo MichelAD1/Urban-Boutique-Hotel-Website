@@ -108,7 +108,7 @@ Route::group(["prefix"=>"v0.1"], function(){
 
             Route::post('editinfo',[StaffController::class,'editInformation']);
             Route::get('ban/{employeeid}',[StaffController::class,'banEmployee']);
-            Route::get('search/{employeeid}',[StaffController::class,'searchEmployee']);
+            Route::post('search',[StaffController::class,'searchEmployee']);
             Route::get('get',[StaffController::class,'getEmployees']);
             Route::post('add',[StaffController::class,'addEmployee']);
 

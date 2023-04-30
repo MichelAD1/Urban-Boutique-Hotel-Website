@@ -48,7 +48,7 @@ export default function PendingRequests({ reqData }) {
 	return (
 		<div className='request-box'>
 			<div className='request-header'>
-				<div className='title'>Pending room maintanance requests</div>
+				<div className='title'>Pending room maintenance requests</div>
 				<div className='item-redirect' onClick={maintenanceRedirect}>
 					View All
 				</div>

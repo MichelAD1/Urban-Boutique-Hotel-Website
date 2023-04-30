@@ -11,8 +11,8 @@ class LanguageController extends Controller
         //admin function
         $language = new Language();
         $language->name = $request->name;
-        $language->isavailable = 1;
-        $language->isdefault = $request->isdefault;
+        $language->isavailable = $request->isavailable;
+        $language->isdeafult = $request->isdefault;
         $language->code = $request->code;
         if($language->save()){
             return response()->json([

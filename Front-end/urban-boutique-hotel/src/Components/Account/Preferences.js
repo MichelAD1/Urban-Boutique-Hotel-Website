@@ -10,7 +10,8 @@ const Preferences = () => {
 
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState(localStorage.getItem("Currency"));
+  const [currencies, setCurrencies] = useState(null);
   const [language, setLanguage] = useState(localStorage.getItem("Lg"));
 
   const {
@@ -23,7 +24,7 @@ const Preferences = () => {
 
   useEffect(() => {
     if (status === "success" && currencyData) {
-      console.log(currencyData);
+      setCurrencies(currencyData);
       setLoading(false);
     }
   }, [currencyData, status, error]);
@@ -41,7 +42,7 @@ const Preferences = () => {
   };
   const handleCancel = () => {
     setEdit(false);
-    setCurrency("USD");
+    setCurrency(localStorage.getItem("Currency"));
     setLanguage(localStorage.getItem("Lg"));
   };
   const handleSubmit = () => {
@@ -66,6 +67,12 @@ const Preferences = () => {
       localStorage.setItem("Translate", "it");
       localStorage.setItem("Lg", "Italian");
     }
+    currencies.map((item) => {
+      if (item.symbol === currency) {
+        localStorage.setItem("Currency", item.symbol);
+        localStorage.setItem("Exchange", item.exchange_rate);
+      }
+    });
   };
 
   return (
@@ -141,11 +148,11 @@ const Preferences = () => {
                           setCurrency(e.target.value);
                         }}
                       >
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="GBP">GBP</option>
-                        <option value="AUD">AUD</option>
-                        <option value="CAD">CAD</option>
+                        {currencies.map((currencyData, index) => (
+                          <option key={index} value={currencyData.symbol}>
+                            {currencyData.symbol}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   )}

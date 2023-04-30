@@ -23,6 +23,15 @@ function FindUs() {
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+  //currency handler
+  useEffect(() => {
+    if (!localStorage.getItem("Currency")) {
+      localStorage.setItem("Currency", "USD");
+    }
+    if (!localStorage.getItem("Exchange")) {
+      localStorage.setItem("Exchange", 1);
+    }
+  }, [localStorage.getItem("Currency"), localStorage.getItem("Exchange")]);
 
   const slideshowd_data = [
     {

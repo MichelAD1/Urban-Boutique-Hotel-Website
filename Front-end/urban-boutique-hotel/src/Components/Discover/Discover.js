@@ -16,9 +16,20 @@ import GetPhotos from "../../api-client/Discover/GetPhotos";
 
 const Discover = () => {
   const { t, i18n } = useTranslation();
+
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+
+  //currency handler
+  useEffect(() => {
+    if (!localStorage.getItem("Currency")) {
+      localStorage.setItem("Currency", "USD");
+    }
+    if (!localStorage.getItem("Exchange")) {
+      localStorage.setItem("Exchange", 1);
+    }
+  }, [localStorage.getItem("Currency"), localStorage.getItem("Exchange")]);
 
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(true);

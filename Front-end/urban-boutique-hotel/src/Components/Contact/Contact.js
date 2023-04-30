@@ -12,9 +12,20 @@ import SendMessage from "../../api-client/Contact/SendMessage";
 
 const Contact = () => {
   const { t, i18n } = useTranslation();
+
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+  //currency handler
+  useEffect(() => {
+    if (!localStorage.getItem("Currency")) {
+      localStorage.setItem("Currency", "USD");
+    }
+    if (!localStorage.getItem("Exchange")) {
+      localStorage.setItem("Exchange", 1);
+    }
+  }, [localStorage.getItem("Currency"), localStorage.getItem("Exchange")]);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");

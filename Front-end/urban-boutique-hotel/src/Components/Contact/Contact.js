@@ -121,9 +121,9 @@ const Contact = () => {
             height: "3.5em",
             borderRadius: "30px",
           }}
-          onClick={() => window.open("http://localhost:3000/livechat")}
+          onClick={() => window.open("http://localhost:3000/feedback")}
         >
-          {t("livechat")}
+          {t("feedback")}
         </Fab>
       </div>
       <div className="contactHero">

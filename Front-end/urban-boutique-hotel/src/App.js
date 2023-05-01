@@ -17,12 +17,13 @@ import Policy from "./Components/Policies/Policy";
 import Discover from "./Components/Discover/Discover";
 import Contact from "./Components/Contact/Contact";
 import BookingSubmitted from "./Components/Submit/BookingSubmitted";
+import FeedbackSubmitted from "./Components/Submit/FeedbackSubmitted";
 import MaintenanceSubmitted from "./Components/Submit/MaintenanceSubmitted";
 
 import Navbar from "./Components/Navbar/Navbar";
 import Account from "./Components/Account/Account";
 import AccountNav from "./Components/Navbar/AccountNav";
-import Livechat from "./Components/Livechat/Livechat";
+import Feedback from "./Components/Feedback/Feedback";
 import Reservation from "./Components/Account/Reservation";
 import PrivateRoute from "./Routes/PrivateRoute";
 
@@ -74,11 +75,11 @@ function App() {
               }
             />
             <Route
-              path="/livechat"
+              path="/feedback"
               element={
                 <>
                   <ScrollToTop />
-                  <Livechat />
+                  <Feedback />
                 </>
               }
             />
@@ -130,6 +131,17 @@ function App() {
                   <>
                     <ScrollToTop />
                     <MaintenanceSubmitted />
+                  </>
+                }
+              />
+            </Route>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/feedback/submit"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <FeedbackSubmitted />
                   </>
                 }
               />

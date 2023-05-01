@@ -26,6 +26,8 @@ import {
 	RiFeedbackFill,
 	RiFileList2Fill,
 	RiFileList2Line,
+	RiProfileLine,
+	RiProfileFill,
 } from "react-icons/ri";
 
 import finance_fill from "../../assets/icons/finance-fill.svg";
@@ -161,6 +163,19 @@ export default function Navbar() {
 					<Link to='/support' className='nav-link'>
 						<RiFeedbackLine className='icons' />
 						<div className='routes'>Support</div>
+					</Link>
+				)}
+				{/* Profile Page navigation */}
+				{path === "/profile" && (
+					<div className='nav-link'>
+						<RiProfileFill className='icons' />
+						<div className='routes active'>Profile</div>
+					</div>
+				)}
+				{path !== "/profile" && (
+					<Link to='/profile' className='nav-link'>
+						<RiProfileLine className='icons' />
+						<div className='routes'>Profile</div>
 					</Link>
 				)}
 			</div>

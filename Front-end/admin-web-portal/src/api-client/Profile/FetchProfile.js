@@ -3,7 +3,7 @@ import base_url from "../BaseUrl";
 
 export default async function FetchProfile() {
 	return await axios
-		.get(`${base_url}auth/refresh`, {
+		.get(`${base_url}staff/getinfo`, {
 			method: "GET",
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("token")}`,

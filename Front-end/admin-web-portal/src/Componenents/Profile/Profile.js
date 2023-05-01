@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 //API
 import FetchProfile from "../../api-client/Profile/FetchProfile";
@@ -14,6 +15,8 @@ const UserItem = () => {
 
 	const [loading, setLoading] = useState(true);
 
+	const navigate = useNavigate();
+
 	const {
 		status,
 		error,
@@ -22,13 +25,13 @@ const UserItem = () => {
 		staleTime: 300000, // 5 minutes
 	});
 	useEffect(() => {
-		console.log(profileData);
 		if (profileData) {
 			if (profileData.user) {
-				setData(profileData.user);
-				localStorage.setItem("token", profileData.authorisation.token);
+				setData(mergeObjects(profileData.user, profileData.employee));
 			} else {
 				alert("Please login again");
+				localStorage.removeItem("token");
+				navigate("/login");
 			}
 			setLoading(false);
 		}
@@ -43,6 +46,17 @@ const UserItem = () => {
 			setGender(data.gender);
 		}
 	}, [data]);
+
+	const mergeObjects = (obj1, obj2) => {
+		var obj3 = {};
+		for (var attrname in obj1) {
+			obj3[attrname] = obj1[attrname];
+		}
+		for (var attrname in obj2) {
+			obj3[attrname] = obj2[attrname];
+		}
+		return obj3;
+	};
 
 	function capitalizeFirstLetter(string) {
 		if (string) return string.charAt(0).toUpperCase() + string.slice(1);

@@ -22,7 +22,7 @@ const MaintenanceSubmitted = () => {
   useEffect(() => {
     if (!isLoading) {
       const timeoutId = setTimeout(() => {
-        navigate("/account");
+        navigate("/account", { replace: true });
       }, 2000);
       return () => clearTimeout(timeoutId);
     }

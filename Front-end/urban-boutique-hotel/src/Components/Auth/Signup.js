@@ -156,7 +156,7 @@ const Signup = () => {
         );
         localStorage.setItem("shouldReload", JSON.stringify(true));
         axios.defaults.headers.common["Authorization"] = "Bearer" + token;
-        navigation("/");
+        navigation("/", { replace: true });
       }
     });
   };

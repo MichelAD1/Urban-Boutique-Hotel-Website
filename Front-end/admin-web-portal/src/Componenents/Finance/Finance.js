@@ -33,27 +33,23 @@ const Finance = () => {
 	} = useQuery(["finance_data"], FetchFinance);
 	useEffect(() => {
 		if (financeData) {
-			Promise.all(financeData).then((results) => {
-				if (
-					results[0].name === "AxiosError" ||
-					results[1].name === "AxiosError"
-				) {
-					setLoading(false);
-					setErr("Something went wrong");
-				}
-				if (results[0].length === 0) {
-					setBudgetErr("No budgets found");
-				}
-				if (results[1].length === 0) {
-					setTransactionsErr("No transactions found");
-				}
-				setBudgets(results[0]);
-				setTransactions(results[1]);
-
+			if (financeData.name === "AxiosError") {
 				setLoading(false);
-			});
+				setErr("Something went wrong");
+			}
+			if (financeData.length === 0) {
+				setBudgetErr("No budgets found");
+			}
+			setBudgets(financeData);
+			setLoading(false);
 		}
 	}, [financeData, status]);
+
+	useEffect(() => {
+		if (transactions.length === 0) {
+			setTransactionsErr("No transactions found");
+		}
+	}, [transactions]);
 
 	const handleAddBudget = (e) => {
 		e.preventDefault();
@@ -65,10 +61,10 @@ const Finance = () => {
 		AddBudget(reqData).then((res) => {
 			if (res.status === "success") {
 				setBudgets([...budgets, res.budget]);
-				closeBudgetModal();
 			} else {
 				setBudgetErr(res.data);
 			}
+			closeBudgetModal();
 		});
 	};
 	const openBudgetModal = () => {
@@ -180,7 +176,7 @@ const Finance = () => {
 						display: "flex",
 						justifyContent: "center",
 						alignItems: "center",
-						zIndex: "100",
+						zIndex: "200",
 					},
 				}}>
 				<div style={{ height: "17em" }}>

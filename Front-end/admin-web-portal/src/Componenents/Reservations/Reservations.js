@@ -92,7 +92,6 @@ const Reservations = () => {
 		};
 		setSeachLoading(true);
 		Search(reqQuery, "reservation").then((res) => {
-			console.log(res);
 			if (res.reservations) {
 				setReservations(res.reservations);
 			} else {

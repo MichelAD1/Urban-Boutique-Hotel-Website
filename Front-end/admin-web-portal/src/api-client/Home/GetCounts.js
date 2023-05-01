@@ -11,7 +11,6 @@ export default async function GetCounts() {
 			return res.data;
 		})
 		.catch((err) => {
-			console.log(err);
 			return err.response;
 		});
 

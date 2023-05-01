@@ -8,7 +8,7 @@ const BookingSubmitted = () => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      navigate("/");
+      navigate("/", { replace: true });
     }, 5000);
 
     return () => clearTimeout(timeoutId);

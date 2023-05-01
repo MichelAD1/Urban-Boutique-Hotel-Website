@@ -22,7 +22,7 @@ import MaintenanceSubmitted from "./Components/Submit/MaintenanceSubmitted";
 import Navbar from "./Components/Navbar/Navbar";
 import Account from "./Components/Account/Account";
 import AccountNav from "./Components/Navbar/AccountNav";
-import Livechat from "./Components/Livechat/Livechat";
+import Feedback from "./Components/Feedback/Feedback";
 import Reservation from "./Components/Account/Reservation";
 import PrivateRoute from "./Routes/PrivateRoute";
 
@@ -74,11 +74,11 @@ function App() {
               }
             />
             <Route
-              path="/livechat"
+              path="/feedback"
               element={
                 <>
                   <ScrollToTop />
-                  <Livechat />
+                  <Feedback />
                 </>
               }
             />

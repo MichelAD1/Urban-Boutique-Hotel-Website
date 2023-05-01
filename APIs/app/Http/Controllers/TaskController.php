@@ -14,8 +14,8 @@ class TaskController extends Controller
         //admin function
         $task = new Task();
         $task->text = $request->text;
-        $task->start_date = $request->start_date;
-        $task->end_date = $request->end_date;
+        $task->startdate = $request->startdate;
+        $task->enddate = $request->enddate;
         if($task->save()){
             return response()->json([
                 'message'=>"successful",

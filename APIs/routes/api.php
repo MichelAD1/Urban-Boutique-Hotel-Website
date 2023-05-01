@@ -20,6 +20,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\TaskController;
 use App\Models\EmailSender;
 use App\Models\Maintenance_Request;
 use Illuminate\Http\Request;

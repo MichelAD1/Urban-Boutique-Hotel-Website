@@ -1,20 +1,33 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
 import Footer from "../../Global/Components/Footer";
+//apis
+import SendFeedback from "../../api-client/Contact/SendFeedback";
 
 const Feedback = () => {
   const { t, i18n } = useTranslation();
   const [text, setText] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
-  });
+  }, []);
 
   useEffect(() => {
     document.title = "Feedback";
   }, []);
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    const data = { text };
+    let response = SendFeedback(data);
+    response.then((res) => {
+      if (res) {
+        navigate("/feedback/submit");
+      }
+    });
+  };
 
   return (
     <>
@@ -27,7 +40,7 @@ const Feedback = () => {
             <div className="message-paragraph">
               <p>{t("feedback_w")}</p>
             </div>
-            <form className="message-inputs feedback" onSubmit={handleSubmit}>
+            <div className="message-inputs feedback">
               <div className="message-textarea">
                 <textarea
                   id="message"
@@ -40,6 +53,7 @@ const Feedback = () => {
               <div className="feedback-button">
                 {" "}
                 <button
+                  onClick={handleSubmit}
                   disabled={!text}
                   type="submit"
                   className={!text ? "disabled-button" : ""}
@@ -47,7 +61,7 @@ const Feedback = () => {
                   {t("con_send")}
                 </button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

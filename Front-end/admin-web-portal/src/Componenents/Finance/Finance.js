@@ -30,9 +30,7 @@ const Finance = () => {
 		status,
 		error,
 		data: financeData,
-	} = useQuery(["finance_data"], FetchFinance, {
-		staleTime: 300000, // 5 minutes
-	});
+	} = useQuery(["finance_data"], FetchFinance);
 	useEffect(() => {
 		if (financeData) {
 			Promise.all(financeData).then((results) => {
@@ -124,7 +122,6 @@ const Finance = () => {
 		],
 		[],
 	);
-	console.log(err);
 	if (err !== "") {
 		return <div className='container-buffer'>{err}</div>;
 	}

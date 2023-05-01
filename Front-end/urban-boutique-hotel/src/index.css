@@ -898,7 +898,6 @@ h6 {
 .order-desc.price {
   font-size: 13px;
   font-weight: bold;
-  width: 10%;
   color: var(--primaryColor);
 }
 .order-label.total {
@@ -910,7 +909,6 @@ h6 {
 .order-desc.total {
   font-size: 18px;
   font-weight: bold;
-  width: 20%;
   color: var(--primaryColor);
 }
 .gallery-image.order {
@@ -2127,14 +2125,13 @@ h6 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  width: 90em;
+  justify-content: center;
+
   cursor: pointer;
 }
 .slide-content.rooms img {
   width: 100%;
   height: 38em;
-  object-fit: cover;
 }
 .slide-image {
   height: auto;
@@ -2148,7 +2145,37 @@ h6 {
   white-space: pre-wrap;
   color: var(--primaryColor);
 }
+@media (max-width: 768px) {
+  .slide-content.rooms {
+    height: 35em;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
 
+  .slide-content.rooms img {
+    height: auto;
+    width: 100%;
+  }
+
+  .slide-image {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide-content.rooms {
+    justify-content: center;
+  }
+  .slide-content.rooms img {
+    height: auto;
+    width: 100%;
+  }
+
+  .slide-image {
+    max-width: 100%;
+  }
+}
 /* Buttons */
 
 .slideshowDots {
@@ -2453,6 +2480,13 @@ h6 {
   .settings-link {
     display: none;
   }
+}
+.reservations-edit-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 15%;
+  padding-right: 15%;
+  height: 22em;
 }
 
 .reservations-section {
@@ -2778,6 +2812,11 @@ h6 {
 }
 /* End of FAQS */
 /* Reservations */
+.res-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 .table-button button {
   width: 6em;
   height: 2em;
@@ -2792,6 +2831,28 @@ h6 {
 }
 
 .table-button button:hover {
+  background-color: #2a32499a;
+}
+.confirm-edit button {
+  width: 10em;
+  height: 3em;
+  padding: 0.2rem 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.confirm-edit {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5%;
+  margin-top: 3%;
+}
+
+.confirm-edit button:hover {
   background-color: #2a32499a;
 }
 /* End of reservations */

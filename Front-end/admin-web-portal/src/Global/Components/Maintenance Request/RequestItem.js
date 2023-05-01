@@ -1,18 +1,38 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+// Functions
+import checkEmpty from "../../Functions/CheckEmpty";
+
+// Components
+import SearchList from "../SearchList";
+
+// API
+import Search from "../../../api-client/Search";
+import AssignEmployee from "../../../api-client/Maintenance/AssignEmployee";
+
 const RequestItem = () => {
 	const loc = useLocation();
 	const [data, setData] = useState(loc.state.data);
+
+	const [query, setQuery] = useState("");
 
 	const [assigned, setAssigned] = useState(false);
 
 	const [room, setRoom] = useState({});
 	const [reservation, setReservation] = useState({});
 	const [customer, setCustomer] = useState({});
+	const [employees, setEmployees] = useState([]);
+
 	const [employee, setEmployee] = useState({});
 
 	const [edit, setEdit] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
 	const [selected, setSelected] = useState(false);
 
 	const navigate = useNavigate();
@@ -21,15 +41,60 @@ const RequestItem = () => {
 		setRoom(data.room_object);
 		setReservation(data.reservation_object);
 		setCustomer(data.customer_object);
+		setEmployee(data.employee_object);
 
 		if (data.status !== "pending") {
 			setAssigned(true);
 		}
 	}, [data]);
 
+	useEffect(() => {
+		handleSearch();
+	}, [query]);
+
+	const handleSearch = () => {
+		setError("");
+		const reqQuery = {
+			search_query: query,
+		};
+		setLoading(true);
+		Search(reqQuery).then((res) => {
+			if (res.employees) {
+				setEmployees(res.employees);
+			} else {
+				setError("No employees found");
+			}
+			setLoading(false);
+		});
+	};
+
+	const handleSetEmployee = (employee) => {
+		setEmployee(employee);
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("Submitted");
+		if (!assigned) {
+			alert("Please assign an employee first");
+		}
+
+		const reqData = {
+			employee_id: employee.id,
+			requestid: data.id,
+		};
+
+		const response = AssignEmployee(reqData);
+		response.then((res) => {
+			if (res.message === "success") {
+				res.id = res.maintenance_object.id;
+				res.status = res.maintenance_object.status;
+				loc.state = { data: res };
+				setData(res);
+				setEdit(false);
+			} else {
+				alert("Error assigning employee");
+			}
+		});
 	};
 
 	const handleCancel = () => {
@@ -48,16 +113,21 @@ const RequestItem = () => {
 		navigate(path, state);
 	};
 
+	const theme = createTheme({
+		palette: {
+			primary: {
+				light: "#2a3249",
+				main: "#2a3249",
+				contrastText: "#fff",
+			},
+		},
+	});
+
 	return (
 		<div className='container'>
 			<form className='edit-container' onSubmit={handleSubmit}>
 				<div className='edit-item'>
 					<h2>Request #{data.id}</h2>
-					{assigned && !edit && (
-						<button type='button' className='button' onClick={openEdit}>
-							Edit
-						</button>
-					)}
 					{(!assigned || edit) && (
 						<>
 							<button type='submit' className='save-button'>
@@ -122,25 +192,30 @@ const RequestItem = () => {
 						</div>
 						{assigned && !edit && (
 							<div>
-								<p>{}</p>
+								<p>{employee.username}</p>
 							</div>
 						)}
 						{(!assigned || edit) && (
 							<div>
-								<select
-									className='input-dropdown'
-									value={employee}
-									onChange={(e) => {
-										setEmployee(e.target.value);
-										setSelected(true);
-									}}>
-									<option value='' hidden>
-										Select Employee
-									</option>
-									<option value='1'>Employee 1</option>
-									<option value='2'>Employee 2</option>
-									<option value='3'>Employee 3</option>
-								</select>
+								<input
+									className='search-input'
+									type='text'
+									placeholder='Search'
+									onChange={(e) => setQuery(e.target.value)}
+									onFocus={() => {
+										setQuery("");
+										setEmployee("");
+									}}
+									value={employee ? employee.username : query}
+								/>
+								{!employee && query && (
+									<SearchList
+										data={employees}
+										employee={handleSetEmployee}
+										loading={loading}
+										error={error}
+									/>
+								)}
 							</div>
 						)}
 					</div>

@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import output from "../../Global/Data/Currencies";
+
+// API
+import GetPreferences from "../../api-client/Options/GetPreferences";
 
 const Preferences = () => {
 	const [edit, setEdit] = useState(false);
@@ -9,38 +13,28 @@ const Preferences = () => {
 	const [currencies, setCurrencies] = useState([]);
 	const [paymentMethods, setPaymentMethods] = useState([]);
 
+	const [loading, setLoading] = useState(true);
+
+	const {
+		status,
+		error,
+		data: preferencesData,
+	} = useQuery(["preferences_data"], GetPreferences, {
+		staleTime: 300000, // 5 minutes
+	});
 	useEffect(() => {
-		setLanguages([
-			{
-				id: 1,
-				name: "English",
-				code: "en",
-				isDefault: true,
-				available: true,
-			},
-			{
-				id: 2,
-				name: "Arabic",
-				code: "ar",
-				isDefault: false,
-				available: true,
-			},
-			{
-				id: 3,
-				name: "French",
-				code: "fr",
-				isDefault: false,
-				available: false,
-			},
-			{
-				id: 4,
-				name: "German",
-				code: "de",
-				isDefault: false,
-				available: false,
-			},
-		]);
-		setCurrencies(output);
+		if (preferencesData) {
+			Promise.all(preferencesData).then((results) => {
+				setLanguages(results[0]);
+				setCurrencies(results[1]);
+				// setPaymentMethods(results[2]);
+				setLoading(false);
+			});
+		}
+	}, [preferencesData, status]);
+
+	useEffect(() => {
+		console.log(output);
 		setPaymentMethods([
 			{
 				id: 1,
@@ -50,9 +44,15 @@ const Preferences = () => {
 			},
 			{
 				id: 2,
-				name: "Debit Card",
+				name: "Offline payment",
 				isDefault: false,
 				available: false,
+			},
+			{
+				id: 3,
+				name: "Paypal",
+				isDefault: false,
+				available: true,
 			},
 		]);
 	}, [output]);
@@ -128,17 +128,17 @@ const Preferences = () => {
 						<div className='amm-checkbox'>
 							{languages.map(
 								(language) =>
-									(language.available || edit) && (
+									(language.isavailable || edit) && (
 										<div className='checkbox-item' key={language.id}>
 											{edit && (
 												<input
 													type='checkbox'
-													checked={language.available}
+													checked={language.isavailable}
 													onChange={(e) => handleLanguageChange(e, language.id)}
 												/>
 											)}
 											<label>{language.name}</label>
-											{language.isDefault && <span>Default</span>}
+											{language.isdeafult === 1 && <span>Default</span>}
 										</div>
 									),
 							)}
@@ -153,19 +153,19 @@ const Preferences = () => {
 						<div className='amm-checkbox currencies'>
 							{currencies.map(
 								(currency) =>
-									(currency.available || edit) && (
+									(currency.isavailable || edit) && (
 										<div className='checkbox-item' key={currency.id}>
 											{edit && (
 												<input
 													type='checkbox'
-													checked={currency.available}
+													checked={currency.isavailable}
 													onChange={(e) => handleCurrencyChange(e, currency.id)}
 												/>
 											)}
-											{(currency.available || edit) && (
+											{(currency.isavailable || edit) && (
 												<label>{currency.name}</label>
 											)}
-											{currency.isDefault && <span>Default</span>}
+											{currency.isdefault === 1 && <span>Default</span>}
 										</div>
 									),
 							)}

@@ -20,7 +20,6 @@ const RoomItem = () => {
 	const navigate = useNavigate();
 
 	const [edit, setEdit] = useState(false);
-	const [loading, setLoading] = useState(true);
 
 	const [isValid, setIsValid] = useState(loc.state);
 
@@ -244,7 +243,7 @@ const RoomItem = () => {
 			if (res.message === "room deleted successfully") {
 				navigate("/rooms");
 			} else {
-				setErr("Something went wrong");
+				alert("Something went wrong");
 			}
 		});
 		closeModal();

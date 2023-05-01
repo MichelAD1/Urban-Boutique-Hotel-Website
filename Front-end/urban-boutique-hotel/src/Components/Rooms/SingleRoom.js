@@ -13,6 +13,8 @@ import { useEffect } from "react";
 import dummy1 from "../../assets/images/room-1.jpeg";
 
 const SingleRoom = ({ reverse, room, type }) => {
+  const currency = localStorage.getItem("Currency");
+  const exchange = localStorage.getItem("Exchange");
   const { t, i18n } = useTranslation();
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
@@ -88,10 +90,15 @@ const SingleRoom = ({ reverse, room, type }) => {
           ) : null}
         </div>
         <div className="prices">
-          <h4>${room.room.rent}</h4>
+          <h4>
+            {currency} {Number(room.room.rent * exchange).toFixed(0)}
+          </h4>
           {room.room.discount ? (
             <h4 className="old-price">
-              ${room.room.rent + room.room.discount}
+              {currency}{" "}
+              {Number((room.room.rent + room.room.discount) * exchange).toFixed(
+                0
+              )}
             </h4>
           ) : null}
         </div>

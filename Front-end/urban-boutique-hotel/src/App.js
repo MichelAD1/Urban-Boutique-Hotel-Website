@@ -21,6 +21,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Account from "./Components/Account/Account";
 import AccountNav from "./Components/Navbar/AccountNav";
 import Livechat from "./Components/Livechat/Livechat";
+import Reservation from "./Components/Account/Reservation";
 import PrivateRoute from "./Routes/PrivateRoute";
 
 import Profile from "./Components/Account/Profile";
@@ -108,6 +109,7 @@ function App() {
                 }
               />
             </Route>
+
             <Route exact path="/" element={<PrivateRoute />}>
               <Route
                 path="/submit"
@@ -150,6 +152,17 @@ function App() {
                 </>
               }
             />
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/reservations/edit"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <Reservation />
+                  </>
+                }
+              />
+            </Route>
             <Route
               path="/discover"
               element={

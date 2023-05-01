@@ -28,7 +28,7 @@ return new class extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->string('employeeid');
-            $table->date('duedate');
+            $table->date('due_date');
         });
     }
 };

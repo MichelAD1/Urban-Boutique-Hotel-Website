@@ -92,7 +92,25 @@ const Preferences = () => {
 			alert("No changes made");
 			return;
 		}
+
+		setLoading(true);
 		const response = AssignPreferences(reqData);
+		response.then((res) => {
+			console.log(res);
+			if (
+				res[0] === "Success" &&
+				res[1] === "Success" &&
+				res[2] === "Success"
+			) {
+				setEdit(false);
+				setChangedCurrencies([]);
+				setChangedLanguages([]);
+				setChangedPaymentMethods([]);
+			} else {
+				alert("Preferences not updated");
+			}
+			setLoading(false);
+		});
 	};
 
 	if (loading) {

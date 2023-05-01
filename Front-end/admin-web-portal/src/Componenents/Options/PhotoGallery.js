@@ -36,13 +36,11 @@ const PhotoGallery = () => {
 			setImages(photoGalleryData);
 			setLoading(false);
 		}
-	}, [photoGalleryData, status]);
-
-	useEffect(() => {
-		console.log("Images", images);
-		console.log("Added Images", addedImages);
-		console.log("Deleted Images", deletedImages);
-	}, [images, addedImages, deletedImages]);
+		if (error) {
+			setErr("Something went wrong");
+			setLoading(false);
+		}
+	}, [photoGalleryData, status, error, imagesChanged]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -181,7 +179,11 @@ const PhotoGallery = () => {
 								images.map((image) => {
 									return (
 										<div key={image.id}>
-											<img className='gallery-images' src={image.image_url} />
+											<img
+												className='gallery-images'
+												src={image.image_url}
+												alt='Gallery Image'
+											/>
 											{edit && !loading && (
 												<RiDeleteBin2Fill
 													className='delete-icon'

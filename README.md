@@ -1,5 +1,4 @@
 # Urban-Boutique-Hotel-Website
-![icon](https://user-images.githubusercontent.com/102959762/235473266-64105375-3b66-48c4-971c-d0491b2321a5.png)
 <h2> :radio_button: Description </h2>
 <br>
 <p> Welcome to the Urban Boutique Hotel website, your go-to destination for planning the perfect stay in the heart of the city. 
@@ -37,5 +36,5 @@ Take some time to explore our website and discover the extensive range of world-
 <br>
 <p>This project is licensed under the MIT License - see the LICENSE.md file for details.</p>
 <br>
-
+![icon](https://user-images.githubusercontent.com/102959762/235473266-64105375-3b66-48c4-971c-d0491b2321a5.png)
 

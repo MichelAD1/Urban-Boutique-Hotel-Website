@@ -39,6 +39,16 @@ export default function Home() {
 		}
 	}, [homeData, status]);
 
+	const formatData = (value) => {
+		if (value > 1000) {
+			return (value / 1000).toFixed(2) + "K";
+		}
+		if (value > 1000000) {
+			return (value / 1000000).toFixed(2) + "M";
+		}
+		return value;
+	};
+
 	if (loading) {
 		return (
 			<div className='container-buffer'>
@@ -52,23 +62,23 @@ export default function Home() {
 			<div className='headerStats'>
 				<Link to='/finance/transactions' className='smallStats'>
 					<p className='statsTitle'>Monthly Revenue</p>
-					<p className='statsAmount'>USD {revenueCount}</p>
+					<p className='statsAmount'>USD {formatData(revenueCount)}</p>
 					<p className='statsLink'>View entire list</p>
 				</Link>
 
 				<Link to='/reservations' className='smallStats'>
 					<p className='statsTitle'>Total reservations</p>
-					<p className='statsAmount'>{reservationsCount}</p>
+					<p className='statsAmount'>{formatData(reservationsCount)}</p>
 					<p className='statsLink'>View entire list</p>
 				</Link>
 				<Link to='/users' className='smallStats'>
 					<p className='statsTitle'>Total Customers</p>
-					<p className='statsAmount'>{customersCount}</p>
+					<p className='statsAmount'>{formatData(customersCount)}</p>
 					<p className='statsLink'>View entire list</p>
 				</Link>
 				<Link to='/rooms' className='smallStats'>
 					<p className='statsTitle'>Total Rooms</p>
-					<p className='statsAmount'>{roomsCount}</p>
+					<p className='statsAmount'>{formatData(roomsCount)}</p>
 					<p className='statsLink'>View entire list</p>
 				</Link>
 			</div>

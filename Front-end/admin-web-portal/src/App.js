@@ -54,6 +54,9 @@ import Transactions from "./Componenents/Finance/Transactions";
 import Rooms from "./Componenents/Rooms/Rooms";
 import RoomItem from "./Componenents/Rooms/RoomItem";
 
+// ******** Profile ********
+import Profile from "./Componenents/Profile/Profile";
+
 // ******** Global ********
 import MaintenanceRequest from "./Global/Components/Maintenance Request/Requests";
 import RequestItem from "./Global/Components/Maintenance Request/RequestItem";
@@ -364,6 +367,17 @@ function App() {
 									<>
 										<Navbar />
 										<Transactions />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/profile'
+								element={
+									<>
+										<Navbar />
+										<Profile />
 									</>
 								}
 							/>

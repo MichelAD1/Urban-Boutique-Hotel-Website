@@ -1,19 +1,26 @@
 import { useMemo, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import base_url from "../../api-client/BaseUrl";
 
 // Components
 import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
+import SearchList from "../../Global/Components/SearchList";
 
 // Icons
 import search_icon from "../../assets/icons/search.svg";
 
 // API
 import FetchData from "../../api-client/FetchData";
+import Search from "../../api-client/Search";
 
 export default function Users() {
 	const [data, setData] = useState([]);
 	const [query, setQuery] = useState("");
+
+	const [searchErr, setSearchErr] = useState("");
+	const [users, setUsers] = useState([]);
+	const [searchLoading, setSeachLoading] = useState(false);
 
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
@@ -35,6 +42,10 @@ export default function Users() {
 			setLoading(false);
 		}
 	}, [usersData, status]);
+
+	useEffect(() => {
+		handleSearch();
+	}, [query]);
 
 	const columns = useMemo(
 		() => [
@@ -70,6 +81,29 @@ export default function Users() {
 		[],
 	);
 
+	// Search handler
+	const navigate = useNavigate();
+	const handleRedirect = (employee) => {
+		setQuery("");
+		navigate("/user/profile", { state: { data: employee } });
+	};
+
+	const handleSearch = () => {
+		setSearchErr("");
+		const reqQuery = {
+			search_query: query,
+		};
+		setSeachLoading(true);
+		Search(reqQuery, "customer").then((res) => {
+			if (res.customers) {
+				setUsers(res.customers);
+			} else {
+				setSearchErr("No customers found");
+			}
+			setSeachLoading(false);
+		});
+	};
+
 	return (
 		<>
 			{loading ? (
@@ -86,16 +120,28 @@ export default function Users() {
 								type='text'
 								placeholder='Search'
 								onChange={(e) => setQuery(e.target.value)}
+								value={query}
 							/>
 						</div>
 					</div>
-					<div className='users-container'>
-						<BasicTable
-							reqData={data}
-							columns={columns}
-							redirect={"user"}
-							err={err}
-						/>
+					<div className='employees-container'>
+						{!query && (
+							<BasicTable
+								reqData={data}
+								columns={columns}
+								redirect={"user"}
+								err={err}
+							/>
+						)}
+						{query && (
+							<SearchList
+								data={users}
+								redirect={handleRedirect}
+								loading={searchLoading}
+								error={searchErr}
+								type='employee'
+							/>
+						)}
 					</div>
 				</div>
 			)}

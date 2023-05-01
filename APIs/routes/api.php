@@ -63,7 +63,7 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::middleware(['auth', 'check.reservationmanager'])->group(function(){
                 Route::get('get',[RoomController::class,'getReservations']);
                 Route::get('cancel_res/{reservationid}',[CustomerController::class,'cancelReservation']);
-                Route::get('search/{reservationid}',[RoomController::class,'searchReservation']);
+                Route::post('search',[RoomController::class,'searchReservation']);
             });
             Route::middleware(['auth', 'check.admin'])->group(function(){
                 Route::get('getcount',[RoomController::class,'getReservationsCount']);
@@ -87,6 +87,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.usermanager'])->group(function(){
             Route::get('ban/{customerid}',[CustomerController::class,'banCustomer']);
             Route::get('get',[CustomerController::class,'getCustomers']);
+            Route::post('search',[CustomerController::class,'searchCustomer']);
         });
         Route::middleware(['auth', 'check.admin'])->group(function(){
             Route::get('getcount',[CustomerController::class,'getCustomerCount']);

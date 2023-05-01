@@ -245,9 +245,19 @@ class RoomController extends Controller
             'reservation_count'=>$count
         ]);
     }
-    public function searchReservation($reservationid){
-        return DB::table('customer_reserves_room')->where('id','=',$reservationid)->first();
-
+    public function searchReservation(Request $request){
+        $reservations = DB::table('customer_reserves_room')->where('id',"like",'%'.$request->search_query.'%')->get();
+        foreach($reservations as $reservation){
+            $customer = Customer::join('users','users.id','=','customers.user_id')->where('users.id','=',$reservation->customer_id)->first();
+            $room = Room::find($reservation->room_id);
+            $reservation->customer_object = $customer;
+            $reservation->room_object=$room;
+            $images = Image::where('room_id','=',$reservation->room_id)->get();
+            $reservation->images = $images;
+        }
+        return response()->json([
+            'reservations'=>$reservations
+        ]);
     }
     public function getCustomerReservations(){
         $user = Auth::user();

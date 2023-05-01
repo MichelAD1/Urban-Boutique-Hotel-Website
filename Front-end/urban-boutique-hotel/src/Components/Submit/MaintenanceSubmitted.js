@@ -32,12 +32,12 @@ const MaintenanceSubmitted = () => {
     <div className="faq-container">
       {isLoading ? (
         <>
-          <h1>Submitting Maintenance Request</h1>
+          <h1>{t("submit_main")}</h1>
           <div className="buffer-loader submit"></div>
         </>
       ) : (
         <>
-          <h1>Maintenance Request Submitted</h1>
+          <h1>{t("submit_main1")}</h1>
           <div className="checkmark-container">
             <div className="check-mark-container">
               <svg className="check-mark-svg" viewBox="0 0 52 52">

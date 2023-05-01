@@ -130,7 +130,7 @@ const Reservation = () => {
     let response = MaintenanceRequest(data);
     response.then((res) => {
       if (res) {
-        console.log(res);
+        navigate("/maintenance/submit");
       }
     });
   };
@@ -182,9 +182,9 @@ const Reservation = () => {
           </button>
         </div>
         <div className="reservations main">
-          <h2>Maintenance Request</h2>
+          <h2>{t("main_head")}</h2>
           <div className="confirm-edit main">
-            <button onClick={handleRequest}>Send Request</button>
+            <button onClick={handleRequest}>{t("send_request")}</button>
           </div>
         </div>
       </div>

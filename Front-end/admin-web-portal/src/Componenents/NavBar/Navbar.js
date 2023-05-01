@@ -30,11 +30,6 @@ import {
 	RiProfileFill,
 } from "react-icons/ri";
 
-import finance_fill from "../../assets/icons/finance-fill.svg";
-import support_fill from "../../assets/icons/support-fill.svg";
-import finance_nf from "../../assets/icons/finance-nf.svg";
-import support_nf from "../../assets/icons/support-nf.svg";
-
 import Logout from "../../api-client/Auth/Logout";
 
 export default function Navbar() {

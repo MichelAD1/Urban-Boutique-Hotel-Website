@@ -34,8 +34,6 @@ import ReviewItem from "./Componenents/Support/Reviews/ReviewItem";
 //Feedback
 import Feedback from "./Componenents/Support/Feedback/Feedback";
 import FeedbackItem from "./Componenents/Support/Feedback/FeedbackItem";
-// Live Chat
-import LiveChat from "./Componenents/Support/Live Chat/LiveChat";
 
 // ******** Options ********
 import Options from "./Componenents/Options/Options";
@@ -45,6 +43,7 @@ import FaqPolicyList from "./Componenents/Options/FaqPolicy/FaqPolicyList";
 import FaqPolicyItem from "./Componenents/Options/FaqPolicy/FaqPolicyItem";
 import RegulationDisasterList from "./Componenents/Options/RegulationDisaster/RegulationDisasterList";
 import RegulationDisasterItem from "./Componenents/Options/RegulationDisaster/RegulationDisasterItem";
+import EmailMarketing from "./Componenents/Options/EmailMarketing";
 
 // ******** Finance ********
 import Finance from "./Componenents/Finance/Finance";
@@ -114,6 +113,17 @@ function App() {
 									<>
 										<Navbar />
 										<PhotoGallery />
+									</>
+								}
+							/>
+						</Route>
+						<Route exact path='/' element={<PrivateRoute />}>
+							<Route
+								path='/options/marketing'
+								element={
+									<>
+										<Navbar />
+										<EmailMarketing />
 									</>
 								}
 							/>
@@ -257,17 +267,6 @@ function App() {
 									<>
 										<Navbar />
 										<FeedbackItem />
-									</>
-								}
-							/>
-						</Route>
-						<Route exact path='/' element={<PrivateRoute />}>
-							<Route
-								path='/support/livechat'
-								element={
-									<>
-										<Navbar />
-										<LiveChat />
 									</>
 								}
 							/>

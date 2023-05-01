@@ -10,7 +10,6 @@ const FeedbackSubmitted = () => {
     const timeoutId = setTimeout(() => {
       navigate("/contact", { replace: true });
     }, 5000);
-
     return () => clearTimeout(timeoutId);
   }, [navigate]);
   useEffect(() => {
@@ -18,7 +17,7 @@ const FeedbackSubmitted = () => {
   }, []);
 
   return (
-    <div className="faq-container">
+    <div className="feedback-container">
       <h1>{t("feedback_submit1")}</h1>
       <h4>{t("feedback_submit2")}</h4>
       <div className="buffer-loader submit"></div>

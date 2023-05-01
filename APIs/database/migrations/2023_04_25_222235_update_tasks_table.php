@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->dropColumn('employeeid');
-            $table->dropColumn('duedate');
             $table->date('start_date')->after('text');
             $table->date('end_date')->after('text');
 

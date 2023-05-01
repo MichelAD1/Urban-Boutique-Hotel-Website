@@ -67,29 +67,6 @@ const appointments = [
 	},
 ];
 
-const owners = [
-	{
-		text: "Andrew Glover",
-		id: 1,
-		color: indigo,
-	},
-	{
-		text: "Arnie Schwartz",
-		id: 2,
-		color: teal,
-	},
-	{
-		text: "Arnie Schwartz",
-		id: 3,
-		color: teal,
-	},
-	{
-		text: "Arnie Schwartz",
-		id: 4,
-		color: teal,
-	},
-];
-
 const date = new Date();
 const current = `${date.getFullYear()}-${
 	date.getMonth() + 1
@@ -101,13 +78,7 @@ const classes = {
 	checkBoxContainer: `${PREFIX}-checkBoxContainer`,
 	textField: `${PREFIX}-textField`,
 };
-const StyledGrid = styled(Grid)(({ theme: { spacing } }) => ({
-	[`&.${classes.checkBoxContainer}`]: {
-		paddingTop: spacing(1),
-		paddingBottom: spacing(1),
-		paddingLeft: spacing(4),
-	},
-}));
+
 const StyledTextField = styled(TextField)(({ theme: { spacing } }) => ({
 	[`&.${classes.textField}`]: {
 		marginRight: spacing(4),
@@ -116,40 +87,11 @@ const StyledTextField = styled(TextField)(({ theme: { spacing } }) => ({
 	},
 }));
 
-const UpdateIntervalBox = ({ updateInterval, onValueChange }) => (
-	<Grid item container xs={6} alignItems='center' justifyContent='flex-end'>
-		<Typography>Staff schedule</Typography>
-		<StyledTextField
-			className={classes.textField}
-			variant='outlined'
-			onChange={(event) => onValueChange(event.target.value)}
-			value={updateInterval / 1000}
-			type='number'
-			InputProps={{
-				endAdornment: <InputAdornment position='end'>s</InputAdornment>,
-			}}
-		/>
-	</Grid>
-);
-
 export default class Demo extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
 			data: appointments,
-			resources: [
-				{
-					fieldName: "members",
-					title: "Members",
-					instances: owners,
-					allowMultiple: true,
-				},
-			],
-			grouping: [
-				{
-					resourceName: "members",
-				},
-			],
 			shadePreviousCells: true,
 			shadePreviousAppointments: true,
 			updateInterval: 10000,
@@ -197,8 +139,6 @@ export default class Demo extends React.PureComponent {
 	render() {
 		const {
 			data,
-			resources,
-			grouping,
 			shadePreviousCells,
 			updateInterval,
 			shadePreviousAppointments,
@@ -207,20 +147,16 @@ export default class Demo extends React.PureComponent {
 		return (
 			<React.Fragment>
 				<Grid container paddingTop='1em' paddingLeft='1em'>
-					{/* <UpdateIntervalBox updateInterval={updateInterval} /> */}
 					<h2>Staff Schedule</h2>
 				</Grid>
 				<Paper>
 					<Scheduler data={data} height={850}>
 						<ViewState defaultCurrentDate={current} />
 						<EditingState onCommitChanges={this.commitChanges} />
-						<GroupingState grouping={grouping} />
 
 						<WeekView />
 						<DayView />
 						<Appointments />
-						<Resources data={resources} mainResourceName='members' />
-						<IntegratedGrouping />
 						<IntegratedEditing />
 
 						<Toolbar />
@@ -229,7 +165,6 @@ export default class Demo extends React.PureComponent {
 						<TodayButton />
 						<AppointmentTooltip showOpenButton />
 						<AppointmentForm />
-						<GroupingPanel />
 						<DragDropProvider />
 						<CurrentTimeIndicator
 							shadePreviousCells={shadePreviousCells}

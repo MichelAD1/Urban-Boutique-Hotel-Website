@@ -46,7 +46,6 @@ class TaskController extends Controller
     public function removeTask($taskid){
         //admin function
         if(Task::find($taskid)->delete()){
-            DB::table('employee_has_task')->where('taskid','=',$taskid)->delete();
             return response()->json([
                 'message'=>"task removed successfuly"
             ],200);
@@ -54,12 +53,6 @@ class TaskController extends Controller
     }
     public function getTasks(){
         $tasks=Task::all();
-        foreach($tasks as $task){
-            $employees = DB::table('employee_has_task')->join('staff','staff.user_id','=','employee_has_task.employeeid')
-                                    ->join('users','users.id','=','staff.user_id')
-                                    ->where('employee_has_task.taskid','=',$task->id)->get();
-            $task['employees']=$employees;
-        }
         return $tasks;
     }
     public function getEmployeeTasks(){

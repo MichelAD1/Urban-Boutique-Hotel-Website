@@ -32,6 +32,20 @@ Take some time to explore our website and discover the extensive range of world-
 <br>
 <p>This project is licensed under the MIT License - see the LICENSE.md file for details.</p>
 <br>
-# Screenshots
-![icon](https://user-images.githubusercontent.com/102959762/235473266-64105375-3b66-48c4-971c-d0491b2321a5.png)
+
+
+
+
+
+## Screenshots
+
+Here are some screenshots and videos of the Urban Boutique Hotel website:
+
+![Timeline_1](https://user-images.githubusercontent.com/102959762/235481595-d67a12bd-2972-474c-8bfd-80a47601683b.gif)
+![Screenshot 2023-05-01 182937](https://user-images.githubusercontent.com/102959762/235479463-4d9dc334-f6ed-46fd-976b-3f8abe654619.png)
+![Timeline_2_AdobeExpress](https://user-images.githubusercontent.com/102959762/235481906-963573ef-e5ad-4c9c-be76-5235d2bda11a.gif)
+![Screenshot 2023-05-01 183546](https://user-images.githubusercontent.com/102959762/235479471-3b7556d9-2bfb-40de-86d2-33cd1f368f32.png)
+![Timeline_3_AdobeExpress](https://user-images.githubusercontent.com/102959762/235482287-5451a8eb-6d14-45bb-9d91-758b2e83d97d.gif)
+![Screenshot 2023-05-01 183556](https://user-images.githubusercontent.com/102959762/235479473-9e17dec9-bc8e-454f-ab7e-43e16ee57378.png)
+
 

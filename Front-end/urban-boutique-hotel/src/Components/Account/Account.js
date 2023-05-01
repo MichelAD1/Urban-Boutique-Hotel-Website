@@ -42,6 +42,7 @@ const Profile = () => {
       const newRows = reservationData.map((reservation) =>
         createData(
           reservation.id,
+          reservation.room_id,
           reservation.title,
           reservation.reservation_date,
           reservation.reservation_end,
@@ -61,6 +62,7 @@ const Profile = () => {
   ];
   function createData(
     id,
+    room_id,
     title,
     reservation_date,
     reservation_end,
@@ -69,6 +71,7 @@ const Profile = () => {
   ) {
     return {
       id,
+      room_id,
       title,
       reservation_date,
       reservation_end,

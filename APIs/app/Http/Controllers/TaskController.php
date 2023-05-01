@@ -33,7 +33,7 @@ class TaskController extends Controller
         if($request->has("startDate")){
             $task->startDate=$request->startDate;
         }
-        if($request->has("enddate")){
+        if($request->has("endDate")){
             $task->endDate=$request->endDate;
         }
         if($task->save()){

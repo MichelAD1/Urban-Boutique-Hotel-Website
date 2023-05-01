@@ -45,7 +45,19 @@ const formattedDate = (date) => {
 		parsedDate.getDate() < 10
 			? `0${parsedDate.getDate()}`
 			: parsedDate.getDate();
-	const formattedDate = `${year}-${month}-${day}`;
+	const hour =
+		parsedDate.getHours() < 10
+			? `0${parsedDate.getHours()}`
+			: parsedDate.getHours();
+	const minute =
+		parsedDate.getMinutes() < 10
+			? `0${parsedDate.getMinutes()}`
+			: parsedDate.getMinutes();
+	const second =
+		parsedDate.getSeconds() < 10
+			? `0${parsedDate.getSeconds()}`
+			: parsedDate.getSeconds();
+	const formattedDate = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 	return formattedDate;
 };
 
@@ -78,6 +90,7 @@ const Calendar = () => {
 			added.endDate = formattedDate(added.endDate);
 			const response = AddTask(added);
 			response.then((res) => {
+				console.log(res);
 				if (res.message !== "successful") {
 					alert("Something went wrong");
 				}
@@ -88,8 +101,14 @@ const Calendar = () => {
 		}
 		if (changed) {
 			const taskid = Object.keys(changed)[0];
-			const response = edit(changed[taskid], taskid);
+			changed[taskid].startDate = formattedDate(changed[taskid].startDate);
+			changed[taskid].endDate = formattedDate(changed[taskid].endDate);
+			changed[taskid].taskid = parseInt(taskid);
+
+			console.log(changed);
+			const response = EditTask(changed[taskid]);
 			response.then((res) => {
+				console.log(res);
 				if (res.message !== "task editted successfuly") {
 					alert("Something went wrong");
 				}

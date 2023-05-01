@@ -15,8 +15,8 @@ return new class extends Migration
             $table->dropColumn('employeeid');
             $table->dropColumn('text');
             $table->string('title')->after('id');
-            $table->date('startDate')->after('title');
-            $table->date('endDate')->after('title');
+            $table->dateTime('startDate')->after('title');
+            $table->dateTime('endDate')->after('title');
 
         });
     }

@@ -12,7 +12,7 @@ class PaymentOptionController extends Controller
         $payment_option = new Payment_Option();
         $payment_option->name = $request->name;
         $payment_option->isavailable = $request->isavailable;
-        $payment_option->isdefault = $request->isdefault;
+        $payment_option->isdeafult = $request->isdefault;
         if($payment_option->save()){
             return response()->json([
                 'message'=>"successful",

@@ -16,7 +16,18 @@ const GetPreferences = async () => {
 
 	const currencies = await axios({
 		method: "get",
-		url: base_url + "currency/get",
+		url: base_url + "currency/getall",
+		headers: { Authorization: localStorage.getItem("token") },
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			return err.response.data;
+		});
+	const payment_options = await axios({
+		method: "get",
+		url: base_url + "payment/getall",
 		headers: { Authorization: localStorage.getItem("token") },
 	})
 		.then((res) => {
@@ -26,7 +37,7 @@ const GetPreferences = async () => {
 			return err.response.data;
 		});
 
-	return [languages, currencies];
+	return [languages, currencies, payment_options];
 };
 
 export default GetPreferences;

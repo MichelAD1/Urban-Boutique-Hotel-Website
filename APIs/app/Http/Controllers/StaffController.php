@@ -86,6 +86,14 @@ class StaffController extends Controller
         $user = Auth::user();
         return Staff::join('users','staff.user_id','=','users.id')->where('users.id','!=', $user->id)->paginate(14);
     }
+    public function getInformation(){
+        $user = Auth::user();
+        $employee = Staff::where('user_id',$user->id)->first();
+        return response()->json([
+            'user'=>$user,
+            'staff'=>$employee,
+        ]);
+    }
     public function addEmployee(Request $request){
         $validation = Validator::make($request->all(), [
             'username' => 'required|string|min:6',

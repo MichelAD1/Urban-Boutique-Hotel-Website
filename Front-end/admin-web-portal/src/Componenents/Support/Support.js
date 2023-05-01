@@ -28,14 +28,17 @@ export default function Support() {
 								<div className='settings-link'>Manage photo gallery</div>
 							</div>
 						</Link>
-						<Link to='/support/livechat' className='settings-box'>
-							<BsFillChatDotsFill className='settings-icon' />
-							<div className='settings-content'>
-								<h3>Liva chat</h3>
-								<p>Interact with customer's inqueries</p>
-								<div className='settings-link'>Open live chat</div>
-							</div>
-						</Link>
+						<div
+							className='settings-box'
+							style={{
+								minWidth: "100%",
+								cursor: "default",
+								border: "0",
+							}}>
+							<br />
+							<br />
+							<br />
+						</div>
 					</div>
 				</div>
 			</div>

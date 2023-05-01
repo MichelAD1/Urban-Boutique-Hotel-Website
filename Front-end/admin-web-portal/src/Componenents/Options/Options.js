@@ -31,7 +31,7 @@ const Options = () => {
 								<div className='settings-link'>Manage photo gallery</div>
 							</div>
 						</Link>
-						<Link to='' className='settings-box'>
+						<Link to='/options/marketing' className='settings-box'>
 							<MdMarkEmailUnread className='settings-icon' />
 							<div className='settings-content'>
 								<h3>Email marketing</h3>

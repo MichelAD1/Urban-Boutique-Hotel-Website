@@ -1,6 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+// Authorizations
+import authorizations from "../../Global/authorizations";
+
 // Componenets
 import ReactModal from "react-modal";
 
@@ -28,29 +31,6 @@ const EmployeeItem = () => {
 	const [ban, setBan] = useState("");
 
 	const [edit, setEdit] = useState(false);
-
-	const authorizations = [
-		{
-			id: 1,
-			name: "Super admin",
-		},
-		{
-			id: 2,
-			name: "Content manager",
-		},
-		{
-			id: 3,
-			name: "User manager",
-		},
-		{
-			id: 4,
-			name: "Reservation manager",
-		},
-		{
-			id: 5,
-			name: "Default employee",
-		},
-	];
 
 	useEffect(() => {
 		if (isValid) {

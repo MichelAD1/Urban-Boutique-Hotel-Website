@@ -113,6 +113,7 @@ Route::group(["prefix"=>"v0.1"], function(){
             Route::post('search',[StaffController::class,'searchEmployee']);
             Route::get('get',[StaffController::class,'getEmployees']);
             Route::post('add',[StaffController::class,'addEmployee']);
+            Route::get('getinfo',[StaffController::class,'getInformation']);
 
         });
 

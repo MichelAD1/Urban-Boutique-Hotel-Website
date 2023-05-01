@@ -29,9 +29,7 @@ export default function Users() {
 		status,
 		error,
 		data: usersData,
-	} = useQuery(["users_data", `${base_url}customer/get`], FetchData, {
-		staleTime: 300000, // 5 minutes
-	});
+	} = useQuery(["users_data", `${base_url}customer/get`], FetchData);
 	useEffect(() => {
 		if (usersData) {
 			if (usersData.data.length > 0) {

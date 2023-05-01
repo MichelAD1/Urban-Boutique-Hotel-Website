@@ -43,7 +43,7 @@ const Finance = () => {
 			setBudgets(financeData);
 			setLoading(false);
 		}
-	}, [financeData, status]);
+	}, [financeData, status, isBudgetModalOpen]);
 
 	useEffect(() => {
 		if (transactions.length === 0) {

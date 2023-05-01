@@ -122,6 +122,8 @@ const Reservation = () => {
     });
   };
 
+  const handleRequest = () => {};
+
   return (
     <>
       <div className="reservations-edit-container">
@@ -167,6 +169,12 @@ const Reservation = () => {
           <button onClick={handleSubmit} type="submit">
             {t("save_changes")}
           </button>
+        </div>
+        <div className="reservations main">
+          <h2>Maintenance Request</h2>
+          <div className="confirm-edit main">
+            <button onClick={handleRequest}>Send Request</button>
+          </div>
         </div>
       </div>
       <Footer />

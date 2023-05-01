@@ -2486,7 +2486,10 @@ h6 {
   flex-direction: column;
   padding-left: 15%;
   padding-right: 15%;
-  height: 22em;
+  height: 28em;
+}
+.reservations.main {
+  margin-top: 2%;
 }
 
 .reservations-section {
@@ -2849,6 +2852,11 @@ h6 {
   display: flex;
   justify-content: flex-end;
   margin-right: 5%;
+  margin-top: 3%;
+}
+.confirm-edit.main {
+  display: flex;
+  justify-content: flex-start;
   margin-top: 3%;
 }
 

@@ -9,9 +9,11 @@ const FeedbackSubmitted = () => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       navigate("/contact", { replace: true });
+      window.close();
     }, 5000);
     return () => clearTimeout(timeoutId);
   }, [navigate]);
+
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);

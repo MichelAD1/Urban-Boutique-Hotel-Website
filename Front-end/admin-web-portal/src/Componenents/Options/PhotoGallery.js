@@ -71,6 +71,7 @@ const PhotoGallery = () => {
 				setEdit(false);
 				setAddedImages([]);
 				setDeletedImages([]);
+				window.location.reload();
 			} else {
 				alert("Something went wrong");
 			}

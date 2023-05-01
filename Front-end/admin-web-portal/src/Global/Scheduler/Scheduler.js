@@ -2,17 +2,13 @@ import * as React from "react";
 import Paper from "@mui/material/Paper";
 import {
 	ViewState,
-	GroupingState,
-	IntegratedGrouping,
 	IntegratedEditing,
 	EditingState,
 } from "@devexpress/dx-react-scheduler";
 import {
 	Scheduler,
-	Resources,
 	Appointments,
 	AppointmentTooltip,
-	GroupingPanel,
 	DayView,
 	WeekView,
 	ViewSwitcher,
@@ -24,44 +20,34 @@ import {
 	CurrentTimeIndicator,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { styled } from "@mui/material/styles";
-import { teal, indigo } from "@mui/material/colors";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import InputAdornment from "@mui/material/InputAdornment";
+
+// API
+import AddTask from "../../api-client/Scheduler/AddTask";
 
 const appointments = [
 	{
 		id: 0,
 		title: "Watercolor Landscape",
-		members: [1, 2],
-		roomId: 1,
 		startDate: new Date(2017, 4, 28, 9, 30),
 		endDate: new Date(2017, 4, 28, 12, 0),
 	},
 	{
 		id: 1,
 		title: "Oil Painting for Beginners",
-		members: [1],
-		roomId: 2,
 		startDate: new Date(2017, 4, 28, 12, 30),
 		endDate: new Date(2017, 4, 28, 14, 30),
 	},
 	{
 		id: 2,
 		title: "Testing",
-		members: [1, 2],
-		roomId: 1,
 		startDate: new Date(2017, 4, 29, 12, 30),
 		endDate: new Date(2017, 4, 29, 14, 30),
 	},
 	{
 		id: 3,
 		title: "Final exams",
-		members: [1, 2],
-		roomId: 2,
 		startDate: new Date(2017, 4, 29, 9, 30),
 		endDate: new Date(2017, 4, 29, 12, 0),
 	},
@@ -79,13 +65,20 @@ const classes = {
 	textField: `${PREFIX}-textField`,
 };
 
-const StyledTextField = styled(TextField)(({ theme: { spacing } }) => ({
-	[`&.${classes.textField}`]: {
-		marginRight: spacing(4),
-		marginLeft: spacing(1),
-		width: "120px",
-	},
-}));
+const formattedDate = (date) => {
+	const parsedDate = new Date(date);
+	const year = parsedDate.getFullYear();
+	const month =
+		parsedDate.getMonth() + 1 < 10
+			? `0${parsedDate.getMonth() + 1}`
+			: parsedDate.getMonth() + 1;
+	const day =
+		parsedDate.getDate() < 10
+			? `0${parsedDate.getDate()}`
+			: parsedDate.getDate();
+	const formattedDate = `${year}-${month}-${day}`;
+	return formattedDate;
+};
 
 export default class Demo extends React.PureComponent {
 	constructor(props) {
@@ -118,6 +111,13 @@ export default class Demo extends React.PureComponent {
 		this.setState((state) => {
 			let { data } = state;
 			if (added) {
+				added.startDate = formattedDate(added.startDate);
+				added.endDate = formattedDate(added.endDate);
+				console.log(added);
+				const response = AddTask(added);
+				response.then((res) => {
+					console.log(res);
+				});
 				const startingAddedId =
 					data.length > 0 ? data[data.length - 1].id + 1 : 0;
 				data = [...data, { id: startingAddedId, ...added }];

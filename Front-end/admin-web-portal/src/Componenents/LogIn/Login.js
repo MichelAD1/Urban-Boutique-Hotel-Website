@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import crypto from "crypto-js";
 
 // MUI
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,6 +11,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // logo
 import logo from "../../assets/logo.png";
+
+// Functions
+import useHash from "../../Global/Functions/Hash";
 
 // API
 import FetchCred from "../../api-client/Auth/FetchCred";
@@ -39,6 +43,10 @@ const Login = () => {
 		FetchCred(reqData).then((res) => {
 			if (res.status === "success") {
 				localStorage.setItem("token", `Bearer ${res.authorisation.token}`);
+				localStorage.setItem(
+					"auth",
+					crypto.SHA256(res.customer.position).toString(),
+				);
 				navigate("/");
 			} else if (res.status === 401) {
 				alert("Incorrect email or password");

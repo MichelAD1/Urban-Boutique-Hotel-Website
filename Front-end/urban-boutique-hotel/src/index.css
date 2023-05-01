@@ -2962,7 +2962,7 @@ h6 {
   margin-top: 2%;
   display: flex;
   width: 85%;
-  height: 330px;
+  height: 350px;
   flex-direction: row;
   justify-content: center;
   align-content: center;
@@ -2986,5 +2986,8 @@ h6 {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+.feedback {
+  height: 30em;
 }
 /* End of feedback */

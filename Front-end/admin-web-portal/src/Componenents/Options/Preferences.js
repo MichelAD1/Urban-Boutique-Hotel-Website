@@ -96,7 +96,6 @@ const Preferences = () => {
 		setLoading(true);
 		const response = AssignPreferences(reqData);
 		response.then((res) => {
-			console.log(res);
 			if (
 				res[0] === "Success" &&
 				res[1] === "Success" &&

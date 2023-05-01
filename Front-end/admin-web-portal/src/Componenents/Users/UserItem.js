@@ -16,7 +16,6 @@ const UserItem = () => {
 	const [gender, setGender] = useState("");
 
 	useEffect(() => {
-		console.log(data.banned);
 		if (data.banned) {
 			setBan("Unban");
 		} else {
@@ -58,7 +57,6 @@ const UserItem = () => {
 				const new_data = res.user;
 				loc.state = { data: new_data };
 			}
-			console.log(res);
 		});
 		closeModal();
 	};

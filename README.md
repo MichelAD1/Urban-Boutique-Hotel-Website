@@ -28,8 +28,14 @@ Take some time to explore our website and discover the extensive range of world-
 <pre><code>npm start</code></pre>
 <p>This will start a local development server at http://localhost:3000 where you can access the website.</p>
 <br>
+<h2> :radio_button: GIFs </h2>
+<br>
+![Alt Text](https://media.giphy.com/media/SpopD7IQN2gK3qN4jS/giphy.gif)
+<br>
 <h2> :radio_button: License </h2>
 <br>
 <p>This project is licensed under the MIT License - see the LICENSE.md file for details.</p>
+<br>
+
 
 

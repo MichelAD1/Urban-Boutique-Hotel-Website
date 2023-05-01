@@ -29,7 +29,7 @@ const PhotoGallery = () => {
 		data: photoGalleryData,
 	} = useQuery(["photo_gallery"], GetImages);
 	useEffect(() => {
-		if (photoGalleryData) {
+		if (photoGalleryData && !imagesChanged) {
 			if (photoGalleryData.length === 0) {
 				setErr("No images found");
 			}
@@ -37,6 +37,12 @@ const PhotoGallery = () => {
 			setLoading(false);
 		}
 	}, [photoGalleryData, status]);
+
+	useEffect(() => {
+		console.log("Images", images);
+		console.log("Added Images", addedImages);
+		console.log("Deleted Images", deletedImages);
+	}, [images, addedImages, deletedImages]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -59,15 +65,18 @@ const PhotoGallery = () => {
 		const response = EditImages(data);
 		response.then((res) => {
 			if (res.status === 200) {
+				if (res.data.length === 0) {
+					setErr("No images found");
+				}
 				setImages(res.data);
 				setImagesChanged(false);
 				setEdit(false);
+				setAddedImages([]);
+				setDeletedImages([]);
 			} else {
 				alert("Something went wrong");
 			}
 			setLoading(false);
-			setAddedImages([]);
-			setDeletedImages([]);
 		});
 	};
 
@@ -97,11 +106,11 @@ const PhotoGallery = () => {
 				return convertImageToBase64(file, images.length + id);
 			}),
 		);
-		setImages([...images, ...base64Images]);
 		const reqImages = [];
 		for (let i = 0; i < base64Images.length; i++) {
 			reqImages.push(base64Images[i].image_url);
 		}
+		setImages([...images, ...base64Images]);
 		setAddedImages([...addedImages, ...reqImages]);
 		setImagesChanged(true);
 		setErr("");
@@ -173,7 +182,7 @@ const PhotoGallery = () => {
 									return (
 										<div key={image.id}>
 											<img className='gallery-images' src={image.image_url} />
-											{edit && (
+											{edit && !loading && (
 												<RiDeleteBin2Fill
 													className='delete-icon'
 													onClick={() => handleImageDelete(image.id)}

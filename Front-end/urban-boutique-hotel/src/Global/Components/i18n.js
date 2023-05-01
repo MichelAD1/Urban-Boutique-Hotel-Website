@@ -203,6 +203,10 @@ i18n.use(initReactI18next).init({
         send_request: "Send Request",
         submit_main: "Submitting Maintenance Request",
         submit_main1: "Maintenance Request Submitted",
+        feedback_submit1:
+          "Thank you for taking the time to share your feedback with us!",
+        feedback_submit2:
+          "We appreciate your input and will take it into consideration as we work to improve our services.",
         feedback_head: "Feedback",
         feedback_w:
           "We would be thrilled if you could share your thoughts on our website. Your feedback is incredibly valuable to us and helps us improve our services.",
@@ -417,6 +421,11 @@ i18n.use(initReactI18next).init({
         send_request: "Enviar Solicitud",
         submit_main: "Enviando Solicitud de Mantenimiento",
         submit_main1: "Solicitud de Mantenimiento Enviada",
+        feedback_submit1:
+          "¡Gracias por tomarte el tiempo de compartir tu opinión con nosotros!",
+        feedback_submit2:
+          "Apreciamos tus comentarios y los tendremos en cuenta mientras trabajamos para mejorar nuestros servicios.",
+
         feedback_head: "Comentarios",
         feedback_w:
           "Nos encantaría que compartiera sus pensamientos sobre nuestro sitio web. Sus comentarios son extremadamente valiosos para nosotros y nos ayudan a mejorar nuestros servicios.",
@@ -620,6 +629,10 @@ i18n.use(initReactI18next).init({
         send_request: "Envoyer Demande",
         submit_main: "Envoi de la Demande de Maintenance",
         submit_main1: "Demande de Maintenance Envoyée",
+        feedback_submit1:
+          "Merci d'avoir pris le temps de nous faire part de votre avis !",
+        feedback_submit2:
+          "Nous apprécions vos commentaires et les prendrons en considération pour améliorer nos services.",
         feedback_head: "Commentaires",
         feedback_w:
           "Nous serions ravis si vous pouviez partager vos réflexions sur notre site web. Vos commentaires sont incroyablement précieux pour nous et nous aident à améliorer nos services.",
@@ -821,6 +834,10 @@ i18n.use(initReactI18next).init({
         send_request: "Anfrage senden",
         submit_main: "Wartungsanfrage wird gesendet",
         submit_main1: "Wartungsanfrage gesendet",
+        feedback_submit1:
+          "Vielen Dank, dass Sie sich die Zeit genommen haben, uns Ihr Feedback mitzuteilen!",
+        feedback_submit2:
+          "Wir schätzen Ihre Meinung und werden sie berücksichtigen, während wir daran arbeiten, unsere Dienstleistungen zu verbessern.",
         feedback_head: "Feedback",
         feedback_w:
           "Wir würden uns freuen, wenn Sie uns Ihre Gedanken zu unserer Website mitteilen könnten. Ihr Feedback ist unglaublich wertvoll für uns und hilft uns, unsere Dienstleistungen zu verbessern.",
@@ -1022,6 +1039,10 @@ i18n.use(initReactI18next).init({
         send_request: "Invia Richiesta",
         submit_main: "Invio della Richiesta di Manutenzione",
         submit_main1: "Richiesta di Manutenzione Inviata",
+        feedback_submit1:
+          "Grazie per aver dedicato del tempo a condividere il tuo feedback con noi!",
+        feedback_submit2:
+          "Apprezziamo il tuo contributo e lo terremo in considerazione mentre lavoriamo per migliorare i nostri servizi.",
         feedback_head: "Feedback",
         feedback_w:
           "Saremmo entusiasti se poteste condividere i vostri pensieri sul nostro sito web. Il vostro feedback è incredibilmente prezioso per noi e ci aiuta a migliorare i nostri servizi.",

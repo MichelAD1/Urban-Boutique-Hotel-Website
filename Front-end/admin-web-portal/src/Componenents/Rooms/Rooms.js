@@ -33,23 +33,25 @@ function Rooms() {
 	}, [roomsData, status]);
 
 	const search_parameters = Object.keys(Object.assign({}, ...data));
-	const filter_items = [...new Set(data.map((item) => item.category))].map(
-		(category) => {
-			return { category: category, id: counter_key++ };
+	const filter_items = [...new Set(data.map((item) => item.room.beds))].map(
+		(beds) => {
+			return { beds: beds, id: counter_key++ };
 		},
 	);
 
 	function search(items) {
-		return items.filter(
-			(item) =>
-				item.category.includes(filter) &&
-				search_parameters.some((parameter) =>
-					item[parameter]
-						.toString()
+		return items.filter((item) => {
+			const { room, ...rest } = item;
+			const searchKeys = [...Object.keys(room), ...search_parameters];
+			return (
+				item.room.beds.includes(filter) &&
+				searchKeys.some((key) =>
+					String(rest[key] || room[key])
 						.toLowerCase()
 						.includes(query.toLowerCase()),
-				),
-		);
+				)
+			);
+		});
 	}
 
 	if (loading) {
@@ -77,8 +79,8 @@ function Rooms() {
 					onChange={(e) => setFilter(e.target.value)}>
 					<option value=''>Filter by category</option>
 					{filter_items.map((item) => (
-						<option value={item.category} key={item.id}>
-							{item.category}
+						<option value={item.beds} key={item.id}>
+							{item.beds}
 						</option>
 					))}
 				</select>
@@ -99,7 +101,7 @@ function Rooms() {
 						</h2>
 					)}
 					{!err &&
-						data.map((item) => {
+						search(data).map((item) => {
 							return <Room data={item} key={item.room.id} />;
 						})}
 				</div>

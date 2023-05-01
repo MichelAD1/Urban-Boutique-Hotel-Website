@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import Footer from "../../Global/Components/Footer";
 //apis
 import EditReservation from "../../api-client/Account/EditReservation";
+import MaintenanceRequest from "../../api-client/Account/MaintenanceRequest";
 
 const Reservation = () => {
   const location = useLocation();
@@ -122,6 +123,18 @@ const Reservation = () => {
     });
   };
 
+  const handleRequest = () => {
+    const reservation_id = room.id;
+    const room_id = room.room_id;
+    const data = { reservation_id, room_id };
+    let response = MaintenanceRequest(data);
+    response.then((res) => {
+      if (res) {
+        navigate("/maintenance/submit");
+      }
+    });
+  };
+
   return (
     <>
       <div className="reservations-edit-container">
@@ -167,6 +180,12 @@ const Reservation = () => {
           <button onClick={handleSubmit} type="submit">
             {t("save_changes")}
           </button>
+        </div>
+        <div className="reservations main">
+          <h2>{t("main_head")}</h2>
+          <div className="confirm-edit main">
+            <button onClick={handleRequest}>{t("send_request")}</button>
+          </div>
         </div>
       </div>
       <Footer />

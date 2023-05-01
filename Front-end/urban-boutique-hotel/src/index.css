@@ -2486,7 +2486,10 @@ h6 {
   flex-direction: column;
   padding-left: 15%;
   padding-right: 15%;
-  height: 22em;
+  height: 28em;
+}
+.reservations.main {
+  margin-top: 2%;
 }
 
 .reservations-section {
@@ -2812,6 +2815,46 @@ h6 {
 }
 /* End of FAQS */
 /* Reservations */
+.checkmark-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.check-mark-container {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.check-mark-svg {
+  width: 50px;
+  height: 50px;
+}
+
+.check-mark-circle {
+  stroke: var(--primaryColor);
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  fill: none;
+  animation: stroke-checkmark 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.check-mark-path {
+  stroke: var(--primaryColor);
+  stroke-width: 2;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  fill: none;
+  animation: stroke-checkmark 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
+}
+
+@keyframes stroke-checkmark {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
 .res-buttons {
   display: flex;
   flex-direction: row;
@@ -2849,6 +2892,11 @@ h6 {
   display: flex;
   justify-content: flex-end;
   margin-right: 5%;
+  margin-top: 3%;
+}
+.confirm-edit.main {
+  display: flex;
+  justify-content: flex-start;
   margin-top: 3%;
 }
 

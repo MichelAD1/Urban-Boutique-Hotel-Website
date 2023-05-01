@@ -269,6 +269,7 @@ class RoomController extends Controller
             $object->id = $reservation->id;
             $object->reservation_date = $reservation->reservation_date;
             $object->reservation_end = $reservation->reservation_end;
+            $object->room_id = $reservation->room_id;
             $room = Room::find($reservation->room_id);
             $roomReservations = DB::table('customer_reserves_room')->where('customer_reserves_room.room_id','=',$room->id)->get();
             $object->title = $room->title;

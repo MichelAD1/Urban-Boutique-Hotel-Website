@@ -17,6 +17,7 @@ import Policy from "./Components/Policies/Policy";
 import Discover from "./Components/Discover/Discover";
 import Contact from "./Components/Contact/Contact";
 import BookingSubmitted from "./Components/Submit/BookingSubmitted";
+import FeedbackSubmitted from "./Components/Submit/FeedbackSubmitted";
 import MaintenanceSubmitted from "./Components/Submit/MaintenanceSubmitted";
 
 import Navbar from "./Components/Navbar/Navbar";
@@ -130,6 +131,17 @@ function App() {
                   <>
                     <ScrollToTop />
                     <MaintenanceSubmitted />
+                  </>
+                }
+              />
+            </Route>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route
+                path="/feedback/submit"
+                element={
+                  <>
+                    <ScrollToTop />
+                    <FeedbackSubmitted />
                   </>
                 }
               />

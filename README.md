@@ -28,13 +28,10 @@ Take some time to explore our website and discover the extensive range of world-
 <pre><code>npm start</code></pre>
 <p>This will start a local development server at http://localhost:3000 where you can access the website.</p>
 <br>
-<h2> :radio_button: Screenshots </h2>
-<br>
-
-<br>
 <h2> :radio_button: License </h2>
 <br>
 <p>This project is licensed under the MIT License - see the LICENSE.md file for details.</p>
 <br>
+#Screenshots
 ![icon](https://user-images.githubusercontent.com/102959762/235473266-64105375-3b66-48c4-971c-d0491b2321a5.png)
 

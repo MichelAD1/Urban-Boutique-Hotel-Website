@@ -20,6 +20,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\TaskController;
 use App\Models\EmailSender;
 use App\Models\Maintenance_Request;
 use Illuminate\Http\Request;
@@ -62,8 +63,8 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::group(['prefix'=>'reservation'],function(){
             Route::middleware(['auth', 'check.reservationmanager'])->group(function(){
                 Route::get('get',[RoomController::class,'getReservations']);
-                Route::get('cancel/{reservationid}',[CustomerController::class,'cancelReservation']);
-                Route::get('search/{reservationid}',[RoomController::class,'searchReservation']);
+                Route::get('cancel_res/{reservationid}',[CustomerController::class,'cancelReservation']);
+                Route::post('search',[RoomController::class,'searchReservation']);
             });
             Route::middleware(['auth', 'check.admin'])->group(function(){
                 Route::get('getcount',[RoomController::class,'getReservationsCount']);
@@ -87,6 +88,7 @@ Route::group(["prefix"=>"v0.1"], function(){
         Route::middleware(['auth', 'check.usermanager'])->group(function(){
             Route::get('ban/{customerid}',[CustomerController::class,'banCustomer']);
             Route::get('get',[CustomerController::class,'getCustomers']);
+            Route::post('search',[CustomerController::class,'searchCustomer']);
         });
         Route::middleware(['auth', 'check.admin'])->group(function(){
             Route::get('getcount',[CustomerController::class,'getCustomerCount']);
@@ -108,7 +110,7 @@ Route::group(["prefix"=>"v0.1"], function(){
 
             Route::post('editinfo',[StaffController::class,'editInformation']);
             Route::get('ban/{employeeid}',[StaffController::class,'banEmployee']);
-            Route::get('search/{employeeid}',[StaffController::class,'searchEmployee']);
+            Route::post('search',[StaffController::class,'searchEmployee']);
             Route::get('get',[StaffController::class,'getEmployees']);
             Route::post('add',[StaffController::class,'addEmployee']);
 

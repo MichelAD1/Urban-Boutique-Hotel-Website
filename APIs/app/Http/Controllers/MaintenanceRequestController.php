@@ -53,16 +53,17 @@ class MaintenanceRequestController extends Controller
     public function assignEmployee(Request $request){
         $maintenancereq = Maintenance_Request::find($request->requestid);
         $maintenancereq->employee_id = $request->employee_id;
+        $maintenancereq->status = "completed";
         if($maintenancereq->save()){
             return response()->json([
                 'message'=>'success',
                 'maintenance_object'=>$maintenancereq,
                 'customer_object'=> User::join('customers','customers.user_id','=','users.id')
-                                        ->where('users.id','=',$maintenancereq->customer_id)->get(),
-                'reservation_object'=> DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$maintenancereq->reservation_id)->get(),
+                                        ->where('users.id','=',$maintenancereq->customer_id)->first(),
+                'reservation_object'=> DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$maintenancereq->reservation_id)->first(),
                 'room_object'=>Room::find($maintenancereq->room_id),
                 'employee_object'=>User::join('staff','staff.user_id','=','users.id')
-                ->where('users.id','=',$maintenancereq->customer_id)->get()
+                ->where('users.id','=',$request->employee_id)->first()
 
 
             ]);
@@ -70,7 +71,7 @@ class MaintenanceRequestController extends Controller
     }
 
     public function getPendingRequests(){
-        $maintenanceRequests = Maintenance_Request::where('status', '=', 'pending')->paginate(10);
+        $maintenanceRequests = Maintenance_Request::where('status', '=', 'pending')->paginate(14);
         foreach($maintenanceRequests as $mainreq){
             $mainreq['customer_object']=User::join('customers','customers.user_id','=','users.id')
             ->where('users.id','=',$mainreq->customer_id)->first();
@@ -80,10 +81,10 @@ class MaintenanceRequestController extends Controller
         return $maintenanceRequests;
     }
     public function getCompletedRequests(){
-        $maintenanceRequests=Maintenance_Request::where('status','=','completed')->get();
+        $maintenanceRequests=Maintenance_Request::where('status','=','completed')->paginate(14);
         foreach($maintenanceRequests as $mainreq){
             $mainreq['customer_object']=User::join('customers','customers.user_id','=','users.id')
-            ->where('users.id','=',$mainreq->customer_id)->gfirstet();
+            ->where('users.id','=',$mainreq->customer_id)->first();
             $mainreq['reservation_object'] =DB::table('customer_reserves_room')->where('customer_reserves_room.id','=',$mainreq->reservation_id)->first();
             $mainreq['room_object']=Room::find($mainreq->room_id);
             $mainreq['employee_object']=User::join('staff','staff.user_id','=','users.id')

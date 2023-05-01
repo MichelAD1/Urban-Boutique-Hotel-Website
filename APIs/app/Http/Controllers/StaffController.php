@@ -69,14 +69,18 @@ class StaffController extends Controller
         return $revenue;
     }
     public function searchEmployee(Request $request){ //name or username
-        if($request->has('name')){
-            $employee = Staff::join('users','staff.user_id','=','users.id')->where('users.name','=',$request->name)->first();
-        }
-        else if($request->has('username')){
-            $employee = Staff::join('users','staff.user_id','=','users.id')->where('users.username','=',$request->username)->first();
+        $query = $request->search_query;
+
+        $employees = Staff::join('users', 'staff.user_id', '=', 'users.id')
+        ->where('users.name', 'like', '%'.$query.'%')
+        ->orWhere('users.username', 'like', '%'.$query.'%')
+        ->get();
+
+        if ($employees->isEmpty()) {
+        return response()->json(['error' => 'No employees found']);
         }
 
-        return $employee;
+        return response()->json(['employees' => $employees]);
     }
     public function getEmployees(){
         $user = Auth::user();

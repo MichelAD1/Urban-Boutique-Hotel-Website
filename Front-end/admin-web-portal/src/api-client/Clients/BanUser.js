@@ -11,7 +11,6 @@ export default async function banUser(user_id) {
 			return res.data;
 		})
 		.catch((err) => {
-			console.log(err);
 			return err.response;
 		});
 }

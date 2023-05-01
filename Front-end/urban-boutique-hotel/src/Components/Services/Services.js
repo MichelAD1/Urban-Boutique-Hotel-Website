@@ -7,12 +7,57 @@ import groupOffersImg from "../../assets/images/group-offers.jpg";
 import parkingImg from "../../assets/images/parking.jpg";
 import promotionsImg from "../../assets/images/promotions.jpg";
 import { useTranslation } from "react-i18next";
+import jwt_decode from "jwt-decode";
 
 const Services = () => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
   }, []);
+
+  //Token handler
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const shouldReload = localStorage.getItem("shouldReload");
+    if (shouldReload === "true") {
+      localStorage.removeItem("shouldReload");
+      window.location.reload(true);
+    }
+  }, []);
+  if (token) {
+    const decoded = jwt_decode(token);
+    const currentTime = Date.now() / 1000; // Convert to seconds
+
+    if (decoded.exp < currentTime) {
+      localStorage.removeItem("username");
+      localStorage.removeItem("token");
+      localStorage.removeItem("Translate");
+      localStorage.removeItem("Lg");
+      localStorage.removeItem("Exchange");
+      localStorage.removeItem("Currency");
+      localStorage.setItem("shouldReload", "true");
+    }
+  }
+
+  //Translation handler
+  useEffect(() => {
+    if (!localStorage.getItem("Translate")) {
+      localStorage.setItem("Translate", "en");
+      localStorage.setItem("Lg", "English");
+    }
+    i18n.changeLanguage(localStorage.getItem("Translate"));
+  }, [localStorage.getItem("Translate")]);
+
+  //currency handler
+  useEffect(() => {
+    if (!localStorage.getItem("Currency")) {
+      localStorage.setItem("Currency", "USD");
+    }
+    if (!localStorage.getItem("Exchange")) {
+      localStorage.setItem("Exchange", 1);
+    }
+  }, [localStorage.getItem("Currency"), localStorage.getItem("Exchange")]);
+
   const servicesData = [
     {
       id: 1,

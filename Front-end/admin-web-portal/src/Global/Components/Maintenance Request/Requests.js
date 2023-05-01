@@ -1,24 +1,47 @@
-import "../../Styles/styles.css";
 import { useMemo, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import base_url from "../../../api-client/BaseUrl";
+import { useQuery } from "@tanstack/react-query";
 
 // Components
 import BasicTable from "../Tables/BasicTablePagination";
 
 // API
-import fetchMaintenance from "../../../api-client/Maintenance/fetchMaintenance";
+import FetchData from "../../../api-client/FetchData";
 
 const Requests = () => {
 	const location = useLocation();
-	const [data, setData] = useState(location.state.data);
-	const [query, setQuery] = useState("");
+	const [data, setData] = useState([]);
 	const [filter, setFilter] = useState("");
 
 	const [err, setErr] = useState("");
 
+	const [url, setUrl] = useState(`${base_url}maintenance/get`);
+	const [loading, setLoading] = useState(true);
+
 	useEffect(() => {
-		if (data.data.length === 0) setErr("No pending requests");
-	}, [data]);
+		if (filter === "pending") {
+			setUrl(`${base_url}maintenance/get`);
+		} else if (filter === "completed") {
+			setUrl(`${base_url}maintenance/getcompleted`);
+		}
+		setLoading(true);
+	}, [filter]);
+
+	const {
+		status,
+		error,
+		data: requestsData,
+	} = useQuery(["requests_data", url], FetchData);
+	useEffect(() => {
+		if (requestsData) {
+			if (requestsData.length === 0) {
+				setErr("No pending requests");
+			}
+			setData(requestsData);
+			setLoading(false);
+		}
+	}, [requestsData, status, url]);
 
 	const columns = useMemo(
 		() => [
@@ -46,17 +69,37 @@ const Requests = () => {
 		],
 		[],
 	);
+	if (loading) {
+		return (
+			<div className='container-buffer'>
+				<div className='buffer-loader home'></div>
+			</div>
+		);
+	}
 	return (
 		<div className='container'>
-			<div className='requests-container'>
-				<h2>Room maintenance requests</h2>
-				<BasicTable
-					reqData={data}
-					columns={columns}
-					redirect={"request"}
-					err={err}
-				/>
+			<div
+				className='searchAndFilter'
+				style={{ justifyContent: "space-between" }}>
+				<h2>Maintenance Requests</h2>
+				<div className='filter'>
+					<select
+						value={filter}
+						className='filterDropDown'
+						onChange={(e) => {
+							setFilter(e.target.value);
+						}}>
+						<option value='pending'>Pending</option>
+						<option value='completed'>Completed</option>
+					</select>
+				</div>
 			</div>
+			<BasicTable
+				reqData={data}
+				columns={columns}
+				redirect={"request"}
+				err={err}
+			/>
 		</div>
 	);
 };

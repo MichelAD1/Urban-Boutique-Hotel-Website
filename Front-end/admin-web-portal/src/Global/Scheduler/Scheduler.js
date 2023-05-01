@@ -1,18 +1,14 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import {
 	ViewState,
-	GroupingState,
-	IntegratedGrouping,
 	IntegratedEditing,
 	EditingState,
 } from "@devexpress/dx-react-scheduler";
 import {
 	Scheduler,
-	Resources,
 	Appointments,
 	AppointmentTooltip,
-	GroupingPanel,
 	DayView,
 	WeekView,
 	ViewSwitcher,
@@ -23,222 +19,147 @@ import {
 	TodayButton,
 	CurrentTimeIndicator,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { styled } from "@mui/material/styles";
-import { teal, indigo } from "@mui/material/colors";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import InputAdornment from "@mui/material/InputAdornment";
 
-const appointments = [
-	{
-		id: 0,
-		title: "Watercolor Landscape",
-		members: [1, 2],
-		roomId: 1,
-		startDate: new Date(2017, 4, 28, 9, 30),
-		endDate: new Date(2017, 4, 28, 12, 0),
-	},
-	{
-		id: 1,
-		title: "Oil Painting for Beginners",
-		members: [1],
-		roomId: 2,
-		startDate: new Date(2017, 4, 28, 12, 30),
-		endDate: new Date(2017, 4, 28, 14, 30),
-	},
-	{
-		id: 2,
-		title: "Testing",
-		members: [1, 2],
-		roomId: 1,
-		startDate: new Date(2017, 4, 29, 12, 30),
-		endDate: new Date(2017, 4, 29, 14, 30),
-	},
-	{
-		id: 3,
-		title: "Final exams",
-		members: [1, 2],
-		roomId: 2,
-		startDate: new Date(2017, 4, 29, 9, 30),
-		endDate: new Date(2017, 4, 29, 12, 0),
-	},
-];
+// React Query
+import { useQuery } from "@tanstack/react-query";
 
-const owners = [
-	{
-		text: "Andrew Glover",
-		id: 1,
-		color: indigo,
-	},
-	{
-		text: "Arnie Schwartz",
-		id: 2,
-		color: teal,
-	},
-	{
-		text: "Arnie Schwartz",
-		id: 3,
-		color: teal,
-	},
-	{
-		text: "Arnie Schwartz",
-		id: 4,
-		color: teal,
-	},
-];
+// API
+import AddTask from "../../api-client/Scheduler/AddTask";
+import FetchTasks from "../../api-client/Scheduler/FetchTasks";
+import EditTask from "../../api-client/Scheduler/EditTask";
+import DeleteTask from "../../api-client/Scheduler/DeleteTask";
 
 const date = new Date();
 const current = `${date.getFullYear()}-${
 	date.getMonth() + 1
 }-${date.getDate()}`;
 
-const PREFIX = "Demo";
-
-const classes = {
-	checkBoxContainer: `${PREFIX}-checkBoxContainer`,
-	textField: `${PREFIX}-textField`,
+const formattedDate = (date) => {
+	const parsedDate = new Date(date);
+	const year = parsedDate.getFullYear();
+	const month =
+		parsedDate.getMonth() + 1 < 10
+			? `0${parsedDate.getMonth() + 1}`
+			: parsedDate.getMonth() + 1;
+	const day =
+		parsedDate.getDate() < 10
+			? `0${parsedDate.getDate()}`
+			: parsedDate.getDate();
+	const hour =
+		parsedDate.getHours() < 10
+			? `0${parsedDate.getHours()}`
+			: parsedDate.getHours();
+	const minute =
+		parsedDate.getMinutes() < 10
+			? `0${parsedDate.getMinutes()}`
+			: parsedDate.getMinutes();
+	const second =
+		parsedDate.getSeconds() < 10
+			? `0${parsedDate.getSeconds()}`
+			: parsedDate.getSeconds();
+	const formattedDate = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+	return formattedDate;
 };
-const StyledGrid = styled(Grid)(({ theme: { spacing } }) => ({
-	[`&.${classes.checkBoxContainer}`]: {
-		paddingTop: spacing(1),
-		paddingBottom: spacing(1),
-		paddingLeft: spacing(4),
-	},
-}));
-const StyledTextField = styled(TextField)(({ theme: { spacing } }) => ({
-	[`&.${classes.textField}`]: {
-		marginRight: spacing(4),
-		marginLeft: spacing(1),
-		width: "120px",
-	},
-}));
 
-const UpdateIntervalBox = ({ updateInterval, onValueChange }) => (
-	<Grid item container xs={6} alignItems='center' justifyContent='flex-end'>
-		<Typography>Staff schedule</Typography>
-		<StyledTextField
-			className={classes.textField}
-			variant='outlined'
-			onChange={(event) => onValueChange(event.target.value)}
-			value={updateInterval / 1000}
-			type='number'
-			InputProps={{
-				endAdornment: <InputAdornment position='end'>s</InputAdornment>,
-			}}
-		/>
-	</Grid>
-);
+const Calendar = () => {
+	const [appointments, setAppointments] = useState([]);
+	const [shadePreviousCells, setShadePreviousCells] = useState(true);
+	const [shadePreviousAppointments, setShadePreviousAppointments] =
+		useState(true);
+	const [updateInterval, setUpdateInterval] = useState(10000);
 
-export default class Demo extends React.PureComponent {
-	constructor(props) {
-		super(props);
-		this.state = {
-			data: appointments,
-			resources: [
-				{
-					fieldName: "members",
-					title: "Members",
-					instances: owners,
-					allowMultiple: true,
-				},
-			],
-			grouping: [
-				{
-					resourceName: "members",
-				},
-			],
-			shadePreviousCells: true,
-			shadePreviousAppointments: true,
-			updateInterval: 10000,
-		};
+	const {
+		status,
+		error,
+		data: tasksData,
+	} = useQuery(["tasks_data"], FetchTasks);
+	useEffect(() => {
+		if (tasksData) {
+			if (tasksData.length > 0) {
+				setAppointments(tasksData);
+			} else {
+				alert("No staff found");
+			}
+		}
+	}, [tasksData, status]);
 
-		this.commitChanges = this.commitChanges.bind(this);
-
-		this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-		this.handleUpdateIntervalChange = (nextValue) => {
-			this.setState({
-				updateInterval: nextValue * 1000,
+	const commitChanges = ({ added, changed, deleted }) => {
+		let data = [...appointments];
+		if (added) {
+			added.startDate = formattedDate(added.startDate);
+			added.endDate = formattedDate(added.endDate);
+			const response = AddTask(added);
+			response.then((res) => {
+				if (res.message !== "successful") {
+					alert("Something went wrong");
+				}
 			});
-		};
-	}
+			const startingAddedId =
+				data.length > 0 ? data[data.length - 1].id + 1 : 0;
+			data = [...data, { id: startingAddedId, ...added }];
+		}
+		if (changed) {
+			const taskid = Object.keys(changed)[0];
+			changed[taskid].startDate = formattedDate(changed[taskid].startDate);
+			changed[taskid].endDate = formattedDate(changed[taskid].endDate);
+			changed[taskid].taskid = parseInt(taskid);
+			const response = EditTask(changed[taskid]);
+			response.then((res) => {
+				if (res.message !== "task editted successfuly") {
+					alert("Something went wrong");
+				}
+			});
 
-	handleCheckboxChange(stateField) {
-		const { [stateField]: fieldToChange } = this.state;
-		this.setState({
-			[stateField]: !fieldToChange,
-		});
-	}
+			data = data.map((appointment) =>
+				changed[appointment.id]
+					? { ...appointment, ...changed[appointment.id] }
+					: appointment,
+			);
+		}
+		if (deleted !== undefined) {
+			const response = DeleteTask(deleted);
+			response.then((res) => {
+				if (res.message !== "task removed successfuly") {
+					alert("Something went wrong");
+				}
+			});
+			data = data.filter((appointment) => appointment.id !== deleted);
+		}
+		setAppointments(data);
+	};
 
-	commitChanges({ added, changed, deleted }) {
-		this.setState((state) => {
-			let { data } = state;
-			if (added) {
-				const startingAddedId =
-					data.length > 0 ? data[data.length - 1].id + 1 : 0;
-				data = [...data, { id: startingAddedId, ...added }];
-			}
-			if (changed) {
-				data = data.map((appointment) =>
-					changed[appointment.id]
-						? { ...appointment, ...changed[appointment.id] }
-						: appointment,
-				);
-			}
-			if (deleted !== undefined) {
-				data = data.filter((appointment) => appointment.id !== deleted);
-			}
-			return { data };
-		});
-	}
+	return (
+		<React.Fragment>
+			<Grid container paddingTop='1em' paddingLeft='1em'>
+				<h2>Staff Schedule</h2>
+			</Grid>
+			<Paper>
+				<Scheduler data={appointments} height={850}>
+					<ViewState defaultCurrentDate={current} />
+					<EditingState onCommitChanges={commitChanges} />
 
-	render() {
-		const {
-			data,
-			resources,
-			grouping,
-			shadePreviousCells,
-			updateInterval,
-			shadePreviousAppointments,
-		} = this.state;
+					<WeekView />
+					<DayView />
+					<Appointments />
+					<IntegratedEditing />
 
-		return (
-			<React.Fragment>
-				<Grid container paddingTop='1em' paddingLeft='1em'>
-					{/* <UpdateIntervalBox updateInterval={updateInterval} /> */}
-					<h2>Staff Schedule</h2>
-				</Grid>
-				<Paper>
-					<Scheduler data={data} height={850}>
-						<ViewState defaultCurrentDate={current} />
-						<EditingState onCommitChanges={this.commitChanges} />
-						<GroupingState grouping={grouping} />
+					<Toolbar />
+					<ViewSwitcher />
+					<DateNavigator />
+					<TodayButton />
+					<AppointmentTooltip showOpenButton />
+					<AppointmentForm />
+					<DragDropProvider />
+					<CurrentTimeIndicator
+						shadePreviousCells={shadePreviousCells}
+						shadePreviousAppointments={shadePreviousAppointments}
+						updateInterval={updateInterval}
+					/>
+				</Scheduler>
+			</Paper>
+		</React.Fragment>
+	);
+};
 
-						<WeekView />
-						<DayView />
-						<Appointments />
-						<Resources data={resources} mainResourceName='members' />
-						<IntegratedGrouping />
-						<IntegratedEditing />
-
-						<Toolbar />
-						<ViewSwitcher />
-						<DateNavigator />
-						<TodayButton />
-						<AppointmentTooltip showOpenButton />
-						<AppointmentForm />
-						<GroupingPanel />
-						<DragDropProvider />
-						<CurrentTimeIndicator
-							shadePreviousCells={shadePreviousCells}
-							shadePreviousAppointments={shadePreviousAppointments}
-							updateInterval={updateInterval}
-						/>
-					</Scheduler>
-				</Paper>
-			</React.Fragment>
-		);
-	}
-}
+export default Calendar;

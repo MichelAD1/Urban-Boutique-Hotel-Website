@@ -15,6 +15,9 @@ const Book = () => {
   const navigation = useNavigate();
   const [err, setErr] = useState("");
 
+  const currency = localStorage.getItem("Currency");
+  const exchange = localStorage.getItem("Exchange");
+
   const room = location.state.data;
   const [room_id, setRoonID] = useState(room.room.id);
   const [first_name, setFirstName] = useState("");
@@ -29,7 +32,7 @@ const Book = () => {
   const firstFreeDate = room.free_dates[0];
   const [maxCheckout, setMaxDate] = useState(null);
   const [total_price, setTotalPrice] = useState(
-    room.room.rent * 0.1 + room.room.rent
+    Number(room.room.rent * exchange) * 0.1 + Number(room.room.rent * exchange)
   );
   const countries = [
     "USA",
@@ -325,7 +328,7 @@ const Book = () => {
             </div>
             <div className="order-image">
               <div className="gallery-image order">
-                <img src={galleryImage1} alt="" />
+                <img src={room.images[0].image_url} alt="" />
               </div>
             </div>
             <div className="order-infos">
@@ -344,16 +347,22 @@ const Book = () => {
               <div className="underline"></div>
               <div className="order-info price">
                 <p className="order-label price">{t("subtotal")}</p>
-                <p className="order-desc price">€{room.room.rent}</p>
+                <p className="order-desc price">
+                  {currency} {room.room.rent * exchange}
+                </p>
               </div>
               <div className="order-info">
                 <p className="order-label price">{t("tax")} (10%) </p>
-                <p className="order-desc price">€{room.room.rent * 0.1}</p>
+                <p className="order-desc price">
+                  {currency} {room.room.rent * exchange * 0.1}
+                </p>
               </div>
               <div className="underline"></div>
               <div className="order-info">
                 <p className="order-label total">{t("total")} </p>
-                <p className="order-desc total">€{total_price}</p>
+                <p className="order-desc total">
+                  {currency} {total_price}
+                </p>
               </div>
             </div>
           </div>

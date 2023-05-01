@@ -20,7 +20,6 @@ const RoomItem = () => {
 	const navigate = useNavigate();
 
 	const [edit, setEdit] = useState(false);
-	const [loading, setLoading] = useState(true);
 
 	const [isValid, setIsValid] = useState(loc.state);
 
@@ -200,7 +199,6 @@ const RoomItem = () => {
 				setLoading(true);
 				const response = EditRoom(reqData);
 				response.then((res) => {
-					console.log(res);
 					if (res[0].message === "room added successfully") {
 						const new_data = {};
 						new_data.room = res[0].room;
@@ -244,7 +242,7 @@ const RoomItem = () => {
 			if (res.message === "room deleted successfully") {
 				navigate("/rooms");
 			} else {
-				setErr("Something went wrong");
+				alert("Something went wrong");
 			}
 		});
 		closeModal();

@@ -85,14 +85,7 @@ class CurrencyController extends Controller
         return Currency::all();
     }
     public function getAvailableCurrencies(){
-        $currencies = $this->getCurrencies();
-        $available = array();
-        foreach($currencies as $currency){
-            if($currency->isavailable=1){
-                array_push($available,$currency);
-            }
-        }
-        return $available;
+        return Currency::where('isavailable','=',1)->get();
     }
 
 }

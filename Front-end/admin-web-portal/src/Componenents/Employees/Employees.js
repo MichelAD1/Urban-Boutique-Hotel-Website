@@ -1,25 +1,30 @@
 import { useMemo, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-
-import FetchData from "../../api-client/FetchData";
 import base_url from "../../api-client/BaseUrl";
+
+// API
+import FetchData from "../../api-client/FetchData";
+import Search from "../../api-client/Search";
 
 // Components
 import BasicTable from "../../Global/Components/Tables/BasicTablePagination";
+import SearchList from "../../Global/Components/SearchList";
 
 // Icons
 import { AiOutlinePlus } from "react-icons/ai";
-
 import search_icon from "../../assets/icons/search.svg";
 
 export default function Employees() {
 	const [data, setData] = useState([]);
 	const [query, setQuery] = useState("");
-	const [filter, setFilter] = useState("");
 	const [err, setErr] = useState("");
 
+	const [searchErr, setSearchErr] = useState("");
+	const [employees, setEmployees] = useState([]);
+
 	const [loading, setLoading] = useState(true);
+	const [searchLoading, setSeachLoading] = useState(false);
 
 	const {
 		status,
@@ -36,6 +41,10 @@ export default function Employees() {
 			setLoading(false);
 		}
 	}, [staffData, status]);
+
+	useEffect(() => {
+		handleSearch();
+	}, [query]);
 
 	const columns = useMemo(
 		() => [
@@ -71,6 +80,29 @@ export default function Employees() {
 		[],
 	);
 
+	// Search handler
+	const navigate = useNavigate();
+	const handleRedirect = (employee) => {
+		setQuery("");
+		navigate("/employee/profile", { state: { data: employee } });
+	};
+
+	const handleSearch = () => {
+		setSearchErr("");
+		const reqQuery = {
+			search_query: query,
+		};
+		setSeachLoading(true);
+		Search(reqQuery).then((res) => {
+			if (res.employees) {
+				setEmployees(res.employees);
+			} else {
+				setSearchErr("No employees found");
+			}
+			setSeachLoading(false);
+		});
+	};
+
 	if (loading) {
 		return (
 			<div className='container-buffer'>
@@ -92,28 +124,29 @@ export default function Employees() {
 						onChange={(e) => setQuery(e.target.value)}
 					/>
 				</div>
-				<select
-					className='filterDropDown'
-					value={filter}
-					onChange={(e) => setFilter(e.target.value)}>
-					<option value=''>Filter by position</option>
-					{/* {positions.map((position) => (
-							<option key={position} value={position}>
-								{position}
-							</option>
-						))} */}
-				</select>
 				<Link to='/employee/profile'>
 					<AiOutlinePlus className='add-button' />
 				</Link>
 			</div>
 			<div className='employees-container'>
-				<BasicTable
-					reqData={data}
-					columns={columns}
-					redirect={"employee"}
-					err={err}
-				/>
+				{!query && (
+					<BasicTable
+						reqData={data}
+						columns={columns}
+						redirect={"employee"}
+						err={err}
+						type={"activate"}
+					/>
+				)}
+				{query && (
+					<SearchList
+						data={employees}
+						redirect={handleRedirect}
+						loading={searchLoading}
+						error={searchErr}
+						type='employee'
+					/>
+				)}
 			</div>
 		</div>
 	);

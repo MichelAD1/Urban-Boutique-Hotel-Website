@@ -8,12 +8,14 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { useNavigate } from "react-router-dom";
 
 //apis
 import CancelReservation from "../../api-client/Account/CancelReservation";
 
 export default function HotelTables({ columns, initialRows }) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [rows, setRows] = React.useState(initialRows);
   const handleCancel = (id) => {
@@ -21,8 +23,12 @@ export default function HotelTables({ columns, initialRows }) {
     response.then((res) => {
       if (res === "success") {
         setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+        localStorage.setItem("shouldReload", "true");
       }
     });
+  };
+  const handleEdit = (room) => {
+    navigate(`/reservations/edit`, { state: { data: room } });
   };
   useEffect(() => {
     i18n.changeLanguage(localStorage.getItem("Translate"));
@@ -60,10 +66,17 @@ export default function HotelTables({ columns, initialRows }) {
                     );
                   })}
                   <TableCell>
-                    <div className="table-button">
-                      <button onClick={() => handleCancel(row.id)}>
-                        {t("cancel")}
-                      </button>
+                    <div className="res-buttons">
+                      <div className="table-button">
+                        <button onClick={() => handleEdit(row)}>
+                          {t("edit")}
+                        </button>
+                      </div>{" "}
+                      <div className="table-button">
+                        <button onClick={() => handleCancel(row.id)}>
+                          {t("cancel")}
+                        </button>
+                      </div>
                     </div>
                   </TableCell>
                 </TableRow>

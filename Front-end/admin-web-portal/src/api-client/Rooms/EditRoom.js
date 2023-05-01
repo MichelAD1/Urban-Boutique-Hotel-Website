@@ -2,7 +2,6 @@ import axios from "axios";
 import base_url from "../BaseUrl";
 
 export default async function EditRoom(data) {
-	console.log(data);
 	const room = await axios({
 		method: "post",
 		url: `${base_url}room/edit`,

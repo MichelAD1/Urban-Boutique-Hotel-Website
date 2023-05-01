@@ -41,7 +41,7 @@ const Login = () => {
 				localStorage.setItem("token", `Bearer ${res.authorisation.token}`);
 				navigate("/");
 			} else if (res.status === 401) {
-				console.log("Unauthorized");
+				alert("Incorrect email or password");
 			}
 		});
 	}

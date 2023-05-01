@@ -146,7 +146,7 @@ export default function Navbar() {
 
 				{path !== "/finance" && (
 					<Link to='/finance' className='nav-link'>
-						<RiMoneyDollarBoxLine className='icons' s />
+						<RiMoneyDollarBoxLine className='icons' />
 						<div className='routes'>Finance</div>
 					</Link>
 				)}

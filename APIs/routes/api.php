@@ -272,6 +272,7 @@ Route::group(["prefix"=>"v0.1"], function(){
     Route::group(['prefix'=>'currency'],function(){
         Route::middleware(['auth', 'check.financemanager'])->group(function(){
             Route::post('add',[CurrencyController::class,'addCurrency']);
+            Route::post('select',[CurrencyController::class,'selectOptions']);
             Route::get('getall',[CurrencyController::class,'getCurrencies']);
             Route::get('set/{currencyid}',[CurrencyController::class,'setavailability']);
         });

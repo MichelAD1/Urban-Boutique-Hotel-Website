@@ -28,6 +28,7 @@ import { useQuery } from "@tanstack/react-query";
 import AddTask from "../../api-client/Scheduler/AddTask";
 import FetchTasks from "../../api-client/Scheduler/FetchTasks";
 import EditTask from "../../api-client/Scheduler/EditTask";
+import DeleteTask from "../../api-client/Scheduler/DeleteTask";
 
 const date = new Date();
 const current = `${date.getFullYear()}-${
@@ -90,7 +91,6 @@ const Calendar = () => {
 			added.endDate = formattedDate(added.endDate);
 			const response = AddTask(added);
 			response.then((res) => {
-				console.log(res);
 				if (res.message !== "successful") {
 					alert("Something went wrong");
 				}
@@ -104,11 +104,8 @@ const Calendar = () => {
 			changed[taskid].startDate = formattedDate(changed[taskid].startDate);
 			changed[taskid].endDate = formattedDate(changed[taskid].endDate);
 			changed[taskid].taskid = parseInt(taskid);
-
-			console.log(changed);
 			const response = EditTask(changed[taskid]);
 			response.then((res) => {
-				console.log(res);
 				if (res.message !== "task editted successfuly") {
 					alert("Something went wrong");
 				}
@@ -121,6 +118,12 @@ const Calendar = () => {
 			);
 		}
 		if (deleted !== undefined) {
+			const response = DeleteTask(deleted);
+			response.then((res) => {
+				if (res.message !== "task removed successfuly") {
+					alert("Something went wrong");
+				}
+			});
 			data = data.filter((appointment) => appointment.id !== deleted);
 		}
 		setAppointments(data);
